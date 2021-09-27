@@ -29,7 +29,7 @@
 "Female" = "أنثى";
 "Male" = "ذكر";
 "Confirm Password" = "تأكيد كلمة المرور";
-"Country Code" = "مفتاح الدولة";
+"Country" = "مفتاح الدولة";
 "Mobile Number" = "رقم الهاتف";
 "SIGN UP" = "تسجيل";
 /*Forgot Password*/
@@ -166,7 +166,7 @@
 
 "General notes" = "ملاحظات عامة";
 "I have read and agreed to the terms of service" = "لقد قرأت ووافقت على شروط الخدمة";
-"Payment now" = "الدفع الآن";
+//"Payment now" = "الدفع الآن";
 "Terms of service" = "شروط الخدمة";
 "Kuwait" = "الكويت";
 "myemail@gmail.com" = "myemail@gmail.com";
@@ -212,3 +212,60 @@
 "For reservations, You must download the App" = "للحجز ، يجب عليك تحميل التطبيق";
 "Available on the App store" = "متوفر في متجر أبل";
 "Computer browser" = "متصفح الكومبيوتر";
+
+"My Booking" = "الحجز";
+"Copy" = "ينسخ";
+"Copied" = "تم النسخ";
+"Active" = "نشيط";
+"Not Active" = "غير فعال";
+"Awaiting Payment" = "انتظار الدفع";
+"No." = "لا.";
+"Call us" = "اتصل بنا";
+"Check-in" = "الدخول";
+"Check-Out" = "الدفع";
+"Location" = "موقع";
+"Please pay the remaining amount before" = "يرجى دفع المبلغ المتبقي قبل";
+"Cancelled" = "ألغيت";
+"Total Rewards :" = "إجمالي المكافآت :";
+"Earn " = "يكسب";
+"spent " = " تنفقه";
+"On every " = "على كل ";
+"Must be used Total " = "يجب استخدام إجمالي";
+"Rewards before " = " المكافآت قبل";
+"the end of the year" = " نهاية العام";
+"Booking Details" = "تفاصيل الحجز";
+"Rental Price" = "سعر الإيجار";
+"Total Rewards (Discount)" = "إجمالي المكافآت (الخصم)";
+"Total Invoice" = "إجمالي الفاتورة";
+"Chalet details" = "تفاصيل الشاليه";
+"You must Agree to all condtions to be able book" = "يجب أن توافق على جميع الشروط لتتمكن من الحجز";
+"Deposit" = "عربون";
+"After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:" = "بعد هذا التاريخ يعتبر الحجز ملغى
+ولا يحق لك المطالبه بالعربون وسوف يكون الشاليه متاح للحجز من قبل عميل آخر
+يمكنك دفع باقي المبلغ من خلال الانتقال الى حجوزاتي";
+"Booking" = "الحجز";
+
+"There is no chalet Available for this date Try another date" = "لا يوجد شاليه متاح لهذا التاريخ
+جرب تاريخ آخر";
+"I have read and " = "قرأت و";
+"Agree " = "وافقت";
+"to the " = "على";
+"terms" = "شروط الخدمة";
+//" of service " = "";
+"Are you sure you want to reject?" = "رفض الحجز . !
+هل أنت متأكد ؟";
+"Are you sure you want to accept?" = "قبول الحجز . !
+هل أنت متأكد ؟";
+"Cancel" = "إلغاء";
+"Accept" = "قبول";
+"Reject" = "رفض";
+"Failed...!" = "حدث خطأ ..!";
+"Rewards (Discount)" = "بونص ( مكافأة )";
+"Offers (Discount)" = "عروض (خصم)";
+"Booked Successfully" = "تم الحجز بنجاح";
+"Thank You" = "اشكرك";
+"You don't have any offers yet" = "ليس لديك أي عروض حتى الآن";
+"Your Account has been Blocked. Please contact Administrator." = "تم حظر حسابك. يرجى الاتصال بالمسؤول.";
+"Please Login for booking. Do you want to continue?" = "الرجاء تسجيل الدخول أولا";
+"There is no deposit option for this chalet" = "لا يوجد خيار إيداع لهذا الشاليه";
+"please install WhatsApp" = "الرجاء تثبيت Whatsapp";

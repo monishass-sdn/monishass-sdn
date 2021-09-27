@@ -22,13 +22,13 @@ class OffersListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        /*if CAUser.currentUser.id != nil{
+      //  if CAUser.currentUser.id != nil{
             self.getRewardsData()
-        }else {
+      //  }else {
             self.isLoad = true
-        }*/
+      //  }
         
-        self.getRewardsData()
+       // self.getRewardsData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
         appDelegate.checkBlockStatus()
@@ -48,7 +48,7 @@ class OffersListVC: UIViewController {
         //let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         //self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+       // self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = "Offers".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
@@ -85,6 +85,7 @@ extension OffersListVC : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OfferListTVCell", for: indexPath) as! OfferListTVCell
             cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row, loaded: false)
             cell.setValuesToFields(dictAdmin: dictAdmin!, dict: self.arryOfferList[indexPath.row])
+            cell.tag = indexPath.row
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NoBookingTVCell", for: indexPath) as! NoBookingTVCell
@@ -111,6 +112,17 @@ extension OffersListVC : UICollectionViewDelegate, UICollectionViewDataSource, U
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RewardsChaletListCollectionViewCell", for: indexPath) as! RewardsChaletListCollectionViewCell
         cell.setValuesToFields(dict: arryOfferList[collectionView.tag].offerUser_details![indexPath.row])
+        if kCurrentLanguageCode == "ar"{
+            cell.lblCheckIn.font = UIFont(name: kFontAlmaraiBold, size: 16)
+            cell.lblCheckOut.font = UIFont(name: kFontAlmaraiBold, size: 16)
+            cell.lblDiscountname.font = UIFont(name: kFontAlmaraiBold, size: 15)
+
+        }else{
+            cell.lblCheckIn.font = UIFont(name: "Roboto-Bold", size: 16)
+            cell.lblCheckOut.font = UIFont(name: "Roboto-Bold", size: 16)
+            cell.lblDiscountname.font = UIFont(name: "Roboto-Medium", size: 16)
+
+        }
         return cell
     }
     
@@ -137,7 +149,8 @@ extension OffersListVC {
     //MARK:- GetMyBookingData
     func getRewardsData() {
        //["userid":CAUser.currentUser.id!]
-        ServiceManager.sharedInstance.postMethodAlamofire("api/offers", dictionary: nil, withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/offers", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
+            self.checkNotificationCount()
             self.isLoad = true
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
@@ -155,5 +168,23 @@ extension OffersListVC {
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
             }
         }
+    }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
     }
 }

@@ -16,6 +16,7 @@ class SelectPackageTVC: UITableViewController {
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var collectionChalletList: UICollectionView!
     @IBOutlet weak var colletionViewHolidays: UICollectionView!
+    @IBOutlet weak var lblThereisNoChaletString: UILabel!
     var  arrayListCalender  = [JobsPerDate]()
 
     var topSliderMenuArray:[String] = []
@@ -38,14 +39,16 @@ class SelectPackageTVC: UITableViewController {
     var holidaySelectedIndex = 0
     var calendarHeight : CGFloat = 425
     var selectedIndexHolidays = 0
+    var showAvilablechaletStringHeight = 0
     @IBOutlet var calenderContainerView     : UIView!
     @IBOutlet weak var lblAvailableChalets: UILabel!
+    var tempValues : [User_details]?
     var arrayValuesToBackEnd = ["holidays","weekB","weekA","weekend","weekdays"]
-    
+    var selectedDate: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+
         
         self.topSelection = arrayValuesToBackEnd[selectedIndex ?? 0]
         
@@ -55,7 +58,6 @@ class SelectPackageTVC: UITableViewController {
         }else{
             self.isLoadHolidaysAndEvents = false
         }
-        
         topSliderMenuValArray =  ["Holidays and Events".localized(), "Thursday - Wednesday".localized(), "Sunday to Saturday".localized(), "Thursday - Friday - Saturday".localized(),"Sunday - Monday - Tuesday - Wednesday".localized()]
                               //Sunday-Monday-Tuesday-Wednesday
         topSliderMenuArray =  ["Holidays", "Week (B)".localized(), "Week (A)".localized(), "Weekend".localized(), "Weekdays".localized()]
@@ -65,7 +67,7 @@ class SelectPackageTVC: UITableViewController {
         navigationController?.navigationBar.barTintColor = kAppHeaderColor
 
         self.navigationItem.setHidesBackButton(true, animated: false)
-        self.addBarButtons()
+       // self.addBarButtons()
         self.setupUI()
         self.setupCalenderView()
                 
@@ -78,6 +80,13 @@ class SelectPackageTVC: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         appDelegate.checkBlockStatus()
+        
+        //checkNotificationCount()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.checkNotificationCount()
     }
     
     override func viewDidLayoutSubviews() {
@@ -157,12 +166,23 @@ class SelectPackageTVC: UITableViewController {
     @objc func btnMessageDidTap(sender: UIButton) {
         
     }
+    
+    func numberOfDaysBetween() -> Int {
+        let userselectedDate = calendarSelectedDate.sharedData.selectedCalendarDate
+        let curruntDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let dateString = dateFormatter.date(from: userselectedDate!)
+        let userCalendar = Calendar.current
+        let numberOfDays = userCalendar.dateComponents([.day], from: curruntDate, to: dateString!)
+        return numberOfDays.day! + 1
+    }
 
     //MARK:- Button Actions
     @IBAction func btnSearchAction(_ sender: UIButton) {
         if self.isSearchEnable == true {
+            showAvilablechaletStringHeight = 35
             self.searchChalet(fromDate: self.startDate, toDate: self.endDate, selectedPackage: self.topSelection)
-            
         }
     }
     
@@ -177,7 +197,7 @@ class SelectPackageTVC: UITableViewController {
             if arrayUserDetails.count > 0 {
                 return 35
             }else{
-                return 0
+                return CGFloat(showAvilablechaletStringHeight)
             }
         }else if indexPath.row == 2 {
             if self.isLoadHolidaysAndEvents == true {
@@ -471,6 +491,8 @@ extension SelectPackageTVC : CalenderDelegateNew {
             }
         }
         
+        
+        
         /*if selectedDates.count > 1 {
             self.isSearchEnable = true
             self.btnSearch.backgroundColor = #colorLiteral(red: 0.002171910696, green: 0.6666592845, blue: 0.007707458573, alpha: 1)
@@ -495,6 +517,9 @@ extension SelectPackageTVC : CalenderDelegateNew {
         
         self.getCalendarList(month: "\(monthIndex)", year: "\(year)", package: topSelection)
         self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+        self.isSearchEnable = false
+        self.btnSearch.backgroundColor = UIColor("#C2C2C2")
+
     }
     
     func delegateChaletReserved() {
@@ -513,25 +538,93 @@ extension SelectPackageTVC : CalenderDelegateNew {
         let dayInWeek = dateFormatter.string(from: date!)
         return dayInWeek
     }
+    
+  /*  func daysBetween(start: String, end: String) -> Int {
+        var currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from:isoDate)!
+
+      //  return Calendar.current.dateComponents([.day], from: start, to: end).day!
+    }
+ */
 }
 extension SelectPackageTVC {
     
     //MARK:- Search Chalet
     func searchChalet(fromDate:String,toDate:String,selectedPackage:String) {
+        
+        print("USer Selected Date == \(calendarSelectedDate.sharedData.selectedCalendarDate!)")
         ServiceManager.sharedInstance.postMethodAlamofire("api/searchchalet", dictionary: ["from_date":fromDate,"to_date":toDate,"package":selectedPackage,"userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
             if success {
                 if response!["status"] as! Bool == true {
                     let responseBase = ChaletSearchBase(dictionary: response as! NSDictionary)
                     self.arrayUserDetails = (responseBase?.user_details)!
-                    
+                    let differenceDate = self.numberOfDaysBetween()
+                    let reservationAvailable = responseBase?.reservation_available ?? 0
+                    print("Difference from Date = \(differenceDate)")
+                    print("ReservationAvailable Upto == \(reservationAvailable)")
+                    if differenceDate > reservationAvailable {
+                        print("Show alert box")
+                        let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable) days from Today", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }else{
+    
                     DispatchQueue.main.async {
-                        self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
-                        self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
-                        self.collectionChalletList.reloadData()
+                            self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
+                            self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
+                            self.collectionChalletList.reloadData()
+
                         if self.arrayUserDetails.count > 0{
                             self.tableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .top, animated: true)
+                            //self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                            self.isNoChaletFound = false
+                        }else{
+                            DispatchQueue.main.async {
+                                self.isNoChaletFound = true
+                                self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                                self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
+                                self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
+                            }
                         }
+                        
+                        
+
+                        
+                        //self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                        if responseBase!.offer_status == true {
+                            let alert = UIAlertController(title: "Message", message: "Chalet date contain Holidays and offers", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.kAlertOfferCLick), object: nil, userInfo: nil)
+                            }))
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }else if responseBase!.holiday_status == true {
+                            let alert = UIAlertController(title: "Message", message: "Chalet date contain Holidays and offers", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                self.selectedIndex = 0
+                                self.lblForSelectedChaletInfo.text = self.topSliderMenuValArray[0]
+                                self.topSelection = self.arrayValuesToBackEnd[0]
+                                self.calenderView.topSelection = self.topSelection
+                                self.calenderView.selectedArray.removeAll()
+                                self.collectionView.reloadData()
+                                self.isLoadHolidaysAndEvents = true
+                                self.getHolidayPackage()
+                                self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                                self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+                            }))
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
                     }
                 }else{
                     DispatchQueue.main.async {
@@ -640,7 +733,7 @@ extension SelectPackageTVC {
     //MARK:- Get Holidays Package
     func getHolidayPackage() {
         self.arrayChalletList.removeAll()
-        ServiceManager.sharedInstance.postMethodAlamofire("api/holidaysevents", dictionary: nil, withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/holidaysevents", dictionary: ["userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
             if success {
                 if response!["status"] as! Bool == true {
@@ -662,4 +755,24 @@ extension SelectPackageTVC {
     }
     
     
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
+    
 }
+
+

@@ -384,6 +384,8 @@ class CalenderViewNew: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             delegate?.delegateChaletReserved()
         }else{
         let clickedDate = "\(calcDate)/\(currentMonthIndex)/\(currentYear)"
+        print(clickedDate)
+        calendarSelectedDate.sharedData.selectedCalendarDate = clickedDate
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         let jDate = dateFormatter.date(from: clickedDate)!

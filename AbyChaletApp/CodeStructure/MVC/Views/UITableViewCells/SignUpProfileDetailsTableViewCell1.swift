@@ -78,7 +78,39 @@ class SignUpProfileDetailsTableViewCell1: UITableViewCell  {
         txtFirstName.selectedTitle = "First Name".localized()
         txtLastName.selectedTitle = "Last Name".localized()
         txtDateOfBirth.text = "k"
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donedatePicker))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action:
+                    #selector(cancelDatePicker))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([doneBtn,flexSpace,cancelButton], animated: true)
+        let calender = Calendar(identifier: .gregorian)
+        let currentDate = Date()
+        var components = DateComponents()
+        components.calendar = calender
+        
+        //components.year = 0
+        components.month = 12
+        
+        let maxDate = Date()
+        
+        components.year = -100
+        let minDate = calender.date(byAdding: components, to: currentDate)
+        
+        txtBirthDay.inputAccessoryView = toolbar
+        txtBirthDay.inputView = datePicker
+        txtBirthMonth.inputAccessoryView = toolbar
+        txtBirthMonth.inputView = datePicker
+        txtBirthYear.inputAccessoryView = toolbar
+        txtBirthYear.inputView = datePicker
 
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -90,18 +122,25 @@ class SignUpProfileDetailsTableViewCell1: UITableViewCell  {
         viewForButtonSelectedGreenView.addCornerForView()
         viewForMalebuttonSelectedGreenview.addCornerForView()
     }
-    
-    
     @IBAction func txtYearAction(_ sender: UITextField) {
-        
-        
     }
     
     @objc func donedatePicker(){
-        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateFormat = "dd"
+        txtBirthDay.text = formatter.string(from: datePicker.date)
+        formatter.dateFormat = "MM"
+        txtBirthMonth.text = formatter.string(from: datePicker.date)
+        formatter.dateFormat = "yyyy"
+        txtBirthYear.text = formatter.string(from: datePicker.date)
+        self.endEditing(true)
     }
+    
     @objc func cancelDatePicker(){
-        
+        txtBirthDay.resignFirstResponder()
+        txtBirthMonth.resignFirstResponder()
+        txtBirthYear.resignFirstResponder()
     }
     
 }

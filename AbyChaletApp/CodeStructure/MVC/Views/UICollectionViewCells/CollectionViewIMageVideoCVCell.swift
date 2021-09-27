@@ -27,17 +27,23 @@ class CollectionViewVideoCVCell: UICollectionViewCell, AVPlayerViewControllerDel
     let playerController                = AVPlayerViewController()
 
     
-    func playVideo(videourl:String,previewImage: String) {
-        
-        
-        DispatchQueue.main.async {
-            let img = self.createVideoThumbnail(from: URL(string: videourl.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)!)
-            if img != nil {
-                self.imgChaletImage.image = img
-            }else{
-                self.imgChaletImage.image = kPlaceHolderImage
-            }
+    func playVideo(videourl:String,previewImage: String,thumb: String) {
+        if thumb != "" {
+            self.imgChaletImage.sd_setImage(with: URL(string: thumb), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
+            
+        }else{
+            DispatchQueue.main.async {
+                 let img = self.createVideoThumbnail(from: URL(string: videourl.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)!)
+                 if img != nil {
+                     self.imgChaletImage.image = img
+                 }else{
+                     self.imgChaletImage.image = kPlaceHolderImage
+                 }
+             }
+            
         }
+   
+      
         
         
         /*let player = AVPlayer(url: URL(string: videourl.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)!)
@@ -84,7 +90,15 @@ class CollectionViewChaletDetailsCVCell: UICollectionViewCell {
     @IBOutlet weak var btnIcon: UIButton!
     
     func setValuesToFields(dict:Chalet_details) {
-        self.lblChaletDetails.text = dict.chalet_details!
+        let htmlStr = dict.chalet_details!
+        if let htmlData = htmlStr.data(using: String.Encoding.unicode) {
+            do {
+                self.lblChaletDetails.attributedText = try NSAttributedString(data: htmlData,options: [.documentType:NSAttributedString.DocumentType.html],documentAttributes: nil)
+            } catch let e as NSError {
+                print("Couldn't translate \(htmlStr): \(e.localizedDescription) ")
+                self.lblChaletDetails.text = dict.chalet_details!
+            }
+        }
     }
     
 }
@@ -223,11 +237,23 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
     
     
     func setValuesToFields(dict : User_details) {
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
         
-        lblSlNo.text = "No. \(dict.chalet_id ?? 0)"
+        if kCurrentLanguageCode == "ar"{
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+        }else{
+            lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
+        }
+        
+        lblSlNo.text = "\("No.".localized())\(dict.chalet_id ?? 0)"
         lblChaletName.text = dict.chalet_name
         lblRent.text = dict.rent
         lblCheckOutDate.text = dict.check_out?.appFormattedDate
@@ -243,6 +269,8 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
         
         
     }
+    
+    
     
     
     

@@ -64,7 +64,15 @@ class BookingRewardsTVCell: UITableViewCell {
         let gradientImage = UIImage.gradientImageWithBounds(bounds: lblEarnRewards.bounds, colors: [#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)])
         lblEarnRewards.textColor = UIColor.init(patternImage: gradientImage)
 
-
+        if kCurrentLanguageCode == "ar"{
+            lblEarn.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblSpent.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblTotalRewardsMessage.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+        }else{
+            lblEarn.font = UIFont(name: "Roboto-Medium", size: 15)
+            lblSpent.font = UIFont(name: "Roboto-Medium", size: 15)
+            lblTotalRewardsMessage.font = UIFont(name: "Roboto-Medium", size: 15)
+        }
         
     }
 
@@ -84,28 +92,30 @@ class BookingRewardsTVCell: UITableViewCell {
         let attrsWhatKindOfJob6 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : dictReward.rewarded_amt != "" ?   UIColor("#379F00") : UIColor("#A8A8A8")] as [NSAttributedString.Key : Any]
         
         
-        let attributedStringEarn1 = NSMutableAttributedString(string:"Earn ", attributes:attrsWhatKindOfJob1)
+        let attributedStringEarn1 = NSMutableAttributedString(string:"Earn ".localized(), attributes:attrsWhatKindOfJob1)
         let attributedStringEarn2 = NSMutableAttributedString(string:"\(dictReward.reward_earn ?? "") ", attributes:attrsWhatKindOfJob2)
         let attributedStringEarn3 = NSMutableAttributedString(string:"KD ", attributes:attrsWhatKindOfJob1)
         attributedStringEarn1.append(attributedStringEarn2)
         attributedStringEarn1.append(attributedStringEarn3)
         self.lblEarn.attributedText = attributedStringEarn1
         
-        let attributedStringSpent1 = NSMutableAttributedString(string:"On every ", attributes:attrsWhatKindOfJob1)
+        let attributedStringSpent1 = NSMutableAttributedString(string:"On every ".localized(), attributes:attrsWhatKindOfJob1)
         let attributedStringSpent2 = NSMutableAttributedString(string:"\(dictReward.every_spend ?? "") ", attributes:attrsWhatKindOfJob3)
-        let attributedStringSpent3 = NSMutableAttributedString(string:"KD spent ", attributes:attrsWhatKindOfJob1)
+        let attributedStringSpent3 = NSMutableAttributedString(string:"KD", attributes:attrsWhatKindOfJob1)
+        let attributedStringSpent4 = NSMutableAttributedString(string:"spent ".localized(), attributes:attrsWhatKindOfJob1)
         attributedStringSpent1.append(attributedStringSpent2)
         attributedStringSpent1.append(attributedStringSpent3)
+        attributedStringSpent1.append(attributedStringSpent4)
         lblSpent.attributedText = attributedStringSpent1
 
-        let attributedStringRewards1 = NSMutableAttributedString(string:"Must be used Total ", attributes:attrsWhatKindOfJob4)
-        let attributedStringRewards2 = NSMutableAttributedString(string:"Rewards before ", attributes:attrsWhatKindOfJob5)
-        let attributedStringRewards3 = NSMutableAttributedString(string:"the end of the year", attributes:attrsWhatKindOfJob4)
+        let attributedStringRewards1 = NSMutableAttributedString(string:"Must be used Total ".localized(), attributes:attrsWhatKindOfJob4)
+        let attributedStringRewards2 = NSMutableAttributedString(string:"Rewards before ".localized(), attributes:attrsWhatKindOfJob5)
+        let attributedStringRewards3 = NSMutableAttributedString(string:"the end of the year".localized(), attributes:attrsWhatKindOfJob4)
         attributedStringRewards1.append(attributedStringRewards2)
         attributedStringRewards1.append(attributedStringRewards3)
         lblTotalRewardsMessage.attributedText = attributedStringRewards1
         
-        let attributedStringTotalRewards = NSMutableAttributedString(string:"Total Rewards : \(dictReward.rewarded_amt ?? "") KD", attributes:attrsWhatKindOfJob6)
+        let attributedStringTotalRewards = NSMutableAttributedString(string:"\("Total Rewards :".localized()) \(dictReward.rewarded_amt ?? "") KD", attributes:attrsWhatKindOfJob6)
         lblTotalRewards.attributedText = attributedStringTotalRewards
     }
     
@@ -190,13 +200,30 @@ class InActiveBookingTVCell: UITableViewCell {
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblBookingId: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
         
+        if kCurrentLanguageCode == "ar"{
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblStatus.font = UIFont(name: kFontAlmaraiRegular, size: 13)
+            lblSlNo.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+
+        }else{
+            lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblStatus.font = UIFont(name: "Roboto-Medium", size: 13)
+            lblSlNo.font = UIFont(name: "Roboto-Medium", size: 13)
+
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -206,7 +233,7 @@ class InActiveBookingTVCell: UITableViewCell {
     }
     func setValuesToFields(dict:MyBooking_details) {
         let arrayBookingDetails = dict.myBookingChalet_details?.first
-        self.lblSlNo.text = "No.\(arrayBookingDetails?.chalet_id! ?? 0)"
+        self.lblSlNo.text = "\("No.".localized())\(arrayBookingDetails?.chalet_id! ?? 0)"
         self.lblChaletName.text = arrayBookingDetails?.chalet_name!
         self.imgChaletImage.sd_setImage(with: URL(string: (arrayBookingDetails?.cover_photo!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
         self.lblRent.text = dict.rent!
@@ -215,7 +242,7 @@ class InActiveBookingTVCell: UITableViewCell {
         self.lblCheckInDate.text = convertDateFormat(dateStr: dict.check_in!)
         self.lblCheckInTime.text = dict.admincheck_in!
         self.lblBookingId.text = dict.reservation_id!
-        self.lblStatus.text = "Not Active"
+        self.lblStatus.text = "Not Active".localized()
     }
 }
 class NotAvailableBookingTVCell: UITableViewCell {
@@ -229,6 +256,7 @@ class NotAvailableBookingTVCell: UITableViewCell {
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
+    
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblBookingId: UILabel!
@@ -246,7 +274,7 @@ class NotAvailableBookingTVCell: UITableViewCell {
     func setValuesToFields(dict:MyBooking_details) {
         
         let arrayBookingDetails = dict.myBookingChalet_details?.first
-        self.lblSlNo.text = "No.\(arrayBookingDetails?.chalet_id! ?? 0)"
+        self.lblSlNo.text = "\("No.".localized())\(arrayBookingDetails?.chalet_id! ?? 0)"
         self.lblChaletName.text = arrayBookingDetails?.chalet_name!
         self.imgChaletImage.sd_setImage(with: URL(string: (arrayBookingDetails?.cover_photo!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
         self.lblRent.text = dict.rent!
@@ -255,7 +283,7 @@ class NotAvailableBookingTVCell: UITableViewCell {
         self.lblCheckInDate.text = convertDateFormat(dateStr: dict.check_in!)
         self.lblCheckInTime.text = dict.admincheck_in!
         self.lblBookingId.text = dict.reservation_id!
-        self.lblStatus.text = "Not Available"
+        self.lblStatus.text = "Not Available".localized()
     }
 }
 class ActiveBookingTVCell: UITableViewCell, MKMapViewDelegate {
@@ -269,15 +297,44 @@ class ActiveBookingTVCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var lblRent: UILabel!
     @IBOutlet weak var lblCheckOutDate: UILabel!
     @IBOutlet weak var lblCheckInDate: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblBookingId: UILabel!
+    @IBOutlet weak var btnCallUs: UIButton!
     let annotation = MKPointAnnotation()
     override func awakeFromNib() {
         super.awakeFromNib()
+        btnCallUs.setTitle("Call us".localized(), for: .normal)
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblLocation.text = "Location".localized()
+        btnCopy.setTitle("Copy".localized(), for: .normal)
+        btnCopy.setTitle("Copied".localized(), for: .normal)
+        btnCallUs.setTitle("Call us".localized(), for: .normal)
+
         
+        if kCurrentLanguageCode == "ar"{
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblLocation.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblStatus.font = UIFont(name: kFontAlmaraiRegular, size: 13)
+            btnCallUs.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblSlNo.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+        }else{
+            lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblLocation.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblStatus.font = UIFont(name: "Roboto-Medium", size: 13)
+            btnCallUs.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblSlNo.font = UIFont(name: "Roboto-Medium", size: 15)
+
+        }
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -288,7 +345,7 @@ class ActiveBookingTVCell: UITableViewCell, MKMapViewDelegate {
     func setValuesToFields(dict:MyBooking_details) {
         
         let arrayBookingDetails = dict.myBookingChalet_details?.first
-        self.lblSlNo.text = "No.\(arrayBookingDetails?.chalet_id! ?? 0)"
+        self.lblSlNo.text = "\("No.".localized())\(arrayBookingDetails?.chalet_id! ?? 0)"
         self.lblChaletName.text = arrayBookingDetails?.chalet_name!
         self.imgChaletImage.sd_setImage(with: URL(string: (arrayBookingDetails?.cover_photo!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
         self.lblRent.text = dict.rent!
@@ -299,7 +356,7 @@ class ActiveBookingTVCell: UITableViewCell, MKMapViewDelegate {
             //dict.check_in!
         self.lblCheckInTime.text = dict.admincheck_in!
         self.lblBookingId.text = dict.reservation_id!
-        self.lblStatus.text = "Active"
+        self.lblStatus.text = "Active".localized()
         
         let lat = Double(arrayBookingDetails!.longitude!)
         let long = Double(arrayBookingDetails!.latitude!)
@@ -360,16 +417,43 @@ class AwaitingBookingTVCell: UITableViewCell {
     @IBOutlet weak var lblCheckOutDate: UILabel!
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblRemaining: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblBookingId: UILabel!
     @IBOutlet weak var lblReaminingAmt: UILabel!
     @IBOutlet weak var lblRemainingDateTime: UILabel!
+    @IBOutlet weak var lblPleasePayRemainingAmt: UILabel!
     @IBOutlet weak var btnPay: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        btnPay.titleLabel?.text = "Payment now".localized()
+        //btnPay.titleLabel?.text = "Payment now".localized()
+        btnPay.setTitle("Payment now".localized(), for: .normal)
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblRemaining.text = "Remaining".localized()
+        lblPleasePayRemainingAmt.text = "Please pay the remaining amount before".localized()
+        
+        if kCurrentLanguageCode == "ar"{
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblRemaining.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblPleasePayRemainingAmt.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblStatus.font = UIFont(name: kFontAlmaraiRegular, size: 13)
+            lblSlNo.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+
+        }else{
+            lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblRemaining.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblPleasePayRemainingAmt.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblStatus.font = UIFont(name: "Roboto-Medium", size: 13)
+            lblSlNo.font = UIFont(name: "Roboto-Medium", size: 13)
+
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -380,7 +464,7 @@ class AwaitingBookingTVCell: UITableViewCell {
     func setValuesToFields(dict:MyBooking_details) {
         
         let arrayBookingDetails = dict.myBookingChalet_details?.first
-        self.lblSlNo.text = "No.\(arrayBookingDetails?.chalet_id! ?? 0)"
+        self.lblSlNo.text = "\("No.".localized())\(arrayBookingDetails?.chalet_id! ?? 0)"
         self.lblChaletName.text = arrayBookingDetails?.chalet_name!
         self.imgChaletImage.sd_setImage(with: URL(string: (arrayBookingDetails?.cover_photo!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
         self.lblRent.text = dict.rent!
@@ -389,10 +473,11 @@ class AwaitingBookingTVCell: UITableViewCell {
         self.lblCheckInDate.text = convertDateFormat(dateStr: dict.check_in!)
         self.lblCheckInTime.text = dict.admincheck_in!
         self.lblBookingId.text = dict.reservation_id!
-        //self.lblStatus.text = "Active"
+        self.lblStatus.text = "Awaiting Payment".localized()
         let rent = Int(dict.rent!)
         let totalPaid = Int(dict.total_paid!)
-        let remainingAmt : Int = Int(rent! - totalPaid!)
+        let rewardsUsed = Int(dict.reward_discount!) ?? 0
+        let remainingAmt = rent! - totalPaid! - rewardsUsed
         self.lblReaminingAmt.text = "KD \(remainingAmt)"
         //self.lblRemainingDateTime.text = "\(dict.check_in!) (\(dict.admincheck_in!))"
         
@@ -420,15 +505,23 @@ class CancelledBookingTVCell: UITableViewCell {
     @IBOutlet weak var lblCheckOutDate: UILabel!
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblBookingId: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblStatus.text = "Cancelled".localized()
+    }
+    
     func setValuesToFields(dict:MyBooking_details) {
-        
         let arrayBookingDetails = dict.myBookingChalet_details?.first
-        self.lblSlNo.text = "No.\(arrayBookingDetails?.chalet_id! ?? 0)"
+        self.lblSlNo.text = "\("No.".localized())\(arrayBookingDetails?.chalet_id! ?? 0)"
         self.lblChaletName.text = arrayBookingDetails?.chalet_name!
         //self.imgChaletImage.sd_setImage(with: URL(string: (arrayBookingDetails?.cover_photo!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
         self.lblRent.text = dict.rent!

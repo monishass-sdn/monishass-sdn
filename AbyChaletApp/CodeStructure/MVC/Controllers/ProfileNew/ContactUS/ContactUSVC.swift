@@ -19,6 +19,8 @@ class ContactUSVC: UIViewController {
         self.setupUI()
         self.getContactList()
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        self.navigationItem.rightBarButtonItems = [notificationButton]
     }
     @objc func logoutUser() {
         appDelegate.logOut()
@@ -43,7 +45,7 @@ class ContactUSVC: UIViewController {
         let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+        //self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = "Contact Us"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
@@ -95,6 +97,7 @@ extension ContactUSVC {
     
     func getContactList() {
         ServiceManager.sharedInstance.postMethodAlamofire("api/contact", dictionary: nil, withHud: true) { (success, response, error) in
+            //self.checkNotificationCount()
             if success {
                 if response!["status"] as! Bool == true {
                     let responseBase = ContactUsBase(dictionary: response as! NSDictionary)
@@ -111,4 +114,21 @@ extension ContactUSVC {
         }
     }
     
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class EmptyChaletTableViewCell: UITableViewCell {
+    @IBOutlet weak var lblThereIsNoChaletString: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

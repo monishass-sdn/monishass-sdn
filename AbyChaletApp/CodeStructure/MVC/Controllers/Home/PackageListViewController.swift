@@ -33,6 +33,14 @@ class PackageListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         appDelegate.checkBlockStatus()
+        
+        //self.checkNotificationCount()
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.checkNotificationCount()
     }
     
     @objc func logoutUser() {
@@ -82,4 +90,24 @@ extension PackageListViewController: UITableViewDelegate, UITableViewDataSource 
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    if let messageCount = ((response as! NSDictionary)["message_count"] as? Int) {
+                        kNotificationCount = messageCount
+                        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                        self.navigationItem.rightBarButtonItems = [notificationButton]
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }

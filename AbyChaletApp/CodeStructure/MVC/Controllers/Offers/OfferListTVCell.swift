@@ -10,15 +10,20 @@ import GradientProgress
 
 class OfferListTVCell: UITableViewCell {
 
-    @IBOutlet weak var progressView: GradientProgressBar!
+    @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var collectionView       : UICollectionView!
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var lblTime: UILabel!
+    var timeString: String?
+    var countdownTimer : Timer?
+    var totalTime = 60
+    var dateString = "March 4, 2018 13:20:10" as String
     override func awakeFromNib() {
         super.awakeFromNib()
         let width = kScreenWidth - 30
         let columnLayout = ColumnFlowLayout.init(cellsPerRow: 1, minimumInteritemSpacing: 0.0, minimumLineSpacing: 0.0, sectionInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), cellHeight: 155, cellWidth: width,scrollDirec: .vertical)
         collectionView?.collectionViewLayout = columnLayout
+        
         
     }
 
@@ -51,12 +56,15 @@ class OfferListTVCell: UITableViewCell {
         self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
         //progressView.progress = 0.0
         DispatchQueue.main.async {
-            self.progressView.progress = 0.0
-            self.progressView.gradientColors = [UIColor.yellow.cgColor, UIColor.red.cgColor]
+           // self.progressView.progress = 100.0
+         //   self.progressView.gradientColors = [#colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1),#colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.7647058824, blue: 0, alpha: 1)]
+                //[UIColor.yellow.cgColor, UIColor.red.cgColor]
         }
         
     }
     
+   
+
     func strtTimer(time:String,offerCreated:Date)  {
         let timeee = time
         let dateFormater = DateFormatter()
@@ -66,16 +74,51 @@ class OfferListTVCell: UITableViewCell {
         let date = dateFormater.date(from: time)!
         //let time = timeFormatter.string(from: date!)
         let dd = DateCountDownTimer()
-        dd.initializeTimer(timeee)
+        initializeTimer(timeee)
         let seconds : Double = Double(Date().seconds(from: offerCreated))
         let totalSeconds : Double = Double(date.seconds(from: offerCreated))
         var progressValue = (seconds / totalSeconds)
-        progressView.setProgress(Float(progressValue), animated: true)
-        dd.startTimer(pUpdateActionHandler: { [self] (time) in
-            progressValue = progressValue + 0.0001
-            self.lblTime.text = time
-            progressView.progress = Float(progressValue)
+       // progressView.setProgress(Float(progressValue), animated: true)
+        let calender:Calendar = Calendar.current
+        let components: DateComponents = calender.dateComponents([.day, .hour, .minute, .second], from: offerCreated, to: date)
+        
+        if (components.day! >= 0 && components.day! < 3) {
+            self.progressView.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
+        }else if (components.day! > 3 && components.day! < 12){
+            self.progressView.backgroundColor = #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)
+        }else{
+            self.progressView.backgroundColor = #colorLiteral(red: 1, green: 0.7647058824, blue: 0, alpha: 1)
+        }
+        startTimer()
+       /* dd.startTimer(pUpdateActionHandler: { [self] (time) in
             
+            print(time)
+            /*let dateFormatterNew = DateFormatter()
+            dateFormatterNew.dateFormat = "hh:mm:ss"
+            let calendar = NSCalendar.current
+            if dateFormatterNew.date(from: time) != nil {
+                let dat = dateFormatterNew.date(from: time)
+                let components = calendar.component(.hour, from: dat!)
+                
+                print("Casdasdasd  \(components)")
+                
+                if components < 15 {
+                    DispatchQueue.main.async {
+                        self.progressView.gradientColors = [#colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)]
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.progressView.gradientColors = [#colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1),#colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.7647058824, blue: 0, alpha: 1)]
+                    }
+                }
+                
+            }*/
+            //progressValue = progressValue + 0.0001
+            //progressValue = progressValue + 0.0001
+            timeString = String()
+            timeString = time
+            self.lblTime.text = timeString
+            //progressView.progress = Float(progressValue)
             /*
              totalTime = min
              progress 0.01
@@ -90,7 +133,15 @@ class OfferListTVCell: UITableViewCell {
                 print("Completed")
             
             }
-        }
+        } */
+    }
+    
+    override func prepareForReuse() {
+            endTimer()
+            lblTime.text = "loading.."
+            countdownTimer = nil
+            totalTime = 60
+            dateString = "March 4, 2018 13:20:10" as String
     }
     
     public func calculatePercentage(value:Double,percentageVal:Double)->Double{
@@ -111,11 +162,16 @@ class RewardsChaletListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblDiscountname: UILabel!
     
     func setValuesToFields(dict : OfferUser_details) {
         
-        
-        lblSlNo.text = "No.\(dict.chalet_id ?? 0)"
+        lblDiscountname.text = "Discount".localized()
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblSlNo.text = "\("No.".localized())\(dict.chalet_id ?? 0)"
         lblChaletName.text = dict.chalet_name
         
         lblCheckOutDate.text = convertDateFormatOffer(dateStr: dict.check_out!)
@@ -157,4 +213,73 @@ class RewardsChaletListCollectionViewCell: UICollectionViewCell {
         lblOffer.attributedText = attributedStringRent
     }
     
+}
+
+extension OfferListTVCell{
+    public func startTimer() {
+        DispatchQueue.main.async { [self] in
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func updateTime() {
+        DispatchQueue.main.async { [self] in
+            lblTime.text = timeFormatted(totalTime)
+        }
+        if totalTime > 0 {
+            totalTime -= 1
+        } else {
+            endTimer()
+        }
+  
+    }
+
+    func endTimer() {
+        
+        countdownTimer!.invalidate()
+    }
+    
+    public func initializeTimer(_ date: String) {
+
+        self.dateString = date
+
+        // Setting Today's Date
+        let currentDate = Date()
+
+        // Setting TargetDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        //dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.timeZone = NSTimeZone.local
+        if let targedDate = dateFormatter.date(from: dateString) {
+
+            let currentD = dateFormatter.string(from: currentDate)
+            let cuD = dateFormatter.date(from: currentD)
+        // Calculating the difference of dates for timer
+            let calendar = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: cuD!, to: targedDate)
+        let days = calendar.day!
+        let hours = calendar.hour!
+        let minutes = calendar.minute!
+        let seconds = calendar.second!
+        totalTime = hours * 60 * 60 + minutes * 60 + seconds
+        totalTime = days * 60 * 60 * 24 + totalTime
+    }
+    }
+    
+    func timeFormatted(_ totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        let hours: Int = (totalSeconds / 60 / 60) % 24
+        let days: Int = (totalSeconds / 60 / 60 / 24)
+        
+        if days > 0 {
+            return String(format: "%d \("Day".localized()) - %02d:%02d:%02d", days, hours, minutes, seconds)
+        }else if hours > 0 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }else if minutes > 0  {
+            return String(format: "%02d:%02d",minutes, seconds)
+        }else {
+            return String(format: "%02d Second", seconds)
+        }
+    }
 }

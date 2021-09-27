@@ -12,8 +12,7 @@ class HeaderPackageTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var lblForSelectedChaletInfo: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
- 
-          
+
 
     }
 

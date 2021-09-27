@@ -18,7 +18,8 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         super.viewDidLoad()
 
         self.setUpNavigationBar()
-        
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        self.navigationItem.rightBarButtonItems = [notificationButton]
         SVProgressHUD.show()
         webView.navigationDelegate = self
         webView.uiDelegate = self
@@ -30,6 +31,7 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         appDelegate.checkBlockStatus()
+        
     }
     
     
@@ -47,7 +49,7 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+        //self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = ""
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
@@ -75,5 +77,23 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         print(error)
         SVProgressHUD.dismiss()
     }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
 
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }

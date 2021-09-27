@@ -1,0 +1,1440 @@
+
+/* Class = "UILabel"; text = "now"; ObjectID = "00r-6x-MWt"; */
+"00r-6x-MWt.text" = "now";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "08p-a4-Hle"; */
+"08p-a4-Hle.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "Challet details"; ObjectID = "0IJ-ru-Hkz"; */
+"0IJ-ru-Hkz.text" = "Challet details";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0Ks-nI-wSd"; */
+"0Ks-nI-wSd.text" = "Label";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "0ai-Gg-pt6"; */
+"0ai-Gg-pt6.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "0lg-Lk-VGk"; */
+"0lg-Lk-VGk.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "0os-rg-sAh"; */
+"0os-rg-sAh.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "Not Available"; ObjectID = "0zd-sd-3qK"; */
+"0zd-sd-3qK.text" = "Not Available";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "1IX-nF-0zk"; */
+"1IX-nF-0zk.text" = "Deposit";
+
+/* Class = "UILabel"; text = "Paid"; ObjectID = "1Rj-v8-XY3"; */
+"1Rj-v8-XY3.text" = "Paid";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "1iA-Id-YjQ"; */
+"1iA-Id-YjQ.text" = "KD 600";
+
+/* Class = "UILabel"; text = "18/03/2021 (12:00 AM)"; ObjectID = "2G5-Kk-Gma"; */
+"2G5-Kk-Gma.text" = "18/03/2021 (12:00 AM)";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "2Gx-hQ-1Re"; */
+"2Gx-hQ-1Re.text" = "Remaining";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "2Hg-Nf-NkU"; */
+"2Hg-Nf-NkU.text" = "KD 600";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "2It-4e-IDG"; */
+"2It-4e-IDG.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "2Jp-T0-CKU"; */
+"2Jp-T0-CKU.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "2KI-aR-6h0"; */
+"2KI-aR-6h0.text" = "600";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "2O9-fu-3SN"; */
+"2O9-fu-3SN.text" = "Remaining";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "2u5-Pq-iL9"; */
+"2u5-Pq-iL9.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "35o-8u-WHL"; */
+"35o-8u-WHL.text" = "KD ";
+
+/* Class = "UILabel"; text = "1/5"; ObjectID = "3ES-KQ-jOR"; */
+"3ES-KQ-jOR.text" = "1/5";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "3KD-8i-Myq"; */
+"3KD-8i-Myq.text" = "Label";
+
+/* Class = "UILabel"; text = "0 KD"; ObjectID = "3OF-pq-PGT"; */
+"3OF-pq-PGT.text" = "0 KD";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "3Ot-RP-scN"; */
+"3Ot-RP-scN.text" = "Location";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "3Rh-8y-8hv"; */
+"3Rh-8y-8hv.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD 400"; ObjectID = "3Sh-rf-WaK"; */
+"3Sh-rf-WaK.text" = "KD 400";
+
+/* Class = "UILabel"; text = "No.1"; ObjectID = "3Yn-3s-HLj"; */
+"3Yn-3s-HLj.text" = "No.1";
+
+/* Class = "UILabel"; text = "KD 400"; ObjectID = "3Ze-QD-E7J"; */
+"3Ze-QD-E7J.text" = "KD 400";
+
+/* Class = "UIButton"; normalTitle = "Reject"; ObjectID = "3bm-Ha-Hyj"; */
+"3bm-Ha-Hyj.normalTitle" = "Reject";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "3hc-p6-d6T"; */
+"3hc-p6-d6T.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "You don't have any Reservations yet"; ObjectID = "3he-De-qhl"; */
+"3he-De-qhl.text" = "You don't have any Reservations yet";
+
+/* Class = "UILabel"; text = "-100"; ObjectID = "3kD-hp-gy2"; */
+"3kD-hp-gy2.text" = "-100";
+
+/* Class = "UILabel"; text = "Total Rewards ( Discount )"; ObjectID = "3li-MT-oDc"; */
+"3li-MT-oDc.text" = "Total Rewards ( Discount )";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "3mf-gr-8ZM"; */
+"3mf-gr-8ZM.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Reservation Canceled"; ObjectID = "3rf-g2-PHe"; */
+"3rf-g2-PHe.text" = "Reservation Canceled";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "41c-SG-uqz"; */
+"41c-SG-uqz.text" = "Not Active";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "4X7-hb-COi"; */
+"4X7-hb-COi.text" = "400";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "4e9-Bp-Pc8"; */
+"4e9-Bp-Pc8.text" = "600";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "4es-Ua-s15"; */
+"4es-Ua-s15.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "4nE-Il-4pr"; */
+"4nE-Il-4pr.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Su"; ObjectID = "4ou-mR-2UM"; */
+"4ou-mR-2UM.text" = "Su";
+
+/* Class = "UILabel"; text = "Please pay the remaining amount before"; ObjectID = "4pZ-05-rBK"; */
+"4pZ-05-rBK.text" = "Please pay the remaining amount before";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "51P-cr-FEp"; */
+"51P-cr-FEp.text" = "No. 1";
+
+/* Class = "UINavigationItem"; title = "Aby Chalet"; ObjectID = "5kw-yc-B6i"; */
+"5kw-yc-B6i.title" = "Aby Chalet";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "5s1-cd-3fV"; */
+"5s1-cd-3fV.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "5sl-nx-vX6"; */
+"5sl-nx-vX6.text" = "PM 02:00";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "65l-6w-F0Z"; */
+"65l-6w-F0Z.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "6Wf-5P-aV0"; */
+"6Wf-5P-aV0.text" = "KD";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "6e7-zf-iaX"; */
+"6e7-zf-iaX.text" = "600";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "6nX-Qa-DN8"; */
+"6nX-Qa-DN8.text" = "PM 02:00";
+
+/* Class = "UIButton"; normalTitle = "Inbox"; ObjectID = "79I-nB-ucp"; */
+"79I-nB-ucp.normalTitle" = "Inbox";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "7EP-0i-DhP"; */
+"7EP-0i-DhP.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "7In-nN-Vf5"; */
+"7In-nN-Vf5.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "7X2-Ge-Nje"; */
+"7X2-Ge-Nje.text" = "Check-in";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "7hy-gl-Oe6"; */
+"7hy-gl-Oe6.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "7kP-F8-1Fq"; */
+"7kP-F8-1Fq.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Thank you"; ObjectID = "7ww-Gc-uAp"; */
+"7ww-Gc-uAp.text" = "Thank you";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "89Q-YN-Mbq"; */
+"89Q-YN-Mbq.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "8Bi-uf-bPV"; */
+"8Bi-uf-bPV.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "8Ea-Az-J2T"; */
+"8Ea-Az-J2T.text" = "No. 1";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "8OC-v5-Ujc"; */
+"8OC-v5-Ujc.text" = "400";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "8bF-Fb-cHa"; */
+"8bF-Fb-cHa.text" = "600";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "8uf-Ny-48x"; */
+"8uf-Ny-48x.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "8xG-vm-5pp"; */
+"8xG-vm-5pp.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "92c-79-QLg"; */
+"92c-79-QLg.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Available Chalets"; ObjectID = "95Z-j4-z1w"; */
+"95Z-j4-z1w.text" = "Available Chalets";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "9Dq-aj-5m5"; */
+"9Dq-aj-5m5.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "9Jk-3P-fee"; */
+"9Jk-3P-fee.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "9Nw-cO-L0E"; */
+"9Nw-cO-L0E.text" = "400";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "9cl-gM-QfF"; */
+"9cl-gM-QfF.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "9fb-ej-WUm"; */
+"9fb-ej-WUm.text" = "Check-in";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "9wQ-KY-D0C"; */
+"9wQ-KY-D0C.text" = "400";
+
+/* Class = "UILabel"; text = "Cancelled"; ObjectID = "Aro-mI-OJX"; */
+"Aro-mI-OJX.text" = "Cancelled";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "AxX-2A-4xG"; */
+"AxX-2A-4xG.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "B7c-I5-5F3"; */
+"B7c-I5-5F3.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "Agreement"; ObjectID = "BIf-jm-GZ9"; */
+"BIf-jm-GZ9.text" = "Agreement";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "BUR-cv-2qb"; */
+"BUR-cv-2qb.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Offers (Discount)"; ObjectID = "Ben-0b-GYr"; */
+"Ben-0b-GYr.text" = "Offers (Discount)";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "Bnf-Po-iUY"; */
+"Bnf-Po-iUY.text" = "400";
+
+/* Class = "UILabel"; text = "i have read and Agree to the terms of service"; ObjectID = "Bow-2B-9Hb"; */
+"Bow-2B-9Hb.text" = "i have read and Agree to the terms of service";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "BpQ-O2-bXv"; */
+"BpQ-O2-bXv.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "Terms of services"; ObjectID = "BrX-BG-XMn"; */
+"BrX-BG-XMn.text" = "Terms of services";
+
+/* Class = "UITabBarItem"; title = "Offers"; ObjectID = "BzH-n4-wtw"; */
+"BzH-n4-wtw.title" = "Offers";
+
+/* Class = "UILabel"; text = "Remind"; ObjectID = "CCV-66-KWd"; */
+"CCV-66-KWd.text" = "Remind";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "CCo-MH-EH0"; */
+"CCo-MH-EH0.text" = "400";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "CHh-hv-szs"; */
+"CHh-hv-szs.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "COB-KW-mn0"; */
+"COB-KW-mn0.text" = "KD";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "CP0-4T-by8"; */
+"CP0-4T-by8.text" = "600";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CRK-on-FN0"; */
+"CRK-on-FN0.text" = "Label";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "D0g-7z-npY"; */
+"D0g-7z-npY.text" = "No. 1";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "D1h-w5-5Eo"; */
+"D1h-w5-5Eo.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Canceled"; ObjectID = "DAy-Or-F9U"; */
+"DAy-Or-F9U.text" = "Canceled";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "DJz-oT-NTV"; */
+"DJz-oT-NTV.text" = "24/03/2019";
+
+/* Class = "UIButton"; normalTitle = "Call us"; ObjectID = "DQv-bt-4Cs"; */
+"DQv-bt-4Cs.normalTitle" = "Call us";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "DWV-qq-U90"; */
+"DWV-qq-U90.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "DdW-MK-ug1"; */
+"DdW-MK-ug1.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "DnX-99-fLv"; */
+"DnX-99-fLv.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:"; ObjectID = "E6t-Ec-TFA"; */
+"E6t-Ec-TFA.text" = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:";
+
+/* Class = "UILabel"; text = "KD 300"; ObjectID = "EfT-vK-pGe"; */
+"EfT-vK-pGe.text" = "KD 300";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "EfU-BU-H03"; */
+"EfU-BU-H03.text" = "Remaining";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "Ekc-yx-x1H"; */
+"Ekc-yx-x1H.text" = "Not Active";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Ev0-8y-1du"; */
+"Ev0-8y-1du.text" = "KD ";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "FPQ-YO-olS"; */
+"FPQ-YO-olS.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "FWd-bs-ipv"; */
+"FWd-bs-ipv.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "Fmq-Ir-kI1"; */
+"Fmq-Ir-kI1.text" = "Remaining";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "Fzj-EU-KBe"; */
+"Fzj-EU-KBe.text" = "Discount";
+
+/* Class = "UILabel"; text = "Id : #12345"; ObjectID = "G3h-AA-S9b"; */
+"G3h-AA-S9b.text" = "Id : #12345";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "G7A-uT-vo7"; */
+"G7A-uT-vo7.text" = "600";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "GSH-rg-pec"; */
+"GSH-rg-pec.text" = "No. 1";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "GVE-MZ-ICj"; */
+"GVE-MZ-ICj.text" = "600";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "GWT-n2-ysR"; */
+"GWT-n2-ysR.text" = "-";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "GWf-ZR-0vv"; */
+"GWf-ZR-0vv.text" = "600";
+
+/* Class = "UILabel"; text = "KD 400"; ObjectID = "Gka-P5-YuE"; */
+"Gka-P5-YuE.text" = "KD 400";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "GsQ-0b-Je5"; */
+"GsQ-0b-Je5.text" = "-";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "GvD-Dj-dxJ"; */
+"GvD-Dj-dxJ.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "KD 200"; ObjectID = "HNY-MB-Ec5"; */
+"HNY-MB-Ec5.text" = "KD 200";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "HZq-2l-3nO"; */
+"HZq-2l-3nO.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "Hbg-UE-gQ6"; */
+"Hbg-UE-gQ6.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "Rental Price"; ObjectID = "HkP-oZ-hXY"; */
+"HkP-oZ-hXY.text" = "Rental Price";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "HmU-Su-x8n"; */
+"HmU-Su-x8n.text" = "KD ";
+
+/* Class = "UILabel"; text = "Total Rewards ( Discount )"; ObjectID = "HuD-xC-sss"; */
+"HuD-xC-sss.text" = "Total Rewards ( Discount )";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "HvW-zn-Qjf"; */
+"HvW-zn-Qjf.text" = "Remaining";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "I2b-xo-QuL"; */
+"I2b-xo-QuL.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "I6b-al-QZW"; */
+"I6b-al-QZW.text" = "400";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "I9h-Lf-UuT"; */
+"I9h-Lf-UuT.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "IH1-DZ-Irm"; */
+"IH1-DZ-Irm.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "You must Agree to all condtions to be able book"; ObjectID = "Ikn-KY-lT1"; */
+"Ikn-KY-lT1.text" = "You must Agree to all condtions to be able book";
+
+/* Class = "UILabel"; text = "18/03/2021 ( 12:00 AM )"; ObjectID = "J58-CT-sBf"; */
+"J58-CT-sBf.text" = "18/03/2021 ( 12:00 AM )";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "Jn9-E7-Bir"; */
+"Jn9-E7-Bir.text" = "General Notes";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "Jnm-FC-mdc"; */
+"Jnm-FC-mdc.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "Jzt-Xl-4sr"; */
+"Jzt-Xl-4sr.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "KJL-aJ-R2q"; */
+"KJL-aJ-R2q.text" = "KD ";
+
+/* Class = "UILabel"; text = "1/5"; ObjectID = "KOM-8B-WcD"; */
+"KOM-8B-WcD.text" = "1/5";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "KSW-aI-CU7"; */
+"KSW-aI-CU7.text" = "Label";
+
+/* Class = "UILabel"; text = "Total Rewards (Discount)"; ObjectID = "Kro-VV-lf1"; */
+"Kro-VV-lf1.text" = "Total Rewards (Discount)";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "Ksk-aQ-jDq"; */
+"Ksk-aQ-jDq.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Please pay the remaining amount before"; ObjectID = "Ktv-ZM-LA9"; */
+"Ktv-ZM-LA9.text" = "Please pay the remaining amount before";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "Kwk-J0-hHF"; */
+"Kwk-J0-hHF.text" = "400";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "L6k-tV-2j7"; */
+"L6k-tV-2j7.text" = "No. 1";
+
+/* Class = "UIButton"; normalTitle = "Enjoy"; ObjectID = "L76-vW-sqR"; */
+"L76-vW-sqR.normalTitle" = "Enjoy";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "L9X-JL-sc2"; */
+"L9X-JL-sc2.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "LAb-u5-tS9"; */
+"LAb-u5-tS9.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "LDj-CJ-sx9"; */
+"LDj-CJ-sx9.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Offers (Discount)"; ObjectID = "LGN-UF-nNk"; */
+"LGN-UF-nNk.text" = "Offers (Discount)";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "Lel-i2-maN"; */
+"Lel-i2-maN.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "KD - 100 (10%)"; ObjectID = "LfJ-jd-y4G"; */
+"LfJ-jd-y4G.text" = "KD - 100 (10%)";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "Lgh-zW-az6"; */
+"Lgh-zW-az6.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "Lni-XA-LNd"; */
+"Lni-XA-LNd.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "3h ago"; ObjectID = "M1Q-xF-Nac"; */
+"M1Q-xF-Nac.text" = "3h ago";
+
+/* Class = "UILabel"; text = "KD 200"; ObjectID = "M5a-0y-OEO"; */
+"M5a-0y-OEO.text" = "KD 200";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "M6g-9w-1Ni"; */
+"M6g-9w-1Ni.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "M6l-40-Kcp"; */
+"M6l-40-Kcp.text" = "KD";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "M80-J6-8Ta"; */
+"M80-J6-8Ta.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "MBk-65-4ww"; */
+"MBk-65-4ww.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Paid"; ObjectID = "MGK-pW-ukx"; */
+"MGK-pW-ukx.text" = "Paid";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "MTE-lt-X7b"; */
+"MTE-lt-X7b.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "MXh-AC-Qxo"; */
+"MXh-AC-Qxo.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Mjx-0j-dOr"; */
+"Mjx-0j-dOr.text" = "KD ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Mk1-MU-LQ3"; */
+"Mk1-MU-LQ3.text" = "Label";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "N8b-O3-qBB"; */
+"N8b-O3-qBB.text" = "KD ";
+
+/* Class = "UILabel"; text = "No Deposit 72 hours before Check-in"; ObjectID = "NfI-cE-XiG"; */
+"NfI-cE-XiG.text" = "No Deposit 72 hours before Check-in";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "Nil-GE-HHP"; */
+"Nil-GE-HHP.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "Njr-jH-9hU"; */
+"Njr-jH-9hU.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "OT1-jo-9mi"; */
+"OT1-jo-9mi.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "OYU-vh-5S4"; */
+"OYU-vh-5S4.text" = "Rental price";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "OZX-ww-Rbb"; */
+"OZX-ww-Rbb.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "OfU-sS-ovD"; */
+"OfU-sS-ovD.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "Omq-56-hxi"; */
+"Omq-56-hxi.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "Ot8-8l-ue8"; */
+"Ot8-8l-ue8.text" = "Check-Out";
+
+/* Class = "UIButton"; normalTitle = "Copy"; ObjectID = "PJ0-ET-4oO"; */
+"PJ0-ET-4oO.normalTitle" = "Copy";
+
+/* Class = "UILabel"; text = "Earn 100 KD"; ObjectID = "PLp-ee-fdp"; */
+"PLp-ee-fdp.text" = "Earn 100 KD";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "PQI-rs-gQa"; */
+"PQI-rs-gQa.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:"; ObjectID = "PaH-nH-gez"; */
+"PaH-nH-gez.text" = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "Pe3-hq-4eC"; */
+"Pe3-hq-4eC.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "PsC-10-kMf"; */
+"PsC-10-kMf.text" = "Not Active";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "Psg-ae-RdO"; */
+"Psg-ae-RdO.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "Pv6-oR-iaS"; */
+"Pv6-oR-iaS.text" = "400";
+
+/* Class = "UILabel"; text = "Challet Name"; ObjectID = "QCA-sb-GsX"; */
+"QCA-sb-GsX.text" = "Challet Name";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "QF7-aY-9EM"; */
+"QF7-aY-9EM.text" = "400";
+
+/* Class = "UILabel"; text = "1/5"; ObjectID = "QcY-ov-OMq"; */
+"QcY-ov-OMq.text" = "1/5";
+
+/* Class = "UILabel"; text = "18/03/2021 (12.00Pm)"; ObjectID = "Qeh-AL-U7L"; */
+"Qeh-AL-U7L.text" = "18/03/2021 (12.00Pm)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Qjl-lZ-f9f"; */
+"Qjl-lZ-f9f.text" = "Label";
+
+/* Class = "UILabel"; text = "Total Rewards ( Discount )"; ObjectID = "QkI-Fw-jJh"; */
+"QkI-Fw-jJh.text" = "Total Rewards ( Discount )";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "Qsg-zu-KGb"; */
+"Qsg-zu-KGb.text" = "KD";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "Qwt-qb-jPr"; */
+"Qwt-qb-jPr.text" = "Check-in";
+
+/* Class = "UITabBarItem"; title = "Bookings"; ObjectID = "RAE-lm-OWe"; */
+"RAE-lm-OWe.title" = "Bookings";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "RRc-yW-X0W"; */
+"RRc-yW-X0W.text" = "Label";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "RYP-V8-rCc"; */
+"RYP-V8-rCc.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "RaY-k1-tf6"; */
+"RaY-k1-tf6.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "Rfk-QE-2io"; */
+"Rfk-QE-2io.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "Rgh-qO-yha"; */
+"Rgh-qO-yha.text" = "Not Active";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "Riz-YB-bbu"; */
+"Riz-YB-bbu.text" = "Not Active";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "RlN-JU-96d"; */
+"RlN-JU-96d.text" = "Deposit";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "Rvm-fn-dS0"; */
+"Rvm-fn-dS0.text" = "Check-in";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "S26-Km-Gce"; */
+"S26-Km-Gce.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "S2O-MI-Ade"; */
+"S2O-MI-Ade.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "S6B-l0-xgF"; */
+"S6B-l0-xgF.text" = "Label";
+
+/* Class = "UILabel"; text = "Total Rewards (Discount)"; ObjectID = "S99-sT-fdB"; */
+"S99-sT-fdB.text" = "Total Rewards (Discount)";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "SBT-Mn-WGQ"; */
+"SBT-Mn-WGQ.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "SBw-m8-cId"; */
+"SBw-m8-cId.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Agreement"; ObjectID = "SEL-vX-aNJ"; */
+"SEL-vX-aNJ.text" = "Agreement";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "SEb-Ke-PGq"; */
+"SEb-Ke-PGq.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "SJy-7V-K5b"; */
+"SJy-7V-K5b.text" = "KD";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "SlH-Vg-T3y"; */
+"SlH-Vg-T3y.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "No.1"; ObjectID = "SpJ-pq-MAt"; */
+"SpJ-pq-MAt.text" = "No.1";
+
+/* Class = "UILabel"; text = "KD -0"; ObjectID = "Spy-cD-5F8"; */
+"Spy-cD-5F8.text" = "KD -0";
+
+/* Class = "UILabel"; text = "No Deposit 72 hours before Check-in"; ObjectID = "SsO-Ju-Gtl"; */
+"SsO-Ju-Gtl.text" = "No Deposit 72 hours before Check-in";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "T8r-Pi-R8O"; */
+"T8r-Pi-R8O.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T8z-TV-fWJ"; */
+"T8z-TV-fWJ.text" = "Label";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "TBn-Mo-E9i"; */
+"TBn-Mo-E9i.text" = "No. 1";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "TVi-rq-HWO"; */
+"TVi-rq-HWO.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "TZm-5N-ea3"; */
+"TZm-5N-ea3.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "TxE-v2-lH7"; */
+"TxE-v2-lH7.text" = "Rental price";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "Ty0-db-Ngt"; */
+"Ty0-db-Ngt.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Agreement"; ObjectID = "U24-TW-288"; */
+"U24-TW-288.text" = "Agreement";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "U74-75-VkA"; */
+"U74-75-VkA.text" = "600";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "UKx-sJ-ZBJ"; */
+"UKx-sJ-ZBJ.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "ULV-lP-xlB"; */
+"ULV-lP-xlB.text" = "KD";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "UNj-N6-MFh"; */
+"UNj-N6-MFh.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "UaY-go-jkg"; */
+"UaY-go-jkg.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "V5m-Ls-IQB"; */
+"V5m-Ls-IQB.text" = "-";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "V64-lo-51G"; */
+"V64-lo-51G.text" = "Check-in";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "V7N-eH-2O3"; */
+"V7N-eH-2O3.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Please pay the remaining amount before"; ObjectID = "VHP-nW-WsI"; */
+"VHP-nW-WsI.text" = "Please pay the remaining amount before";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "VIO-06-vZl"; */
+"VIO-06-vZl.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Text...."; ObjectID = "VLS-f6-451"; */
+"VLS-f6-451.text" = "Text....";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "VV6-pQ-PeM"; */
+"VV6-pQ-PeM.text" = "Location";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Va8-rJ-z4b"; */
+"Va8-rJ-z4b.text" = "KD ";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "Vaw-Ac-npk"; */
+"Vaw-Ac-npk.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "Vhm-qa-Ldi"; */
+"Vhm-qa-Ldi.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "Booked Successfully"; ObjectID = "Vjv-ZN-VO3"; */
+"Vjv-ZN-VO3.text" = "Booked Successfully";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "Vmc-yw-v6k"; */
+"Vmc-yw-v6k.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "There is no chalet Available for this date Try another date"; ObjectID = "WTI-YF-5Ca"; */
+"WTI-YF-5Ca.text" = "There is no chalet Available for this date Try another date";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "WWI-wC-uWt"; */
+"WWI-wC-uWt.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "WX2-y3-olR"; */
+"WX2-y3-olR.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "WdW-Oh-rCr"; */
+"WdW-Oh-rCr.text" = "Rental price";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "Wf0-97-d6G"; */
+"Wf0-97-d6G.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "Wo5-ts-Rms"; */
+"Wo5-ts-Rms.text" = "KD 600";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "Wz5-vL-jKf"; */
+"Wz5-vL-jKf.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "XCO-M9-Qph"; */
+"XCO-M9-Qph.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "XPS-ch-s8L"; */
+"XPS-ch-s8L.text" = "KD ";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "XT6-OL-plj"; */
+"XT6-OL-plj.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "Xjj-5n-RRm"; */
+"Xjj-5n-RRm.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "XkK-GI-XAl"; */
+"XkK-GI-XAl.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "Enjoy"; ObjectID = "Xne-gG-u9k"; */
+"Xne-gG-u9k.normalTitle" = "Enjoy";
+
+/* Class = "UILabel"; text = "Total Rewards ( Discount )"; ObjectID = "Y1B-k0-05o"; */
+"Y1B-k0-05o.text" = "Total Rewards ( Discount )";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "Y4f-UP-BRJ"; */
+"Y4f-UP-BRJ.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD 200"; ObjectID = "YDP-bb-afZ"; */
+"YDP-bb-afZ.text" = "KD 200";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "YTG-x9-hV2"; */
+"YTG-x9-hV2.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "KD 0"; ObjectID = "YYT-G1-sjW"; */
+"YYT-G1-sjW.text" = "KD 0";
+
+/* Class = "UILabel"; text = "Red color is (reserved)"; ObjectID = "Yu6-sS-cpm"; */
+"Yu6-sS-cpm.text" = "Red color is (reserved)";
+
+/* Class = "UILabel"; text = "Rental Price"; ObjectID = "Ywc-nF-GR6"; */
+"Ywc-nF-GR6.text" = "Rental Price";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "Z4M-n7-jUY"; */
+"Z4M-n7-jUY.text" = "KD 600";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Z88-9W-Lul"; */
+"Z88-9W-Lul.text" = "0";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "ZDI-qz-Wlf"; */
+"ZDI-qz-Wlf.text" = "600";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "ZLs-pN-bZh"; */
+"ZLs-pN-bZh.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "ZSj-w6-Zgs"; */
+"ZSj-w6-Zgs.text" = "Check-in";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "ZUm-cc-tPG"; */
+"ZUm-cc-tPG.text" = "PM 02:00";
+
+/* Class = "UIButton"; normalTitle = "Reject"; ObjectID = "ZVk-fu-p5R"; */
+"ZVk-fu-p5R.normalTitle" = "Reject";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "ZZ5-K9-h5b"; */
+"ZZ5-K9-h5b.title" = "Home";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "Zb0-UW-hgg"; */
+"Zb0-UW-hgg.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Zht-dF-Dip"; */
+"Zht-dF-Dip.text" = "KD ";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Zl3-ZD-HVd"; */
+"Zl3-ZD-HVd.text" = "KD ";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "Zlj-d6-pvn"; */
+"Zlj-d6-pvn.text" = "KD ";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "aD0-KR-cMB"; */
+"aD0-KR-cMB.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Total Paid"; ObjectID = "aIZ-e8-Gub"; */
+"aIZ-e8-Gub.text" = "Total Paid";
+
+/* Class = "UILabel"; text = "Awaiting Payment"; ObjectID = "aMq-0E-las"; */
+"aMq-0E-las.text" = "Awaiting Payment";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "aQ6-ad-NPf"; */
+"aQ6-ad-NPf.text" = "KD";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "aXB-xZ-IuX"; */
+"aXB-xZ-IuX.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "ah1-G8-N7H"; */
+"ah1-G8-N7H.text" = "Not Active";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "avx-us-6Ax"; */
+"avx-us-6Ax.text" = "General Notes";
+
+/* Class = "UILabel"; text = "KD 1000"; ObjectID = "ayt-yY-k21"; */
+"ayt-yY-k21.text" = "KD 1000";
+
+/* Class = "UILabel"; text = "18/03/2021 (12.01AM)"; ObjectID = "b06-HX-L7J"; */
+"b06-HX-L7J.text" = "18/03/2021 (12.01AM)";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "bAT-n9-Vnn"; */
+"bAT-n9-Vnn.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "bNS-H4-Bgo"; */
+"bNS-H4-Bgo.text" = "Deposit";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "bUO-0c-8lJ"; */
+"bUO-0c-8lJ.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "bXE-qi-p9L"; */
+"bXE-qi-p9L.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Total Paid"; ObjectID = "bep-Px-XfD"; */
+"bep-Px-XfD.text" = "Total Paid";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "bgQ-UI-h8P"; */
+"bgQ-UI-h8P.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Booking Confirmed"; ObjectID = "bhL-Ao-5Jm"; */
+"bhL-Ao-5Jm.text" = "Booking Confirmed";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "bqy-9e-ytb"; */
+"bqy-9e-ytb.text" = "No. 1";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "cBA-3Y-tgH"; */
+"cBA-3Y-tgH.text" = "General Notes";
+
+/* Class = "UILabel"; text = "Please pay the remaining amount before"; ObjectID = "cCP-gO-4oF"; */
+"cCP-gO-4oF.text" = "Please pay the remaining amount before";
+
+/* Class = "UILabel"; text = "KD 200"; ObjectID = "cHT-jZ-03M"; */
+"cHT-jZ-03M.text" = "KD 200";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "cKN-bP-zWP"; */
+"cKN-bP-zWP.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "cZR-nR-VG4"; */
+"cZR-nR-VG4.text" = "Check-in";
+
+/* Class = "UILabel"; text = "INV000175"; ObjectID = "cip-Sr-cF6"; */
+"cip-Sr-cF6.text" = "INV000175";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "ckO-H2-7p8"; */
+"ckO-H2-7p8.text" = "KD ";
+
+/* Class = "UIButton"; normalTitle = "Messages"; ObjectID = "cvM-lN-vtg"; */
+"cvM-lN-vtg.normalTitle" = "Messages";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "cyH-hE-zIO"; */
+"cyH-hE-zIO.text" = "Discount";
+
+/* Class = "UILabel"; text = "Challet Name"; ObjectID = "d3H-GE-6N4"; */
+"d3H-GE-6N4.text" = "Challet Name";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "d7c-RU-A1g"; */
+"d7c-RU-A1g.text" = "KD 600";
+
+/* Class = "UILabel"; text = "Earn 100 KD"; ObjectID = "dS3-i4-PVY"; */
+"dS3-i4-PVY.text" = "Earn 100 KD";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "dWd-eP-g5L"; */
+"dWd-eP-g5L.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "No Deposit 72 hours before Check-in"; ObjectID = "dZ1-zX-Eru"; */
+"dZ1-zX-Eru.text" = "No Deposit 72 hours before Check-in";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "db8-bF-lW7"; */
+"db8-bF-lW7.text" = "Deposit";
+
+/* Class = "UILabel"; text = "id : #442458"; ObjectID = "dbY-ry-l5j"; */
+"dbY-ry-l5j.text" = "id : #442458";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "djU-Sm-d6U"; */
+"djU-Sm-d6U.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "dwz-Ig-GNn"; */
+"dwz-Ig-GNn.text" = "400";
+
+/* Class = "UILabel"; text = "After this date The reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:"; ObjectID = "eI8-dj-F9e"; */
+"eI8-dj-F9e.text" = "After this date The reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:";
+
+/* Class = "UILabel"; text = "Open Aby Chalet App"; ObjectID = "eLo-K4-Pjl"; */
+"eLo-K4-Pjl.text" = "Open Aby Chalet App";
+
+/* Class = "UILabel"; text = "Agreement"; ObjectID = "eNg-0H-0bS"; */
+"eNg-0H-0bS.text" = "Agreement";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "eOl-Q7-oWs"; */
+"eOl-Q7-oWs.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "Awaiting Payment"; ObjectID = "eQD-mm-Mtc"; */
+"eQD-mm-Mtc.text" = "Awaiting Payment";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "edI-fH-2ae"; */
+"edI-fH-2ae.text" = "Check-in";
+
+/* Class = "UILabel"; text = "Total Paid"; ObjectID = "eeg-ap-FP5"; */
+"eeg-ap-FP5.text" = "Total Paid";
+
+/* Class = "UILabel"; text = "18/03/2021 (12.01AM)"; ObjectID = "efy-o3-XF1"; */
+"efy-o3-XF1.text" = "18/03/2021 (12.01AM)";
+
+/* Class = "UILabel"; text = "Id : #12233"; ObjectID = "egS-gr-KfS"; */
+"egS-gr-KfS.text" = "Id : #12233";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "ehs-pU-AP1"; */
+"ehs-pU-AP1.text" = "400";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "eu0-Ug-8Ka"; */
+"eu0-Ug-8Ka.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "fS2-Bd-gDC"; */
+"fS2-Bd-gDC.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "fpx-Nw-ifX"; */
+"fpx-Nw-ifX.text" = "KD";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fqV-e8-pJI"; */
+"fqV-e8-pJI.text" = "Label";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "fxO-Kw-BVc"; */
+"fxO-Kw-BVc.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "fzx-Gu-JIZ"; */
+"fzx-Gu-JIZ.text" = "KD";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "g1h-v6-6SG"; */
+"g1h-v6-6SG.text" = "Total Invoice";
+
+/* Class = "UIButton"; normalTitle = "Payment Now"; ObjectID = "gAd-VM-Dpz"; */
+"gAd-VM-Dpz.normalTitle" = "Payment Now";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "gJf-PP-eEh"; */
+"gJf-PP-eEh.text" = "0";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "gPm-nX-T84"; */
+"gPm-nX-T84.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "-50"; ObjectID = "gS3-Hq-b1T"; */
+"gS3-Hq-b1T.text" = "-50";
+
+/* Class = "UILabel"; text = "Rewards (Discount)"; ObjectID = "ga0-i4-kfa"; */
+"ga0-i4-kfa.text" = "Rewards (Discount)";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "ga9-QI-HIB"; */
+"ga9-QI-HIB.text" = "Check-in";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "gdg-Ny-ns9"; */
+"gdg-Ny-ns9.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gk2-Eh-JBJ"; */
+"gk2-Eh-JBJ.text" = "Label";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "gsQ-lh-lrF"; */
+"gsQ-lh-lrF.text" = "400";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "gt2-Oe-mDL"; */
+"gt2-Oe-mDL.text" = "KD ";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "gx3-06-zQ7"; */
+"gx3-06-zQ7.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "gzF-N3-Ohk"; */
+"gzF-N3-Ohk.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "gzT-p4-D6Q"; */
+"gzT-p4-D6Q.text" = "KD 600";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "h0C-cX-XjH"; */
+"h0C-cX-XjH.text" = "400";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "h21-Ty-qx0"; */
+"h21-Ty-qx0.text" = "0";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "h25-JC-cjP"; */
+"h25-JC-cjP.text" = "400";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "h4G-kj-UHF"; */
+"h4G-kj-UHF.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "KD 0"; ObjectID = "h7t-bC-rbf"; */
+"h7t-bC-rbf.text" = "KD 0";
+
+/* Class = "UILabel"; text = "Total Paid"; ObjectID = "h81-SZ-uqO"; */
+"h81-SZ-uqO.text" = "Total Paid";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "hDi-m8-0cG"; */
+"hDi-m8-0cG.text" = "KD ";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "hDo-0a-ItW"; */
+"hDo-0a-ItW.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "hGF-x0-Ah4"; */
+"hGF-x0-Ah4.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Id : #12345"; ObjectID = "hNL-w9-P14"; */
+"hNL-w9-P14.text" = "Id : #12345";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "hPO-CY-vv0"; */
+"hPO-CY-vv0.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "hge-Am-TNy"; */
+"hge-Am-TNy.text" = "KD";
+
+/* Class = "UILabel"; text = "Earn 100 KD"; ObjectID = "hpI-B9-QYN"; */
+"hpI-B9-QYN.text" = "Earn 100 KD";
+
+/* Class = "UILabel"; text = "Booking"; ObjectID = "i5a-EL-bwW"; */
+"i5a-EL-bwW.text" = "Booking";
+
+/* Class = "UIButton"; normalTitle = "Search"; ObjectID = "iVI-24-zge"; */
+"iVI-24-zge.normalTitle" = "Search";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "if8-BD-dcI"; */
+"if8-BD-dcI.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "ijB-f2-Iq5"; */
+"ijB-f2-Iq5.text" = "KD 600";
+
+/* Class = "UILabel"; text = "Commission"; ObjectID = "jHS-Hf-1d3"; */
+"jHS-Hf-1d3.text" = "Commission";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "jKb-VM-7oN"; */
+"jKb-VM-7oN.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "jP8-R4-sNR"; */
+"jP8-R4-sNR.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "jYE-bH-s6o"; */
+"jYE-bH-s6o.text" = "Check-in";
+
+/* Class = "UILabel"; text = "You must Agree to all condtions to be able book"; ObjectID = "jYb-af-cSf"; */
+"jYb-af-cSf.text" = "You must Agree to all condtions to be able book";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "jcY-nn-MRF"; */
+"jcY-nn-MRF.text" = "Booking Details";
+
+/* Class = "UIButton"; normalTitle = "Copy"; ObjectID = "jq2-px-MQi"; */
+"jq2-px-MQi.normalTitle" = "Copy";
+
+/* Class = "UILabel"; text = "now"; ObjectID = "kB2-rj-waL"; */
+"kB2-rj-waL.text" = "now";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "kBm-ol-Eow"; */
+"kBm-ol-Eow.text" = "KD";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "kCX-Sj-FVP"; */
+"kCX-Sj-FVP.text" = "400";
+
+/* Class = "UIButton"; normalTitle = "Payment Now"; ObjectID = "kCZ-8g-KId"; */
+"kCZ-8g-KId.normalTitle" = "Payment Now";
+
+/* Class = "UILabel"; text = "8h ago"; ObjectID = "kQt-91-6Jg"; */
+"kQt-91-6Jg.text" = "8h ago";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "kbR-6L-l8B"; */
+"kbR-6L-l8B.text" = "Rental price";
+
+/* Class = "UILabel"; text = "Mo"; ObjectID = "kpD-mz-hL2"; */
+"kpD-mz-hL2.text" = "Mo";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "kvo-Rk-6RK"; */
+"kvo-Rk-6RK.text" = "Remaining";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "kwH-HY-sFo"; */
+"kwH-HY-sFo.text" = "400";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "kxg-GR-5Ze"; */
+"kxg-GR-5Ze.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "Id : #12345"; ObjectID = "l8a-TB-6WF"; */
+"l8a-TB-6WF.text" = "Id : #12345";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "lJU-pW-Atk"; */
+"lJU-pW-Atk.text" = "Remaining";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "lay-G3-kFJ"; */
+"lay-G3-kFJ.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ldC-oH-2Du"; */
+"ldC-oH-2Du.text" = "0";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "liz-FJ-LHm"; */
+"liz-FJ-LHm.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "No Notifications found"; ObjectID = "lj0-0h-Q7R"; */
+"lj0-0h-Q7R.text" = "No Notifications found";
+
+/* Class = "UILabel"; text = "Payment is Failed Please try again"; ObjectID = "ljq-VJ-qCv"; */
+"ljq-VJ-qCv.text" = "Payment is Failed Please try again";
+
+/* Class = "UIBarButtonItem"; title = "  "; ObjectID = "lk8-9c-9vm"; */
+"lk8-9c-9vm.title" = "  ";
+
+/* Class = "UILabel"; text = "Booking Details"; ObjectID = "lx4-m8-uK5"; */
+"lx4-m8-uK5.text" = "Booking Details";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "lzI-wG-kDO"; */
+"lzI-wG-kDO.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "lzt-H8-y4C"; */
+"lzt-H8-y4C.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "m0w-4P-CDM"; */
+"m0w-4P-CDM.text" = "No. 1";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "m0y-rj-oLu"; */
+"m0y-rj-oLu.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "m7P-FU-7ab"; */
+"m7P-FU-7ab.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "Available Chalets"; ObjectID = "mAM-dt-8iG"; */
+"mAM-dt-8iG.text" = "Available Chalets";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "mDi-C4-GaK"; */
+"mDi-C4-GaK.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "We are sorry, your reservation has been canceled due to non-payment of the remaining amount"; ObjectID = "mHY-32-Kfy"; */
+"mHY-32-Kfy.text" = "We are sorry, your reservation has been canceled due to non-payment of the remaining amount";
+
+/* Class = "UILabel"; text = "Not Active"; ObjectID = "mpj-n1-1XT"; */
+"mpj-n1-1XT.text" = "Not Active";
+
+/* Class = "UILabel"; text = "Event Name"; ObjectID = "msP-XA-GLi"; */
+"msP-XA-GLi.text" = "Event Name";
+
+/* Class = "UILabel"; text = "Id : #12233"; ObjectID = "myk-53-LPm"; */
+"myk-53-LPm.text" = "Id : #12233";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "n5r-Ds-WSZ"; */
+"n5r-Ds-WSZ.text" = "KD";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "nMS-7H-UpZ"; */
+"nMS-7H-UpZ.text" = "400";
+
+/* Class = "UILabel"; text = "Th"; ObjectID = "nUr-X9-Sjy"; */
+"nUr-X9-Sjy.text" = "Th";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nYb-7y-IiK"; */
+"nYb-7y-IiK.text" = "Label";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "nio-8f-Xng"; */
+"nio-8f-Xng.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Challet Name"; ObjectID = "o4c-bP-75F"; */
+"o4c-bP-75F.text" = "Challet Name";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "oIS-N0-yQq"; */
+"oIS-N0-yQq.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "oLQ-t4-XWE"; */
+"oLQ-t4-XWE.text" = "General Notes";
+
+/* Class = "UILabel"; text = "Tu"; ObjectID = "oVn-Tc-naJ"; */
+"oVn-Tc-naJ.text" = "Tu";
+
+/* Class = "UILabel"; text = "Id : #12345"; ObjectID = "ohy-ea-kXq"; */
+"ohy-ea-kXq.text" = "Id : #12345";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "olT-aA-T3r"; */
+"olT-aA-T3r.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "We"; ObjectID = "ols-EE-tOZ"; */
+"ols-EE-tOZ.text" = "We";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "osF-eL-yjL"; */
+"osF-eL-yjL.text" = "KD ";
+
+/* Class = "UIButton"; normalTitle = "Payment Now"; ObjectID = "oxj-Af-4BZ"; */
+"oxj-Af-4BZ.normalTitle" = "Payment Now";
+
+/* Class = "UILabel"; text = "Red color is (reserved)"; ObjectID = "oxw-M8-yGq"; */
+"oxw-M8-yGq.text" = "Red color is (reserved)";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "pBL-K4-Zoa"; */
+"pBL-K4-Zoa.text" = "No. 1";
+
+/* Class = "UILabel"; text = "Booking"; ObjectID = "pOl-9A-Yq3"; */
+"pOl-9A-Yq3.text" = "Booking";
+
+/* Class = "UILabel"; text = "Check-in"; ObjectID = "pSb-HS-XVs"; */
+"pSb-HS-XVs.text" = "Check-in";
+
+/* Class = "UILabel"; text = "You don't have any Offers yet"; ObjectID = "pUt-rJ-IkI"; */
+"pUt-rJ-IkI.text" = "You don't have any Offers yet";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "pWa-jX-mJh"; */
+"pWa-jX-mJh.text" = "KD";
+
+/* Class = "UIButton"; normalTitle = "Search"; ObjectID = "pa4-mZ-mIz"; */
+"pa4-mZ-mIz.normalTitle" = "Search";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "pfD-jQ-QRm"; */
+"pfD-jQ-QRm.text" = "KD";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "piI-3K-K3n"; */
+"piI-3K-K3n.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Rental Price"; ObjectID = "pmV-cD-F0u"; */
+"pmV-cD-F0u.text" = "Rental Price";
+
+/* Class = "UILabel"; text = "KD 200"; ObjectID = "pvv-v9-Jnq"; */
+"pvv-v9-Jnq.text" = "KD 200";
+
+/* Class = "UILabel"; text = "Please pay the remaining amount before"; ObjectID = "q4h-46-XcS"; */
+"q4h-46-XcS.text" = "Please pay the remaining amount before";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "qBS-Lf-yGN"; */
+"qBS-Lf-yGN.text" = "KD ";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "qBh-f4-iV4"; */
+"qBh-f4-iV4.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Text...."; ObjectID = "qOh-lW-hZ1"; */
+"qOh-lW-hZ1.text" = "Text....";
+
+/* Class = "UILabel"; text = "KD 1000"; ObjectID = "qR0-Rf-AKg"; */
+"qR0-Rf-AKg.text" = "KD 1000";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "qT5-cz-vY5"; */
+"qT5-cz-vY5.text" = "KD ";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "qYK-Bh-C0C"; */
+"qYK-Bh-C0C.text" = "Chalet name";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "qZI-EF-ilS"; */
+"qZI-EF-ilS.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "qbm-ce-rYw"; */
+"qbm-ce-rYw.text" = "KD";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qfv-xW-pFq"; */
+"qfv-xW-pFq.text" = "Label";
+
+/* Class = "UILabel"; text = "Bookings"; ObjectID = "qpR-El-9VP"; */
+"qpR-El-9VP.text" = "Bookings";
+
+/* Class = "UILabel"; text = "id : #442458"; ObjectID = "rIc-1x-5I6"; */
+"rIc-1x-5I6.text" = "id : #442458";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "rMP-L6-bVA"; */
+"rMP-L6-bVA.text" = "General Notes";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "rcY-TV-MZP"; */
+"rcY-TV-MZP.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "ruP-e9-wTn"; */
+"ruP-e9-wTn.text" = "600";
+
+/* Class = "UILabel"; text = "Total Rewards ( Discount )"; ObjectID = "sGF-rN-hFC"; */
+"sGF-rN-hFC.text" = "Total Rewards ( Discount )";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "sOR-9R-CSq"; */
+"sOR-9R-CSq.text" = "-";
+
+/* Class = "UILabel"; text = "Rental Price"; ObjectID = "sSH-Y6-y01"; */
+"sSH-Y6-y01.text" = "Rental Price";
+
+/* Class = "UILabel"; text = "Challet details"; ObjectID = "se4-fE-hXY"; */
+"se4-fE-hXY.text" = "Challet details";
+
+/* Class = "UILabel"; text = "Commission"; ObjectID = "ssI-2m-AUQ"; */
+"ssI-2m-AUQ.text" = "Commission";
+
+/* Class = "UILabel"; text = "Sa"; ObjectID = "t9t-rq-TqG"; */
+"t9t-rq-TqG.text" = "Sa";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "tLc-Pa-qbs"; */
+"tLc-Pa-qbs.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "tSZ-OU-Dzs"; */
+"tSZ-OU-Dzs.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "tnC-t6-EL5"; */
+"tnC-t6-EL5.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "General Notes"; ObjectID = "u93-bI-qon"; */
+"u93-bI-qon.text" = "General Notes";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "uEL-Nx-xP4"; */
+"uEL-Nx-xP4.text" = "600";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "uJc-9J-k3y"; */
+"uJc-9J-k3y.text" = "Deposit";
+
+/* Class = "UILabel"; text = "KD 0"; ObjectID = "uYk-TS-W0j"; */
+"uYk-TS-W0j.text" = "KD 0";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "uZf-KW-JfO"; */
+"uZf-KW-JfO.text" = "KD";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "uhN-Gq-q8R"; */
+"uhN-Gq-q8R.text" = "No. 1";
+
+/* Class = "UILabel"; text = "600"; ObjectID = "ukp-K3-3qZ"; */
+"ukp-K3-3qZ.text" = "600";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "uoY-G8-wvb"; */
+"uoY-G8-wvb.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "Fr"; ObjectID = "upK-Xz-UBO"; */
+"upK-Xz-UBO.text" = "Fr";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "v0Y-aN-rPd"; */
+"v0Y-aN-rPd.text" = "-";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "v0x-r6-Qtm"; */
+"v0x-r6-Qtm.title" = "Profile";
+
+/* Class = "UIButton"; normalTitle = "Payment now"; ObjectID = "v9Y-Y1-ucg"; */
+"v9Y-Y1-ucg.normalTitle" = "Payment now";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "vVw-dU-6EH"; */
+"vVw-dU-6EH.text" = "No. 1";
+
+/* Class = "UILabel"; text = "No.1"; ObjectID = "vYQ-YM-uRY"; */
+"vYQ-YM-uRY.text" = "No.1";
+
+/* Class = "UILabel"; text = "18/03/2021 (12:00 AM)"; ObjectID = "vaO-Dc-9TQ"; */
+"vaO-Dc-9TQ.text" = "18/03/2021 (12:00 AM)";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "vbV-xS-Wli"; */
+"vbV-xS-Wli.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "vci-t3-wTV"; */
+"vci-t3-wTV.text" = "KD ";
+
+/* Class = "UILabel"; text = "KD 600"; ObjectID = "vjF-OK-s4q"; */
+"vjF-OK-s4q.text" = "KD 600";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "voL-Li-nCg"; */
+"voL-Li-nCg.text" = "Rental price";
+
+/* Class = "UILabel"; text = "There is no chalet Available for this date Try another date"; ObjectID = "wVQ-q1-ngf"; */
+"wVQ-q1-ngf.text" = "There is no chalet Available for this date Try another date";
+
+/* Class = "UILabel"; text = "Deposit"; ObjectID = "wYj-J9-sK3"; */
+"wYj-J9-sK3.text" = "Deposit";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "wd1-0H-diL"; */
+"wd1-0H-diL.text" = "KD ";
+
+/* Class = "UILabel"; text = "Chalet name"; ObjectID = "wg6-7e-IHP"; */
+"wg6-7e-IHP.text" = "Chalet name";
+
+/* Class = "UILabel"; text = "24/03/2021"; ObjectID = "whO-ma-WCd"; */
+"whO-ma-WCd.text" = "24/03/2021";
+
+/* Class = "UILabel"; text = "Chalet details"; ObjectID = "xMG-Wm-Jl7"; */
+"xMG-Wm-Jl7.text" = "Chalet details";
+
+/* Class = "UILabel"; text = "Earn 100 KD"; ObjectID = "xQK-el-w0c"; */
+"xQK-el-w0c.text" = "Earn 100 KD";
+
+/* Class = "UILabel"; text = "KD 0"; ObjectID = "xQg-dn-BzA"; */
+"xQg-dn-BzA.text" = "KD 0";
+
+/* Class = "UILabel"; text = "KD"; ObjectID = "xYq-Hc-M4d"; */
+"xYq-Hc-M4d.text" = "KD";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "xb3-DY-GCe"; */
+"xb3-DY-GCe.text" = "Rental price";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "xdd-Y9-syI"; */
+"xdd-Y9-syI.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "xey-M3-L1e"; */
+"xey-M3-L1e.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "You must Agree to all conditions to be able to book"; ObjectID = "xxF-sW-Me6"; */
+"xxF-sW-Me6.text" = "You must Agree to all conditions to be able to book";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "xyC-dV-fG7"; */
+"xyC-dV-fG7.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "y4T-n8-5Z4"; */
+"y4T-n8-5Z4.text" = "KD ";
+
+/* Class = "UILabel"; text = "400"; ObjectID = "yOe-sQ-9fH"; */
+"yOe-sQ-9fH.text" = "400";
+
+/* Class = "UILabel"; text = "Rewards (Discount)"; ObjectID = "ydO-XX-Yz0"; */
+"ydO-XX-Yz0.text" = "Rewards (Discount)";
+
+/* Class = "UILabel"; text = "KD - 100 (10%)"; ObjectID = "yl2-mA-vYB"; */
+"yl2-mA-vYB.text" = "KD - 100 (10%)";
+
+/* Class = "UILabel"; text = "Total Invoice"; ObjectID = "z5O-dv-sXj"; */
+"z5O-dv-sXj.text" = "Total Invoice";
+
+/* Class = "UILabel"; text = "Rental price"; ObjectID = "z9u-MO-ARf"; */
+"z9u-MO-ARf.text" = "Rental price";
+
+/* Class = "UILabel"; text = "24/03/2019"; ObjectID = "zC0-pZ-Dp4"; */
+"zC0-pZ-Dp4.text" = "24/03/2019";
+
+/* Class = "UILabel"; text = "Open Aby Chalet App"; ObjectID = "zES-Sl-Oje"; */
+"zES-Sl-Oje.text" = "Open Aby Chalet App";
+
+/* Class = "UILabel"; text = "21/03/2019"; ObjectID = "zHd-PY-0Bf"; */
+"zHd-PY-0Bf.text" = "21/03/2019";
+
+/* Class = "UILabel"; text = "No. 1"; ObjectID = "zJF-z4-bmq"; */
+"zJF-z4-bmq.text" = "No. 1";
+
+/* Class = "UILabel"; text = "KD 0"; ObjectID = "zJS-iq-3q2"; */
+"zJS-iq-3q2.text" = "KD 0";
+
+/* Class = "UILabel"; text = "PM 02:00"; ObjectID = "zdr-u1-H2L"; */
+"zdr-u1-H2L.text" = "PM 02:00";
+
+/* Class = "UILabel"; text = "Check-Out"; ObjectID = "zu4-tT-2QY"; */
+"zu4-tT-2QY.text" = "Check-Out";
+
+/* Class = "UILabel"; text = "KD "; ObjectID = "zxL-Cq-lhd"; */
+"zxL-Cq-lhd.text" = "KD ";
+
+/* Class = "UILabel"; text = "Reservation has beed canceled"; ObjectID = "zxe-TI-kjp"; */
+"zxe-TI-kjp.text" = "Reservation has beed canceled";

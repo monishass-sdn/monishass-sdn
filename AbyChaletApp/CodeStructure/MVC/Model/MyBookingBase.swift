@@ -191,6 +191,7 @@ public class MyBookingChalet_details {
     public var updated_at : String?
     public var remaining_amt_pay : String?
     public var available_deposit : String?
+    public var default_callus: String?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [MyBookingChalet_details]
     {
@@ -234,6 +235,7 @@ public class MyBookingChalet_details {
         updated_at = dictionary["updated_at"] as? String
         remaining_amt_pay = dictionary["remaining_amt_pay"] as? String
         available_deposit = dictionary["available_deposit"] as? String
+        default_callus = dictionary["default_callus"] as? String
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -268,6 +270,7 @@ public class MyBookingChalet_details {
         dictionary.setValue(self.updated_at, forKey: "updated_at")
         dictionary.setValue(self.remaining_amt_pay, forKey: "remaining_amt_pay")
         dictionary.setValue(self.available_deposit, forKey: "available_deposit")
+        dictionary.setValue(self.default_callus, forKey: "default_callus")
 
         return dictionary
     }

@@ -46,7 +46,7 @@ class SignUpProfileDetailsTableViewCell2: UITableViewCell {
                 return text
             }
         }
-        txtForCountryCode.setLeftPaddingPoints(20)
+       // txtForCountryCode.setLeftPaddingPoints(10)
         txtEmailAdd.placeholder = "Email Address".localized()
         txtPassword.placeholder = "Password".localized()
         txtConfirmPasswrd.placeholder = "Confirm Password".localized()
@@ -55,7 +55,7 @@ class SignUpProfileDetailsTableViewCell2: UITableViewCell {
         txtEmailAdd.selectedTitle = "Email Address".localized()
         txtPassword.selectedTitle = "Password".localized()
         txtConfirmPasswrd.selectedTitle = "Confirm Password".localized()
-        txtForCountryCode.selectedTitle = "Country Code".localized()
+        txtForCountryCode.selectedTitle = "Country".localized()
         txtforMobileNumber.selectedTitle = "Mobile Number".localized()
         
         

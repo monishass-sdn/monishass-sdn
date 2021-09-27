@@ -140,6 +140,11 @@ extension LoginSignUpViewController {
     
     var isSelfFromValidForSignUp:(Bool, String?, String?, String?, String?, String?, String?, String? , String?, String?, String?) {
         // dateOfBirth = "\(birthDay)-)"+"\(birthMonth)-)"+"\(birthYear)"
+        print("First Name = \(firstName)")
+        print("Last Name = \(lastName)")
+        print("DOB == \(birthDay) - \(birthMonth) - \(birthYear)")
+        
+        
         dateOfBirth = "\(birthYear)-"+"\(birthMonth)-"+"\(birthDay)"
         if firstName.isEmpty {//&& phoneNumberFromSocialMedia.isEmpty  {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter first name".localized())
@@ -147,22 +152,11 @@ extension LoginSignUpViewController {
         } else if lastName.isEmpty {//&& phoneNumberFromSocialMedia.isEmpty  {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter last name".localized())
             return (false , nil , nil , nil , nil, nil, nil, nil, nil, nil, nil)
-        } else if birthDay.isEmpty{ //&& phoneNumberFromSocialMedia.isEmpty  {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter day of birth".localized())
-            
+        }else if birthDay.isEmpty && birthMonth.isEmpty && birthYear.isEmpty {
+            showDefaultAlert(viewController: self, title: "", msg: "Please enter DOB".localized())
             return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
-        }else if birthMonth.isEmpty{ //&& phoneNumberFromSocialMedia.isEmpty  {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter month of birth".localized())
-            
-            return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
-        }else if birthYear.isEmpty{ //&& phoneNumberFromSocialMedia.isEmpty  {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter year of birth".localized())
-            return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
-        }else if dateOfBirth.isEmpty{ //&& phoneNumberFromSocialMedia.isEmpty  {
-            showDefaultAlert(viewController: self, title: "", msg: "Please Enter Date Of birth".localized())
-            
-            return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
-        } else if personGender.isEmpty {
+        }
+        else if personGender.isEmpty {
             showDefaultAlert(viewController: self, title: "", msg: "Please select gender".localized())
             
             return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
@@ -379,9 +373,9 @@ extension LoginSignUpViewController: UITableViewDataSource {
             cell.imgViewForProfilePicture.isUserInteractionEnabled = true
            // cell.imgViewForProfilePicture.removeCornerForView()
             cell.imgViewForProfilePicture.addGestureRecognizer(tapGestureRecognizer)
-            cell.txtBirthDay.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-            cell.txtBirthMonth.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-            cell.txtBirthYear.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+            cell.txtBirthDay.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for:.editingDidEnd)
+            cell.txtBirthMonth.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingDidEnd)
+            cell.txtBirthYear.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingDidEnd)
             cell.txtFirstName.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
             cell.txtLastName.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
             cell.btnFemale.addTarget(self, action: #selector(btnFemaleDidTap(_:)), for: .touchUpInside)
@@ -578,6 +572,8 @@ extension LoginSignUpViewController: UITextFieldDelegate {
         }
     }
     
+
+    
     @objc func textFieldDidChange(_ textfield: UITextField) {
         switch textfield.tag {
         case 1:
@@ -625,10 +621,10 @@ extension LoginSignUpViewController: CountryCodePopUpDelegate{
         contryCode = Countrydetails.countryCode
         countryName = Countrydetails.countryName
         let cell:SignUpProfileDetailsTableViewCell2 = tblView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SignUpProfileDetailsTableViewCell2
-        cell.txtForCountryCode.text = contryCode
-        cell.txtForCountryCode.textAlignment = .right
+        cell.txtForCountryCode.text = "          \(contryCode)"
+        
         cell.country = Countrydetails.countryName
-        cell.txtForCountryCode.setRightPaddingPoints(10)
+        cell.txtForCountryCode.setRightPaddingPoints(5)
         cell.imgViewForCountryCode.image = UIImage(named: Countrydetails.countryFlag )
     }
     

@@ -18,7 +18,8 @@ class TermsAndConditionVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         super.viewDidLoad()
         
         self.setUpNavigationBar()
-        
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        self.navigationItem.rightBarButtonItems = [notificationButton]
         if isFromReservation == false{
             SVProgressHUD.show()
             webView.navigationDelegate = self
@@ -69,6 +70,21 @@ class TermsAndConditionVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         SVProgressHUD.dismiss()
     }
     
-    
-    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }

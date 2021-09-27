@@ -113,6 +113,8 @@ public class OfferUser_details {
     public var created_at : String?
     public var updated_at : String?
     public var package : String?
+    public var rewarded_amt : Int?
+    public var available_deposit : String?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [OfferUser_details]
     {
@@ -156,6 +158,9 @@ public class OfferUser_details {
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
         package = dictionary["package"] as? String
+        rewarded_amt = dictionary["rewarded_amt"] as? Int
+        available_deposit = dictionary["available_deposit"] as? String
+
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -189,6 +194,9 @@ public class OfferUser_details {
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
         dictionary.setValue(self.min_deposit, forKey: "min_deposit")
+        dictionary.setValue(self.rewarded_amt, forKey: "rewarded_amt")
+        dictionary.setValue(self.available_deposit, forKey: "available_deposit")
+
         return dictionary
     }
 

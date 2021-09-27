@@ -97,13 +97,11 @@ public class DateCountDownTimer{
         let days: Int = (totalSeconds / 60 / 60 / 24)
         
         if days > 0 {
-            return String(format: "%d d %02d h %02d m %02d s", days, hours, minutes, seconds)
-
+            return String(format: "%d \("Day".localized()) - %02d:%02d:%02d", days, hours, minutes, seconds)
         }else if hours > 0 {
-            return String(format: "%02d h %02d m %02d s", hours, minutes, seconds)
-
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }else if minutes > 0  {
-            return String(format: "%02d m %02d s",minutes, seconds)
+            return String(format: "%02d:%02d",minutes, seconds)
         }else {
             return String(format: "%02d Second", seconds)
         }

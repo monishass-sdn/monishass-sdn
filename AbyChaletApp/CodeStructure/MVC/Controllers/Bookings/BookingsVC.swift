@@ -9,6 +9,7 @@ import UIKit
 import KDCircularProgress
 import MFSDK
 import SVProgressHUD
+import CoreLocation
 
 class BookingsVC: UIViewController {
 
@@ -27,11 +28,13 @@ class BookingsVC: UIViewController {
     var isLoad = false
     var isUSerIsBlocked = false
     var dictRewardDetails = NSDictionary()
+    let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpNavigationBar()
         appDelegate.checkBlockStatus()
-        
+        locationManager.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,8 +57,8 @@ class BookingsVC: UIViewController {
         //let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         //self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
-        self.navigationItem.title = "My Booking"
+       // self.navigationItem.rightBarButtonItems = [notificationButton]
+        self.navigationItem.title = "My Booking".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         
@@ -78,11 +81,11 @@ class BookingsVC: UIViewController {
         UIPasteboard.general.string = arr!.location!
         self.tableViewBooking.reloadRows(at: [IndexPath(row: sender.tag, section: 1)], with: .none)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
-            sender.setTitle("Copied", for: .normal)
+            sender.setTitle("Copied".localized(), for: .normal)
             self.tableViewBooking.reloadRows(at: [IndexPath(row: sender.tag, section: 1)], with: .none)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            sender.setTitle("Copy", for: .normal)
+            sender.setTitle("Copy".localized(), for: .normal)
             self.tableViewBooking.reloadRows(at: [IndexPath(row: sender.tag, section: 1)], with: .none)
         }
     }
@@ -91,6 +94,8 @@ class BookingsVC: UIViewController {
         if isUSerIsBlocked == false {
             self.selectedIndex = sender.tag
             if CAUser.currentUser.id != nil {
+                locationManager.requestWhenInUseAuthorization()
+                retriveCurrentLocation()
                 self.intialisePaymentWithType()
             }else{
                 let alert = UIAlertController(title: "Message", message: "Please Login for booking. Do you want to continue?", preferredStyle: .alert)
@@ -122,7 +127,24 @@ class BookingsVC: UIViewController {
             print("Can't use comgooglemaps://")
         }
     }
-        
+    @IBAction func btnCallusWhatsapAction(_ sender: UIButton) {
+        let dict = self.arrayMyBooking[sender.tag]
+        let arrayBookingDetails = dict.myBookingChalet_details?.first
+        if let phone = arrayBookingDetails?.default_callus {
+            if phone != "" {
+                let urlWhats = "whatsapp://app"
+                if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters:CharacterSet.urlQueryAllowed) {
+                    if let whatsappURL = URL(string: urlString) {
+                        if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                            UIApplication.shared.open(NSURL(string: "whatsapp://send?phone=\(phone)")! as URL)
+                        }else{
+                            showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Please install Whatsapp")
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     
 }
@@ -167,6 +189,7 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                     cell.setValuesToFields(dict: self.arrayMyBooking[indexPath.row])
                     cell.btnCopy.tag = indexPath.row
                     cell.btnClickMap.tag = indexPath.row
+                    cell.btnCallUs.tag = indexPath.row
                     return cell
                     
                 }else if dict.active_status == "awaiting_payment"{
@@ -219,7 +242,8 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                 }else if dict.active_status == "not_available"{
                     return 171
                 }else if dict.active_status == "active"{
-                    return 286
+                    return 321
+                        //286
                 }else if dict.active_status == "awaiting_payment"{
                     if dict.booking_status == "booked"{
                         return 311
@@ -263,7 +287,7 @@ extension BookingsVC {
                     //showDefaultAlert(viewController: self, title: "", msg: response!["message"]!)
                 }
             }else{
-                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!".localized())
             }
         }
     }
@@ -301,7 +325,6 @@ extension BookingsVC {
                    // showDefaultAlert(viewController: self!, title: "Success..!", msg: "result: \(invoiceStatus)")
                     let dict = self?.arrayMyBooking[(self?.selectedIndex)!]
                     let dataDict = executePaymentResponse.invoiceTransactions?.first!
-                
                     let renta = Int(dict!.rent!)
                     let totalPaid = Int(dict!.total_paid!)
                     let remainingAmt : Int = Int(renta! - totalPaid!)
@@ -320,7 +343,8 @@ extension BookingsVC {
         
         let renta = Int(amountDict.rent!)
         let totalPaid = Int(amountDict.total_paid!)
-        let remainingAmt : Int = Int(renta! - totalPaid!)
+        let rewardsUsed = Int(amountDict.reward_discount!) ?? 0
+        let remainingAmt : Int = Int(renta! - totalPaid! - rewardsUsed)
         let rent = "\(remainingAmt)"
         
         let dict = self.arrayMyBooking[(self.selectedIndex)].myBookingChalet_details!.first!
@@ -385,6 +409,7 @@ extension BookingsVC {
     func checkBlockStatus() {
         if CAUser.currentUser.id != nil {
             ServiceManager.sharedInstance.postMethodAlamofire("api/block_user", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
+                self.checkNotificationCount()
                 if success {
                     let status = ((response as! NSDictionary)["status"] as! Bool)
                     if status{
@@ -399,6 +424,23 @@ extension BookingsVC {
         }
     }
     
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }
 extension Double {
     /// Rounds the double to decimal places value
@@ -406,4 +448,61 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
+}
+
+extension BookingsVC: CLLocationManagerDelegate {
+  // handle delegate methods of location manager here
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("location manager authorization status changed")
+        switch status {
+        case .authorizedAlways:
+            print("user allow app to get location data when app is active or in background")
+        case .authorizedWhenInUse:
+            print("user allow app to get location data only when app is active")
+        case .denied:
+            print("user tap 'disallow' on the permission dialog, cant get location data")
+        case .restricted:
+            print("parental control setting disallow location data")
+        case .notDetermined:
+            print("the location permission dialog haven't shown before, user haven't tap allow/disallow")
+        }
+      }
+    
+    func retriveCurrentLocation(){
+        let status = CLLocationManager.authorizationStatus()
+
+        if(status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled()){
+            // show alert to user telling them they need to allow location data to use some feature of your app
+            return
+        }
+
+        // if haven't show location permission dialog before, show it to user
+        if(status == .notDetermined){
+            locationManager.requestWhenInUseAuthorization()
+
+            // if you want the app to retrieve location data even in background, use requestAlwaysAuthorization
+            // locationManager.requestAlwaysAuthorization()
+            return
+        }
+        
+        // at this point the authorization status is authorized
+        // request location data once
+        locationManager.requestLocation()
+      
+        // start monitoring location data and get notified whenever there is change in location data / every few seconds, until stopUpdatingLocation() is called
+        // locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // .requestLocation will only pass one location to the locations array
+        // hence we can access it by taking the first element of the array
+        if let location = locations.first {
+            
+            let location = "\(location.coordinate.latitude) \(location.coordinate.longitude)"
+            print(location)
+            userCurrentLocation.sharedData.fetchedLocation = location
+        }
+    }
+    
+
 }

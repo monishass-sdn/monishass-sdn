@@ -12,19 +12,29 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var btnMessages: UIButton!
     @IBOutlet weak var btnInbox: UIButton!
     @IBOutlet weak var viewContainer: UIView!
+    var isFromProfile = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setUpNavigationBar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItems = [notificationButton]
+        
+        btnInbox.setTitle("Inbox".localized(), for: .normal)
+        btnMessages.setTitle("Messages".localized(), for: .normal)
     }
     
     @objc func logoutUser() {
         appDelegate.logOut()
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.didSetInboxVC()
+        if self.isFromProfile == true{
+            self.didSetInboxVC()
+        }else{
+            self.didSetMessageVC()
+        }
         appDelegate.checkBlockStatus()
         
     }
@@ -38,9 +48,9 @@ class NotificationVC: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         self.navigationItem.leftBarButtonItems = [backBarButton]
-        let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
-        self.navigationItem.title = "Notifications"
+       // let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
+        //self.navigationItem.rightBarButtonItems = [notificationButton]
+        self.navigationItem.title = "Notifications".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         
@@ -89,8 +99,14 @@ class NotificationVC: UIViewController {
         inboxVC.view.frame = viewContainer.bounds
         viewContainer.addSubview(inboxVC.view)
         inboxVC.didMove(toParent: self)
-        btnInbox.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 16.0)
-        btnMessages.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16.0)
+        if kCurrentLanguageCode == "ar"{
+            btnInbox.titleLabel?.font = UIFont(name: kFontAlmaraiBold, size: 16)
+            btnMessages.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+        }else{
+            btnInbox.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 16.0)
+            btnMessages.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16.0)
+        }
+
         btnInbox.isSelected = true
         btnMessages.isSelected = false
     }
@@ -103,10 +119,29 @@ class NotificationVC: UIViewController {
         messagesVC.view.frame = viewContainer.bounds
         viewContainer.addSubview(messagesVC.view)
         messagesVC.didMove(toParent: self)
-        btnInbox.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16.0)
-        btnMessages.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 16.0)
+        if kCurrentLanguageCode == "ar"{
+            btnInbox.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            btnMessages.titleLabel?.font = UIFont(name: kFontAlmaraiBold, size: 16)
+        }else{
+            btnInbox.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16.0)
+            btnMessages.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 16.0)
+        }
+
         btnInbox.isSelected = false
         btnMessages.isSelected = true
     }
 
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action:nil)
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    
 }

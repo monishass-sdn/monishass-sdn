@@ -41,7 +41,8 @@ class MyAccountTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        self.navigationItem.rightBarButtonItems = [notificationButton]
         self.setUpNavigationBar()
         self.setuValuesToFields()
         self.setupUI()
@@ -73,7 +74,7 @@ class MyAccountTVC: UITableViewController {
         let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+        //self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = "My Account".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
@@ -121,7 +122,7 @@ class MyAccountTVC: UITableViewController {
         self.txtFldLastName.text = CAUser.currentUser.last_name!
         self.txtFldEmailAddress.text = CAUser.currentUser.email!
         self.tctFldPhoneNumber.text = CAUser.currentUser.phone!
-        self.tctFldCountryCode.text = CAUser.currentUser.country_code!
+        self.tctFldCountryCode.text = "          \(CAUser.currentUser.country_code!)"
         if CAUser.currentUser.gender == "Female"{
             gender = "Female"
             btnFemale.isSelected = true
@@ -262,7 +263,8 @@ extension MyAccountTVC : CountryCodePopUpDelegate{
     
     func selectedCountryDetails(Countrydetails: CountryDetailsDataStruct) {
         
-        self.tctFldCountryCode.text = Countrydetails.countryCode
+        self.tctFldCountryCode.text = "          \(Countrydetails.countryCode)"
+            //Countrydetails.countryCode
         self.tctFldCountryCode.textAlignment = .left
         self.tctFldCountryCode.setRightPaddingPoints(1)
         self.imgFlag.image = UIImage(named: Countrydetails.countryFlag )
@@ -334,4 +336,21 @@ extension MyAccountTVC : UINavigationControllerDelegate, UIImagePickerController
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
 }

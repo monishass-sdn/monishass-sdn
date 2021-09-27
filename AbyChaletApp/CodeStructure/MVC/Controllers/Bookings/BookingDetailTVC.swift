@@ -24,6 +24,16 @@ class BookingDetailTVC: UITableViewController {
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckOutDate: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblBookingDetails: UILabel!
+    @IBOutlet weak var lblRentalPrice: UILabel!
+    @IBOutlet weak var lblTotalRewardsDiscount: UILabel!
+    @IBOutlet weak var lblTotalInvoice: UILabel!
+    @IBOutlet weak var lblChaletDetails: UILabel!
+    @IBOutlet weak var lblAgreement: UILabel!
+    @IBOutlet weak var lblYouMustAgreeAllConditions: UILabel!
+    
     @IBOutlet weak var lblChaletId: UILabel!
     @IBOutlet weak var lblChaletName: UILabel!
     @IBOutlet weak var collectionViewChalletImage: UICollectionView!
@@ -42,6 +52,41 @@ class BookingDetailTVC: UITableViewController {
         self.setupUI()
         self.setValuesToFields()
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
+        
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblBookingDetails.text = "Booking Details".localized()
+        lblRentalPrice.text = "Rental Price".localized()
+        lblTotalRewardsDiscount.text = "Total Rewards (Discount)".localized()
+        lblTotalInvoice.text = "Total Invoice".localized()
+        lblChaletDetails.text = "Chalet details".localized()
+        lblAgreement.text = "Agreement".localized()
+        lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
+        
+        if kCurrentLanguageCode == "ar"{
+            lblBookingDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblRentalPrice.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblTotalRewardsDiscount.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblTotalInvoice.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblChaletDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblAgreement.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblYouMustAgreeAllConditions.font = UIFont(name: kFontAlmaraiRegular, size: 14)
+
+
+        }else {
+            lblBookingDetails.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblCheckIn.font = UIFont(name: "Roboto-Regular", size: 17)
+            lblCheckOut.font = UIFont(name: "Roboto-Regular", size: 17)
+            lblRentalPrice.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblTotalRewardsDiscount.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblTotalInvoice.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblChaletDetails.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblAgreement.font = UIFont(name: "Roboto-Medium", size: 17)
+            lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
+
+        }
     }
     
     @objc func logoutUser() {
@@ -69,7 +114,7 @@ class BookingDetailTVC: UITableViewController {
         let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(backButtonTouched))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+        //self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = ""
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
@@ -142,7 +187,7 @@ class BookingDetailTVC: UITableViewController {
         
     }
     @IBAction func btnWhatsapAction(_ sender: UIButton) {
-        let shareImage = self.tableView.screenshot()
+        /*let shareImage = self.tableView.screenshot()
        
         if shareImage != nil {
             
@@ -158,6 +203,20 @@ class BookingDetailTVC: UITableViewController {
             ]
             
             present(activityController, animated: true, completion: nil)
+        }*/
+        let dict = dictMyBooking.myBookingChalet_details?.first
+        var message = ""
+        message = "http://sicsapp.com/Aby_chalet/details/\(dict?.chalet_id! ?? 0)"
+        var queryCharSet = NSCharacterSet.urlQueryAllowed
+        queryCharSet.remove(charactersIn: "+&")
+        if let escapedString = message.addingPercentEncoding(withAllowedCharacters: queryCharSet) {
+            if let whatsappURL = URL(string: "whatsapp://send?text=\(escapedString)") {
+                if UIApplication.shared.canOpenURL(whatsappURL) {
+                    UIApplication.shared.open(whatsappURL, options: [: ], completionHandler: nil)
+                } else {
+                    debugPrint("please install WhatsApp")
+                }
+            }
         }
     }
     
@@ -224,7 +283,7 @@ extension BookingDetailTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 return cell
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewVideoCVCell", for: indexPath) as! CollectionViewVideoCVCell
-                cell.playVideo(videourl: arr![indexPath.item].file_name!, previewImage: "")
+                cell.playVideo(videourl: arr![indexPath.item].file_name!, previewImage: "", thumb: arr![indexPath.item].thumbnail!)
                 cell.btnPlay.tag = indexPath.item
                 return cell
             }
@@ -254,6 +313,7 @@ extension BookingDetailTVC : UICollectionViewDelegate, UICollectionViewDataSourc
 extension BookingDetailTVC {
     func getAgreementsDetails() {
         ServiceManager.sharedInstance.postMethodAlamofire("api/agreements", dictionary: nil, withHud: true) { [self] (success, response, error) in
+            self.checkNotificationCount()
             if success {
                 if ((response as! NSDictionary)["status"] as! Bool) == true {
                     
@@ -270,5 +330,23 @@ extension BookingDetailTVC {
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!")
             }
         }
+    }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
     }
 }

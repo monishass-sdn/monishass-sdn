@@ -26,12 +26,14 @@ let kFontAlmaraiExtraBold = "Almarai-ExtraBold"
 let kFontRobotoRegular = "Roboto-Regular"
 let kFontRobotoMedium = "Roboto-Medium"
 let kFontRobotoBold = "Roboto-Bold"
-
+var kNotificationCount = 0
 struct Images {
     
     static let kIconBack            = UIImage.init(named:"backIcon")?.withRenderingMode(.alwaysOriginal)
     static let kIconBackGreen            = UIImage.init(named:"iconprev")?.withRenderingMode(.alwaysOriginal)
     static let kIconNotification            = UIImage.init(named:"icn_Message")?.withRenderingMode(.alwaysOriginal)
+    static let kIconNoMessage            = UIImage.init(named:"NoMessage")?.withRenderingMode(.alwaysOriginal)
+    
     
     
 }
@@ -41,6 +43,8 @@ struct NotificationNames {
     static let kStopVideoPlayer              = "stopVideo"
     static let kUpdateProfile                = "UpdateProfile"
     static let kBlockedUser                  = "BlockedAdmin"
+    static let kAlertOfferCLick               = "AlertOfferClick"
+    
     
 }
 
@@ -68,3 +72,4 @@ func getPreferredLocale() -> Locale {
     }
     return Locale(identifier: preferredIdentifier)
 }
+

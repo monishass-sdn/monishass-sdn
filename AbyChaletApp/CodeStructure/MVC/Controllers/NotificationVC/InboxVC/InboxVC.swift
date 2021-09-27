@@ -16,7 +16,6 @@ class InboxVC: UIViewController {
     var selectedIndx = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if CAUser.currentUser.userstatus == "owner" {
             self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id!)")
         }
@@ -28,20 +27,20 @@ class InboxVC: UIViewController {
     //MARK:- ButtonActions
     @IBAction func btnRejectAction(_ sender: UIButton) {
         let dict = self.arrayReservationList[sender.tag]
-        self.showAcceptReject(message: "Are you sure you want to reject?", isFrom: "reject", bookindID: "\(dict.id!)")
+        self.showAcceptReject(message: "Are you sure you want to reject?".localized(), isFrom: "reject", bookindID: "\(dict.id!)")
     }
     @IBAction func btnAcceptAction(_ sender: UIButton) {
         let dict = self.arrayReservationList[sender.tag]
-        self.showAcceptReject(message: "Are you sure you want to accept?", isFrom: "accept", bookindID: "\(dict.id!)")
+        self.showAcceptReject(message: "Are you sure you want to accept?".localized(), isFrom: "accept", bookindID: "\(dict.id!)")
     }
     
     func showAcceptReject(message:String,isFrom:String,bookindID:String) {
-        let alert = UIAlertController(title: "Message", message: message.localized(), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: isFrom == "accept" ? "Accept" : "Reject", style: .default, handler: { action in
+        let alert = UIAlertController(title: "Message".localized(), message: message.localized(), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: isFrom == "accept" ? "Accept".localized() : "Reject".localized(), style: .default, handler: { action in
                 self.acceptReject(status: isFrom, bookingId: bookindID)
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .default, handler: { action in
             
         }))
         self.present(alert, animated: true, completion: nil)
@@ -71,6 +70,12 @@ extension InboxVC : UITableViewDelegate, UITableViewDataSource {
             //}
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NoNotificationTVCell", for: indexPath) as! NoNotificationTVCell
+            cell.lblNoNotificationMessage.text = "No notifications found".localized()
+            if kCurrentLanguageCode == "ar"{
+                cell.lblNoNotificationMessage.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            }else{
+                cell.lblNoNotificationMessage.font = UIFont(name: "Roboto-Regular", size: 17)
+            }
             return cell
         }
     }
@@ -134,7 +139,7 @@ extension InboxVC {
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: ((response! as! NSDictionary)["message"] as! String))
                 }
             }else{
-                showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!")
+                showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!".localized())
             }
         }
     }
@@ -170,10 +175,10 @@ extension InboxVC{
                         }
                     }
                 }else{
-                    showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!")
+                    showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!".localized())
                 }
             }else{
-                showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!")
+                showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!".localized())
             }
         }
         

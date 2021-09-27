@@ -36,7 +36,7 @@ class ConfirmationCodeViewController: UIViewController {
         lblEmailAddress.text = userEmailAddress ?? ""
         setUpForOTPTextField()
         startOtpTimer()
-        showCustomAlert(title: "OTP Sent".localized(), message: "", isError: false)
+        //showCustomAlert(title: "OTP Sent".localized(), message: "", isError: false)
         btnRequestResendOtp.setTitle("Request a new one".localized(), for: .normal)
         lblTimeOut.text = "\("Timeout in".localized()) :"
         lblInValidCode.text = "Invalid code. Please check your code and try again".localized()

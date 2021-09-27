@@ -26,7 +26,7 @@ class SelectPackageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         topSliderMenuValArray =  ["Holidays and Events".localized(), "Thursday - Wednesday".localized(), "Sunday - Saturday".localized(), "Thursday - Friday - Saturday".localized(),"Sunday - Monday - Tuesday - Wednesday".localized()]
-                              
+        
         topSliderMenuArray =  ["Holidays", "Week (B)".localized(), "Week (A)".localized(), "Weekend".localized(), "Weekdays".localized()]
         setupForCustomNavigationTitle(self: self)
         collectionView.allowsMultipleSelection = false

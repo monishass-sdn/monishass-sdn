@@ -95,3 +95,13 @@ class JobsPerDate : NSObject {
         self.jobID = jobID
     }
 }
+
+final class calendarSelectedDate{
+    static let sharedData = calendarSelectedDate()
+    var selectedCalendarDate: String!
+}
+
+final class userCurrentLocation{
+    static let sharedData = userCurrentLocation()
+    var fetchedLocation: String!
+}

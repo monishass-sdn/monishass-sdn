@@ -12,9 +12,11 @@ import SDWebImage
 import UserNotifications
 import AVFoundation
 import GoogleMaps
+import SVProgressHUD
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var timerReload : Timer?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         printFontName()
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let them = MFTheme(navigationTintColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), navigationBarTintColor: kAppThemeColor, navigationTitle: "Payment".localized(), cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
         GMSServices.provideAPIKey("AIzaSyB75kZV00quV-LeAWJD9QaZ8Hbc4kqBgwo")
+        //timerReload = Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(self.reloadData), userInfo: nil, repeats: true)
+        SVProgressHUD.setDefaultMaskType(.clear)
         return true
     }
     
@@ -44,7 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func settingFirstViewController(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let currentAppLaunchCount = UserDefaults.standard.integer(forKey: "appLaunchCount")
-        if currentAppLaunchCount == 0 {
+        UserDefaults.standard.set(currentAppLaunchCount+1 , forKey: "appLaunchCount")
+        if UserDefaults.standard.integer(forKey: "appLaunchCount") == nil {
+       // if currentAppLaunchCount == 0 {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let introScreen = storyboard.instantiateViewController(withIdentifier: "IntroScreenVC") as! IntroScreenVC
             appDelegate.window?.rootViewController = introScreen
@@ -55,8 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.makeKeyAndVisible()
         
-        UserDefaults.standard.set(currentAppLaunchCount + 1 , forKey: "appLaunchCount")
-        UserDefaults.standard.synchronize()
+       // UserDefaults.standard.synchronize()
     }
     
     func extendSplashScreenPresentation(){
@@ -108,6 +113,7 @@ extension AppDelegate {
     func logOut(){
         UserDefaults.standard.removeObject(forKey: "kCurrentUserDetails")
         UserDefaults.standard.removeObject(forKey: "kCurrentGuestUserDetails")
+        UserDefaults.standard.removeObject(forKey: "kDeviceToken")
         CAUser.currentUser.id = nil
         CAGuestUser.currentUser.id = nil
         SDImageCache.shared.clearMemory()
@@ -172,7 +178,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
+        print("Received Notification : \(userInfo)")
         let state: UIApplication.State = UIApplication.shared.applicationState
         if state == .active {
             let systemSoundID: SystemSoundID = 1007
@@ -212,6 +218,7 @@ extension AppDelegate {
     func checkBlockStatus() {
         if CAUser.currentUser.id != nil {
             ServiceManager.sharedInstance.postMethodAlamofire("api/block_user", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
+                //self.checkNotificationCount()
                 if success {
                     let status = ((response as! NSDictionary)["status"] as! Bool)
                     if status == false{
@@ -229,6 +236,22 @@ extension AppDelegate {
                 if success {
                     let status = ((response as! NSDictionary)["status"] as! Bool)
                     
+                }
+            }
+        }
+    }
+    
+    @objc func reloadData() {
+        
+        //self.checkNotificationCount()
+    }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
                 }
             }
         }

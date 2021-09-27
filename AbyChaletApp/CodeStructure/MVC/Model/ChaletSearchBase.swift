@@ -5,7 +5,10 @@ import Foundation
 
 public class ChaletSearchBase {
 	public var status : Bool?
+    public var holiday_status : Bool?
+    public var offer_status : Bool?
 	public var message : String?
+    public var reservation_available : Int?
 	public var user_details : [User_details]?
 
 
@@ -23,7 +26,10 @@ public class ChaletSearchBase {
 	required public init?(dictionary: NSDictionary) {
 
 		status = dictionary["status"] as? Bool
+        holiday_status = dictionary["holiday_status"] as? Bool
+        offer_status = dictionary["offer_status"] as? Bool
 		message = dictionary["message"] as? String
+        reservation_available = dictionary["reservation_available"] as? Int
         if (dictionary["user_details"] != nil) { user_details = User_details.modelsFromDictionaryArray(array: dictionary["user_details"] as! NSArray) }
 	}
 
@@ -32,8 +38,10 @@ public class ChaletSearchBase {
 		let dictionary = NSMutableDictionary()
 
 		dictionary.setValue(self.status, forKey: "status")
+        dictionary.setValue(self.holiday_status, forKey: "holiday_status")
+        dictionary.setValue(self.offer_status, forKey: "offer_status")
 		dictionary.setValue(self.message, forKey: "message")
-
+        dictionary.setValue(self.reservation_available, forKey: "reservation_available")
 		return dictionary
 	}
 
@@ -70,7 +78,8 @@ public class User_details {
     public var chalet_upload : [Chalet_upload]?
     public var created_at : String?
     public var updated_at : String?
-
+    public var rewarded_amt : Int?
+   // public var reservation_available : Int?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [User_details]
     {
@@ -115,6 +124,8 @@ public class User_details {
         if (dictionary["chalet_upload"] != nil) { chalet_upload = Chalet_upload.modelsFromDictionaryArray(array: dictionary["chalet_upload"] as! NSArray) }
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
+        rewarded_amt = dictionary["rewarded_amt"] as? Int
+      //  reservation_available = dictionary["reservation_available"] as? Int
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -150,7 +161,8 @@ public class User_details {
         dictionary.setValue(self.offer_expiry, forKey: "offer_expiry")
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
-
+        dictionary.setValue(self.rewarded_amt, forKey: "rewarded_amt")
+      //  dictionary.setValue(self.reservation_available, forKey: "reservation_available")
         return dictionary
     }
 
@@ -190,7 +202,7 @@ public class Chalet_upload {
     public var id : Int?
     public var chalet_id : Int?
     public var file_name : String?
-
+    public var thumbnail : String?
     public class func modelsFromDictionaryArray(array:NSArray) -> [Chalet_upload]
     {
         var models:[Chalet_upload] = []
@@ -206,6 +218,7 @@ public class Chalet_upload {
         id = dictionary["id"] as? Int
         chalet_id = dictionary["chalet_id"] as? Int
         file_name = dictionary["file_name"] as? String
+        thumbnail = dictionary["thumbnail"] as? String
     }
 
 

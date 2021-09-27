@@ -57,7 +57,26 @@ class BookingDetailsTVC: UITableViewController {
     @IBOutlet weak var lblDpRemaining: UILabel!
     @IBOutlet weak var lblDpRemainingDate: UILabel!
     @IBOutlet weak var lblBookStatus: UILabel!
-    
+    @IBOutlet weak var lblpleasePaytheremainingAmtbfr: UILabel!
+    @IBOutlet weak var lblafterThisDateString: UILabel!
+    @IBOutlet weak var lblBooking: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblBookingDetail: UILabel!
+    @IBOutlet weak var lblRentalPrice: UILabel!
+    @IBOutlet weak var lblDepositt: UILabel!
+    @IBOutlet weak var lblRewardsDiscount: UILabel!
+    @IBOutlet weak var lblOfferDiscount: UILabel!
+    @IBOutlet weak var lblTotalPaid: UILabel!
+    @IBOutlet weak var lblRemainingg: UILabel!
+    @IBOutlet weak var lblBookingDetail1: UILabel!
+    @IBOutlet weak var lblRentalPrice1: UILabel!
+    @IBOutlet weak var lblDeposit1: UILabel!
+    @IBOutlet weak var lblRewardsDisscount1: UILabel!
+    @IBOutlet weak var lblOfferDiscount1: UILabel!
+    @IBOutlet weak var lblRemaining1: UILabel!
+    @IBOutlet weak var lblTotalPaid1: UILabel!
     
     var selectedIndex : Int!
     var collectionIndex = 0
@@ -97,6 +116,8 @@ class BookingDetailsTVC: UITableViewController {
         }*/
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
             appDelegate.checkBlockStatus()
+        
+        self.checkNotificationCount()
     }
     @objc func logoutUser() {
         appDelegate.logOut()
@@ -124,7 +145,7 @@ class BookingDetailsTVC: UITableViewController {
         //self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(notificationButtonTouched))
         self.navigationItem.rightBarButtonItems = [notificationButton]
-        self.navigationItem.title = "Thank You"
+        self.navigationItem.title = "Thank You".localized()
         
     }
     //MARK:- SetupUI
@@ -142,7 +163,7 @@ class BookingDetailsTVC: UITableViewController {
     
     //MARK:- SetValuesToFields
     func setValuesToFields() {
-        self.lblSlNo.text =  "No. \(dictBookingDetails.id ?? 0)"
+        self.lblSlNo.text =  "\("No.".localized())\(dictBookingDetails.id ?? 0)"
         self.lblChaletName.text = dictBookingDetails.chalet_name!
         self.lblReservationID.text = dictBookingDetails.reservation_id!
         self.lblCheckOutDate.text = dictBookingDetails.check_out?.appFormattedDate
@@ -164,6 +185,100 @@ class BookingDetailsTVC: UITableViewController {
         self.lblDpRemaining.text = "KD \(dictBookingDetails.remaining!)"
         
         
+        // print("Rent Amount = \(dictBookingDetails.rent)")
+        //print("Deposit Amount = \(dictBookingDetails.deposit)")
+        //print("Offer Discount if any = \(dictBookingDetails.offer_discount)")
+        //print("Total Paid Amount = \(dictBookingDetails.total_paid)")
+        //print("Remaining Amount = \(dictBookingDetails.remaining)")
+
+        
+        lblpleasePaytheremainingAmtbfr.text = "Please pay the remaining amount before".localized()
+        lblafterThisDateString.text = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:".localized()
+        lblBooking.text = "Booking".localized()
+        lblLocation.text = "Location".localized()
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblBookingDetail1.text = "Booking Details".localized()
+        lblRentalPrice1.text = "Rental Price".localized()
+        lblDeposit1.text = "Deposit".localized()
+        lblRewardsDisscount1.text = "Rewards (Discount)".localized()
+        lblOfferDiscount1.text = "Offers (Discount)".localized()
+        lblRemaining1.text = "Remaining".localized()
+        lblTotalPaid1.text = "Total paid".localized()
+        lblRentalPrice.text = "Rental Price".localized()
+        lblBookingDetail.text = "Booking Details".localized()
+        lblDepositt.text = "Deposit".localized()
+        lblRewardsDiscount.text = "Rewards (Discount)".localized()
+        lblOfferDiscount.text = "Offers (Discount)".localized()
+        lblTotalPaid.text = "Total paid".localized()
+        lblRemainingg.text = "Remaining".localized()
+
+
+        btnCopy.setTitle("Copy".localized(), for: .normal)
+        
+        if kCurrentLanguageCode == "ar"{
+            lblpleasePaytheremainingAmtbfr.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblafterThisDateString.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblBooking.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblLocation.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblCheckIn.font = UIFont(name: kFontAlmaraiBold, size: 18)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiBold, size: 18)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiBold, size: 17)
+            lblRentalPrice1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblDeposit1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblBookingDetail1.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblRewardsDisscount1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblOfferDiscount1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblRemaining1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblTotalPaid1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblBookStatus.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            
+            lblBookingDetail.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblRentalPrice.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblDeposit.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblRewardsDiscount.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblOfferDiscount.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblTotalPaid.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblRemainingg.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+
+
+        }else{
+            lblpleasePaytheremainingAmtbfr.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblafterThisDateString.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblBooking.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblLocation.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblCheckIn.font = UIFont(name: "Roboto-Regular", size: 18)
+            lblCheckOut.font = UIFont(name: "Roboto-Regular", size: 18)
+            lblCheckOut.font = UIFont(name: "Roboto-Bold", size: 17)
+            lblRentalPrice1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblDeposit1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblBookingDetail1.font = UIFont(name: "Roboto-Regular", size: 17)
+            lblRewardsDisscount1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblOfferDiscount1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblRemaining1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblTotalPaid1.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblBookStatus.font = UIFont(name: "Roboto-Regular", size: 17)
+            
+            lblBookingDetail.font = UIFont(name: "Roboto-Regular", size: 17)
+            lblRentalPrice.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblDeposit.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblRewardsDiscount.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblOfferDiscount.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblTotalPaid.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblRemaining.font = UIFont(name: "Roboto-Regular", size: 15)
+        }
+      /*
+       let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#1E4355")] as [NSAttributedString.Key : Any]
+        
+        let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
+        
+        let attributedStringEarn1 = NSMutableAttributedString(string:"\(dictBookingDetails.rent!)", attributes:attrsWhatKindOfJob2)
+        let attributedStringEarn2 = NSMutableAttributedString(string:"KD ", attributes:attrsWhatKindOfJob1)
+        attributedStringEarn1.append(attributedStringEarn1)
+        attributedStringEarn1.append(attributedStringEarn2)
+        self.lblDpRentalPrice.attributedText = attributedStringEarn1
+*/
+        
         /*let dateFormater = DateFormatter()
         dateFormater.dateFormat = "yyyy-MM-dd hh:mm a"
         let checkinDate = dateFormater.date(from: "\(String(describing: dictBookingDetails.check_in!)) \(String(describing: dictBookingDetails.checkin_time!))")
@@ -175,7 +290,7 @@ class BookingDetailsTVC: UITableViewController {
         
         self.lblDpRemainingDate.text = remainingAmtDate
         if isFrom == "Booked Successfully" {
-            self.lblBookStatus.text = "Booked Successfully"
+            self.lblBookStatus.text = "Booked Successfully".localized()
         }else{
             self.lblBookStatus.text = "Payment failed"
         }
@@ -258,14 +373,14 @@ class BookingDetailsTVC: UITableViewController {
     }
     @IBAction func btnCopyAction(_ sender: UIButton) {
         
-        sender.setTitle("Copied", for: .normal)
+        sender.setTitle("Copied".localized(), for: .normal)
         UIPasteboard.general.string = dictBookingDetails.location!
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(didTimerComplete), userInfo: nil, repeats: false)
         
     }
     
     @objc private func didTimerComplete() {
-        btnCopy.setTitle("Copy", for: .normal)
+        btnCopy.setTitle("Copy".localized(), for: .normal)
     }
     
     @IBAction func btnClickMapAction(_ sender: UIButton) {
@@ -340,7 +455,8 @@ extension BookingDetailsTVC : UICollectionViewDelegate, UICollectionViewDataSour
              cell.imgChaletImage.image = kPlaceHolderImage
              }
              }*/
-            cell.playVideo(videourl: arr[indexPath.item].file_name!, previewImage: "")
+            
+            cell.playVideo(videourl: arr[indexPath.item].file_name!, previewImage: "", thumb: arr[indexPath.item].thumbnail!)
             cell.btnPlay.tag = indexPath.item
             return cell
         }
@@ -371,5 +487,23 @@ extension BookingDetailsTVC : MKMapViewDelegate {
         } else {
             print("Can't use comgooglemaps://")
         }
+    }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
     }
 }

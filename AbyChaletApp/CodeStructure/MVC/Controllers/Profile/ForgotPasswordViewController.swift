@@ -66,7 +66,7 @@ class ForgotPasswordViewController: UIViewController {
         if txtEmailAddress.hasText{
             if self.isValidEmail(txtEmailAddress.text!) == true {
                // showActivityIndicator(self: self, show: true, message: "Verification is in progress...")
-                self.resendOtp(emailID: txtEmailAddress.text ?? "")
+                self.resendOtp(emailID: txtEmailAddress.text ?? "", status: "reset")
             }else{
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Please Enter Valid Email Address".localized())
             }
@@ -81,10 +81,10 @@ class ForgotPasswordViewController: UIViewController {
 //MARK:- ResendOTP
 extension ForgotPasswordViewController {
 
-    func resendOtp(emailID:String)  {
+    func resendOtp(emailID:String,status:String)  {
         openAlertPopup(selfVc: self, alertMessage: "Processing...".localized(), showAlert: true)
 //        showActivityIndicator(self: self, show: true, message: "Please check your entered email and follow the steps.")
-        ServiceManager.sharedInstance.postMethodAlamofire("api/resendotp", dictionary: ["email":emailID], withHud: false) { [self] (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/resendotp", dictionary: ["email":emailID,"status":status], withHud: false) { [self] (success, response, error) in
 //            showActivityIndicator(self: self, show: false, message: "Please check your entered email and follow the steps.")
             if success {
                 openAlertPopup(selfVc: self, alertMessage: "", showAlert: false)

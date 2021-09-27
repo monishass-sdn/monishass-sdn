@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -97,7 +97,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CountryCodeListTableViewCell" rowHeight="60" id="m24-Qv-lOc" customClass="CountryCodeListTableViewCell" customModule="AbyChaletApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m24-Qv-lOc" id="muQ-Hp-HLn">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -159,7 +159,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Search ..." translatesAutoresizingMaskIntoConstraints="NO" id="pHS-ib-u55">
-                                                <rect key="frame" x="25" y="10" width="325" height="51"/>
+                                                <rect key="frame" x="25" y="10" width="325" height="56"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                 <color key="barTintColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -182,7 +182,7 @@
                                                 </connections>
                                             </searchBar>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4I-2f-5LM">
-                                                <rect key="frame" x="25" y="71" width="325" height="1"/>
+                                                <rect key="frame" x="25" y="76" width="325" height="1"/>
                                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="GA9-mg-JdW"/>
@@ -550,7 +550,7 @@
                                 <color key="backgroundColor" red="0.11764705882352941" green="0.2627450980392157" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignUpProfileDetailsTableViewCell1" rowHeight="296" id="CN0-1Z-ejZ" customClass="SignUpProfileDetailsTableViewCell1" customModule="AbyChaletApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="296"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="296"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CN0-1Z-ejZ" id="iJF-jB-lCO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="296"/>
@@ -984,7 +984,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignUpProfileDetailsTableViewCell2" rowHeight="226" id="GnG-Pg-viN" customClass="SignUpProfileDetailsTableViewCell2" customModule="AbyChaletApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="320.33333396911621" width="375" height="226"/>
+                                        <rect key="frame" x="0.0" y="324" width="375" height="226"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GnG-Pg-viN" id="HkC-YB-DOW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
@@ -1182,7 +1182,7 @@
                                                                         <constraint firstAttribute="width" secondItem="X6I-xE-Xhp" secondAttribute="height" multiplier="1.1:1" id="hpg-cs-EN6"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O8b-oM-0q5" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                                <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O8b-oM-0q5" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                                     <rect key="frame" x="45" y="7" width="94" height="34"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
@@ -1336,7 +1336,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignUpButtonTableViewCell" rowHeight="75" id="un0-he-USd" customClass="SignUpButtonTableViewCell" customModule="AbyChaletApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="546.33333396911621" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="550" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="un0-he-USd" id="Zye-JM-Xs6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -1599,16 +1599,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Enter the email address you used to create your account and we will email you a link to reset your password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUT-Lz-lpc">
-                                        <rect key="frame" x="30" y="185" width="315" height="53"/>
+                                        <rect key="frame" x="30" y="185" width="315" height="52.666666666666657"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b92-K7-Kfv">
-                                        <rect key="frame" x="20" y="268" width="335" height="60"/>
+                                        <rect key="frame" x="20" y="267.66666666666669" width="335" height="60"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_email" translatesAutoresizingMaskIntoConstraints="NO" id="1hP-LT-Eaa">
-                                                <rect key="frame" x="20" y="21.666666666666686" width="22.333333333333329" height="22.666666666666671"/>
+                                                <rect key="frame" x="20" y="21.666666666666629" width="22.333333333333329" height="22.666666666666671"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1hP-LT-Eaa" secondAttribute="height" multiplier="1:1" id="4t7-zB-4do"/>
                                                 </constraints>
@@ -2048,7 +2048,7 @@
     </scenes>
     <designables>
         <designable name="1jQ-QE-Vbp">
-            <size key="intrinsicContentSize" width="124.66666666666667" height="34"/>
+            <size key="intrinsicContentSize" width="124.33333333333333" height="34"/>
         </designable>
         <designable name="9O0-Fl-Byb">
             <size key="intrinsicContentSize" width="100.66666666666667" height="34"/>
@@ -2057,7 +2057,7 @@
             <size key="intrinsicContentSize" width="132" height="34"/>
         </designable>
         <designable name="BDj-VX-ih1">
-            <size key="intrinsicContentSize" width="124.66666666666667" height="34"/>
+            <size key="intrinsicContentSize" width="124.33333333333333" height="34"/>
         </designable>
         <designable name="FgO-be-nze">
             <size key="intrinsicContentSize" width="94.666666666666671" height="34"/>
@@ -2069,22 +2069,22 @@
             <size key="intrinsicContentSize" width="112.66666666666667" height="34"/>
         </designable>
         <designable name="O8b-oM-0q5">
-            <size key="intrinsicContentSize" width="119.33333333333333" height="34"/>
+            <size key="intrinsicContentSize" width="122" height="34"/>
         </designable>
         <designable name="Oei-Fq-BWc">
-            <size key="intrinsicContentSize" width="128" height="34"/>
+            <size key="intrinsicContentSize" width="129" height="34"/>
         </designable>
         <designable name="akn-sX-67X">
-            <size key="intrinsicContentSize" width="185.66666666666666" height="34"/>
+            <size key="intrinsicContentSize" width="188" height="34"/>
         </designable>
         <designable name="alK-y0-pUp">
-            <size key="intrinsicContentSize" width="102" height="34"/>
+            <size key="intrinsicContentSize" width="101.33333333333333" height="34"/>
         </designable>
         <designable name="oAU-q1-65m">
             <size key="intrinsicContentSize" width="152" height="34"/>
         </designable>
         <designable name="ygb-2I-8WY">
-            <size key="intrinsicContentSize" width="124.66666666666667" height="34"/>
+            <size key="intrinsicContentSize" width="124.33333333333333" height="34"/>
         </designable>
     </designables>
     <resources>

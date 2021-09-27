@@ -34,7 +34,7 @@ class ServiceManager: NSObject {
                 }
                 switch response.result {
                 case .success(let jsonData):
-                    print("Success with JSON: \(jsonData)")
+                    
                     let dictionary = jsonData as! NSDictionary
                     let status:String = dictionary.object(forKey: "status") as! String
                     if(status == "ok"){
@@ -63,7 +63,7 @@ class ServiceManager: NSObject {
                 }
                 switch response.result {
                 case .success(let jsonData):
-                    print("Success with JSON: \(jsonData)")
+                    
                     let dictionary = jsonData as! NSDictionary
                     let status:Bool = dictionary.object(forKey: "status") as! Bool
                     if status {
@@ -78,7 +78,30 @@ class ServiceManager: NSObject {
             }
         }
     }
-    
+    func postMethodAlamofireGetMessage(_ serviceName : String, dictionary : Parameters?,withHud isHud: Bool, completion : @escaping (Bool, AnyObject?, NSError?)->Void) {
+        
+        completionHandler = completion
+        if let url = URL(string: kBaseUrl + serviceName) {
+            let header:HTTPHeaders = ["Content-Type":"application/x-www-form-urlencoded"]
+            AF.request(url, method: .post, parameters: dictionary, encoding: URLEncoding.httpBody, headers: header ).responseJSON { (response:AFDataResponse<Any>) in
+               
+                switch response.result {
+                case .success(let jsonData):
+                    
+                    let dictionary = jsonData as! NSDictionary
+                    let status:Bool = dictionary.object(forKey: "status") as! Bool
+                    if status {
+                        completion(true, response.value as AnyObject , nil)
+                        //self.getModalObject(serviceUrl: serviceName, response: response)
+                    }else{
+                        self.completionHandler(true,response.value as AnyObject,nil)
+                    }
+                case .failure(let error): completion(false,nil,error as NSError)
+                    break
+                }
+            }
+        }
+    }
     func uploadSingleData(_ serviceName : String, parameters : Parameters?,imgdata : Data?,filename: String,withHud isHud: Bool, completion : @escaping (Bool, AnyObject?, NSError?)->Void)
     {
         if isHud {
@@ -103,7 +126,7 @@ class ServiceManager: NSObject {
                 }
                 switch response.result {
                 case .success(let jsonData):
-                    print("Success with JSON: \(jsonData)")
+                    
                     let dictionary = jsonData as! NSDictionary
                     let status:Bool = dictionary.object(forKey: "status") as! Bool
                     if status {

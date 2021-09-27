@@ -22,6 +22,11 @@ class InboxListTVCell: UITableViewCell {
     @IBOutlet weak var lblCheckInDate: UILabel!
     @IBOutlet weak var lblCheckOutTime: UILabel!
     @IBOutlet weak var lblCheckInTime: UILabel!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblBookingDetails: UILabel!
+    @IBOutlet weak var lblCommision: UILabel!
+    @IBOutlet weak var lblTotalPaid: UILabel!
     @IBOutlet weak var lblId: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var imgChaletImage: UIImageView!
@@ -48,7 +53,30 @@ class InboxListTVCell: UITableViewCell {
         super.awakeFromNib()
         
         lblRentTitle.text = "Rental Price".localized()
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        lblBookingDetails.text = "Booking Details".localized()
+        lblCommision.text = "Commision".localized()  // Need to give Arabic string
+        lblTotalPaid.text = "Total paid".localized()
+        btnARAccept.setTitle("Accept".localized(), for: .normal) // Need to give Arabic string
+        btnARReject.setTitle("Reject".localized(), for: .normal) // Need to give Arabic string
+        
+        if kCurrentLanguageCode == "ar"{
+            btnARAccept.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 18)
+            btnARReject.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 18)
+            lblBookingDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblTotalPaid.font = UIFont(name: kFontAlmaraiRegular, size: 17)
+        }else{
+            btnARAccept.titleLabel?.font = UIFont(name: "Roboto_Medium", size: 18)
+            btnARReject.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
+            lblBookingDetails.font = UIFont(name: "Roboto-Regular", size: 17)
+            lblCheckIn.font = UIFont(name: "Roboto-Regular", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Regular", size: 16)
+            lblTotalPaid.font = UIFont(name: "Roboto-Regular", size: 17)
 
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -199,7 +227,7 @@ class InboxAcceptRejectTVCell: UITableViewCell {
     }
 }
 class NoNotificationTVCell: UITableViewCell {
-    
+    @IBOutlet weak var lblNoNotificationMessage: UILabel!
 }
 class CancelReservationTVCell: UITableViewCell {
     
@@ -221,7 +249,16 @@ class CancelReservationTVCell: UITableViewCell {
     func setValuesToFields(dict:Message_Notifcation) {
         
         if dict.reservation_details!.count > 0{
+
+            
+            
             let detailDict = dict.reservation_details?.first!
+            
+            
+
+            //self.lblCanceledTime.text = dict.duration!
+
+            
             lblSlNo.text = "\(detailDict?.chalet_details?.first?.chalet_id! ?? 0)"
             lblChaletName.text = "\(detailDict?.chalet_details?.first?.chalet_name! ?? "")"
             lblRent.text =  detailDict?.rent!
@@ -229,15 +266,24 @@ class CancelReservationTVCell: UITableViewCell {
             lblCheckOutTime.text = detailDict?.checkout_time!
             lblCheckInDate.text = detailDict?.check_in!
             lblCheckInTime.text = detailDict?.checkin_time!
+            self.lblCanceledTime.text = dict.duration
             if let imgUrl = detailDict?.chalet_details?.first?.cover_photo {
                 self.imgChaletImage.sd_setImage(with: URL(string: imgUrl), placeholderImage: kPlaceHolderImage, options: .highPriority, completed: nil)
             }
             lblRemainingAmt.text = "KD\(detailDict?.remaining_amt! ?? "0")"
             lblCanceledDate.text = detailDict?.canceled_date!
             self.lblBookingId.text = detailDict?.reservation_id!
+            
+        /*    var now = Date()
+            let givenDate = dict.duration
+            print("givenDate ====== \(givenDate)")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+            let cancelledDate = dateFormatter.date(from: givenDate!)
+            self.lblCanceledTime.text = cancelledDate?.timeAgoDisplay()
+ */
         }
     }
-
     
 }
 class ChalletTVCell: UITableViewCell {
@@ -275,11 +321,42 @@ class ChalletTextTVCell: UITableViewCell {
     @IBOutlet weak var lblTime: UILabel!
     
     func setValuesToFields(dict:Message_Notifcation) {
-        self.lblTime.text = ""
+        
+    /*    let now = Date()
+        let givenDate = dict.duration!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        let notificationDate = dateFormatter.date(from: givenDate)
+        self.lblTime.text = notificationDate?.timeAgoDisplay()
+     */
+        self.lblTime.text = dict.duration!
         self.lblTitle.text = dict.notification_title!
         self.lblMesage.text = dict.notification_message!
     }
+    
 }
 class CancelPaymentTVCell: UITableViewCell {
     
+}
+
+extension Date {
+    func timeAgoDisplay() -> String {
+        let secondsAgo = Int(Date().timeIntervalSince(self))
+        
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        let week = 7 * day
+        
+        if secondsAgo < minute {
+            return "\(secondsAgo) sec ago"
+        }else if secondsAgo < hour{
+            return "\(secondsAgo / minute) min ago"
+        }else if secondsAgo < day {
+            return "\(secondsAgo / hour) hour ago"
+        }else if secondsAgo < week{
+            return "\(secondsAgo / day) days ago"
+        }
+        return "\(secondsAgo / week) weeks ago"
+    }
 }

@@ -108,6 +108,7 @@ class MyProfileTableVC: UITableViewController {
     
     @IBAction func btnNotificationDidTap(_ sender: Any) {
         let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        changePasswordTVC.isFromProfile = true
         navigationController?.pushViewController(changePasswordTVC, animated: true)
     }
     
@@ -230,6 +231,7 @@ extension MyProfileTableVC {
 extension MyProfileTableVC {
     func getAdminDetails() {
         ServiceManager.sharedInstance.postMethodAlamofire("api/view_admin", dictionary: nil, withHud: true) { [self] (success, response, error) in
+           
             if success {
                 if response!["status"] as! Bool == true {
                     
@@ -244,4 +246,6 @@ extension MyProfileTableVC {
             }
         }
     }
+    
+    
 }

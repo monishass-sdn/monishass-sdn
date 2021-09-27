@@ -22,6 +22,15 @@ class PackageListTableVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        if kCurrentLanguageCode == "ar"{
+            lblPackageType.font = UIFont(name: kFontAlmaraiRegular, size: 18)
+            lblPackageDays.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+        }else{
+            lblPackageType.font = UIFont(name: "Roboto-Medium", size: 18)
+            lblPackageDays.font = UIFont(name: "Roboto-Medium", size: 15)
+
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

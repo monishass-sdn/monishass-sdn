@@ -20,7 +20,7 @@ class CustomTabbarController: UITabBarController {
         let item1 = UINavigationController(rootViewController: packageListVC)
         self.viewControllers![0] = item1
         //self.tabBar.items![0].title = "Home".localized()
-       // self.tabBar.items![1].title = "Bookings".localized()
+        // self.tabBar.items![1].title = "Bookings".localized()
         //self.tabBar.items![2].title = "Offers".localized()
         //self.tabBar.items![3].title = "Profile".localized()
         self.tabBar.items![3].image = UIImage(named: "icn_Home")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)
@@ -28,12 +28,33 @@ class CustomTabbarController: UITabBarController {
         let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PackageListViewController") as! PackageListViewController
         let item1 = UINavigationController(rootViewController: packageListVC)
         self.viewControllers![0] = item1
-        self.tabBar.items![0].title = "Home"
+        self.tabBar.items![0].title = "Home".localized()
         self.tabBar.items![0].image = UIImage(named: "icn_Home")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)
         self.tabBar.isTranslucent = false
+        self.tabBar.items![1].title = "Bookings".localized()
+        self.tabBar.items![2].title = "Offers".localized()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(offerClicked), name: NSNotification.Name(rawValue: NotificationNames.kAlertOfferCLick), object: nil)
         
+        let appearance = UITabBarItem.appearance()
+        if kCurrentLanguageCode == "ar"{
+            let attributes = [NSAttributedString.Key.font:UIFont(name: kFontAlmaraiRegular, size: 14.5)]
+            appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        }else{
+            let attributes = [NSAttributedString.Key.font:UIFont(name: "Roboto-Medium", size: 14.5)]
+            appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        }
+
+    }
+    
+    @objc func offerClicked() {
         
+       /* let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "OffersListVC") as! OffersListVC
+        let item1 = UINavigationController(rootViewController: packageListVC)
+        self.viewControllers![2] = item1
+        self.tabBar.items![2].title = "Offers"
+        self.tabBar.items![2].image = UIImage(named: "flame")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)*/
+        self.selectedIndex = 2
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +72,7 @@ class CustomTabbarController: UITabBarController {
             let profileVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "MyProfileContainerVC") as! MyProfileContainerVC
             let item4 = UINavigationController(rootViewController: profileVC)
             self.viewControllers![3] = item4
-            self.tabBar.items![3].title = "Profile"
+            self.tabBar.items![3].title = "Profile".localized()
             //self.tabBar.items![3].image = imagee
             let imgView = UIImageView()
            

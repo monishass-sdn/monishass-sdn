@@ -15,9 +15,12 @@ class MyProfileContainerVC: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.setHidesBackButton(true, animated: true)
-
+        //self.checkNotificationCount()
         setupForCustomNavigationTitle(self: self)
         addBarButtons()
+        
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        self.navigationItem.rightBarButtonItems = [notificationButton]
     }
 
     
@@ -29,7 +32,7 @@ class MyProfileContainerVC: UIViewController {
         let barButtonSettings = UIBarButtonItem(customView: btnMessage)
         navigationController?.navigationBar.barTintColor = kAppHeaderColor
         navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.rightBarButtonItem = barButtonSettings
+        //self.navigationItem.rightBarButtonItem = barButtonSettings
     }
     
     @objc func btnMessageDidTap(sender: UIButton) {
@@ -37,6 +40,10 @@ class MyProfileContainerVC: UIViewController {
     }
 
     
-    
+    @objc func didMoveToNotification(){
+        
+        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
     
 }

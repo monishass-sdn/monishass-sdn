@@ -6,26 +6,44 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MessagesVC: UIViewController {
+    let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableviewMessageList: UITableView!
     var arrayMessgateList = [Message_Notifcation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let attr = [NSAttributedString.Key.foregroundColor:UIColor.white]
+       // refreshControl.tintColor = UIColor.yellowColor()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes:attr)
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableviewMessageList.addSubview(refreshControl)
         
-        if CAUser.currentUser.id != nil {
-            self.getmessageList()
-        }
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       // appDelegate.checkBlockStatus()
+        if CAUser.currentUser.id != nil {
+            
+            self.getmessageList()
+        }
+        // appDelegate.checkBlockStatus()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if CAUser.currentUser.id != nil {
+            self.getmessageList()
+           // SVProgressHUD.show()
+        }
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        self.getmessageList()
+        tableviewMessageList.reloadData()
+        refreshControl.endRefreshing()
+    }
 
 }
 extension MessagesVC : UITableViewDelegate, UITableViewDataSource {
@@ -85,14 +103,16 @@ extension MessagesVC : UITableViewDelegate, UITableViewDataSource {
         if dict.reservation_status == "reservation_cancelled"{
             return 381
         }else{
-            return 175
+            return tableviewMessageList.estimatedRowHeight
         }
     }
     
 }
 extension MessagesVC {
     func getmessageList(){
-        ServiceManager.sharedInstance.postMethodAlamofire("api/messages", dictionary: ["userid":CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+        SVProgressHUD.show()
+        ServiceManager.sharedInstance.postMethodAlamofireGetMessage("api/messages", dictionary: ["userid":CAUser.currentUser.id!], withHud: false) { (success, response, error) in
+            SVProgressHUD.dismiss()
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = MessageListBase(dictionary: response as! NSDictionary)
