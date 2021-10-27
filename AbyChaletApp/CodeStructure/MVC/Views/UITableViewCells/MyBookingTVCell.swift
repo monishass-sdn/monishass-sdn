@@ -30,8 +30,6 @@ class MyBookingTVCell: UITableViewCell {
 class NoBookingTVCell: UITableViewCell {
 
     @IBOutlet weak var viewBg: UIView!
-
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.viewBg.addCornerForView(cornerRadius: 10)

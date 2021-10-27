@@ -303,7 +303,8 @@ extension MyAccountTVC {
             imageData = Data()
             imgKey = ""
         }
-        let type = CAUser.currentUser.userstatus == "owner" ? "owner" : "user"
+       // let type = CAUser.currentUser.userstatus == "owner" ? "owner" : "user"
+        let type = CAUser.currentUser.userstatus == "user"
         ServiceManager.sharedInstance.uploadSingleData("api/updateprofile", parameters: ["id":CAUser.currentUser.id!,"first_name":firstName,"last_name":lastName,"email":email,"phone":phone,"gender":gender,"country_code":countryCode,"type":type,"country":country], imgdata: imageData, filename: imgKey, withHud: true) { (success, response, error) in
             if success {
                 if response!["status"] as! Bool == true {
@@ -311,10 +312,11 @@ extension MyAccountTVC {
                     let userDict = ((response as! NSDictionary)["user_details"] as! NSDictionary)
                     CAUser.currentUser.initWithDictionary(userDictionary: userDict)
                     CAUser.saveLoggedUserdetails(dictDetails: userDict)
+                    showDefaultAlert(viewController: self, title: "Success".localized(), msg: "Your account details have been updated".localized())
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.kUpdateProfile), object: nil, userInfo: nil)
                     DispatchQueue.main.async {
-                        showDefaultAlert(viewController: self, title: "Success".localized(), msg: "Your account details have been updated".localized())
                         self.setuValuesToFields()
+                       // showDefaultAlert(viewController: self, title: "Success".localized(), msg: "Your account details have been updated".localized())
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "", msg: response!["message"] as! String)

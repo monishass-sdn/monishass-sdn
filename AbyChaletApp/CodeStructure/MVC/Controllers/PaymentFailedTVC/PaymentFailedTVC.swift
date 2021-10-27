@@ -16,7 +16,7 @@ class PaymentFailedTVC: UITableViewController {
 
         self.viewBg.addCornerForView(cornerRadius: 10)
         self.setUpNavigationBar()
-        lblPaymentFailed.text = "You don't have any offers yet".localized()
+        lblPaymentFailed.text = "Payment is failed, Please try again!".localized()
         
         if kCurrentLanguageCode == "ar"{
             lblPaymentFailed.font = UIFont(name: kFontAlmaraiRegular, size: 15)

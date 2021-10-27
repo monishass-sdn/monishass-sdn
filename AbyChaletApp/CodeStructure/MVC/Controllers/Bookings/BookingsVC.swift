@@ -16,7 +16,7 @@ class BookingsVC: UIViewController {
     
     @IBOutlet weak var tableViewBooking: UITableView!
 
-    
+    var noRsrvtnmessage: String = ""
     var status = "Active"
     let status1 = "NotActive"
     var arrayMyBooking = [MyBooking_details]()
@@ -34,7 +34,8 @@ class BookingsVC: UIViewController {
         super.viewDidLoad()
         self.setUpNavigationBar()
         appDelegate.checkBlockStatus()
-        locationManager.delegate = self
+      //  self.tableViewBooking.register(NoBookingTVCell.self, forCellReuseIdentifier: "NoBookingTVCell")
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -94,8 +95,6 @@ class BookingsVC: UIViewController {
         if isUSerIsBlocked == false {
             self.selectedIndex = sender.tag
             if CAUser.currentUser.id != nil {
-                locationManager.requestWhenInUseAuthorization()
-                retriveCurrentLocation()
                 self.intialisePaymentWithType()
             }else{
                 let alert = UIAlertController(title: "Message", message: "Please Login for booking. Do you want to continue?", preferredStyle: .alert)
@@ -265,6 +264,8 @@ extension BookingsVC {
     
     //MARK:- GetMyBookingData
     func getMyBookigData() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/mybooking", dictionary: ["userid":CAUser.currentUser.id!], withHud: true) { (success, response, error) in
             self.isLoad = true
             DispatchQueue.main.async {
@@ -281,13 +282,16 @@ extension BookingsVC {
                            // self.getRewardDetails(rewardAmount: (self.arrayRewards.first?.reward_earn!)!, reservationAmount: (self.arrayRewards.first?.total!)!)
                         }
                         self.tableViewBooking.reloadData()
+                        self.view.isUserInteractionEnabled = true
                     }
                 }else{
                     self.tableViewBooking.reloadData()
+                    self.view.isUserInteractionEnabled = true
                     //showDefaultAlert(viewController: self, title: "", msg: response!["message"]!)
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!".localized())
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
@@ -388,8 +392,10 @@ extension BookingsVC {
 extension BookingsVC {
     
     func payRemainingAmount(reservationId:String,totalPaid:String,paymentGateway:String,paymentId:String,authId:String,trackId:String,transcationId:String,invoiceReference:String,referenceId:String)  {
-        
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/remainingpay", dictionary: ["reservation_id":reservationId,"total_paid":totalPaid,"payment_gateway":paymentGateway,"payment_id":paymentId,"authorization_id":authId,"track_id":trackId,"transaction_id":transcationId,"invoice_reference":invoiceReference,"reference_id":referenceId], withHud: true) { (success, response, error) in
+            self.view.isUserInteractionEnabled = true
             if success {
                 if ((response as! NSDictionary)["status"] as! Bool) == true {
                     DispatchQueue.main.async {
@@ -398,9 +404,11 @@ extension BookingsVC {
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "Message", msg: "Something went wrong")
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Message", msg: error!.localizedDescription)
+                self.view.isUserInteractionEnabled = true
             }
         }
         
@@ -450,59 +458,3 @@ extension Double {
     }
 }
 
-extension BookingsVC: CLLocationManagerDelegate {
-  // handle delegate methods of location manager here
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("location manager authorization status changed")
-        switch status {
-        case .authorizedAlways:
-            print("user allow app to get location data when app is active or in background")
-        case .authorizedWhenInUse:
-            print("user allow app to get location data only when app is active")
-        case .denied:
-            print("user tap 'disallow' on the permission dialog, cant get location data")
-        case .restricted:
-            print("parental control setting disallow location data")
-        case .notDetermined:
-            print("the location permission dialog haven't shown before, user haven't tap allow/disallow")
-        }
-      }
-    
-    func retriveCurrentLocation(){
-        let status = CLLocationManager.authorizationStatus()
-
-        if(status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled()){
-            // show alert to user telling them they need to allow location data to use some feature of your app
-            return
-        }
-
-        // if haven't show location permission dialog before, show it to user
-        if(status == .notDetermined){
-            locationManager.requestWhenInUseAuthorization()
-
-            // if you want the app to retrieve location data even in background, use requestAlwaysAuthorization
-            // locationManager.requestAlwaysAuthorization()
-            return
-        }
-        
-        // at this point the authorization status is authorized
-        // request location data once
-        locationManager.requestLocation()
-      
-        // start monitoring location data and get notified whenever there is change in location data / every few seconds, until stopUpdatingLocation() is called
-        // locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // .requestLocation will only pass one location to the locations array
-        // hence we can access it by taking the first element of the array
-        if let location = locations.first {
-            
-            let location = "\(location.coordinate.latitude) \(location.coordinate.longitude)"
-            print(location)
-            userCurrentLocation.sharedData.fetchedLocation = location
-        }
-    }
-    
-
-}

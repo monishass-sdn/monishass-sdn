@@ -207,7 +207,7 @@ extension MyProfileTableVC {
     func setValuesToFields() {
         self.imgViewForProfile.image = #imageLiteral(resourceName: "Icn_UserProfileImage")
         self.lblForUserName.text = "\(CAUser.currentUser.first_name!) \(CAUser.currentUser.last_name!)"
-        self.lblForMobileNum.text = "\(CAUser.currentUser.country_code!)-\(CAUser.currentUser.phone!) - \(CAUser.currentUser.country!)"
+        self.lblForMobileNum.text = "\(CAUser.currentUser.country_code!)-\(CAUser.currentUser.phone!) - \(CAUser.currentUser.country ?? "")"
         self.lblForEmailId.text = CAUser.currentUser.email!
         
         if CAUser.currentUser.profile_pic != nil{

@@ -12,15 +12,18 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var btnMessages: UIButton!
     @IBOutlet weak var btnInbox: UIButton!
     @IBOutlet weak var viewContainer: UIView!
+    @IBOutlet weak var btnMessageWidth: NSLayoutConstraint!
+    var showResrvationButton: Bool = false
     var isFromProfile = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        checkuserstatus()
         self.setUpNavigationBar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
-        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.KNoNotification : Images.KNewNotification, style: .plain, target: self, action: nil)
+        let reservationButton = UIBarButtonItem(image: showResrvationButton == true ? Images.KReservationicon?.withTintColor(UIColor.white) : Images.KHideReservationicon, style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItems = [notificationButton,reservationButton]
         
         btnInbox.setTitle("Inbox".localized(), for: .normal)
         btnMessages.setTitle("Messages".localized(), for: .normal)
@@ -37,6 +40,21 @@ class NotificationVC: UIViewController {
         }
         appDelegate.checkBlockStatus()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK:- Check User/Owner Status
+    
+    func checkuserstatus(){
+        if CAUser.currentUser.userstatus == "user"{
+            showResrvationButton = false
+            btnMessageWidth.constant = view.frame.width
+        }else{
+            showResrvationButton = true
+        }
     }
     
     //MARK:- SetUp NavigationBar

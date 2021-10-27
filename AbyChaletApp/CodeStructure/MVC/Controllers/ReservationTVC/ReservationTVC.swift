@@ -12,7 +12,6 @@ import DHSmartScreenshot
 import MFSDK
 import SVProgressHUD
 import GradientProgress
-import CoreLocation
 
 class ReservationTVC: UITableViewController {
     
@@ -115,12 +114,10 @@ class ReservationTVC: UITableViewController {
     var arrayAgreements = [Agreement]()
     var arrayAdminDetails = [Admin_details]()
     var isUnpaidDone = true
-    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        locationManager.delegate = self
         self.setUpNavigationBar()
         self.setupUI()
         self.getAdminDetails()
@@ -187,12 +184,17 @@ class ReservationTVC: UITableViewController {
         
         
         
-        initiatePayment()
+       // initiatePayment()
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         appDelegate.checkBlockStatus()
+        print(navigationController?.viewControllers)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        initiatePayment()
     }
     
     @objc func logoutUser() {
@@ -357,6 +359,7 @@ class ReservationTVC: UITableViewController {
         let checkinDate = dateFormater.date(from: "\(String(describing: arrayUserDetails[selectIndex].check_in!)) \(String(describing: arrayUserDetails[selectIndex].admincheck_in!))")
         let difference = Calendar.current.dateComponents([.hour], from: Date(), to: checkinDate!)
         if difference.hour! >= Int(arrayUserDetails[selectIndex].available_deposit!)! {
+            
                 self.viewNoDeposit.isHidden = true
                 let totalRent = Double(arrayUserDetails[selectIndex].rent!)
                 let minDeposit = Double(arrayUserDetails[selectedIndex].min_deposit!)
@@ -370,8 +373,18 @@ class ReservationTVC: UITableViewController {
                 lblRemainingDateAndTime.text = dateFormater.string(from: wedDate!)
         }else{
             self.viewNoDeposit.isHidden = false
+            self.lblDeposit72No.text = "\("No Deposit".localized()) \(Int(arrayUserDetails[selectIndex].available_deposit!)!) \("Hours before Check-in".localized())"
             self.lblTotalInvoice.text = "KD \(arrayUserDetails[selectIndex].rent!)"
             self.lblTotalInvoice.font = UIFont(name: "Roboto-Bold", size: 16.0)
+        }
+        
+        let totarent = Double(arrayUserDetails[selectIndex].rent!)
+        let rewardsshown = Double(arrayUserDetails[selectIndex].rewarded_amt!)
+        if totarent == rewardsshown {
+            self.viewDepositBg.isHidden = true
+        }else{
+            self.viewDepositBg.isHidden = false
+            
         }
         
       /*  if difference.hour! >= 72{
@@ -460,8 +473,17 @@ class ReservationTVC: UITableViewController {
             lblRemainingDateAndTime.text = dateFormater.string(from: wedDate!)
         }else{
             self.viewNoDeposit.isHidden = false
+            self.lblDeposit72No.text = "\("No Deposit".localized()) \(Int(dictOfferUserDetails.available_deposit!)!) \("Hours before Check-in".localized())"
             self.lblTotalInvoice.font = UIFont(name: "Roboto-Bold", size: 16.0)
             self.lblTotalInvoice.text = "KD \(dictOfferUserDetails.rent!)"
+        }
+        
+        let totarent = Double(dictOfferUserDetails.rent!)
+        let rewardsshown = Double(dictOfferUserDetails.rewarded_amt!)
+        if totarent == rewardsshown {
+            self.viewDepositBg.isHidden = true
+        }else{
+            self.viewDepositBg.isHidden = false
         }
         
         let dateFormater1 = DateFormatter()
@@ -560,13 +582,15 @@ class ReservationTVC: UITableViewController {
         var rent = 0
         var deposit = 0
         if isFromOffer == false{
-            
+            print("Rent is = \(arrayUserDetails[selectedIndex].rent)")
+            print("Deposit is = \(arrayUserDetails[selectedIndex].min_deposit)")
+
             rent = Int(arrayUserDetails[selectedIndex].rent!)!
             deposit = Int(arrayUserDetails[selectedIndex].min_deposit!)!
         }else{
            // rent  = dictOfferUserDetails.discount_amt!
             rent = dictOfferUserDetails.rent!
-            deposit = Int(dictOfferUserDetails.min_deposit!)!
+            deposit = Int(dictOfferUserDetails.min_deposit ?? "0")!
            // print("RENT = \(rent)")
            // print("DEPOSIT = \(deposit)")
         }
@@ -736,11 +760,7 @@ class ReservationTVC: UITableViewController {
         if isUSerIsBlocked == false {
             if self.isPaymentEnable == true {
                 if CAUser.currentUser.id != nil {
-                    retriveCurrentLocation()
-                    locationManager.requestWhenInUseAuthorization()
-                  //  locationManager.requestLocation()
-                    print(locationManager.location?.coordinate as Any)
-                    self.intialisePaymentWithType()
+                    intialisePaymentWithType()
                 }else{
                     
                     let alert = UIAlertController(title: "Message".localized(), message: "Please Login for booking. Do you want to continue?".localized(), preferredStyle: .alert)
@@ -1040,14 +1060,27 @@ extension ReservationTVC {
                         print(responseBase?.booking_details)
                         DispatchQueue.main.async {
                             if serverUrl == "api/booking"{
-                                let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
+                                if self.isFromOffer{
+                                    let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
+                                           bookingDetailsTVC.dictBookingDetails = self.dictBookingDetails
+                                           bookingDetailsTVC.remainingAmtDate = self.lblRemainingDateAndTime.text!
+                                           bookingDetailsTVC.isDeposit = self.isClickDeposit
+                                           bookingDetailsTVC.isFrom = "Booked Successfully"
+                                           self.navigationController?.pushViewController(bookingDetailsTVC, animated: true)
+                                }else{
+                                    let userInfo : [String:Any] = ["bookingData":self.dictBookingDetails!,"datentime" : self.lblRemainingDateAndTime.text!, "isDeposit" : self.isClickDeposit]
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.KgoToSuccessPage), object: nil, userInfo: userInfo)
+                                }
+                                
+                         /*       let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
                                 bookingDetailsTVC.dictBookingDetails = self.dictBookingDetails
                                 bookingDetailsTVC.remainingAmtDate = self.lblRemainingDateAndTime.text!
                                 bookingDetailsTVC.isDeposit = self.isClickDeposit
                                 
                                 bookingDetailsTVC.isFrom = "Booked Successfully"
-                                
+                                //self.present(bookingDetailsTVC, animated: true, completion: nil)
                                 self.navigationController?.pushViewController(bookingDetailsTVC, animated: true)
+ */
                             }else{
                                 let paymentFailedTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PaymentFailedTVC") as! PaymentFailedTVC
                                 self.navigationController?.pushViewController(paymentFailedTVC, animated: true)
@@ -1065,6 +1098,219 @@ extension ReservationTVC {
         }
     }
 }
+/*
+extension ReservationTVC {
+    
+    //MARK:- Payment Integration
+    func initiatePayment() {
+        let request = generateInitiatePaymentModel()
+        SVProgressHUD.show()
+        MFPaymentRequest.shared.initiatePayment(request: request, apiLanguage: .english, completion: { [weak self] (result) in
+            SVProgressHUD.dismiss()
+            switch result {
+            case .success(let initiatePaymentResponse):
+                self?.paymentMethods = initiatePaymentResponse.paymentMethods
+            case .failure(let failError):
+                showDefaultAlert(viewController: self!, title: "Failed..!", msg: "result: \(failError)")
+            }
+        })
+    }
+    
+    func intialisePaymentWithType() {
+        if let paymentMethods = paymentMethods, !paymentMethods.isEmpty {
+            let selectedIndex = selectedPaymentMethodIndex
+            executePayment(paymentMethodId: paymentMethods[selectedIndex].paymentMethodId)
+        }
+    }
+    
+    func executePayment(paymentMethodId: Int) {
+        let request = getExecutePaymentRequest(paymentMethodId: paymentMethodId)
+        SVProgressHUD.show()
+        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] (response, invoiceId)  in
+            SVProgressHUD.dismiss()
+            print(response)
+            switch response {
+            case .success(let executePaymentResponse):
+               // if let invoiceStatus = executePaymentResponse.invoiceStatus {
+                if executePaymentResponse.invoiceStatus != nil {
+                    print("payment response is success")
+                    // showDefaultAlert(viewController: self!, title: "Success..!", msg: "result: \(invoiceStatus)")
+                    
+                    //executePaymentResponse.invoiceReference
+                    let dataDict = executePaymentResponse.invoiceTransactions?.first!
+                    let paymentateway = dataDict?.paymentGateway
+                    let authid = dataDict?.authorizationID
+                    let trackid = dataDict?.trackID
+                    let trancid = dataDict?.transactionID
+                    let invoiceref = executePaymentResponse.invoiceReference
+                    let refid = dataDict?.referenceID
+                    print("paymentgateway = \(paymentateway ?? "")")
+                    print("authid = \(authid ?? "")")
+                    print("trackid = \(trackid ?? "")")
+                    print("trancid = \(trancid ?? "")")
+                    print("invoiceref = \(invoiceref ?? "")")
+                    print("refid = \(refid ?? "")")
+                    
+                    
+
+                    if self!.isFromOffer == false {
+                        let dict = self?.arrayUserDetails[(self?.selectedIndex)!]
+                        
+                        let chalid = dict?.chalet_id
+                        let selpackage = self?.selectedPackage
+                        let checkin = dict?.check_in
+                        let checkout = dict?.check_out
+                        let deposit = self?.isClickDeposit == false ? "0" : dict?.min_deposit
+                        let rent = dict?.rent
+                        
+                        print("chalid = \(chalid ?? 0)")
+                        print("selpackage = \(selpackage ?? "")")
+                        print("checkin = \(checkin ?? "")")
+                        print("checkout = \(checkout ?? "")")
+                        print("deposit = \(deposit ?? "")")
+                        print("rent = \(rent ?? "")")
+                        print("total paid = \(self!.isClickDeposit == false ? self!.isClickRewards == true ? "\(Int((dict?.rent!)!)! - self!.rewards)" : (dict?.rent!)! : (dict?.min_deposit!)!)")
+                        print("rewardDis = \(self?.isClickRewards == false ? "0": String((dict?.rewarded_amt)!))")
+               
+                        DispatchQueue.main.async {
+                            self?.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : (dict?.min_deposit!)!, rent: (dict?.rent!)!, totalPaid: self!.isClickDeposit == false ? self!.isClickRewards == true ? "\(Int((dict?.rent!)!)! - self!.rewards)" : (dict?.rent!)! : (dict?.min_deposit!)!,offerDiscount: "0",paymentGateway: (dataDict?.paymentGateway!)!,paymentId: (dataDict?.paymentID!)!,authId: (dataDict?.authorizationID!)!,trackId: (dataDict?.trackID!)!,transcationId: (dataDict?.transactionID)!,invoiceReference: executePaymentResponse.invoiceReference!,referenceId: (dataDict?.referenceID)!, serverUrl: "api/booking", rewarDiscount: self!.isClickRewards == false ? "0" : String((dict?.rewarded_amt)!))
+                        }
+                    }else{
+                        let dict = self!.dictOfferUserDetails
+                        let dis = "\(dict!.min_deposit!)"
+                        let ren = "\(dict!.rent!)"
+                        let offerdis = "\(dict!.discount_amt ?? 0)"
+                        print("Discount Amount = \(offerdis)")
+                        DispatchQueue.main.async {
+                            self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : dis, rent: ren, totalPaid: self!.isClickDeposit == false ? self!.isClickRewards == true ? "\(Int(dict!.rent!) - self!.rewards)" : ren : dis, offerDiscount: offerdis ,paymentGateway: (dataDict?.paymentGateway!)!,paymentId: (dataDict?.paymentID!)!,authId: (dataDict?.authorizationID!)!,trackId: (dataDict?.trackID!)!,transcationId: (dataDict?.transactionID)!,invoiceReference: executePaymentResponse.invoiceReference!,referenceId: (dataDict?.referenceID)!, serverUrl: "api/booking", rewarDiscount: "0")
+                        }
+                    }
+                }
+            case .failure(let failError):
+                print("Error discription == \(failError.errorDescription)")
+                if self!.isUnpaidDone == true{
+                    self!.isUnpaidDone = false
+                    // showDefaultAlert(viewController: self!, title: "Message", msg: "Payment failed...!")
+                    if  failError.errorDescription == "A server with the specified hostname could not be found." || failError.errorDescription == "Transaction not Captured!" {
+                        if self!.isFromOffer == false {
+                            let dict = self?.arrayUserDetails[(self?.selectedIndex)!]
+                            DispatchQueue.main.async {
+                                self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : (dict?.min_deposit!)!, rent: (dict?.rent!)!, totalPaid: self!.isClickDeposit == false ? (dict?.rent!)! : (dict?.min_deposit!)!, offerDiscount: "0",paymentGateway: "",paymentId: "",authId: "",trackId: "",transcationId: "",invoiceReference: "",referenceId: "", serverUrl: "api/paid_booking", rewarDiscount: self!.isClickRewards == false ? "0" : String((dict?.rewarded_amt)!))
+                            }
+                        }else{
+                            let dict = self!.dictOfferUserDetails
+                            let dis = "\(dict!.min_deposit!)"
+                            let ren = "\(dict!.rent!)"
+                            let offerDis = "\(dict!.discount_amt ?? 0)"
+                            DispatchQueue.main.async {
+                                self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : dis, rent: ren, totalPaid: self!.isClickDeposit == false ? ren : dis, offerDiscount: offerDis,paymentGateway: "",paymentId: "",authId: "",trackId: "",transcationId: "",invoiceReference: "",referenceId: "", serverUrl: "api/paid_booking", rewarDiscount: "0")
+                            }
+                        }
+                        
+                    }else{
+                        showDefaultAlert(viewController: self!, title: "Message", msg: failError.errorDescription)
+                        
+                    }
+                }
+            }
+    }
+    
+    }
+    
+     func getExecutePaymentRequest(paymentMethodId: Int) -> MFExecutePaymentRequest {
+        
+        var rent = ""
+        
+        if isClickRewards == true{
+            if isFromOffer == false {
+                let ren = Int(self.arrayUserDetails[self.selectedIndex].rent!)
+                rent = "\(ren! - self.rewards)"
+                    //self.arrayUserDetails[self.selectedIndex].min_deposit!
+            }else{
+                //rent = "\(self.dictOfferUserDetails.min_deposit!)"
+                let ren = self.dictOfferUserDetails.rent!
+                rent = "\(ren - self.rewards)"
+            }
+        }else{
+            if isFromOffer == false && isClickDeposit == false && isClickRewards == false{
+                rent = self.arrayUserDetails[self.selectedIndex].rent!
+            }else if isFromOffer == true{
+                rent = "\(self.dictOfferUserDetails.rent!)"
+            }
+        }
+        
+        if isClickDeposit == true{
+            if isFromOffer == false {
+                rent = self.arrayUserDetails[self.selectedIndex].min_deposit!
+            }else{
+                rent = "\(self.dictOfferUserDetails.min_deposit!)"
+            }
+        }else{
+            if isFromOffer == false && isClickRewards == true{
+                //rent = self.arrayUserDetails[self.selectedIndex].rent!
+                let ren = Int(self.arrayUserDetails[self.selectedIndex].rent!)
+                rent = "\(ren! - self.rewards)"
+            }else{
+                if isFromOffer == false{
+                    rent = self.arrayUserDetails[self.selectedIndex].rent!
+                }else{
+                    rent = "\(self.dictOfferUserDetails.rent!)"
+                }
+            }
+        }
+        
+        print("Calculated Payment Amount = \(rent)")
+        let invoiceValue = Decimal(string: rent ) ?? 0
+        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue , paymentMethod: paymentMethodId)
+        //request.userDefinedField = ""
+        if isFromOffer == false {
+            request.customerEmail = self.arrayUserDetails[self.selectedIndex].email ?? ""
+            request.customerMobile = self.arrayUserDetails[self.selectedIndex].phone ?? ""
+            request.customerCivilId = self.arrayUserDetails[self.selectedIndex].civil_id ?? ""
+            request.customerName = self.arrayUserDetails[self.selectedIndex].firstname ?? ""
+            let address = MFCustomerAddress(block: "ddd", street: "sss", houseBuildingNo: "sss", address: "sss", addressInstructions: "sss")
+            request.customerAddress = address
+            request.customerReference = "Test MyFatoorah Reference"
+        }else{
+            request.customerEmail = self.dictOfferUserDetails.email!// must be email
+            request.customerMobile = self.dictOfferUserDetails.phone!
+            request.customerCivilId = self.dictOfferUserDetails.civil_id!
+            request.customerName = self.dictOfferUserDetails.firstname!
+            let address = MFCustomerAddress(block: "ddd", street: "sss", houseBuildingNo: "sss", address: "sss", addressInstructions: "sss")
+            request.customerAddress = address
+            request.customerReference = "Test MyFatoorah Reference"
+        }
+        request.language = .english
+        request.mobileCountryCode = MFMobileCountryCodeISO.kuwait.rawValue
+        request.displayCurrencyIso = .kuwait_KWD
+
+//        request.supplierValue = 1
+//        request.supplierCode = 2
+//        request.suppliers.append(MFSupplier(supplierCode: 1, proposedShare: 2, invoiceShare: invoiceValue))
+        
+        // Uncomment this to add products for your invoice
+//         var productList = [MFProduct]()
+//        let product = MFProduct(name: "ABC", unitPrice: 1.887, quantity: 1)
+//         productList.append(product)
+//         request.invoiceItems = productList
+        return request
+    }
+    
+    private func generateInitiatePaymentModel() -> MFInitiatePaymentRequest {
+        // you can create initiate payment request with invoice value and currency
+        // let invoiceValue = Double(amountTextField.text ?? "") ?? 0
+        // let request = MFInitiatePaymentRequest(invoiceAmount: invoiceValue, currencyIso: .kuwait_KWD)
+        // return request
+        let request = MFInitiatePaymentRequest()
+        return request
+    }
+
+    
+    
+    
+}
+*/
+
 extension ReservationTVC {
     
     //MARK:- Payment Integration
@@ -1105,25 +1351,25 @@ extension ReservationTVC {
                     if self!.isFromOffer == false {
                         let dict = self?.arrayUserDetails[(self?.selectedIndex)!]
                 
-                        DispatchQueue.main.async {
+                        
                             self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : (dict?.min_deposit!)!, rent: (dict?.rent!)!, totalPaid: self!.isClickDeposit == false ? self!.isClickRewards == true ? "\(Int((dict?.rent!)!)! - self!.rewards)" : (dict?.rent!)! : (dict?.min_deposit!)!,offerDiscount: "0",paymentGateway: (dataDict?.paymentGateway!)!,paymentId: (dataDict?.paymentID!)!,authId: (dataDict?.authorizationID!)!,trackId: (dataDict?.trackID!)!,transcationId: (dataDict?.transactionID)!,invoiceReference: executePaymentResponse.invoiceReference!,referenceId: (dataDict?.referenceID)!, serverUrl: "api/booking", rewarDiscount: self!.isClickRewards == false ? "0" : String((dict?.rewarded_amt)!))
-                        }
+                        
                     }else{
                         let dict = self!.dictOfferUserDetails
                         let dis = "\(dict!.min_deposit!)"
                         let ren = "\(dict!.rent!)"
                         let offerdis = "\(dict!.discount_amt!)"
                         print("Discount Amount = \(offerdis)")
-                        DispatchQueue.main.async {
+                        
                             self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : dis, rent: ren, totalPaid: self!.isClickDeposit == false ? self!.isClickRewards == true ? "\(Int(dict!.rent!) - self!.rewards)" : ren : dis, offerDiscount: offerdis ,paymentGateway: (dataDict?.paymentGateway!)!,paymentId: (dataDict?.paymentID!)!,authId: (dataDict?.authorizationID!)!,trackId: (dataDict?.trackID!)!,transcationId: (dataDict?.transactionID)!,invoiceReference: executePaymentResponse.invoiceReference!,referenceId: (dataDict?.referenceID)!, serverUrl: "api/booking", rewarDiscount: "0")
-                        }
+                        
                     }
                 }
             case .failure(let failError):
                 print(failError)
-                if self!.isUnpaidDone == true{
-                    self!.isUnpaidDone = false
-                    // showDefaultAlert(viewController: self!, title: "Message", msg: "Payment failed...!")
+                if self?.isUnpaidDone == true{
+                    self?.isUnpaidDone = false
+                    //showDefaultAlert(viewController: self!, title: "Message", msg: "Payment gateway failed...!")
                     if  failError.errorDescription == "A server with the specified hostname could not be found." || failError.errorDescription == "Transaction not Captured!" {
                         if self!.isFromOffer == false {
                             let dict = self?.arrayUserDetails[(self?.selectedIndex)!]
@@ -1452,63 +1698,3 @@ extension ReservationTVC {
 }
  */
 
-extension ReservationTVC: CLLocationManagerDelegate {
-  // handle delegate methods of location manager here
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("location manager authorization status changed")
-        switch status {
-        case .authorizedAlways:
-            print("user allow app to get location data when app is active or in background")
-            let location = locationManager.location?.coordinate
-            print(location as Any)
-        case .authorizedWhenInUse:
-            print("user allow app to get location data only when app is active")
-            locationManager.startUpdatingLocation()
-            let location = locationManager.location?.coordinate
-            print(location as Any)
-        case .denied:
-            print("user tap 'disallow' on the permission dialog, cant get location data")
-        case .restricted:
-            print("parental control setting disallow location data")
-        case .notDetermined:
-            print("the location permission dialog haven't shown before, user haven't tap allow/disallow")
-        }
-      }
-    
-    func retriveCurrentLocation(){
-        let status = CLLocationManager.authorizationStatus()
-
-        if(status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled()){
-            // show alert to user telling them they need to allow location data to use some feature of your app
-            return
-        }
-
-        // if haven't show location permission dialog before, show it to user
-        if(status == .notDetermined){
-            locationManager.requestWhenInUseAuthorization()
-
-            // if you want the app to retrieve location data even in background, use requestAlwaysAuthorization
-            // locationManager.requestAlwaysAuthorization()
-            return
-        }
-        
-        // at this point the authorization status is authorized
-        // request location data once
-        locationManager.requestLocation()
-        // start monitoring location data and get notified whenever there is change in location data / every few seconds, until stopUpdatingLocation() is called
-        // locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // .requestLocation will only pass one location to the locations array
-        // hence we can access it by taking the first element of the array
-        if let location = locations.first {
-            
-            let location = "\(location.coordinate.latitude) \(location.coordinate.longitude)"
-            print(location)
-            userCurrentLocation.sharedData.fetchedLocation = location
-        }
-    }
-    
-
-}

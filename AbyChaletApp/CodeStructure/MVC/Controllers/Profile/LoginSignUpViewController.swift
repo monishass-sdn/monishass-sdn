@@ -153,7 +153,7 @@ extension LoginSignUpViewController {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter last name".localized())
             return (false , nil , nil , nil , nil, nil, nil, nil, nil, nil, nil)
         }else if birthDay.isEmpty && birthMonth.isEmpty && birthYear.isEmpty {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter DOB".localized())
+            showDefaultAlert(viewController: self, title: "", msg: "Please enter Date Of Brith".localized())
             return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
         }
         else if personGender.isEmpty {
@@ -163,12 +163,13 @@ extension LoginSignUpViewController {
         }else  if emailAddress.isEmpty {//&& phoneNumberFromSocialMedia.isEmpty  {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter email address".localized())
             return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
+        }else{
+           if !AbyChaletApp.isValidEmailAddress(email: emailAddress) {
+                showDefaultAlert(viewController: self, title: "", msg: "Please enter valid email address".localized())
+                return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
+            }
         }
-        else if !AbyChaletApp.isValidEmail(email: emailAddress) && emailAddress.isEmpty {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter valid email address".localized())
-            return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
-        }
-        else if password.isEmpty {
+        if password.isEmpty {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter password".localized())
             return (false, nil , nil , nil, nil, nil, nil, nil, nil, nil, nil)
         }

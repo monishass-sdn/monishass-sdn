@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SelectPackageTVC: UITableViewController {
 
@@ -79,8 +80,9 @@ class SelectPackageTVC: UITableViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
         appDelegate.checkBlockStatus()
-        
+        }
         //checkNotificationCount()
         
     }
@@ -89,12 +91,12 @@ class SelectPackageTVC: UITableViewController {
         self.checkNotificationCount()
     }
     
-    override func viewDidLayoutSubviews() {
+  /*  override func viewDidLayoutSubviews() {
         self.viewTop.roundCorners(corners: [.topLeft,.topRight], radius: 10.0)
         let width = kScreenWidth - 30
         let columnLayout = ColumnFlowLayout.init(cellsPerRow: 1, minimumInteritemSpacing: 0.0, minimumLineSpacing: 0.0, sectionInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), cellHeight: 150, cellWidth: width,scrollDirec: .vertical)
         collectionChalletList?.collectionViewLayout = columnLayout
-    }
+    }*/
     //MARK:- SetupUI
     func setupUI() {
         
@@ -391,7 +393,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                     reservationVC.selectedIndex = indexPath.item
                     reservationVC.selectedPackage = self.topSelection
                     reservationVC.isFromOffer = false
-                    navigationController?.pushViewController(reservationVC, animated: true)
+                    self.navigationController?.pushViewController(reservationVC, animated: true)
                 }
             }
         }
@@ -570,8 +572,12 @@ extension SelectPackageTVC {
                         print("Show alert box")
                         let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable) days from Today", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            self.navigationController?.popViewController(animated: true)
+                          /*  let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SelectPackageTVC") as! SelectPackageTVC
+                            self.navigationController?.pushViewController(nextVC, animated: true) */
+                           // self.navigationController?.popViewController(animated: true)
                         }))
+                    
                         self.present(alert, animated: true, completion: nil)
                         
                     }else{
@@ -635,7 +641,7 @@ extension SelectPackageTVC {
                     }
                 }
             }else{
-                showDefaultAlert(viewController: self, title: "", msg: response!["message"] as! String)
+                showDefaultAlert(viewController: self, title: "", msg: response?["message"] as! String)
             }
         }
     }
@@ -656,7 +662,8 @@ extension SelectPackageTVC {
         let formattedMonth = dateFormatter.date(from: month)
         dateFormatter.dateFormat = "MM"
         let mont = dateFormatter.string(from: formattedMonth!)
-        
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/calendarlist", dictionary: ["month":mont,"year":year,"package":package], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
             if success {
@@ -685,11 +692,13 @@ extension SelectPackageTVC {
                     }
                     self.calenderView.arrayListToCalender = self.arrayListCalender
                     self.calenderView.reload()
+                    self.view.isUserInteractionEnabled = true
                 }else{
                     
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
@@ -732,24 +741,31 @@ extension SelectPackageTVC {
     
     //MARK:- Get Holidays Package
     func getHolidayPackage() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
         self.arrayChalletList.removeAll()
         ServiceManager.sharedInstance.postMethodAlamofire("api/holidaysevents", dictionary: ["userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
             if success {
+                print("response is \(response as! NSDictionary)")
+
                 if response!["status"] as! Bool == true {
                     let responseBase = HolidaysAndEventsBas(dictionary: response as! NSDictionary)
                     self.arrayChalletList = (responseBase?.chalet_list)!
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .bottom)
                         self.colletionViewHolidays.reloadData()
+                        self.view.isUserInteractionEnabled = true
                         self.isSearchEnable = false
                         self.btnSearch.backgroundColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
                     }
                 }else{
-                    showDefaultAlert(viewController: self, title: "", msg: "Something went wrong..!")
+                    showDefaultAlert(viewController: self, title: "", msg: "No Holidays and Events")
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
@@ -759,8 +775,8 @@ extension SelectPackageTVC {
         if CAUser.currentUser.id != nil {
             ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
                 if success {
-                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
-                    kNotificationCount = messageCount
+                    let messageCount = ((response as! NSDictionary)["message_count"] as? Int)
+                    kNotificationCount = messageCount ?? 0
                     let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
                     self.navigationItem.rightBarButtonItems = [notificationButton]
                 }

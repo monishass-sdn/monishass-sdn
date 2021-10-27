@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "79AFE012-2FF8-44F7-BD93-289092E9DD80"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/ReservationTVC/ReservationTVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "742"
-            endingLineNumber = "742"
-            landmarkName = "btnPaymentAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "03B5F706-0DA3-40C1-8E01-5B0817B728A9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -52,14 +36,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "03B5F706-0DA3-40C1-8E01-5B0817B728A9 - de43bc0a73a95d68"
+                  uuid = "03B5F706-0DA3-40C1-8E01-5B0817B728A9 - f7c6816ebd440f35"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.AnyObject&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in AbyChaletApp.ChangePasswordTVC.viewProfile() -&gt; ()"
                   moduleName = "AbyChaletApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Desktop/Abin/Chalet-Booking/AbyChaletApp/CodeStructure/MVC/Controllers/ProfileNew/ChangePassword/ChangePasswordTVC.swift"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/ProfileNew/ChangePassword/ChangePasswordTVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -67,14 +51,14 @@
                   offsetFromSymbolStart = "1450">
                </Location>
                <Location
-                  uuid = "03B5F706-0DA3-40C1-8E01-5B0817B728A9 - c1d3846d99124b29"
+                  uuid = "03B5F706-0DA3-40C1-8E01-5B0817B728A9 - e856b90957ff1972"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.AnyObject&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in AbyChaletApp.ChangePasswordTVC.viewProfile() -&gt; ()"
                   moduleName = "AbyChaletApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Desktop/Abin/Chalet-Booking/AbyChaletApp/CodeStructure/MVC/Controllers/ProfileNew/ChangePassword/ChangePasswordTVC.swift"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/ProfileNew/ChangePassword/ChangePasswordTVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "148"
@@ -87,16 +71,112 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "25B7A604-4B1B-4687-AC04-871C9FBD035B"
+            uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "executePayment(paymentMethodId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8 - 81bc07cbed42f3b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "446">
+               </Location>
+               <Location
+                  uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8 - 81bc07cbed42f3b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "474">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
+            landmarkName = "executePayment(paymentMethodId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E - 81bc07cbed42f3d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E - 81bc07cbed42f3d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "917">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20D0339E-5C88-4B6D-94E0-75409EC43750"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/ReservationTVC/ReservationTVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1508"
-            endingLineNumber = "1508"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            startingLineNumber = "1368"
+            endingLineNumber = "1368"
+            landmarkName = "executePayment(paymentMethodId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

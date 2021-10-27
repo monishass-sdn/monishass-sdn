@@ -171,10 +171,10 @@ extension SelectPackageVC: UITableViewDelegate {
             switch indexPath.row {
             case 0:
                 let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as ReservationTVC
-                navigationController?.pushViewController(nextVC, animated: true)
+                self.navigationController?.pushViewController(nextVC, animated: true)
             default:
-                let nextVC1 = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as ReservationTVC
-                navigationController?.pushViewController(nextVC1, animated: true)
+               let nextVC1 = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as ReservationTVC
+                self.navigationController?.pushViewController(nextVC1, animated: true)
             }
         }
     }

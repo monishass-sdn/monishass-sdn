@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         self.checkAutoLogin()
         self.enableNotification()
+        //let token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL"
+        
         let token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL"
         let url = "https://apitest.myfatoorah.com/"
         MFSettings.shared.configure(token: token, baseURL: url)
@@ -32,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyB75kZV00quV-LeAWJD9QaZ8Hbc4kqBgwo")
         //timerReload = Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(self.reloadData), userInfo: nil, repeats: true)
         SVProgressHUD.setDefaultMaskType(.clear)
+        
         return true
     }
     
@@ -50,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentAppLaunchCount = UserDefaults.standard.integer(forKey: "appLaunchCount")
         UserDefaults.standard.set(currentAppLaunchCount+1 , forKey: "appLaunchCount")
         if UserDefaults.standard.integer(forKey: "appLaunchCount") == nil {
-       // if currentAppLaunchCount == 0 {
+        //if currentAppLaunchCount == 0 {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let introScreen = storyboard.instantiateViewController(withIdentifier: "IntroScreenVC") as! IntroScreenVC
             appDelegate.window?.rootViewController = introScreen
@@ -217,24 +220,38 @@ extension AppDelegate {
     
     func checkBlockStatus() {
         if CAUser.currentUser.id != nil {
-            ServiceManager.sharedInstance.postMethodAlamofire("api/block_user", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
-                //self.checkNotificationCount()
+            ServiceManager.sharedInstance.checkBlockStatus {(success, response, error)in
                 if success {
+                    print("Block status response is \(response)")
                     let status = ((response as! NSDictionary)["status"] as! Bool)
+                    print("Status is \(status)")
                     if status == false{
                         DispatchQueue.main.async {
-                            self.logOut()
+                           // self.logOut()
                         }
                     }
                 }
             }
+       /*     ServiceManager.sharedInstance.postMethodAlamofire("api/block_user", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                //self.checkNotificationCount()
+                print("Block status response is \(response)")
+                if success {
+                    let status = ((response as! NSDictionary)["status"] as! Bool)
+                    print("Status is \(status)")
+                    if status == false{
+                        DispatchQueue.main.async {
+                           // self.logOut()
+                        }
+                    }
+                }
+            }*/
         }
     }
     func updateDeviceToke(deviceToken:String){
         if CAUser.currentUser.id != nil {
-            ServiceManager.sharedInstance.postMethodAlamofire("api/update_token", dictionary: ["userid": CAUser.currentUser.id!,"device_token":deviceToken], withHud: true) { [self] (success, response, error) in
+            ServiceManager.sharedInstance.postMethodAlamofire("api/update_token", dictionary: ["userid": CAUser.currentUser.id!,"device_token":deviceToken], withHud: true) { (success, response, error) in
                 if success {
-                    let status = ((response as! NSDictionary)["status"] as! Bool)
+                    _ = ((response as! NSDictionary)["status"] as! Bool)
                     
                 }
             }

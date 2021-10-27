@@ -58,9 +58,9 @@ class SignUpProfileDetailsTableViewCell1: UITableViewCell  {
                 return text
             }
         }
-        txtBirthDay.keyboardType = .numberPad
-        txtBirthMonth.keyboardType = .numberPad
-        txtBirthYear.keyboardType = .numberPad
+       // txtBirthDay.keyboardType = .numberPad
+       // txtBirthMonth.keyboardType = .numberPad
+       // txtBirthYear.keyboardType = .numberPad
         txtFirstName.placeholder = "First Name".localized()
         txtLastName.placeholder = "Last Name".localized()
         if kCurrentLanguageCode == "ar"{

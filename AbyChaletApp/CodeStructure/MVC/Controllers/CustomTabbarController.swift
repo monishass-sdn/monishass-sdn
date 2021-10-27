@@ -8,14 +8,14 @@
 import UIKit
 import SDWebImage
 
-class CustomTabbarController: UITabBarController {
+class CustomTabbarController: UITabBarController, UITabBarControllerDelegate {
 
     let imagee = UIImage(named: "icn_profile")?.withRenderingMode(.alwaysOriginal)
     let selectedImage = UIImage(named: "icn_SelectedProfile")
     let selectedImageLogin = UIImage(named: "icn_profile")
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.delegate = self
         /*let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PackageListViewController") as! PackageListViewController
         let item1 = UINavigationController(rootViewController: packageListVC)
         self.viewControllers![0] = item1
@@ -49,21 +49,21 @@ class CustomTabbarController: UITabBarController {
     
     @objc func offerClicked() {
         
-       /* let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "OffersListVC") as! OffersListVC
+        /* let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "OffersListVC") as! OffersListVC
         let item1 = UINavigationController(rootViewController: packageListVC)
         self.viewControllers![2] = item1
-        self.tabBar.items![2].title = "Offers"
-        self.tabBar.items![2].image = UIImage(named: "flame")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)*/
+        self.tabBar.items![2].title = "Offers".localized()
+        self.tabBar.items![2].image = UIImage(named: "flame")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray) */
         self.selectedIndex = 2
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        /*let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PackageListViewController") as! PackageListViewController
+        let packageListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PackageListViewController") as! PackageListViewController
         let item1 = UINavigationController(rootViewController: packageListVC)
         self.viewControllers![0] = item1
-        self.tabBar.items![0].title = "Home"
-        self.tabBar.items![0].image = UIImage(named: "icn_Home")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)*/
+        self.tabBar.items![0].title = "Home".localized()
+        self.tabBar.items![0].image = UIImage(named: "icn_Home")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)
         
         
         
@@ -75,7 +75,6 @@ class CustomTabbarController: UITabBarController {
             self.tabBar.items![3].title = "Profile".localized()
             //self.tabBar.items![3].image = imagee
             let imgView = UIImageView()
-           
             if CAUser.currentUser.profile_pic != ""{
                 /*imgView.sd_setImage(with: URL(string: CAUser.currentUser.profile_pic!), placeholderImage: kPlaceHolderImage, options: .highPriority) { image, Error, cache, url in
                     if image != nil{
@@ -174,6 +173,9 @@ class CustomTabbarController: UITabBarController {
     
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let items = tabBar.items else {return}
+        print("selected Index is = \(String(describing: items.firstIndex(of: item) ?? 0))")
+
         
         if(item.title! == "Profile"){
             if (UserDefaults.standard.object(forKey: "kCurrentUserDetails") != nil) {
@@ -210,6 +212,20 @@ class CustomTabbarController: UITabBarController {
             item.selectedImage = UIImage(named: "icn_Home")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
         }
     }
+    
+    //Delegate methods
+        
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
 }
 extension UIImage{
     func roundedImageWithBorder(width: CGFloat, color: UIColor) -> UIImage? {

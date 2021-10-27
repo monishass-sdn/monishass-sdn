@@ -33,7 +33,11 @@ struct Images {
     static let kIconBackGreen            = UIImage.init(named:"iconprev")?.withRenderingMode(.alwaysOriginal)
     static let kIconNotification            = UIImage.init(named:"icn_Message")?.withRenderingMode(.alwaysOriginal)
     static let kIconNoMessage            = UIImage.init(named:"NoMessage")?.withRenderingMode(.alwaysOriginal)
-    
+    static let KReservationicon = UIImage.init(named: "icn_Bookings")?.withRenderingMode(.alwaysOriginal)
+    static let KHideReservationicon = UIImage.init(named: "")?.withRenderingMode(.alwaysOriginal)
+    static let KNoNotification = UIImage.init(named: "notification-normal")?.withRenderingMode(.alwaysOriginal)
+    static let KNewNotification = UIImage.init(named: "notification-new")?.withRenderingMode(.alwaysOriginal)
+   // static let KIconNotification1 = UIImage.init(named: "icon_Notification")?.withRenderingMode(.alwaysOriginal)
     
     
 }
@@ -44,6 +48,7 @@ struct NotificationNames {
     static let kUpdateProfile                = "UpdateProfile"
     static let kBlockedUser                  = "BlockedAdmin"
     static let kAlertOfferCLick               = "AlertOfferClick"
+    static let KgoToSuccessPage             = "goToSuccessPage "
     
     
 }

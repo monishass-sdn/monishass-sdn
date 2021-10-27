@@ -52,8 +52,11 @@ class CAUser: NSObject {
     }
     
     class func logOutCurrentUser(){
+        appDelegate.updateDeviceToke(deviceToken: "")
         let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.removeObject(forKey: "kDeviceToken")
+        print("Device Token = \(UserDefaults.standard.value(forKey: "kDeviceToken") ?? "no token")")
     }
     //MARK:- STORE USER DATA
     public class func saveLoggedUserdetails(dictDetails : NSDictionary){

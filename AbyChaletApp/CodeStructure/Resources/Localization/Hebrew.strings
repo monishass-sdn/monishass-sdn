@@ -269,3 +269,16 @@
 "Please Login for booking. Do you want to continue?" = "الرجاء تسجيل الدخول أولا";
 "There is no deposit option for this chalet" = "لا يوجد خيار إيداع لهذا الشاليه";
 "please install WhatsApp" = "الرجاء تثبيت Whatsapp";
+"Payment is failed, Please try again!" = "فشل الدفع
+الرجاء المحاولة مرة أخرى !";
+"You don't have any Offers yet" = "لاتوجد عروض في الوقت الحالي";
+"No Deposit" = "لا يوجد ايداع";
+"hours before Check-in" = "قبل ساعات من تسجيل الوصول";
+"You don't have any Reservations yet" = "You don't have any Reservations yet";
+"We are sorry, your reservation has been cancelled due to non-payment of the remaining amount" = "نأسف
+تم إلغاء حجزك بسبب عدم السداد
+المبلغ المتبقي في الوقت المحدد";
+"Reservation has been cancelled" = "تم إلغاء الحجز";
+"Reservation Cancelled" = "تم إلغاء الحجز";
+"You can accepr or reject later" = "يمكنك قبوله أو رفضه لاحقًا";
+"Commision" = "العمولة";

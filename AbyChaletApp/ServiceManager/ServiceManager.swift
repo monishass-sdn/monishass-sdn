@@ -141,4 +141,30 @@ class ServiceManager: NSObject {
                 }
             })
     }
+    
+    func checkBlockStatus( completion : @escaping (Bool, AnyObject?, NSError?)->Void) {
+        let serviceName = "api/block_user"
+        let Dic = ["userid": CAUser.currentUser.id!]
+        completionHandler = completion
+        if let url = URL(string: kBaseUrl + serviceName) {
+            let header:HTTPHeaders = ["Content-Type":"application/x-www-form-urlencoded"]
+            AF.request(url, method: .post, parameters: Dic, encoding: URLEncoding.httpBody, headers: header ).responseJSON { (response:AFDataResponse<Any>) in
+          
+                switch response.result {
+                case .success(let jsonData):
+                    
+                    let dictionary = jsonData as! NSDictionary
+                    let status:Bool = dictionary.object(forKey: "status") as! Bool
+                    if status {
+                        completion(true, response.value as AnyObject , nil)
+                        //self.getModalObject(serviceUrl: serviceName, response: response)
+                    }else{
+                        self.completionHandler(true,response.value as AnyObject,nil)
+                    }
+                case .failure(let error): completion(false,nil,error as NSError)
+                    break
+                }
+            }
+        }
+    }
 }

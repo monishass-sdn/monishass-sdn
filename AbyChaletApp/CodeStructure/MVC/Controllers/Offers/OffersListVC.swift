@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OffersListVC: UIViewController {
 
@@ -14,9 +15,14 @@ class OffersListVC: UIViewController {
     var arryOfferList = [OfferChalet_list]()
     var dictAdmin = Admin(dictionary: NSDictionary())
     var isLoad = false
+    var activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpNavigationBar()
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .medium
+        self.view.addSubview(activityIndicator)
     }
     
     
@@ -140,7 +146,7 @@ extension OffersListVC : UICollectionViewDelegate, UICollectionViewDataSource, U
         
         //reservationVC.selectedIndex = indexPath.item
         reservationVC.selectedPackage = arryOfferList[collectionView.tag].offerUser_details![indexPath.row].package!
-        navigationController?.pushViewController(reservationVC, animated: true)
+        self.navigationController?.pushViewController(reservationVC, animated: true)
                 
     }
 }
@@ -149,6 +155,8 @@ extension OffersListVC {
     //MARK:- GetMyBookingData
     func getRewardsData() {
        //["userid":CAUser.currentUser.id!]
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/offers", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
             self.checkNotificationCount()
             self.isLoad = true
@@ -160,6 +168,8 @@ extension OffersListVC {
                     DispatchQueue.main.async {
                         self.isLoad = true
                         self.tableViewOfferList.reloadData()
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)

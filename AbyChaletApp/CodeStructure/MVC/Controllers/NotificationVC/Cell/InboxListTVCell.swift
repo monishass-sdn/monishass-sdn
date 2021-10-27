@@ -244,7 +244,10 @@ class CancelReservationTVCell: UITableViewCell {
     @IBOutlet weak var lblCanceledDate: UILabel!
     @IBOutlet weak var lblCanceledTime: UILabel!
     @IBOutlet weak var lblCanceledStatus: UILabel!
-    
+    @IBOutlet weak var lblWearesorry: UILabel!
+    @IBOutlet weak var lblCancelled: UILabel!
+    @IBOutlet weak var lblReservationCancelled: UILabel!
+    @IBOutlet weak var lblRemaining: UILabel!
     
     func setValuesToFields(dict:Message_Notifcation) {
         
@@ -257,8 +260,11 @@ class CancelReservationTVCell: UITableViewCell {
             
 
             //self.lblCanceledTime.text = dict.duration!
-
-            
+            lblCanceledStatus.text = "Reservation Cancelled".localized()
+            lblRemaining.text = "Remaining".localized()
+            lblReservationCancelled.text = "Reservation has been cancelled".localized()
+            lblCancelled.text = "Cancelled".localized()
+            lblWearesorry.text = "We are sorry, your reservation has been cancelled due to non-payment of the remaining amount".localized()
             lblSlNo.text = "\(detailDict?.chalet_details?.first?.chalet_id! ?? 0)"
             lblChaletName.text = "\(detailDict?.chalet_details?.first?.chalet_name! ?? "")"
             lblRent.text =  detailDict?.rent!
