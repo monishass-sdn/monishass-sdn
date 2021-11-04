@@ -36,6 +36,8 @@ class PackageListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        appDelegate.updateDeviceToke(deviceToken: DeviceTokenSaver.standard.deviceToken)
+        //appDelegate.updateDeviceToke(deviceToken: "\(UserDefaults.standard.string(forKey:"kDeviceToken") ?? "No Device Token Captured")")
 //        effect = blurEffectView.effect
    //     blurEffectView.effect = nil
         setupForCustomNavigationTitle(self: self)
@@ -235,8 +237,12 @@ extension PackageListViewController{
                 if response!["status"] as! Bool == true {
                     let jsonBase = OwnerListBase(dictionary: response as! NSDictionary)
                     self.arrayReservationList = (jsonBase?.reservation_list)!
-                    self.showPopUp()
-                    self.popUpTableView.reloadData()
+                    if self.arrayReservationList.count == 0 {
+                        print("No Accept/Reject Data")
+                    }else{
+                        self.showPopUp()
+                        self.popUpTableView.reloadData()
+                    }
                 }else{
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: ((response! as! NSDictionary)["message"] as! String))
                 }

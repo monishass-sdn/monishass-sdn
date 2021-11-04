@@ -71,102 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "executePayment(paymentMethodId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8 - 81bc07cbed42f3b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
-                  moduleName = "AbyChaletApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "327"
-                  endingLineNumber = "327"
-                  offsetFromSymbolStart = "446">
-               </Location>
-               <Location
-                  uuid = "B72770A8-EC3B-4E50-8089-00CD00FBD8D8 - 81bc07cbed42f3b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
-                  moduleName = "AbyChaletApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "327"
-                  endingLineNumber = "327"
-                  offsetFromSymbolStart = "474">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "executePayment(paymentMethodId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E - 81bc07cbed42f3d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
-                  moduleName = "AbyChaletApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "330"
-                  endingLineNumber = "330"
-                  offsetFromSymbolStart = "616">
-               </Location>
-               <Location
-                  uuid = "13B2A469-64CC-4237-8CB9-F0D6E029D02E - 81bc07cbed42f3d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;MFSDK.MFPaymentStatusResponse, MFSDK.MFFailResponse&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AbyChaletApp.BookingsVC.executePayment(paymentMethodId: Swift.Int) -&gt; ()"
-                  moduleName = "AbyChaletApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srishtiinnovative/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Bookings/BookingsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "330"
-                  endingLineNumber = "330"
-                  offsetFromSymbolStart = "917">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "20D0339E-5C88-4B6D-94E0-75409EC43750"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -174,8 +78,8 @@
             filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/ReservationTVC/ReservationTVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1368"
-            endingLineNumber = "1368"
+            startingLineNumber = "1373"
+            endingLineNumber = "1373"
             landmarkName = "executePayment(paymentMethodId:)"
             landmarkType = "7">
          </BreakpointContent>

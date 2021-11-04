@@ -102,9 +102,9 @@
 "My Account" = "حسابي";
 
 /*Invite Friend*/
-"Invite friend by ..." = "";
-"Invite friend by SMS" = "";
-"Invite friend by WhatsApp" = "";
+"Invite friend by ..." = "دعوة صديق ...";
+"Invite friend by SMS" = "دعوة صديق SMS";
+"Invite friend by WhatsApp" = "دعوة صديق WhatsApp";
 //Added by Tejaswini
 "Chalet is not available" = "الشاليه غير متوفر";
 "Abychalet Easy to Rent" = "Abychalet Easy to Rent";
@@ -274,7 +274,8 @@
 "You don't have any Offers yet" = "لاتوجد عروض في الوقت الحالي";
 "No Deposit" = "لا يوجد ايداع";
 "hours before Check-in" = "قبل ساعات من تسجيل الوصول";
-"You don't have any Reservations yet" = "You don't have any Reservations yet";
+"You don't have any Reservations yet" = "ليس لديك أي
+حجوزات حتى الآن ";
 "We are sorry, your reservation has been cancelled due to non-payment of the remaining amount" = "نأسف
 تم إلغاء حجزك بسبب عدم السداد
 المبلغ المتبقي في الوقت المحدد";

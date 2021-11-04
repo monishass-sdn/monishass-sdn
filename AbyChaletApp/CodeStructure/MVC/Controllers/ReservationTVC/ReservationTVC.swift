@@ -77,6 +77,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblChaletDetails: UILabel!
     @IBOutlet weak var lblAgreement1: UILabel!
     @IBOutlet weak var lblYouMustAgreeAllConditions: UILabel!
+    @IBOutlet weak var btnRewardsCheckBox: UIButton!
     
     @IBOutlet weak var viewPrev: UIView!
     @IBOutlet weak var viewForward: UIView!
@@ -410,6 +411,10 @@ class ReservationTVC: UITableViewController {
         }else{
             self.lblRewards.text = "KD -\(arrayUserDetails[selectIndex].rewarded_amt!)"
             self.rewards = arrayUserDetails[selectIndex].rewarded_amt!
+        }
+        
+        if self.lblRewards.text == "KD -0"{
+            self.btnRewardsCheckBox.isEnabled = false
         }
         
         

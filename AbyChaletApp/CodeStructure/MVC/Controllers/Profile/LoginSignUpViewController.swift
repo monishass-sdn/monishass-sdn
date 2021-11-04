@@ -34,6 +34,7 @@ class LoginSignUpViewController: UIViewController , UINavigationControllerDelega
     var btnRememberSelected:Bool = false
     var isFromNoLogin = Bool()
     var selectedProfileImage : UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         txtPassword.isSecureTextEntry = true
@@ -153,7 +154,7 @@ extension LoginSignUpViewController {
             showDefaultAlert(viewController: self, title: "", msg: "Please enter last name".localized())
             return (false , nil , nil , nil , nil, nil, nil, nil, nil, nil, nil)
         }else if birthDay.isEmpty && birthMonth.isEmpty && birthYear.isEmpty {
-            showDefaultAlert(viewController: self, title: "", msg: "Please enter Date Of Brith".localized())
+            showDefaultAlert(viewController: self, title: "", msg: "Please enter Date Of Birth".localized())
             return (false, nil, nil, nil , nil, nil, nil, nil, nil, nil, nil)
         }
         else if personGender.isEmpty {
@@ -258,8 +259,10 @@ extension LoginSignUpViewController {
     @IBAction func btnLoginDidTap(_ sender: Any) {
         let (isValid, emailAdd, password) = self.isSelfFromValidForLogin
         guard isValid else{ return}
-        
+        let devToken = DeviceTokenSaver.standard.deviceToken
+//        let devToken = UserDefaults.standard.string(forKey: "kDeviceToken")
         self.loginWithDetails(emailID: emailAdd ?? "", password: password ?? "", deviceToken: "")
+        print("Device Token After Login = \(devToken)")
         
     }
     
@@ -636,22 +639,25 @@ extension LoginSignUpViewController {
     
     func loginWithDetails(emailID:String,password:String,deviceToken:String)  {
         
-        var deviceeToken = ""
-        if let token = UserDefaults.standard.value(forKey: "kDeviceToken") {
-            deviceeToken = token as! String
-        }else{
-            deviceeToken = ""
-        }
+        let deviceeToken = DeviceTokenSaver.standard.deviceToken
+//        if let token = UserDefaults.standard.string(forKey: "kDeviceToken") {
+//            deviceeToken = token as! String
+//            print("Device Token when login = \(deviceeToken)")
+//        }else{
+//            deviceeToken = "Device Token Not Captured"
+//        }
         openAlertPopup(selfVc: self, alertMessage: "Processing...".localized(), showAlert: true)
         ServiceManager.sharedInstance.postMethodAlamofire("api/login", dictionary: ["email":emailID,"password":password,"device_token":deviceeToken], withHud: false) { (success, response, error) in
             openAlertPopup(selfVc: self, alertMessage: "Processing...".localized(), showAlert: false)
             if success {
+                appDelegate.updateDeviceToke(deviceToken: deviceeToken)
                 if response!["status"] as! Bool == true {
                     self.isUserLogin = true
                     self.logginOffTimer()
                     let userDict = ((response as! NSDictionary)["user_details"] as! NSDictionary)
                     CAUser.currentUser.initWithDictionary(userDictionary: userDict)
                     CAUser.saveLoggedUserdetails(dictDetails: userDict)
+                   
                     let responseMsg = ((response as! NSDictionary)["message"] as! String)
                     
                     //showDefaultAlert(viewController: self, title: "", msg: responseMsg)
@@ -705,13 +711,13 @@ extension LoginSignUpViewController {
                 showDefaultAlert(viewController: self, title: "", msg: "Failed")
             }
         }*/
-        
-        var deviceeToken = ""
-        if let token = UserDefaults.standard.value(forKey: "kDeviceToken") {
-            deviceeToken = token as! String
-        }else{
-            deviceeToken = ""
-        }
+        let deviceeToken = DeviceTokenSaver.standard.deviceToken
+//        var deviceeToken = ""
+//        if let token = UserDefaults.standard.string(forKey: "kDeviceToken") {
+//            deviceeToken = token as! String
+//        }else{
+//            deviceeToken = "No Token Found While Registering"
+//        }
         var imageData = Data()
         var fileName = ""
         if selectedProfileImage != nil{

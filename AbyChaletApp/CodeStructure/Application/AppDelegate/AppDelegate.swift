@@ -52,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let currentAppLaunchCount = UserDefaults.standard.integer(forKey: "appLaunchCount")
         UserDefaults.standard.set(currentAppLaunchCount+1 , forKey: "appLaunchCount")
-        if UserDefaults.standard.integer(forKey: "appLaunchCount") == nil {
-        //if currentAppLaunchCount == 0 {
+        //if UserDefaults.standard.integer(forKey: "appLaunchCount") == nil {
+        if currentAppLaunchCount == 0 {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let introScreen = storyboard.instantiateViewController(withIdentifier: "IntroScreenVC") as! IntroScreenVC
             appDelegate.window?.rootViewController = introScreen
@@ -94,21 +94,24 @@ extension AppDelegate {
             
             
         }else{
+            
+            let deviceeToken = DeviceTokenSaver.standard.deviceToken
             if (UserDefaults.standard.object(forKey: "kCurrentGuestUserDetails") != nil) {
                 let dict:NSDictionary = NSKeyedUnarchiver.unarchiveObject(with: (UserDefaults.standard.object(forKey: "kCurrentGuestUserDetails") as! NSData) as Data) as! NSDictionary
                 CAGuestUser.currentUser.initWithDictionary(userDictionary: dict)
                 CAGuestUser.saveLoggedGuestdetails(dictDetails: dict)
-                    var deviceeToken = ""
-                    if let token = UserDefaults.standard.value(forKey: "kDeviceToken") {
-                        deviceeToken = token as! String
+                
+                    //var deviceeToken = ""
+//                    if let token = UserDefaults.standard.string(forKey: "kDeviceToken") {
+//                        deviceeToken = token as! String
                         self.guestUserReg(userId: CAGuestUser.currentUser.id != nil ? "\(CAGuestUser.currentUser.id!)" : "", deviceToken: deviceeToken)
-                    }
+//                    }
             }else{
-                var deviceeToken = ""
-                if let token = UserDefaults.standard.value(forKey: "kDeviceToken") {
-                    deviceeToken = token as! String
+               // var deviceeToken = ""
+//                if let token = UserDefaults.standard.string(forKey: "kDeviceToken") {
+//                    deviceeToken = token as! String
                     self.guestUserReg(userId: "", deviceToken: deviceeToken)
-                }
+//                }
             }
         }
     }
@@ -116,7 +119,9 @@ extension AppDelegate {
     func logOut(){
         UserDefaults.standard.removeObject(forKey: "kCurrentUserDetails")
         UserDefaults.standard.removeObject(forKey: "kCurrentGuestUserDetails")
-        UserDefaults.standard.removeObject(forKey: "kDeviceToken")
+        let deviceeToken = DeviceTokenSaver.standard.deviceToken
+        print("Device Token After logout == \(deviceeToken)")
+       // UserDefaults.standard.removeObject(forKey: "kDeviceToken")
         CAUser.currentUser.id = nil
         CAGuestUser.currentUser.id = nil
         SDImageCache.shared.clearMemory()
@@ -165,15 +170,18 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        UserDefaults.standard.set(deviceToken, forKey: "kDeviceToken")
-        UserDefaults.standard.synchronize()
+        DeviceTokenSaver.standard.deviceToken = deviceToken
+        UserDefaults.standard.setValue(deviceToken, forKey: "kDeviceToken")
+        //UserDefaults.standard.set(deviceToken, forKey: "kDeviceToken")
+//        UserDefaults.standard.synchronize()
         
         if (UserDefaults.standard.object(forKey: "kCurrentUserDetails") == nil) {
             self.guestUserReg(userId: "", deviceToken: deviceToken)
         }else{
             self.updateDeviceToke(deviceToken: deviceToken)
         }
-        print(deviceToken)
+        print("deviceToken: \(deviceToken)")
+        
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

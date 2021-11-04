@@ -206,10 +206,12 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                     
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "NoBookingTVCell", for: indexPath) as! NoBookingTVCell
+                    cell.labelText.text = "You don't have any Reservations yet".localized()
                     return cell
                 }
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NoBookingTVCell", for: indexPath) as! NoBookingTVCell
+                cell.labelText.text = "You don't have any Reservations yet".localized()
                 return cell
                 
             }

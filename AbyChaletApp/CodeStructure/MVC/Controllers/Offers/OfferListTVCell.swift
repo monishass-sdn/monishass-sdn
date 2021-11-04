@@ -8,12 +8,18 @@
 import UIKit
 import GradientProgress
 
+protocol OfferListTVCellDelegate{
+    func reloadOffers()
+}
+
 class OfferListTVCell: UITableViewCell {
 
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var collectionView       : UICollectionView!
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var lblTime: UILabel!
+    
+    var delegate : OfferListTVCellDelegate?
     var timeString: String?
     var countdownTimer : Timer?
     var totalTime = 60
@@ -230,13 +236,16 @@ extension OfferListTVCell{
             totalTime -= 1
         } else {
             endTimer()
+            //lblTime.text = "Offer Expired"
         }
   
     }
 
     func endTimer() {
-        
+        print("Controll came to End Timer :D ")
+        delegate?.reloadOffers()
         countdownTimer!.invalidate()
+
     }
     
     public func initializeTimer(_ date: String) {

@@ -11,13 +11,15 @@ import SVProgressHUD
 class OffersListVC: UIViewController {
 
     @IBOutlet weak var tableViewOfferList: UITableView!
-    
+  //  var controller = OfferListTVCell()
     var arryOfferList = [OfferChalet_list]()
     var dictAdmin = Admin(dictionary: NSDictionary())
     var isLoad = false
     var activityIndicator = UIActivityIndicatorView()
+    var myTimer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
+     //   controller.delegate = self
         self.setUpNavigationBar()
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -72,7 +74,14 @@ class OffersListVC: UIViewController {
     
 
 }
-extension OffersListVC : UITableViewDelegate, UITableViewDataSource {
+extension OffersListVC : UITableViewDelegate, UITableViewDataSource , OfferListTVCellDelegate {
+
+    func reloadOffers() {
+        print("Table Reload From End Timer")
+        //tableViewOfferList.reloadData()
+      //  getRewardsData()
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -89,12 +98,14 @@ extension OffersListVC : UITableViewDelegate, UITableViewDataSource {
         
         if self.arryOfferList.count > 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "OfferListTVCell", for: indexPath) as! OfferListTVCell
+            cell.delegate = self
             cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row, loaded: false)
             cell.setValuesToFields(dictAdmin: dictAdmin!, dict: self.arryOfferList[indexPath.row])
             cell.tag = indexPath.row
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NoBookingTVCell", for: indexPath) as! NoBookingTVCell
+            cell.labelText.text = "You don't have any Offers yet".localized()
             return cell
             
         }

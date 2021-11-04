@@ -30,6 +30,7 @@ class MyBookingTVCell: UITableViewCell {
 class NoBookingTVCell: UITableViewCell {
 
     @IBOutlet weak var viewBg: UIView!
+    @IBOutlet weak var labelText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.viewBg.addCornerForView(cornerRadius: 10)
@@ -113,7 +114,7 @@ class BookingRewardsTVCell: UITableViewCell {
         attributedStringRewards1.append(attributedStringRewards3)
         lblTotalRewardsMessage.attributedText = attributedStringRewards1
         
-        let attributedStringTotalRewards = NSMutableAttributedString(string:"\("Total Rewards :".localized()) \(dictReward.rewarded_amt ?? "") KD", attributes:attrsWhatKindOfJob6)
+        let attributedStringTotalRewards = NSMutableAttributedString(string:"\("Total Rewards :".localized()) \(dictReward.rewarded_amt ?? "0") KD", attributes:attrsWhatKindOfJob6)
         lblTotalRewards.attributedText = attributedStringTotalRewards
     }
     
