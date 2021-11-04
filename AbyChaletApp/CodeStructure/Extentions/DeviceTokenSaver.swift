@@ -7,3 +7,7 @@
 
 import Foundation
 
+class DeviceTokenSaver {
+    var deviceToken : String = ""
+    static var standard = DeviceTokenSaver()
+}
