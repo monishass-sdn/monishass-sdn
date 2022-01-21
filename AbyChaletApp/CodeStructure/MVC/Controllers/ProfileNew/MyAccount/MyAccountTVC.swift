@@ -211,7 +211,8 @@ class MyAccountTVC: UITableViewController {
         if txtFldFrstName.hasText && txtFldLastName.hasText && txtFldEmailAddress.hasText && tctFldPhoneNumber.hasText && tctFldCountryCode.hasText  {
             if isValidEmail(txtFldEmailAddress.text!) == true{
                 if limitValidation(string: tctFldPhoneNumber.text!, minLength: 6, maxLength: 14){
-                    self.updateProfile(firstName: txtFldFrstName.text!, lastName: txtFldLastName.text!, email: txtFldEmailAddress.text!, countryCode: tctFldCountryCode.text!, phone: tctFldPhoneNumber.text!, gender: self.gender)
+                    print("Country code on the device = \(tctFldCountryCode.text ?? "No country code fetched")")
+                    self.updateProfile(firstName: txtFldFrstName.text!, lastName: txtFldLastName.text!, email: txtFldEmailAddress.text!, countryCode: tctFldCountryCode.text ?? "No Country Fetced", phone: tctFldPhoneNumber.text!, gender: self.gender)
                 }else{
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Please Enter Minimum 6 and Maximum 14 Characters In Mobile Number".localized())
                 }
@@ -307,6 +308,7 @@ extension MyAccountTVC {
         let type = CAUser.currentUser.userstatus == "user"
         ServiceManager.sharedInstance.uploadSingleData("api/updateprofile", parameters: ["id":CAUser.currentUser.id!,"first_name":firstName,"last_name":lastName,"email":email,"phone":phone,"gender":gender,"country_code":countryCode,"type":type,"country":country], imgdata: imageData, filename: imgKey, withHud: true) { (success, response, error) in
             if success {
+                print("Updated Response == \(response)")
                 if response!["status"] as! Bool == true {
                     
                     let userDict = ((response as! NSDictionary)["user_details"] as! NSDictionary)

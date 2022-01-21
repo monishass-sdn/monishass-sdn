@@ -30,9 +30,10 @@ var kNotificationCount = 0
 struct Images {
     
     static let kIconBack            = UIImage.init(named:"backIcon")?.withRenderingMode(.alwaysOriginal)
+    static let kIconAdd            = UIImage.init(named:"addicon")?.withRenderingMode(.alwaysOriginal)
     static let kIconBackGreen            = UIImage.init(named:"iconprev")?.withRenderingMode(.alwaysOriginal)
-    static let kIconNotification            = UIImage.init(named:"icn_Message")?.withRenderingMode(.alwaysOriginal)
-    static let kIconNoMessage            = UIImage.init(named:"NoMessage")?.withRenderingMode(.alwaysOriginal)
+    static let kIconNotification            = UIImage.init(named:"icon__Msg")?.withRenderingMode(.alwaysOriginal)
+    static let kIconNoMessage            = UIImage.init(named:"icon__NoMsg")?.withRenderingMode(.alwaysOriginal)
     static let KReservationicon = UIImage.init(named: "icn_Bookings")?.withRenderingMode(.alwaysOriginal)
     static let KHideReservationicon = UIImage.init(named: "")?.withRenderingMode(.alwaysOriginal)
     static let KNoNotification = UIImage.init(named: "notification-normal")?.withRenderingMode(.alwaysOriginal)

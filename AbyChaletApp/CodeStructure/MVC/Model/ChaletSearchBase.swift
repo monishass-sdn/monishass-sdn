@@ -79,7 +79,8 @@ public class User_details {
     public var created_at : String?
     public var updated_at : String?
     public var rewarded_amt : Int?
-   // public var reservation_available : Int?
+    public var reservation_available : Int?
+    public var reservation_status : Bool?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [User_details]
     {
@@ -125,7 +126,8 @@ public class User_details {
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
         rewarded_amt = dictionary["rewarded_amt"] as? Int
-      //  reservation_available = dictionary["reservation_available"] as? Int
+        reservation_available = dictionary["reservation_available"] as? Int
+        reservation_status = dictionary["reservation_status"] as? Bool
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -162,7 +164,8 @@ public class User_details {
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
         dictionary.setValue(self.rewarded_amt, forKey: "rewarded_amt")
-      //  dictionary.setValue(self.reservation_available, forKey: "reservation_available")
+        dictionary.setValue(self.reservation_available, forKey: "reservation_available")
+        dictionary.setValue(self.reservation_status, forKey: "reservation_status")
         return dictionary
     }
 

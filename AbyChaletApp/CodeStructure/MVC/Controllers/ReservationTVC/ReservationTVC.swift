@@ -109,8 +109,8 @@ class ReservationTVC: UITableViewController {
     let productList = NSMutableArray()
     var selectedPackage = ""
     var isFromOffer = false
-    var dictOfferUserDetails : OfferUser_details!
-    var dictOfferChaletList : OfferChalet_list!
+    var dictOfferUserDetails : Offer_Chalet_list!
+    var dictOfferChaletList : Offer_Chalet_list!
     var dictAdmin : Admin!
     var arrayAgreements = [Agreement]()
     var arrayAdminDetails = [Admin_details]()
@@ -493,8 +493,8 @@ class ReservationTVC: UITableViewController {
         
         let dateFormater1 = DateFormatter()
         dateFormater1.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let offerExpiry = dateFormater1.date(from: dictOfferChaletList.offer_checkin!)
-        let offerCreatedDate = dateFormater1.date(from: dictOfferChaletList.offer_created_at!)
+        let offerExpiry = dateFormater1.date(from: dictOfferUserDetails.offer_checkin!)
+        let offerCreatedDate = dateFormater1.date(from: dictOfferUserDetails.created_at!)
         let expiry = Calendar.current.date( byAdding: .hour,value: -Int(dictAdmin.offer_expiry!)!,to: offerExpiry!)
         let expiryStr = dateFormater1.string(from: expiry!)
        // let time = dateFormater.date(from: "05-28-2021 12:05:22")
@@ -502,13 +502,13 @@ class ReservationTVC: UITableViewController {
         DispatchQueue.main.async {
             self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
         }
-        self.lblCollectionIndex.text = "\(lblIndexValue)/\(String(describing: dictOfferUserDetails.chalet_upload!.count))"
-        if dictOfferUserDetails.rent! < dictOfferUserDetails.rewarded_amt! {
-            self.lblRewards.text = "KD -\(dictOfferUserDetails.rent!)"
-            self.rewards = dictOfferUserDetails.rent!
+        self.lblCollectionIndex.text = "\(lblIndexValue)/\(String(describing: dictOfferChaletList.chalet_upload!.count))"
+        if dictOfferChaletList.rent! < dictOfferChaletList.rewarded_amt! {
+            self.lblRewards.text = "KD -\(dictOfferChaletList.rent!)"
+            self.rewards = dictOfferChaletList.rent!
         }else{
-            self.lblRewards.text = "KD -\(dictOfferUserDetails.rewarded_amt!)"
-            self.rewards = dictOfferUserDetails.rewarded_amt!
+            self.lblRewards.text = "KD -\(dictOfferChaletList.rewarded_amt!)"
+            self.rewards = dictOfferChaletList.rewarded_amt!
         }
     }
     

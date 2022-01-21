@@ -325,6 +325,7 @@ class ChalletTextTVCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblMesage: UILabel!
     @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var titleView: UIView!
     
     func setValuesToFields(dict:Message_Notifcation) {
         
@@ -338,6 +339,17 @@ class ChalletTextTVCell: UITableViewCell {
         self.lblTime.text = dict.duration!
         self.lblTitle.text = dict.notification_title!
         self.lblMesage.text = dict.notification_message!
+        if dict.read_status == true{
+            titleView.backgroundColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+            lblTitle.textColor = #colorLiteral(red: 0.4705882353, green: 0.4705882353, blue: 0.4705882353, alpha: 1)
+            lblTime.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+            lblMesage.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+        }else{
+            titleView.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
+            lblTitle.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            lblTime.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+            lblMesage.textColor = #colorLiteral(red: 0.4470588235, green: 0.4862745098, blue: 0.5568627451, alpha: 1)
+        }
     }
     
 }

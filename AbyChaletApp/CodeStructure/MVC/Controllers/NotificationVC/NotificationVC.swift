@@ -21,7 +21,7 @@ class NotificationVC: UIViewController {
         self.setUpNavigationBar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
-        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.KNoNotification : Images.KNewNotification, style: .plain, target: self, action: nil)
+        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: nil)
         let reservationButton = UIBarButtonItem(image: showResrvationButton == true ? Images.KReservationicon?.withTintColor(UIColor.white) : Images.KHideReservationicon, style: .plain, target: self, action: nil)
         self.navigationItem.rightBarButtonItems = [notificationButton,reservationButton]
         
@@ -33,11 +33,28 @@ class NotificationVC: UIViewController {
         appDelegate.logOut()
     }
     override func viewWillAppear(_ animated: Bool) {
-        if self.isFromProfile == true{
-            self.didSetInboxVC()
+        if CAUser.currentUser.id != nil {
+            if self.isFromProfile == true{
+                //self.didSetInboxVC()
+                self.didSetMessageVC()
+            }else{
+                self.didSetMessageVC()
+            }
         }else{
-            self.didSetMessageVC()
+            
+            let alert = UIAlertController(title: "Message".localized(), message: "Please Login to Continue".localized(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                let loginSignUpViewController = UIStoryboard(name: "Profile", bundle: Bundle.main).instantiateViewController(identifier: "LoginSignUpViewController") as! LoginSignUpViewController
+                loginSignUpViewController.isFromNoLogin = true
+                self.navigationController?.pushViewController(loginSignUpViewController, animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
         }
+
         appDelegate.checkBlockStatus()
         
     }

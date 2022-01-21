@@ -16,13 +16,17 @@ class VerifiedResetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if verificationFrom == VerificationSuccessFrom.forgotPassword {
-            setUpForNavigationController(navigationBarTitle: "Completed".localized())
-            lblAlertTitle.text = "Reset successfully".localized()
+            //setUpForNavigationController(navigationBarTitle: "Completed".localized())
+            setUpForNavigationController(navigationBarTitle: "Reset successfully")
+            //lblAlertTitle.text = "Reset successfully".localized()
             lblDescription.text = "Your password has been changed".localized()
         }else {
             setUpForNavigationController(navigationBarTitle: "Verification".localized())
-            lblAlertTitle.text = "Verified successfully".localized()
-            lblDescription.text = "Your Account has been Verified".localized()
+            self.navigationController?.title = "Confirmed successfully"
+            //lblAlertTitle.text = "Verified successfully".localized()
+            //lblAlertTitle.text = "Confirmed successfully"
+            //lblDescription.text = "Your Account has been Verified".localized()
+            lblDescription.text = "Registration completed successfully"
         }
         btnLogin.setTitle("Login".localized(), for: .normal)
     }

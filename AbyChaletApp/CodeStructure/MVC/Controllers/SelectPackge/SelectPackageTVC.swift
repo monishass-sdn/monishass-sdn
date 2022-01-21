@@ -388,12 +388,23 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
         }else {
             if self.arrayUserDetails.count > 0 {
                 if self.topSelection != "" {
+                   // if self.arrayChalletList[self.holidaySelectedIndex].user_details?.first?.reservation_status == true{
+                        if self.arrayUserDetails[indexPath.row].reservation_status == true{
+                        //Reservation Available
                     let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
                     reservationVC.arrayUserDetails = self.arrayUserDetails
                     reservationVC.selectedIndex = indexPath.item
                     reservationVC.selectedPackage = self.topSelection
                     reservationVC.isFromOffer = false
                     self.navigationController?.pushViewController(reservationVC, animated: true)
+                    }else{
+                        //Reservation Not Available
+                        let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
+                        let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }

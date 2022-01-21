@@ -7,15 +7,16 @@
 
 import UIKit
 import SDWebImage
+import SVProgressHUD
 
 class MyProfileTableVC: UITableViewController {
-   
+    
     //MARK: cellProfile
     @IBOutlet weak var imgViewForProfile: UIImageView!
     @IBOutlet weak var lblForUserName: UILabel!
     @IBOutlet weak var lblForMobileNum: UILabel!
     @IBOutlet weak var lblForEmailId: UILabel!
-     
+    
     
     @IBOutlet weak var btnForMyAccount: UIButton!
     @IBOutlet weak var lblForMyAccount: UILabel!
@@ -43,12 +44,21 @@ class MyProfileTableVC: UITableViewController {
     @IBOutlet weak var btnLegalPrivacy: UIButton!
     @IBOutlet weak var viewForTopUserDetails: UIView!
     @IBOutlet weak var imgViewProfilePic: UIImageView!
-
+    
     @IBOutlet weak var viewForBottomAddYourChalet: UIView!
+    @IBOutlet weak var viewForBottomFAQ: UIView!
+    @IBOutlet weak var notificationCount: UILabel!
+    @IBOutlet weak var viewNotificationcount: UIView!
+    @IBOutlet weak var btnOwnerTap: UIButton!
     
     var arrayAdminDetails = [Admin_details]()
+    var notiCount : Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        getNotificationcount()
+        
+        
+        
         if kCurrentLanguageCode == "ar"{
             btnLogOut.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 15)!
             btnLegalPrivacy.titleLabel?.font = UIFont(name: kFontAlmaraiRegular, size: 15)!
@@ -86,17 +96,24 @@ class MyProfileTableVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setValuesToFields()
+        getNotificationcount()
         appDelegate.checkBlockStatus()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewForTopUserDetails.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
-        viewForBottomAddYourChalet.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        if CAUser.currentUser.userstatus != "owner"{
+            viewForBottomFAQ.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        }else{
+            viewForBottomAddYourChalet.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        }
+        
     }
     
     @IBAction func btnForMyAccountDidTap(_ sender: Any) {
         let myAccountTVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "MyAccountTVC") as! MyAccountTVC
+        myAccountTVC.country = CAUser.currentUser.country ?? ""
         navigationController?.pushViewController(myAccountTVC, animated: true)
         
     }
@@ -107,9 +124,9 @@ class MyProfileTableVC: UITableViewController {
     }
     
     @IBAction func btnNotificationDidTap(_ sender: Any) {
-        let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
-        changePasswordTVC.isFromProfile = true
-        navigationController?.pushViewController(changePasswordTVC, animated: true)
+        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+        nextVC.isFromProfile = true
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnInviteFriendDidTap(_ sender: Any) {
@@ -128,13 +145,13 @@ class MyProfileTableVC: UITableViewController {
     @IBAction func btnShareDidTap(_ sender: Any) {
         
         if arrayAdminDetails.count > 0{
-           /* if let name = URL(string: (arrayAdminDetails.first?.invite_friend!)!), !name.absoluteString.isEmpty {
-                let objectsToShare = [name]
-                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                self.present(activityVC, animated: true, completion: nil)
-            } else {
-                // show alert for not available
-            }*/
+            /* if let name = URL(string: (arrayAdminDetails.first?.invite_friend!)!), !name.absoluteString.isEmpty {
+             let objectsToShare = [name]
+             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+             self.present(activityVC, animated: true, completion: nil)
+             } else {
+             // show alert for not available
+             }*/
             let activityController = UIActivityViewController(activityItems: [(arrayAdminDetails.first?.invite_friend!)!], applicationActivities: nil)
             present(activityController, animated: true, completion: nil)
         }
@@ -142,10 +159,15 @@ class MyProfileTableVC: UITableViewController {
     
     @IBAction func btnAddChaletDidTap(_ sender: Any) {
         /*guard let url = URL(string: "https://web.sicsglobal.com/aby_chalet/adminmail") else { return }
-        UIApplication.shared.open(url)*/
+         UIApplication.shared.open(url)*/
         
         let addNewChaletVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddNewChaletVC") as! AddNewChaletVC
         navigationController?.pushViewController(addNewChaletVC, animated: true)
+    }
+    
+    @IBAction func btnFAQsDidTap(_ sender: Any) {
+        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "FAQsViewController") as! FAQsViewController
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnInstagramDidTap(_ sender: Any) {
@@ -162,6 +184,16 @@ class MyProfileTableVC: UITableViewController {
                 application.open(webURL)
             }
         }
+    }
+    
+    @IBAction func Owner_Tapped(_ sender: Any) {
+        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "OwnerDetailsTableVC") as! OwnerDetailsTableVC
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func MyChalet_Tapped(_ sender: Any) {
+        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnLogOutDidTap(_ sender: Any) {
@@ -192,6 +224,14 @@ class MyProfileTableVC: UITableViewController {
         if indexPath.row == 1 {
             if CAUser.currentUser.userstatus == "owner" {
                 return super.tableView(tableView, heightForRowAt: indexPath)
+            }else{
+                return 0
+            }
+        }
+        
+        if indexPath.row == 9 {
+            if CAUser.currentUser.userstatus != "owner" {
+                return super.tableView(tableView,heightForRowAt: indexPath)
             }else{
                 return 0
             }
@@ -248,4 +288,23 @@ extension MyProfileTableVC {
     }
     
     
+    func getNotificationcount(){
+        
+        if CAUser.currentUser.id != nil {
+            SVProgressHUD.show()
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    self.notiCount = messageCount
+                    if self.notiCount == 0 {
+                        self.viewNotificationcount.isHidden = true
+                    }else{
+                        self.notificationCount.text = String(self.notiCount)
+                        self.viewNotificationcount.isHidden = false
+                    }
+                    SVProgressHUD.dismiss()
+                }
+            }
+        }
+    }
 }

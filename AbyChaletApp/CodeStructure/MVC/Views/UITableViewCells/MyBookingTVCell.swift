@@ -53,6 +53,7 @@ class BookingRewardsTVCell: UITableViewCell {
     @IBOutlet weak var lblTotalRewardsMessage: UILabel!
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var lblEarnRewards: UILabel!
+    @IBOutlet weak var btnQuestionmark: UIButton!
     var progress: KDCircularProgress!
 
     

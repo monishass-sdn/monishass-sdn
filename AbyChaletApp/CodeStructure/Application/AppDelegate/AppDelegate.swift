@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func extendSplashScreenPresentation(){
-        // Get a refernce to LaunchScreen.storyboard
+        // Get a reference to LaunchScreen.storyboard
         let launchStoryBoard = UIStoryboard.init(name: "LaunchScreen", bundle: nil)
         // Get the splash screen controller
         let splashController = launchStoryBoard.instantiateViewController(withIdentifier: "splashController")
@@ -80,7 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func dismissSplashController() {
-        settingFirstViewController()
+        //settingFirstViewController()
+        redirectingToHomeScreen()
     }
 }
 extension AppDelegate {
@@ -195,6 +196,29 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             let systemSoundID: SystemSoundID = 1007
            // AudioServicesPlaySystemSound(systemSoundID)
         }
+        if let infoDict = userInfo as? [String:Any]{
+                  if let aps = infoDict["aps"] as? [String:Any]{
+                      if let alert = aps["alert"] as? [String:Any]{
+                          if let type = alert["type"] as? String{
+                              print("type:\(type)")
+                              notificationClick(type:type)
+                          }
+                          
+                      }
+                  }
+      }
+        
+        /*
+        [AnyHashable("aps"): {
+           alert =     {
+               body = Hello;
+               title = "Auto Notifications";
+               type = autonotify;
+           };
+           badge = 1;
+           sound = default;
+       }]*/
+        
         
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
@@ -210,6 +234,98 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         completionHandler([.alert, .badge, .sound])
         
+    }
+    
+    func notificationClick(type:String){
+       
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+        if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+            presentVC.present(notificationScreen, animated: true, completion: nil)
+            
+        }else{
+            //settingFirstViewController()
+            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(delayedAction), userInfo: nil, repeats: false)
+            
+        }
+        
+        if type == "reward"{
+            
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+          
+        }else if type == "cancelled"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "notify"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "autonotify"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "reminder"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "enjoy"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "checkinrem"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }else if type == "after_checkout"{
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+            if let presentVC = self.window?.rootViewController as? CustomTabbarController{
+                presentVC.present(notificationScreen, animated: true, completion: nil)
+                
+            }
+
+        }
+
+        
+    }
+    @objc func delayedAction(){
+       
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let notificationScreen = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as! NotificationVC
+        if let presentVC = appDelegate.window?.rootViewController as? CustomTabbarController{
+            presentVC.present(notificationScreen, animated: true, completion: nil)
+            
+        }
     }
     
 }

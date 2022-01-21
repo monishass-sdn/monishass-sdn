@@ -52,6 +52,7 @@ public class Message_Notifcation {
     public var updated_at : String?
     public var reservation_details : [Reservation_details]?
     public var duration : String?
+    public var read_status : Bool?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Message_Notifcation]
     {
@@ -77,6 +78,7 @@ public class Message_Notifcation {
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
         duration = dictionary["duration"] as? String
+        read_status = dictionary["read_status"] as? Bool
         if (dictionary["reservation_details"] != nil) { reservation_details = Reservation_details.modelsFromDictionaryArray(array: dictionary["reservation_details"] as! NSArray) }
     }
 
@@ -96,6 +98,7 @@ public class Message_Notifcation {
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
         dictionary.setValue(self.duration, forKey: "duration")
+        dictionary.setValue(self.read_status, forKey: "read_status")
         return dictionary
     }
 

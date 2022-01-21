@@ -493,7 +493,7 @@ extension BookingDetailsTVC : MKMapViewDelegate {
         if CAUser.currentUser.id != nil {
             ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
                 if success {
-                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    guard let messageCount = ((response as! NSDictionary)["message_count"] as? Int) else {return}
                     kNotificationCount = messageCount
                     let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
                     self.navigationItem.rightBarButtonItems = [notificationButton]

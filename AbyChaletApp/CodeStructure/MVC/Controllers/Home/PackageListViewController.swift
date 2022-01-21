@@ -237,12 +237,15 @@ extension PackageListViewController{
                 if response!["status"] as! Bool == true {
                     let jsonBase = OwnerListBase(dictionary: response as! NSDictionary)
                     self.arrayReservationList = (jsonBase?.reservation_list)!
-                    if self.arrayReservationList.count == 0 {
-                        print("No Accept/Reject Data")
+      
+                    if arrayReservationList.count == 0{
+                        print("Reservation Array Count is nil")
+                        self.viewAcceptOrReject.removeFromSuperview()
+                        showPopUpStatus = true
                     }else{
                         self.showPopUp()
-                        self.popUpTableView.reloadData()
                     }
+                        self.popUpTableView.reloadData()
                 }else{
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: ((response! as! NSDictionary)["message"] as! String))
                 }
@@ -277,6 +280,7 @@ extension PackageListViewController{
                         if CAUser.currentUser.userstatus == "owner" {
                             self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id!)")
                         }
+                        self.popUpTableView.reloadData()
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!".localized())

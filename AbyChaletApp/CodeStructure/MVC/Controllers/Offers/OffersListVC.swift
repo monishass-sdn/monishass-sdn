@@ -11,8 +11,10 @@ import SVProgressHUD
 class OffersListVC: UIViewController {
 
     @IBOutlet weak var tableViewOfferList: UITableView!
+    @IBOutlet weak var collectionViewOfferlist: UICollectionView!
+    @IBOutlet weak var lblMessageOnScreen: UILabel!
   //  var controller = OfferListTVCell()
-    var arryOfferList = [OfferChalet_list]()
+    var arryOfferList = [Offer_Chalet_list]()
     var dictAdmin = Admin(dictionary: NSDictionary())
     var isLoad = false
     var activityIndicator = UIActivityIndicatorView()
@@ -45,6 +47,11 @@ class OffersListVC: UIViewController {
         appDelegate.logOut()
     }
     
+    @objc func addOfferTapped(){
+        let addOfferVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "addNewOfferVC") as! addNewOfferVC
+        navigationController?.pushViewController(addOfferVC, animated: true)
+    }
+    
 
     //MARK:- SetUp NavigationBar
     func setUpNavigationBar() {
@@ -59,6 +66,13 @@ class OffersListVC: UIViewController {
        // self.navigationItem.rightBarButtonItems = [notificationButton]
         self.navigationItem.title = "Offers".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        if CAUser.currentUser.userstatus == "owner"{
+            let addOfferBtn = UIBarButtonItem(image: Images.kIconAdd, style: .plain, target: self, action: #selector(addOfferTapped))
+            self.navigationItem.leftBarButtonItems = [addOfferBtn]
+        }else{
+            
+        }
 
         
     }
@@ -74,7 +88,7 @@ class OffersListVC: UIViewController {
     
 
 }
-extension OffersListVC : UITableViewDelegate, UITableViewDataSource , OfferListTVCellDelegate {
+extension OffersListVC : OfferListTVCellDelegate {
 
     func reloadOffers() {
         print("Table Reload From End Timer")
@@ -83,7 +97,7 @@ extension OffersListVC : UITableViewDelegate, UITableViewDataSource , OfferListT
     }
     
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+ /*   func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,16 +133,16 @@ extension OffersListVC : UITableViewDelegate, UITableViewDataSource , OfferListT
             return 174
         }
     }
-    
+  */
 }
 extension OffersListVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arryOfferList[collectionView.tag].offerUser_details!.count
+        return arryOfferList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RewardsChaletListCollectionViewCell", for: indexPath) as! RewardsChaletListCollectionViewCell
-        cell.setValuesToFields(dict: arryOfferList[collectionView.tag].offerUser_details![indexPath.row])
+        cell.setValuesToFields(dict: arryOfferList[indexPath.row])
         if kCurrentLanguageCode == "ar"{
             cell.lblCheckIn.font = UIFont(name: kFontAlmaraiBold, size: 16)
             cell.lblCheckOut.font = UIFont(name: kFontAlmaraiBold, size: 16)
@@ -148,17 +162,30 @@ extension OffersListVC : UICollectionViewDelegate, UICollectionViewDataSource, U
         print("Section\(collectionView.tag)")
         print("Cell\(indexPath.row)")
         
-        
+        if arryOfferList[indexPath.row].reservation_status == true{
+        //Reservation Available
         let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
-        reservationVC.dictOfferUserDetails = arryOfferList[collectionView.tag].offerUser_details![indexPath.row]
+            reservationVC.dictOfferUserDetails = self.arryOfferList[indexPath.row]
         reservationVC.isFromOffer = true
         reservationVC.dictAdmin = self.dictAdmin
-        reservationVC.dictOfferChaletList = self.arryOfferList[collectionView.tag]
+        reservationVC.dictOfferChaletList = self.arryOfferList[indexPath.row]
         
         //reservationVC.selectedIndex = indexPath.item
-        reservationVC.selectedPackage = arryOfferList[collectionView.tag].offerUser_details![indexPath.row].package!
+            reservationVC.selectedPackage = self.arryOfferList[indexPath.row].package!
         self.navigationController?.pushViewController(reservationVC, animated: true)
                 
+        }else{
+            //Reservation Not Available
+            let reservation_Available = arryOfferList[indexPath.row].reservation_available
+            let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservation_Available ?? 0) days from Today", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 20 , height: 210)
     }
 }
 extension OffersListVC {
@@ -175,10 +202,19 @@ extension OffersListVC {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = OfferListBase(dictionary: response as! NSDictionary)
                     self.dictAdmin = responseBase?.admin
-                    self.arryOfferList = (responseBase?.offerChalet_list)!
+                    self.arryOfferList = (responseBase?.chalet_list)!
+                    if self.arryOfferList.count <= 0{
+                        self.tableViewOfferList.isHidden = true
+                        self.lblMessageOnScreen.isHidden = false
+                        if CAUser.currentUser.userstatus == "owner"{
+                            self.lblMessageOnScreen.text = "There are no offer's added yet."
+                        }else{
+                            self.lblMessageOnScreen.text = "There are no offer's available."
+                        }
+                    }
                     DispatchQueue.main.async {
                         self.isLoad = true
-                        self.tableViewOfferList.reloadData()
+                        self.collectionViewOfferlist.reloadData()
                         SVProgressHUD.dismiss()
                         self.view.isUserInteractionEnabled = true
                     }

@@ -231,7 +231,7 @@ extension LoginSignUpViewController {
         btnRememberSelected = !btnRememberSelected
         if btnRememberSelected {
             sender.isSelected = true
-            logginOffTimer()
+            //logginOffTimer()
         }else {
             sender.isSelected = false
         }

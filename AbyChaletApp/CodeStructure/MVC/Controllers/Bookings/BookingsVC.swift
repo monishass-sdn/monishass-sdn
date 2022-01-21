@@ -15,7 +15,10 @@ class BookingsVC: UIViewController {
 
     
     @IBOutlet weak var tableViewBooking: UITableView!
-
+    @IBOutlet weak var lblMessageOnScreen: UILabel!
+    @IBOutlet weak var poupView: UIView!
+    
+    var blurView : UIView!
     var noRsrvtnmessage: String = ""
     var status = "Active"
     let status1 = "NotActive"
@@ -42,6 +45,9 @@ class BookingsVC: UIViewController {
         if CAUser.currentUser.id != nil{
             self.getMyBookigData()
         }else{
+                self.lblMessageOnScreen.isHidden = false
+                self.lblMessageOnScreen.text = "Please login to see your Reservations."
+                
             self.isLoad = true
         }
         initiatePayment()
@@ -145,6 +151,50 @@ class BookingsVC: UIViewController {
         }
     }
     
+    @objc func BtnTapped(sender: UIButton){
+        showPopup()
+    }
+    
+    @IBAction func closepopup(sender: UIButton){
+        dismissPopUpView()
+    }
+    
+    //MARK:- Show Popup
+    func showPopup()  {
+        
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        
+        blurView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height:  kScreenHeight))
+        blurView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        keyWindow!.addSubview(blurView)
+        self.poupView.frame = CGRect(x: 40, y: 110, width: 340, height: 240)
+        self.blurView.addSubview(self.poupView)
+        self.blurView.bringSubviewToFront(self.poupView)
+        self.poupView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        UIView.animate(withDuration: 0.33, animations: {
+            self.poupView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.poupView.addCornerForView(cornerRadius: 5.0)
+            self.poupView.addShadowForView()
+        })
+    }
+    
+    //MARK:- Dismiss Popup
+    func dismissPopUpView(){
+        UIView.animate(withDuration: 0.33, animations: {
+            self.blurView.alpha = 0
+        }, completion: { (completed) in
+        })
+        UIView.animate(withDuration: 0.33, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 10, options: UIView.AnimationOptions(rawValue: 0), animations: {
+        }, completion: { (completed) in
+            self.blurView.removeFromSuperview()
+            self.blurView = nil
+        })
+    }
+    
     
 }
 extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
@@ -154,10 +204,15 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0  {
-            return self.arrayRewards.count
+            if isLoad == true{
+                return 1
+            }else{
+                return self.arrayRewards.count
+            }
+            
         }else{
             if isLoad == true {
-                return self.arrayMyBooking.count != 0 ? self.arrayMyBooking.count : 1
+                return self.arrayMyBooking.count != 0 ? self.arrayMyBooking.count : 0
             }else{
                 return 0
             }
@@ -165,6 +220,11 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            if isLoad{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
+                cell.btnQuestionmark.addTarget(self, action: #selector(BtnTapped(sender:)), for: .touchUpInside)
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
             cell.setValuesToFields(dictReward: arrayRewards[indexPath.row])
             cell.setupProgressBar(dictReward: arrayRewards[indexPath.row])
@@ -233,7 +293,7 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 190
+            return 230
         }else {
             
             if arrayMyBooking.count > 0 {
@@ -282,6 +342,10 @@ extension BookingsVC {
                         self.isLoad = true
                         if self.arrayRewards.count > 0{
                            // self.getRewardDetails(rewardAmount: (self.arrayRewards.first?.reward_earn!)!, reservationAmount: (self.arrayRewards.first?.total!)!)
+                        }
+                        if self.arrayMyBooking.count <= 0{
+                            self.lblMessageOnScreen.isHidden = false
+                            self.lblMessageOnScreen.text = "You don't have any reservations yet."
                         }
                         self.tableViewBooking.reloadData()
                         self.view.isUserInteractionEnabled = true
