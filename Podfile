@@ -18,6 +18,7 @@ target 'AbyChaletApp' do
    pod 'KDCircularProgress'
    pod 'GradientProgress'
    pod 'GoogleMaps'
+   pod 'KeychainAccess'
 
 
 end

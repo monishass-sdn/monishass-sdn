@@ -223,6 +223,41 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
             if isLoad{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
                 cell.btnQuestionmark.addTarget(self, action: #selector(BtnTapped(sender:)), for: .touchUpInside)
+                //cell.setValuesToFields(dictReward: self.arrayRewards[indexPath.row])
+                
+                let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#1E4355")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#379F00")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#379BF2")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob6 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#326277")] as [NSAttributedString.Key : Any]
+                
+                
+                let attributedStringEarn1 = NSMutableAttributedString(string:"Earn ".localized(), attributes:attrsWhatKindOfJob1)
+                let attributedStringEarn2 = NSMutableAttributedString(string:"100", attributes:attrsWhatKindOfJob2)
+                let attributedStringEarn3 = NSMutableAttributedString(string:"KD ", attributes:attrsWhatKindOfJob1)
+                attributedStringEarn1.append(attributedStringEarn2)
+                attributedStringEarn1.append(attributedStringEarn3)
+                cell.lblEarn.attributedText = attributedStringEarn1
+                
+                let attributedStringSpent1 = NSMutableAttributedString(string:"On every ".localized(), attributes:attrsWhatKindOfJob1)
+                let attributedStringSpent2 = NSMutableAttributedString(string:"2000", attributes:attrsWhatKindOfJob3)
+                let attributedStringSpent3 = NSMutableAttributedString(string:"KD", attributes:attrsWhatKindOfJob1)
+                let attributedStringSpent4 = NSMutableAttributedString(string:"spent ".localized(), attributes:attrsWhatKindOfJob1)
+                attributedStringSpent1.append(attributedStringSpent2)
+                attributedStringSpent1.append(attributedStringSpent3)
+                attributedStringSpent1.append(attributedStringSpent4)
+                cell.lblSpent.attributedText = attributedStringSpent1
+
+                let attributedStringRewards1 = NSMutableAttributedString(string:"Must be used Total ".localized(), attributes:attrsWhatKindOfJob4)
+                let attributedStringRewards2 = NSMutableAttributedString(string:"Rewards before ".localized(), attributes:attrsWhatKindOfJob5)
+                let attributedStringRewards3 = NSMutableAttributedString(string:"the end of the year".localized(), attributes:attrsWhatKindOfJob4)
+                attributedStringRewards1.append(attributedStringRewards2)
+                attributedStringRewards1.append(attributedStringRewards3)
+                cell.lblTotalRewardsMessage.attributedText = attributedStringRewards1
+                
+                let attributedStringTotalRewards = NSMutableAttributedString(string:"\("Total Rewards :".localized()) \("0") KD", attributes:attrsWhatKindOfJob6)
+                cell.lblTotalRewards.attributedText = attributedStringTotalRewards
                 return cell
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell

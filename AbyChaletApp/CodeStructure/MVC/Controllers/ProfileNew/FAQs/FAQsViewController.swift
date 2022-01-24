@@ -116,7 +116,7 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.btnUPDOWN.setImage(#imageLiteral(resourceName: "arrow-Down"), for: .normal)
         }
         cell.lblFaqQuestion.text = faqData[indexPath.row].question
-        cell.textViewFaq.text = faqData[indexPath.row].answer
+      //  cell.textViewFaq.text = faqData[indexPath.row].answer
 
         return cell
     }
@@ -153,7 +153,7 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FAQsViewController{
-    //MARK:- GetMyBookingData
+    //MARK:- GetFAQData
     func getFAQData() {
        //["userid":CAUser.currentUser.id!]
         SVProgressHUD.show()

@@ -10,6 +10,7 @@ import UIKit
 class FAQsTableViewCell: UITableViewCell {
     @IBOutlet weak var viewBg: UIView!
     @IBOutlet weak var lblFaqQuestion: UILabel!
+    @IBOutlet weak var lblAnswer: UILabel!
     @IBOutlet weak var textViewFaq: UITextView!
     @IBOutlet weak var topConstrainTextview: NSLayoutConstraint!
     @IBOutlet weak var bottomConstrainDownButton: NSLayoutConstraint!
@@ -17,8 +18,7 @@ class FAQsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textViewFaq.textAlignment = NSTextAlignment.justified
-        viewBg.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15.0)
+       // viewBg.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,7 +31,7 @@ class FAQsTableViewCell: UITableViewCell {
     func setValuesToFields(index:Int,dictFaq:Faq_details,isClick:Bool,selectedIndex:Int) {
         self.btnUPDOWN.tag = index
         self.lblFaqQuestion.text = dictFaq.question
-        self.textViewFaq.text = dictFaq.answer
+//        self.textViewFaq.text = dictFaq.answer
         
         
         if selectedIndex == index{

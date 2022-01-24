@@ -166,7 +166,10 @@ class MyProfileTableVC: UITableViewController {
     }
     
     @IBAction func btnFAQsDidTap(_ sender: Any) {
-        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "FAQsViewController") as! FAQsViewController
+      /*  let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "FAQsViewController") as! FAQsViewController
+        navigationController?.pushViewController(nextVC, animated: true)
+      */
+        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "FAQTableViewController") as! FAQTableViewController
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

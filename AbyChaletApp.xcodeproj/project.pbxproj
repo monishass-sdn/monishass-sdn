@@ -80,6 +80,8 @@
 		4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EC1277A06400058C44C /* myChaletTVCell.swift */; };
 		4D5E3EC2277C1780006C57C7 /* FAQsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */; };
 		4D8910122796E004009AE8BE /* FAQModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8910112796E004009AE8BE /* FAQModel.swift */; };
+		4D8AD1BC279EC72F005DDBFE /* FAQTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AD1BB279EC72F005DDBFE /* FAQTableViewController.swift */; };
+		4D8AD1BF279EC90A005DDBFE /* FAQModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AD1BE279EC90A005DDBFE /* FAQModelData.swift */; };
 		9B4D61982721651B00DD7BC7 /* popUpViewTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D61972721651B00DD7BC7 /* popUpViewTVCell.swift */; };
 		A10816A02668945C00054DB2 /* OwnerListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108169F2668945C00054DB2 /* OwnerListBase.swift */; };
 		A10D337C26957EAC00B2AC07 /* MessageListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10D337B26957EAC00B2AC07 /* MessageListBase.swift */; };
@@ -209,6 +211,8 @@
 		4D534EC1277A06400058C44C /* myChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletTVCell.swift; sourceTree = "<group>"; };
 		4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsViewController.swift; sourceTree = "<group>"; };
 		4D8910112796E004009AE8BE /* FAQModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModel.swift; sourceTree = "<group>"; };
+		4D8AD1BB279EC72F005DDBFE /* FAQTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQTableViewController.swift; sourceTree = "<group>"; };
+		4D8AD1BE279EC90A005DDBFE /* FAQModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModelData.swift; sourceTree = "<group>"; };
 		8C8CAD5721864641A82BE1B0 /* Pods_AbyChaletApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AbyChaletApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4D61972721651B00DD7BC7 /* popUpViewTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpViewTVCell.swift; sourceTree = "<group>"; };
 		A108169F2668945C00054DB2 /* OwnerListBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerListBase.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 				A166F3BA265135D3009BCB7E /* BookingDetailBase.swift */,
 				A166F3BB265135D3009BCB7E /* ChaletSearchBase.swift */,
 				4D8910112796E004009AE8BE /* FAQModel.swift */,
+				4D8AD1BE279EC90A005DDBFE /* FAQModelData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -616,6 +621,7 @@
 			children = (
 				4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */,
 				4D4254AA277C552700306AB2 /* FAQsTableViewCell.swift */,
+				4D8AD1BB279EC72F005DDBFE /* FAQTableViewController.swift */,
 			);
 			path = FAQs;
 			sourceTree = "<group>";
@@ -972,6 +978,7 @@
 				A166F3BD265135D3009BCB7E /* ChaletSearchBase.swift in Sources */,
 				4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */,
 				A1FD69C826501A5F00A03987 /* CollectionViewIMageVideoCVCell.swift in Sources */,
+				4D8AD1BF279EC90A005DDBFE /* FAQModelData.swift in Sources */,
 				4D4C5129277D931A00DCF3FE /* BankDetailsVC.swift in Sources */,
 				00AD385B263FD76500FDA907 /* EmptyChaletTableViewCell.swift in Sources */,
 				0036111C263830BE009E581F /* Utils.swift in Sources */,
@@ -985,6 +992,7 @@
 				007A52B526411A4500DC1127 /* DateOfBirthTableViewCell.swift in Sources */,
 				003E59AE263AD95700FD38F2 /* DIYCalendarCell.swift in Sources */,
 				00E45EE2264EB82F0038BA20 /* ChaletListImageCollectionViewCell.swift in Sources */,
+				4D8AD1BC279EC72F005DDBFE /* FAQTableViewController.swift in Sources */,
 				009FC394264A48D700FAABC8 /* CountryCodePopUpViewController.swift in Sources */,
 				4D493BFF27955219001A4886 /* ConfirmAddedOfferVC.swift in Sources */,
 				A1ABBF57265CC18500F00253 /* MyAccountTVC.swift in Sources */,

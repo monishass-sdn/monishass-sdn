@@ -414,7 +414,7 @@ class ReservationTVC: UITableViewController {
         }
         
         if self.lblRewards.text == "KD -0"{
-            self.btnRewardsCheckBox.isEnabled = false
+            self.btnRewardsCheckBox.isHidden = true
         }
         
         

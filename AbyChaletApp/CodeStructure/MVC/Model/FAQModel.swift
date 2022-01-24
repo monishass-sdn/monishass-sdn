@@ -44,7 +44,7 @@ public class FAQModel {
 
 }
 
-public class Faq_details {
+public class Faq_detailss {
     public var id : Int?
     public var question : String?
     public var answer : String?
@@ -52,12 +52,12 @@ public class Faq_details {
     public var created_at : String?
 
 
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Faq_details]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Faq_detailss]
     {
-        var models:[Faq_details] = []
+        var models:[Faq_detailss] = []
         for item in array
         {
-            models.append(Faq_details(dictionary: item as! NSDictionary)!)
+            models.append(Faq_detailss(dictionary: item as! NSDictionary)!)
         }
         return models
     }

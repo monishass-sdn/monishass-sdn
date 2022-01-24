@@ -7,6 +7,8 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import KeychainAccess
+
 class LoginSignUpViewController: UIViewController , UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
     @IBOutlet weak var viewForSignUpBottomLine: UIView!
@@ -86,6 +88,9 @@ class LoginSignUpViewController: UIViewController , UINavigationControllerDelega
         
         btnLogin.addCorner()
         btnLogin.addBorder()
+        loadKeyChainValue()
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +114,19 @@ class LoginSignUpViewController: UIViewController , UINavigationControllerDelega
             countryCodePopUpViewController.view.removeFromSuperview()
             countryCodePopUpViewController.removeFromParent()
             countryCodePopUpViewController = nil
+        }
+    }
+    
+    func loadKeyChainValue(){
+        // Load Keychain Value
+        
+        let keychain = Keychain(service: "com.srishti.AbyChaletApp")
+        self.txtEmailAddress.text = keychain["email_stored"]
+        self.txtPassword.text = keychain["pwd_stored"]
+        if keychain["remindMe_Tapped"] == "Tapped"{
+            self.btnRememberMe.isSelected = true
+        }else{
+            self.btnRememberMe.isSelected = false
         }
     }
 }
@@ -231,9 +249,29 @@ extension LoginSignUpViewController {
         btnRememberSelected = !btnRememberSelected
         if btnRememberSelected {
             sender.isSelected = true
+            
             //logginOffTimer()
+            
+            let email = self.txtEmailAddress.text
+            let pwd = self.txtPassword.text
+            let remindMeTapped_State = "Tapped"
+            //save data in keychain
+            
+            let keychain = Keychain(service: "com.srishti.AbyChaletApp")
+            keychain["email_stored"] = email
+            keychain["pwd_stored"] = pwd
+            keychain["remindMe_Tapped"] = remindMeTapped_State
+            
         }else {
             sender.isSelected = false
+            let email = ""
+            let pwd = ""
+            let remindMeTapped_State = "Not_Tapped"
+            let keychain = Keychain(service: "com.srishti.AbyChaletApp")
+            keychain["email_stored"] = email
+            keychain["pwd_stored"] = pwd
+            keychain["remindMe_Tapped"] = remindMeTapped_State
+            
         }
     }
     
