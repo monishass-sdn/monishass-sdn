@@ -59,7 +59,7 @@ class BookingRewardsTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.viewBg.addCornerForView(cornerRadius: 10)
+        self.viewBg.addCornerForView(cornerRadius: 15)
         
         let gradientImage = UIImage.gradientImageWithBounds(bounds: lblEarnRewards.bounds, colors: [#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)])
         lblEarnRewards.textColor = UIColor.init(patternImage: gradientImage)

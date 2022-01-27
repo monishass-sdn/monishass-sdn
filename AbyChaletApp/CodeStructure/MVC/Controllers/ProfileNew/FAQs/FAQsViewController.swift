@@ -38,7 +38,6 @@ class FAQsViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [notificationButton]
         
         getFAQData()
-        
        // FAQsTableView.rowHeight = UITableView.automaticDimension
        // FAQsTableView.estimatedRowHeight = UITableView.automaticDimension
     }
@@ -92,6 +91,10 @@ class FAQsViewController: UIViewController {
         self.navigationItem.titleView = navLabel
     }
     
+    func isHtml(_ value:String) -> Bool {
+        let validateTest = NSPredicate(format:"SELF MATCHES %@", "<(\"[^\"]*\"|'[^']*'|[^'\">])*>")
+        return validateTest.evaluate(with: value)
+    }
     
 
 }
@@ -112,13 +115,24 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FAQsTableViewCell") as! FAQsTableViewCell
-        cell.textViewFaq.text = faqData[indexPath.section].answer
-        
-        if indexPath.row == faqData.count{
-            FAQsTableView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+        if ((indexPath.section % 2) == 0){
+            cell.viewBg.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }else{
+            cell.viewBg.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
+        }
+      //  let stringValue = faqData[indexPath.row].answer
+      //  if !isHtml(stringValue!){
+            cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
+      //  }else{
+         //   cell.textViewFaq.text = faqData[indexPath.section].answer
+      //  }
+        if indexPath.row == faqData.count - 1{
+           cell.layer.cornerRadius = 10
         }
         return cell
     }
+    
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionheader") as! FAQsTableViewCell
@@ -129,6 +143,11 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.arrowButton.setImage(#imageLiteral(resourceName: "arrow-Up"), for: .normal)
         }else{
             cell.arrowButton.setImage(#imageLiteral(resourceName: "arrow-Down"), for: .normal)
+        }
+        if section % 2 == 0{
+            cell.viewBg.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }else{
+            cell.viewBg.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
         }
         return cell
     }
@@ -201,5 +220,19 @@ extension FAQsViewController{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
             }
         }
+    }
+}
+
+extension String {
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return nil
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
     }
 }

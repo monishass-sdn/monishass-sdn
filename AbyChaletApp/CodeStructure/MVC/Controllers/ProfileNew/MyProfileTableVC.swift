@@ -86,12 +86,17 @@ class MyProfileTableVC: UITableViewController {
         self.btnLogOut.setTitle("Logout".localized(), for: .normal)
         self.getAdminDetails()
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkNotiCount), name: NSNotification.Name(rawValue: NotificationNames.KNotificationCountCheck), object: nil)
     }
     
     
     
     @objc func logoutUser() {
         appDelegate.logOut()
+    }
+    
+    @objc func checkNotiCount() {
+        getNotificationcount()
     }
     
     override func viewWillAppear(_ animated: Bool) {

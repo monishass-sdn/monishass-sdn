@@ -78,6 +78,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblAgreement1: UILabel!
     @IBOutlet weak var lblYouMustAgreeAllConditions: UILabel!
     @IBOutlet weak var btnRewardsCheckBox: UIButton!
+    @IBOutlet weak var rewardsOrDiscountTrailing : NSLayoutConstraint!
     
     @IBOutlet weak var viewPrev: UIView!
     @IBOutlet weak var viewForward: UIView!
@@ -415,6 +416,7 @@ class ReservationTVC: UITableViewController {
         
         if self.lblRewards.text == "KD -0"{
             self.btnRewardsCheckBox.isHidden = true
+            self.rewardsOrDiscountTrailing.constant = -28
         }
         
         

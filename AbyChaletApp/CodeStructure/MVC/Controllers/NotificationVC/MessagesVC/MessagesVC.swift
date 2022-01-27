@@ -117,6 +117,7 @@ extension MessagesVC {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = MessageListBase(dictionary: response as! NSDictionary)
                     self.arrayMessgateList = (responseBase?.notifcation)!
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.KNotificationCountCheck), object: nil, userInfo: nil)
                     DispatchQueue.main.async {
                         self.tableviewMessageList.reloadData()
                     }

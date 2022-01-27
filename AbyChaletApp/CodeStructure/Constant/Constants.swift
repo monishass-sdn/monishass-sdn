@@ -50,6 +50,7 @@ struct NotificationNames {
     static let kBlockedUser                  = "BlockedAdmin"
     static let kAlertOfferCLick               = "AlertOfferClick"
     static let KgoToSuccessPage             = "goToSuccessPage "
+    static let KNotificationCountCheck       = "checkNotifiactionCount"
     
     
 }
