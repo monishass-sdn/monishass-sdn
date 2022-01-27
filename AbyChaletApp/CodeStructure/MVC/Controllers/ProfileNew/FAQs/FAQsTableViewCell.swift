@@ -2,7 +2,7 @@
 //  FAQsTableViewCell.swift
 //  AbyChaletApp
 //
-//  Created by Srishti on 29/12/21.
+//  Created by Srishti on 25/01/22.
 //
 
 import UIKit
@@ -10,15 +10,17 @@ import UIKit
 class FAQsTableViewCell: UITableViewCell {
     @IBOutlet weak var viewBg: UIView!
     @IBOutlet weak var lblFaqQuestion: UILabel!
-    @IBOutlet weak var lblAnswer: UILabel!
     @IBOutlet weak var textViewFaq: UITextView!
-    @IBOutlet weak var topConstrainTextview: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstrainDownButton: NSLayoutConstraint!
+   // @IBOutlet weak var topConstrainTextview: NSLayoutConstraint!
+   // @IBOutlet weak var bottomConstrainDownButton: NSLayoutConstraint!
     @IBOutlet weak var btnUPDOWN: UIButton!
-
+    @IBOutlet weak var arrowButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-       // viewBg.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15.0)
+        if textViewFaq != nil{
+            textViewFaq.textAlignment = NSTextAlignment.justified
+        }
+        viewBg.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,9 +49,9 @@ class FAQsTableViewCell: UITableViewCell {
         let lblHeight = heightForView(text: self.lblFaqQuestion.text!, font: UIFont(name: "Roboto-Medium", size: 15.0)!, width: kScreenWidth - 146)
         print("label Height = \(lblHeight)")
         if lblHeight < 30 {
-            self.topConstrainTextview.constant = lblHeight + 30
+          //  self.topConstrainTextview.constant = lblHeight + 30
         }else{
-            self.topConstrainTextview.constant = lblHeight + 20
+          //  self.topConstrainTextview.constant = lblHeight + 20
         }
     }
     
@@ -62,5 +64,7 @@ class FAQsTableViewCell: UITableViewCell {
         label.sizeToFit()
         return label.frame.height
     }
-
+    
+    
+   
 }

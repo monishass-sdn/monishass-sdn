@@ -17,15 +17,18 @@ struct cellData{
 
 class FAQsViewController: UIViewController {
     @IBOutlet weak var FAQsTableView: UITableView!
+    @IBOutlet weak var heightForTableView : NSLayoutConstraint!
     @IBOutlet weak var vieww: UIView!
     
     var selectedIndex = -1
     var isClickDown = false
     var faqData = [Faq_details]()
+    var openedSectionDict = [Int:Bool]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        vieww.roundCorners(corners: [.topLeft, .topRight], radius: 0.0)
-        vieww.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 0.0)
+      //  vieww.roundCorners(corners: [.topLeft, .topRight], radius: 0.0)
+       // vieww.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 0.0)
 
 
         // Do any additional setup after loading the view.
@@ -35,7 +38,14 @@ class FAQsViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [notificationButton]
         
         getFAQData()
+        
+       // FAQsTableView.rowHeight = UITableView.automaticDimension
+       // FAQsTableView.estimatedRowHeight = UITableView.automaticDimension
     }
+    
+
+    
+
     
     //MARK:- SetUp NavigationBar
     func setUpNavigationBar() {
@@ -83,70 +93,80 @@ class FAQsViewController: UIViewController {
     }
     
     
-    @IBAction func btnDownAndUpAction(_ sender: UIButton) {
-        if sender.tag != self.selectedIndex{
-            self.selectedIndex = sender.tag
-            self.isClickDown = true
-        }else{
-            self.selectedIndex = -1
-            self.isClickDown = false
-        }
-        self.FAQsTableView.reloadData()
-        self.FAQsTableView.beginUpdates()
-        self.FAQsTableView.endUpdates()
-        
-    }
 
 }
 
 
 extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
     
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return faqData.count
     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if openedSectionDict[section] == true{
+            return 1
+        }else{
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FAQsTableViewCell") as! FAQsTableViewCell
-        cell.btnUPDOWN.tag = indexPath.row
-        cell.btnUPDOWN.addTarget(self, action: #selector(updownAction(_:)), for: .touchUpInside)
-        if self.selectedIndex == indexPath.row {
-            cell.btnUPDOWN.setImage(#imageLiteral(resourceName: "arrow-Up"), for: .normal)
-        }else{
-            cell.btnUPDOWN.setImage(#imageLiteral(resourceName: "arrow-Down"), for: .normal)
+        cell.textViewFaq.text = faqData[indexPath.section].answer
+        
+        if indexPath.row == faqData.count{
+            FAQsTableView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
         }
-        cell.lblFaqQuestion.text = faqData[indexPath.row].question
-      //  cell.textViewFaq.text = faqData[indexPath.row].answer
-
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sectionheader") as! FAQsTableViewCell
+        cell.lblFaqQuestion.text = faqData[section].question
+        cell.btnUPDOWN.tag = section
+        cell.btnUPDOWN.addTarget(self, action: #selector(updownAction(_:)), for: .touchUpInside)
+        if openedSectionDict[section] == true{
+            cell.arrowButton.setImage(#imageLiteral(resourceName: "arrow-Up"), for: .normal)
+        }else{
+            cell.arrowButton.setImage(#imageLiteral(resourceName: "arrow-Down"), for: .normal)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        let QuestionString = faqData[section].question
+        let lblHeight = heightForView(text: QuestionString!, font: UIFont(name: "Roboto-Medium", size: 18.0)!, width: kScreenWidth - 90)
+        return lblHeight + 30
     }
     
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.isClickDown == false{
-            return 60
-        }else{
-            if selectedIndex == indexPath.row{
-                return UITableView.automaticDimension
-            }else{
-                return 60
-            }
-            
-        }
+        return UITableView.automaticDimension
     }
     
     @objc func updownAction(_ sender: UIButton) {
-        if sender.tag != self.selectedIndex{
-            self.selectedIndex = sender.tag
-            self.isClickDown = true
+        if openedSectionDict[sender.tag] == true{
+            openedSectionDict[sender.tag] = false
         }else{
-            self.selectedIndex = -1
-            self.isClickDown = false
+            openedSectionDict[sender.tag] = true
         }
-        self.FAQsTableView.reloadData()
-        self.FAQsTableView.beginUpdates()
-        self.FAQsTableView.endUpdates()
+        FAQsTableView.reloadData()
+     
         
+    }
+    
+    
+    
+    func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return label.frame.height
     }
     
     
@@ -166,11 +186,15 @@ extension FAQsViewController{
                     if status{
                         let responseBase = FAQModel(dictionary: responseDic)
                         self.faqData = (responseBase?.faq_details)!
+                        for (i,_) in self.faqData.enumerated(){
+                            self.openedSectionDict[i] = false
+                        }
                         DispatchQueue.main.async {
                             self.FAQsTableView.reloadData()
                         }
                     }else{
-                        showDefaultAlert(viewController: self, title: "Message", msg: responseDic["message"] as! String)
+                        showDefaultAlert(viewController: self, title: "Message", msg: "Error")
+                       // showDefaultAlert(viewController: self, title: "Message", msg: responseDic["message"] as! String)
                     }
                 }
             }else{
