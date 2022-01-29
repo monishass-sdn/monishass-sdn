@@ -39,6 +39,7 @@ struct Images {
     static let KNoNotification = UIImage.init(named: "notification-normal")?.withRenderingMode(.alwaysOriginal)
     static let KNewNotification = UIImage.init(named: "notification-new")?.withRenderingMode(.alwaysOriginal)
    // static let KIconNotification1 = UIImage.init(named: "icon_Notification")?.withRenderingMode(.alwaysOriginal)
+    static let KcloseButton = UIImage.init(named: "closeButton")?.withRenderingMode(.alwaysOriginal)
     
     
 }

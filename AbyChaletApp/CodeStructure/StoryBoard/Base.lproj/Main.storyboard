@@ -1785,23 +1785,25 @@
                     <size key="freeformSize" width="375" height="1800"/>
                     <connections>
                         <outlet property="lblMessageOnScreen" destination="Ipf-T6-BPd" id="1wV-tS-fNb"/>
+                        <outlet property="lblPopUpContent" destination="g6m-mn-Koj" id="Iqu-O8-fl0"/>
+                        <outlet property="lblPopUpNote" destination="Oaz-NZ-dXg" id="VyT-F0-vy5"/>
                         <outlet property="poupView" destination="MJ8-SU-Bak" id="cfx-PK-LgO"/>
                         <outlet property="tableViewBooking" destination="X3E-9K-ufI" id="RiK-un-05L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvD-z4-f80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="MJ8-SU-Bak">
-                    <rect key="frame" x="0.0" y="0.0" width="324" height="204"/>
+                    <rect key="frame" x="0.0" y="0.0" width="357" height="204"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4v-WB-J5y">
-                            <rect key="frame" x="0.0" y="0.0" width="324" height="204"/>
+                            <rect key="frame" x="0.0" y="0.0" width="357" height="204"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3R-o6-3FL">
-                                    <rect key="frame" x="0.0" y="0.0" width="324" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="357" height="35"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofy-1I-PL8">
-                                            <rect key="frame" x="291" y="5" width="25" height="25"/>
+                                            <rect key="frame" x="324" y="5" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="UxN-ql-ee3"/>
                                                 <constraint firstAttribute="height" constant="25" id="jM2-XO-h5X"/>
@@ -1811,8 +1813,8 @@
                                                 <action selector="closepopupWithSender:" destination="IYU-eU-LSo" eventType="touchUpInside" id="aEA-Se-WGM"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How do i get Rewards?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31g-UE-M8x">
-                                            <rect key="frame" x="62" y="7.6666666666666679" width="200" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How do I get rewards?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31g-UE-M8x">
+                                            <rect key="frame" x="78.666666666666686" y="7.6666666666666679" width="200" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Aaa-59-DEw"/>
                                                 <constraint firstAttribute="width" constant="200" id="miy-df-p5g"/>
@@ -1832,11 +1834,11 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIQ-Is-LX9">
-                                    <rect key="frame" x="0.0" y="154" width="324" height="50"/>
+                                    <rect key="frame" x="0.0" y="154" width="357" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: with the biginning of new year all Rewards are Cencelled and start Over" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaz-NZ-dXg">
-                                            <rect key="frame" x="5" y="5" width="314" height="40"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: with the beginning of new year all Rewards are Cancelled and start Over" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaz-NZ-dXg">
+                                            <rect key="frame" x="5" y="5" width="347" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.86274509799999999" green="0.94901960780000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1851,9 +1853,9 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6m-mn-Koj">
-                                    <rect key="frame" x="5" y="35" width="314" height="119"/>
+                                    <rect key="frame" x="5" y="35" width="347" height="119"/>
                                     <string key="text">For every 2000 KD you spend on your total bookings for chalets, you get a Rewards of 100 KD each time, and you can use this Rewards as a discount on the next booking  or collect and double this Rewards</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.11764705882352941" green="0.2627450980392157" blue="0.33333333333333331" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -1871,10 +1873,15 @@
                                 <constraint firstAttribute="bottom" secondItem="dIQ-Is-LX9" secondAttribute="bottom" id="lcC-o3-JbX"/>
                                 <constraint firstItem="G3R-o6-3FL" firstAttribute="leading" secondItem="n4v-WB-J5y" secondAttribute="leading" id="wLL-05-0Pf"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="TkM-nv-xMQ"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="TkM-nv-xMQ" firstAttribute="trailing" secondItem="n4v-WB-J5y" secondAttribute="trailing" id="6pr-3z-HhR"/>
                         <constraint firstItem="TkM-nv-xMQ" firstAttribute="bottom" secondItem="n4v-WB-J5y" secondAttribute="bottom" id="EzP-y4-oXZ"/>
@@ -1956,7 +1963,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.16862745098039217" green="0.32941176470588235" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.16862745098039217" green="0.32941176470588235" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstItem="TBn-Mo-E9i" firstAttribute="centerY" secondItem="xxr-WO-g3Y" secondAttribute="centerY" id="1ul-TM-Ocb"/>
                                                                 <constraint firstItem="qYK-Bh-C0C" firstAttribute="leading" secondItem="TBn-Mo-E9i" secondAttribute="trailing" constant="15" id="7m5-Ig-6nh"/>
@@ -2248,7 +2255,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pwk-3Q-b8Z"/>
-                        <color key="backgroundColor" red="0.11764705882352941" green="0.2627450980392157" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.11764705882352941" green="0.2627450980392157" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pwk-3Q-b8Z" firstAttribute="bottom" secondItem="YCa-3M-EsZ" secondAttribute="bottom" constant="10" id="BOd-po-rG1"/>
                             <constraint firstItem="YCa-3M-EsZ" firstAttribute="leading" secondItem="pwk-3Q-b8Z" secondAttribute="leading" id="NKC-9S-gDI"/>

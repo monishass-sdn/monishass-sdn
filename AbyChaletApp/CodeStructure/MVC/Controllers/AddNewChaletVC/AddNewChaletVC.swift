@@ -13,13 +13,14 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
 
     
     @IBOutlet var webView: WKWebView!
-    var UrlString = "https://web.sicsglobal.com/aby_chalet/adminmail"
+    var UrlString = "https://sicsapp.com/Aby_chalet/adminmail"
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupForCustomNavigationTitle()
         self.setUpNavigationBar()
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
         self.navigationItem.rightBarButtonItems = [notificationButton]
+    //    self.navigationItem.title = "Add your Chalet"
         SVProgressHUD.show()
         webView.navigationDelegate = self
         webView.uiDelegate = self
@@ -27,6 +28,9 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         webView.load(request)
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
+    //    self.navigationController?.navigationBar.titleTextAttributes = [
+         //   NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
+      //  ]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +57,16 @@ class AddNewChaletVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         self.navigationItem.title = ""
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
+    }
+    
+    func setupForCustomNavigationTitle(){
+
+        let navLabel = UILabel()
+        let navTitle = NSMutableAttributedString(string: "Add Your Chalet", attributes:[
+                                                    NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                    NSAttributedString.Key.font: UIFont(name: "Roboto-Bold", size: 22)! ])
+        navLabel.attributedText = navTitle
+        self.navigationItem.titleView = navLabel
     }
     
     //MARK:- ButtonActions

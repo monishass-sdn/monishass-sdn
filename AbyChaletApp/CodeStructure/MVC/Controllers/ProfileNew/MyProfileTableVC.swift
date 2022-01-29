@@ -50,9 +50,11 @@ class MyProfileTableVC: UITableViewController {
     @IBOutlet weak var notificationCount: UILabel!
     @IBOutlet weak var viewNotificationcount: UIView!
     @IBOutlet weak var btnOwnerTap: UIButton!
+    @IBOutlet weak var heightForInstagramView : NSLayoutConstraint!
     
     var arrayAdminDetails = [Admin_details]()
     var notiCount : Int = 0
+    var Deviceheight : CGFloat = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         getNotificationcount()
@@ -83,11 +85,22 @@ class MyProfileTableVC: UITableViewController {
         self.lblForShareApp.text  = "Share App".localized()
         self.lblForAddChalet.text  = "Add your Chalet".localized()
         self.btnLegalPrivacy.setTitle("Legal & Privacy".localized(), for: .normal)
-        self.btnLogOut.setTitle("Logout".localized(), for: .normal)
+        self.btnLogOut.setTitle("LOG OUT".localized(), for: .normal)
         self.getAdminDetails()
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(checkNotiCount), name: NSNotification.Name(rawValue: NotificationNames.KNotificationCountCheck), object: nil)
+        
+        let bounds = UIScreen.main.bounds
+        Deviceheight = bounds.size.height
+        
+        if Deviceheight > 800 {
+            heightForInstagramView.constant = 100
+        }else{
+            heightForInstagramView.constant = 70
+        }
+        
     }
+    
     
     
     
@@ -240,6 +253,14 @@ class MyProfileTableVC: UITableViewController {
                 return super.tableView(tableView,heightForRowAt: indexPath)
             }else{
                 return 0
+            }
+        }
+        
+        if indexPath.row == 10 {
+            if self.Deviceheight > 890 {
+                return 100
+            }else{
+                return 70
             }
         }
         

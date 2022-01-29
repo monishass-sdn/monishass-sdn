@@ -17,6 +17,8 @@ class BookingsVC: UIViewController {
     @IBOutlet weak var tableViewBooking: UITableView!
     @IBOutlet weak var lblMessageOnScreen: UILabel!
     @IBOutlet weak var poupView: UIView!
+    @IBOutlet weak var lblPopUpContent: UILabel!
+    @IBOutlet weak var lblPopUpNote: UILabel!
     
     var blurView : UIView!
     var noRsrvtnmessage: String = ""
@@ -37,7 +39,9 @@ class BookingsVC: UIViewController {
         super.viewDidLoad()
         self.setUpNavigationBar()
         appDelegate.checkBlockStatus()
+        setupPopUpText()
       //  self.tableViewBooking.register(NoBookingTVCell.self, forCellReuseIdentifier: "NoBookingTVCell")
+
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +55,45 @@ class BookingsVC: UIViewController {
             self.isLoad = true
         }
         initiatePayment()
+    }
+    
+    //MARK:- Set Text for PopUp
+    
+    func setupPopUpText(){
+        let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#1E4355")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 18)!, NSAttributedString.Key.foregroundColor : UIColor("#379BF2")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 18)!, NSAttributedString.Key.foregroundColor : UIColor("#379F00")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-BoldItalic", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#FFFFFF")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#FFFFFF")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob6 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#FFFFFF")] as [NSAttributedString.Key : Any]
+        
+        
+        let attributedStringEarn1 = NSMutableAttributedString(string:"For every ".localized(), attributes:attrsWhatKindOfJob1)
+        let attributedStringEarn2 = NSMutableAttributedString(string:"2000", attributes:attrsWhatKindOfJob2)
+        let attributedStringEarn3 = NSMutableAttributedString(string:" KD you spend on your total bookings for chalets, you get a Rewards of ".localized(), attributes:attrsWhatKindOfJob1)
+        let attributedStringEarn4 = NSMutableAttributedString(string:"100", attributes:attrsWhatKindOfJob3)
+        let attributedStringEarn5 = NSMutableAttributedString(string:" KD each time, and you can use this Rewards as a discount on the next booking  or collect and double this Rewards".localized(), attributes:attrsWhatKindOfJob1)
+        
+        attributedStringEarn1.append(attributedStringEarn2)
+        attributedStringEarn1.append(attributedStringEarn3)
+        attributedStringEarn1.append(attributedStringEarn4)
+        attributedStringEarn1.append(attributedStringEarn5)
+
+        self.lblPopUpContent.attributedText = attributedStringEarn1
+        
+        let attributedStringEarn6 = NSMutableAttributedString(string:"Note:".localized(), attributes:attrsWhatKindOfJob4)
+        let attributedStringEarn7 = NSMutableAttributedString(string:" with the beginning of new year all Rewards are ".localized(), attributes:attrsWhatKindOfJob5)
+        let attributedStringEarn8 = NSMutableAttributedString(string:"Cancelled".localized(), attributes:attrsWhatKindOfJob6)
+        let attributedStringEarn9 = NSMutableAttributedString(string:" and start Over".localized(), attributes:attrsWhatKindOfJob5)
+        
+        attributedStringEarn6.append(attributedStringEarn7)
+        attributedStringEarn6.append(attributedStringEarn8)
+        attributedStringEarn6.append(attributedStringEarn9)
+        
+        self.lblPopUpNote.attributedText = attributedStringEarn6
+        
+
+
     }
     
 
@@ -171,7 +214,8 @@ class BookingsVC: UIViewController {
         blurView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height:  kScreenHeight))
         blurView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         keyWindow!.addSubview(blurView)
-        self.poupView.frame = CGRect(x: 40, y: 110, width: 340, height: 240)
+        self.poupView.center = CGPoint(x: self.view.center.x, y: 210)
+       // self.poupView.frame = CGRect(x: self.view.center.x, y: self.view.center.y - 50, width: 340, height: 240)
         self.blurView.addSubview(self.poupView)
         self.blurView.bringSubviewToFront(self.poupView)
         self.poupView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)

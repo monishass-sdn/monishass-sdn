@@ -96,6 +96,14 @@ class FAQsViewController: UIViewController {
         return validateTest.evaluate(with: value)
     }
     
+    
+    func isValidHtmlString(_ value: String) -> Bool {
+        if value.isEmpty {
+            return false
+        }
+        return (value.range(of: "<(\"[^\"]*\"|'[^']*'|[^'\">])*>", options: .regularExpression) != nil)
+    }
+    
 
 }
 
@@ -103,14 +111,18 @@ class FAQsViewController: UIViewController {
 extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return faqData.count
+        return faqData.count + 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if faqData.count == section{
+            return 0
+        }
         if openedSectionDict[section] == true{
             return 1
         }else{
             return 0
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,21 +132,24 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
         }else{
             cell.viewBg.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
         }
-      //  let stringValue = faqData[indexPath.row].answer
-      //  if !isHtml(stringValue!){
+        let stringValue = faqData[indexPath.section].answer!
+        if isValidHtmlString(stringValue) == true{
+      //  if stringValue.contains(htmlStr){
             cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
-      //  }else{
-         //   cell.textViewFaq.text = faqData[indexPath.section].answer
-      //  }
-        if indexPath.row == faqData.count - 1{
-           cell.layer.cornerRadius = 10
-        }
+        }else{
+            cell.textViewFaq.text = faqData[indexPath.section].answer
+       }
         return cell
     }
     
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == faqData.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "roundedBottomCell")
+            return cell
+        }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionheader") as! FAQsTableViewCell
         cell.lblFaqQuestion.text = faqData[section].question
         cell.btnUPDOWN.tag = section
@@ -153,7 +168,9 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
+        if section == faqData.count{
+            return 15
+        }
         let QuestionString = faqData[section].question
         let lblHeight = heightForView(text: QuestionString!, font: UIFont(name: "Roboto-Medium", size: 18.0)!, width: kScreenWidth - 90)
         return lblHeight + 30
@@ -208,8 +225,10 @@ extension FAQsViewController{
                         for (i,_) in self.faqData.enumerated(){
                             self.openedSectionDict[i] = false
                         }
+                        self.checkNotificationCount()
                         DispatchQueue.main.async {
                             self.FAQsTableView.reloadData()
+                            
                         }
                     }else{
                         showDefaultAlert(viewController: self, title: "Message", msg: "Error")
@@ -218,6 +237,20 @@ extension FAQsViewController{
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+            }
+        }
+    }
+    
+    //MARK:- check notification count
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
             }
         }
     }

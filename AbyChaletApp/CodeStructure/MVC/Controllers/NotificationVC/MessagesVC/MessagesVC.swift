@@ -122,7 +122,8 @@ extension MessagesVC {
                         self.tableviewMessageList.reloadData()
                     }
                 }else{
-                    showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                    showDefaultAlert(viewController: self, title: "Error", msg: "No Notification Fected")
+                   // showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")

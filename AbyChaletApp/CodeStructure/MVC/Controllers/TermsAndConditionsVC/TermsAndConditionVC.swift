@@ -18,8 +18,10 @@ class TermsAndConditionVC: UIViewController,WKUIDelegate,WKNavigationDelegate {
         super.viewDidLoad()
         
         self.setUpNavigationBar()
-        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
-        self.navigationItem.rightBarButtonItems = [notificationButton]
+       // let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+        let closeButton = UIBarButtonItem(image: Images.KcloseButton, style: .plain, target: self, action: #selector(self.closeButtonTouched))
+        self.navigationItem.rightBarButtonItems = [closeButton]
+        self.navigationItem.title = "Legal - Privacy & Terms"
         if isFromReservation == false{
             SVProgressHUD.show()
             webView.navigationDelegate = self
