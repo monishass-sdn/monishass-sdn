@@ -16,6 +16,7 @@ class MessagesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
         let attr = [NSAttributedString.Key.foregroundColor:UIColor.white]
        // refreshControl.tintColor = UIColor.yellowColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes:attr)

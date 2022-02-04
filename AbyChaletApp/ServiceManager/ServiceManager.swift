@@ -102,7 +102,7 @@ class ServiceManager: NSObject {
             }
         }
     }
-    func uploadSingleData(_ serviceName : String, parameters : Parameters?,imgdata : Data?,filename: String,withHud isHud: Bool, completion : @escaping (Bool, AnyObject?, NSError?)->Void)
+    func uploadSingleData(_ serviceName : String, parameters : Parameters?,imgdata : Data?,filename: String,mimetype: String,withHud isHud: Bool, completion : @escaping (Bool, AnyObject?, NSError?)->Void)
     {
         if isHud {
             SVProgressHUD.show()
@@ -113,7 +113,7 @@ class ServiceManager: NSObject {
         
         AF.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.append( imgdata!, withName: filename, fileName: filename, mimeType: "image/png")
+                multipartFormData.append( imgdata!, withName: filename, fileName: filename, mimeType: mimetype)
                 if parameters != nil {
                     for (key, value) in parameters! {
                         multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
@@ -124,6 +124,7 @@ class ServiceManager: NSObject {
                 if isHud {
                     SVProgressHUD.dismiss()
                 }
+                print(response)
                 switch response.result {
                 case .success(let jsonData):
                     

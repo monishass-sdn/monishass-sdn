@@ -39,6 +39,9 @@ class LoginSignUpViewController: UIViewController , UINavigationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1702781916, green: 0.3292656243, blue: 0.4061869979, alpha: 1)
+        self.btnLoginTopMenu.backgroundColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
+        self.btnsignUpTopMenu.backgroundColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
         txtPassword.isSecureTextEntry = true
         txtEmailAddress.keyboardType = .emailAddress
         txtEmailAddress.autocorrectionType = .no
@@ -758,15 +761,17 @@ extension LoginSignUpViewController {
 //        }
         var imageData = Data()
         var fileName = ""
+        var mimetype = ""
         if selectedProfileImage != nil{
             imageData = self.selectedProfileImage.jpegData(compressionQuality: 0.8)!
             fileName = "image"
+            mimetype = mimeType(for: imageData)
         }else{
             imageData = Data()
             fileName = ""
         }
         openAlertPopup(selfVc: self, alertMessage: "Processing...", showAlert: true)
-        ServiceManager.sharedInstance.uploadSingleData("api/register", parameters: ["fname":frstName,"lname":lastName,"email":emailID,"password":password,"device_token":deviceeToken,"phone":phone,"dob":dob,"gender":gender,"country":countryName,"country_code":countryCode,"userid":CAGuestUser.currentUser.id != nil ? "\(CAGuestUser.currentUser.id!)" : ""], imgdata: imageData, filename: fileName, withHud: false) { (success, response, error) in
+        ServiceManager.sharedInstance.uploadSingleData("api/register", parameters: ["fname":frstName,"lname":lastName,"email":emailID,"password":password,"device_token":deviceeToken,"phone":phone,"dob":dob,"gender":gender,"country":countryName,"country_code":countryCode,"userid":CAGuestUser.currentUser.id != nil ? "\(CAGuestUser.currentUser.id!)" : ""], imgdata: imageData, filename: fileName, mimetype: mimetype, withHud: false) { (success, response, error) in
             let responseMsg = ((response as! NSDictionary)["message"] as! String)
             openAlertPopup(selfVc: self, alertMessage: "Processing...", showAlert: false)
             if success {
@@ -794,6 +799,31 @@ extension LoginSignUpViewController {
             }
         }
         
+    }
+    
+    func mimeType(for data: Data) -> String {
+
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
+        }
     }
 }
 

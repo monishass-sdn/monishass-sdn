@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import SDWebImage
 import KDCircularProgress
+import HGCircularSlider
 
 
 class MyBookingTVCell: UITableViewCell {
@@ -54,7 +55,9 @@ class BookingRewardsTVCell: UITableViewCell {
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var lblEarnRewards: UILabel!
     @IBOutlet weak var btnQuestionmark: UIButton!
+    @IBOutlet weak var lblKD : UILabel!
     var progress: KDCircularProgress!
+   // var progress: CircularSlider!
 
     
     override func awakeFromNib() {
@@ -62,7 +65,7 @@ class BookingRewardsTVCell: UITableViewCell {
         self.viewBg.addCornerForView(cornerRadius: 15)
         
         let gradientImage = UIImage.gradientImageWithBounds(bounds: lblEarnRewards.bounds, colors: [#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)])
-        lblEarnRewards.textColor = UIColor.init(patternImage: gradientImage)
+       // lblEarnRewards.textColor = UIColor.init(patternImage: gradientImage)
 
         if kCurrentLanguageCode == "ar"{
             lblEarn.font = UIFont(name: kFontAlmaraiRegular, size: 15)
@@ -87,8 +90,8 @@ class BookingRewardsTVCell: UITableViewCell {
         let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#1E4355")] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#379F00")] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#379BF2")] as [NSAttributedString.Key : Any]
-        let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
-        let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob6 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : dictReward.rewarded_amt != "" ?   UIColor("#326277") : UIColor("#A8A8A8")] as [NSAttributedString.Key : Any]
         
         
@@ -121,27 +124,67 @@ class BookingRewardsTVCell: UITableViewCell {
     
     //MARK:- Setup ProgressBar
     func setupProgressBar(dictReward:Reward_details) {
-        progressView.backgroundColor = .clear
-        progress = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
-        progress.startAngle = -90
-        progress.progressThickness = 0.2
-        progress.trackThickness = 0.4
-        progress.trackColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 0.2904536448)
-        progress.backgroundColor = .clear
-        progress.clockwise = true
-        progress.gradientRotateSpeed = 2
-        progress.roundedCorners = true
-        progress.glowMode = .forward
-        progress.glowAmount = 0.5
-        progress.set(colors: #colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1))
-        self.progressView.addSubview(progress)
+        print("Total Rewards = \(Double(dictReward.total!))")
         
-        
-        
+        let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 97, height: 97))
+        progressNew.backgroundColor = UIColor.white
+        progressNew.lineWidth = 12
+        progressNew.thumbLineWidth = 0.7
+        progressNew.thumbRadius = 4.5
+        progressNew.diskColor = UIColor.white
+        progressNew.trackColor = UIColor.white
+        progressNew.cornerRadius = 42.5
+        progressNew.borderWidth = 1
+        progressNew.borderColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+        progressNew.endThumbTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        progressNew.endThumbStrokeColor = UIColor.white
+        progressNew.isUserInteractionEnabled = false
+        self.progressView.addSubview(progressNew)
+        self.progressView.backgroundColor = UIColor.clear
+        self.progressView.borderColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+        self.progressView.borderWidth = 1.5
+        progressNew.numberOfRounds = 1
         
         if dictReward.total != 0 {
             
             let totolD = Double(dictReward.total!)
+            
+            let progressValue = totolD / 2000
+            print("Progress Value = \(progressValue)")
+         //   self.lblEarnRewards.text = "\(totolD)        KD"
+            
+            if progressValue == 0.0{
+                progressNew.endPointValue = CGFloat(progressValue)
+                progressNew.trackFillColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+                self.lblEarnRewards.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+                progressNew.endThumbTintColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+                self.lblKD.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+            }else if progressValue >= 0.01 && progressValue <= 0.25{
+                progressNew.endPointValue = CGFloat(progressValue)
+                progressNew.trackFillColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+                self.lblEarnRewards.textColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+                progressNew.endThumbTintColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+                self.lblKD.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+            }else if progressValue >= 0.26 && progressValue <= 0.50{
+                progressNew.endPointValue = CGFloat(progressValue)
+                progressNew.trackFillColor = #colorLiteral(red: 1, green: 0.8352941176, blue: 0, alpha: 1)
+                self.lblEarnRewards.textColor = #colorLiteral(red: 1, green: 0.8352941176, blue: 0, alpha: 1)
+                progressNew.endThumbTintColor = #colorLiteral(red: 1, green: 0.8352941176, blue: 0, alpha: 1)
+                self.lblKD.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+            }else if progressValue >= 0.51 && progressValue <= 0.75{
+                progressNew.endPointValue = CGFloat(progressValue)
+                progressNew.trackFillColor = #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)
+                self.lblEarnRewards.textColor = #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)
+                progressNew.endThumbTintColor = #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)
+                self.lblKD.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+            }else{
+                progressNew.endPointValue = CGFloat(progressValue)
+                progressNew.trackFillColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
+                self.lblEarnRewards.textColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
+                progressNew.endThumbTintColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
+                self.lblKD.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+            }
+
             
             if totolD > 2000 || totolD < 2000{
                 let everySpend = Double(dictReward.every_spend!)
@@ -152,27 +195,37 @@ class BookingRewardsTVCell: UITableViewCell {
                 if inPercentage > 0 {
                     let angle = 3.6*inPercentage
                     let earnRewards = rounded * everySpend!
-                    self.lblEarnRewards.text = "\(earnRewards.clean) KD"
-                    progress.angle = angle
+                    self.lblEarnRewards.text = "\(earnRewards.clean)"
+                   // progress.angle = angle
                     if angle >= 360 {
                         //self.updateRewardDetails(rewardAmount: "\(dictReward.rewarded_amt!)", reservationAmount: "\(dictReward.total!)")
                     }
                 }else{
-                    progress.angle = 360
-                    self.lblEarnRewards.text = "\(2000) KD"
+                  //  progress.angle = 360
+                    self.lblEarnRewards.text = "\(2000)"
                     //self.updateRewardDetails(rewardAmount: "\(dictReward.rewarded_amt!)", reservationAmount: "\(dictReward.total!)")
                 }
             }else if totolD == 2000{
-                progress.angle = 360
-                self.lblEarnRewards.text = "\(2000) KD"
+              //  progress.angle = 360
+                self.lblEarnRewards.text = "\(2000)"
                 //self.updateRewardDetails(rewardAmount: "\(dictReward.rewarded_amt!)", reservationAmount: "\(dictReward.total!)")
                 
             }else {
-                progress.angle = 0
-                self.lblEarnRewards.text = "\(0) KD"
+               // progress.angle = 0
+                self.lblEarnRewards.text = "\(0)"
             }
+           
             
-            
+        }else{
+            progressNew.endPointValue = 0.000
+            progressNew.trackFillColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+            self.lblEarnRewards.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+            progressNew.endThumbTintColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
+            progressNew.endThumbStrokeColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+            progressNew.thumbRadius = 5
+            progressNew.thumbLineWidth = 1
+            self.lblKD.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+            self.lblEarnRewards.text = "\(0)"
         }
         
     }

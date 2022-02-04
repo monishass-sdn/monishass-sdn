@@ -10,6 +10,7 @@ import KDCircularProgress
 import MFSDK
 import SVProgressHUD
 import CoreLocation
+import HGCircularSlider
 
 class BookingsVC: UIViewController {
 
@@ -37,6 +38,7 @@ class BookingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
         self.setUpNavigationBar()
         appDelegate.checkBlockStatus()
         setupPopUpText()
@@ -264,16 +266,43 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            if isLoad{
+           // if isLoad{
+                if CAUser.currentUser.id == nil{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
                 cell.btnQuestionmark.addTarget(self, action: #selector(BtnTapped(sender:)), for: .touchUpInside)
-                //cell.setValuesToFields(dictReward: self.arrayRewards[indexPath.row])
+                    
+                    let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 97.5, height: 97.5))
+                    progressNew.backgroundColor = UIColor.white
+                    progressNew.lineWidth = 12
+                    progressNew.thumbLineWidth = 0.7
+                    progressNew.thumbRadius = 4.5
+                    progressNew.diskColor = UIColor.white
+                    progressNew.trackColor = UIColor.white
+                    progressNew.backtrackLineWidth = 10
+                    progressNew.cornerRadius = 42.5
+                    progressNew.borderWidth = 1
+                    progressNew.borderColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+                    progressNew.endThumbTintColor = UIColor.white
+                    progressNew.endThumbStrokeColor = UIColor.gray
+                    progressNew.thumbLineWidth = 1
+                    progressNew.isUserInteractionEnabled = false
+                    progressNew.numberOfRounds = 1
+                    progressNew.endPointValue = 0.00
+                    cell.progressView.addSubview(progressNew)
+                    cell.progressView.backgroundColor = UIColor.white
+                    cell.progressView.borderColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8588235294, alpha: 1)
+                    cell.progressView.borderWidth = 1.5
+                    cell.lblEarnRewards.text = "\(0)"
+                    progressNew.trackFillColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+                    cell.lblEarnRewards.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+                    cell.lblKD.textColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+                    progressNew.endThumbTintColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
                 
                 let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#1E4355")] as [NSAttributedString.Key : Any]
                 let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 17)!, NSAttributedString.Key.foregroundColor : UIColor("#379F00")] as [NSAttributedString.Key : Any]
                 let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#379BF2")] as [NSAttributedString.Key : Any]
-                let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
-                let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 15)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)!, NSAttributedString.Key.foregroundColor : UIColor("#B10622")] as [NSAttributedString.Key : Any]
                 let attrsWhatKindOfJob6 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor("#326277")] as [NSAttributedString.Key : Any]
                 
                 
@@ -303,11 +332,14 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                 let attributedStringTotalRewards = NSMutableAttributedString(string:"\("Total Rewards :".localized()) \("0") KD", attributes:attrsWhatKindOfJob6)
                 cell.lblTotalRewards.attributedText = attributedStringTotalRewards
                 return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
+                cell.btnQuestionmark.addTarget(self, action: #selector(BtnTapped(sender:)), for: .touchUpInside)
+                cell.setValuesToFields(dictReward: arrayRewards[indexPath.row])
+                cell.setupProgressBar(dictReward: arrayRewards[indexPath.row])
+                return cell
             }
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
-            cell.setValuesToFields(dictReward: arrayRewards[indexPath.row])
-            cell.setupProgressBar(dictReward: arrayRewards[indexPath.row])
-            return cell
+
         }else{
             if arrayMyBooking.count > 0 {
                 let dict = self.arrayMyBooking[indexPath.row]
@@ -378,17 +410,17 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
             if arrayMyBooking.count > 0 {
                 let dict = self.arrayMyBooking[indexPath.row]
                 if dict.active_status == "not_active"{
-                    return 171
+                    return 175
                 }else if dict.active_status == "not_available"{
-                    return 171
+                    return 176
                 }else if dict.active_status == "active"{
-                    return 321
+                    return 326
                         //286
                 }else if dict.active_status == "awaiting_payment"{
                     if dict.booking_status == "booked"{
                         return 311
                     }else{
-                        return 171
+                        return 176
                     }
                 }else if dict.active_status == ""{
                     return 0
@@ -425,6 +457,8 @@ extension BookingsVC {
                         if self.arrayMyBooking.count <= 0{
                             self.lblMessageOnScreen.isHidden = false
                             self.lblMessageOnScreen.text = "You don't have any reservations yet."
+                        }else{
+                            self.lblMessageOnScreen.isHidden = true
                         }
                         self.tableViewBooking.reloadData()
                         self.view.isUserInteractionEnabled = true

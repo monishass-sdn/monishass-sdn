@@ -52,6 +52,12 @@ class MyProfileTableVC: UITableViewController {
     @IBOutlet weak var btnOwnerTap: UIButton!
     @IBOutlet weak var heightForInstagramView : NSLayoutConstraint!
     
+    @IBOutlet weak var viewOwnerMYchalet : UIView!
+    @IBOutlet weak var viewOwner : UIView!
+    @IBOutlet weak var viewMychalet: UIView!
+    @IBOutlet weak var widthofViewOwner : NSLayoutConstraint!
+    @IBOutlet weak var widthofViewMyChalet : NSLayoutConstraint!
+    
     var arrayAdminDetails = [Admin_details]()
     var notiCount : Int = 0
     var Deviceheight : CGFloat = 0.0
@@ -99,6 +105,10 @@ class MyProfileTableVC: UITableViewController {
             heightForInstagramView.constant = 70
         }
         
+        let ownerAndmyChaletWidth = UIScreen.main.bounds.width - 40
+        widthofViewOwner.constant = (ownerAndmyChaletWidth / 2) - 0.5
+        widthofViewMyChalet.constant = (ownerAndmyChaletWidth / 2) - 0.5
+        
     }
     
     
@@ -121,11 +131,11 @@ class MyProfileTableVC: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewForTopUserDetails.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
-        if CAUser.currentUser.userstatus != "owner"{
+       // if CAUser.currentUser.userstatus != "owner"{
             viewForBottomFAQ.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
-        }else{
-            viewForBottomAddYourChalet.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
-        }
+       // }else{
+       //     viewForBottomAddYourChalet.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+      //  }
         
     }
     
@@ -252,15 +262,15 @@ class MyProfileTableVC: UITableViewController {
             if CAUser.currentUser.userstatus != "owner" {
                 return super.tableView(tableView,heightForRowAt: indexPath)
             }else{
-                return 0
+                return super.tableView(tableView,heightForRowAt: indexPath)
             }
         }
         
         if indexPath.row == 10 {
             if self.Deviceheight > 890 {
-                return 100
+                return 90
             }else{
-                return 70
+                return 60
             }
         }
         

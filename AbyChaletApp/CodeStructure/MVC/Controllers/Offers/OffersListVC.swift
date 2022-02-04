@@ -185,7 +185,7 @@ extension OffersListVC : UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 20 , height: 210)
+        return CGSize(width: collectionView.frame.width - 20 , height: 200)
     }
 }
 extension OffersListVC {

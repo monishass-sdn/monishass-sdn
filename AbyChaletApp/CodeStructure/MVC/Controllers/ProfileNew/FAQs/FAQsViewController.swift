@@ -133,12 +133,22 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.viewBg.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
         }
         let stringValue = faqData[indexPath.section].answer!
-        if isValidHtmlString(stringValue) == true{
-      //  if stringValue.contains(htmlStr){
-            cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
-        }else{
+        
+        let predicate = NSPredicate(format: "SELF MATCHES %@", "(?s).*\\p{Arabic}.*")
+        cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
+     /*   if predicate.evaluate(with: stringValue) {
+            print("arabic")
             cell.textViewFaq.text = faqData[indexPath.section].answer
-       }
+        }else{
+            if isValidHtmlString(stringValue) == true{
+                cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
+            }
+        }*/
+      //  if isValidHtmlString(stringValue) == true{
+      //      cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
+      //  }else{
+     //       cell.textViewFaq.text = faqData[indexPath.section].answer
+    //   }
         return cell
     }
     

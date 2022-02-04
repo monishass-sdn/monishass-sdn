@@ -17,6 +17,7 @@ class NotificationVC: UIViewController {
     var isFromProfile = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
         checkuserstatus()
         self.setUpNavigationBar()
         

@@ -64,6 +64,9 @@
 		00FD4E7826398C54009C9932 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00FD4E6B26398C53009C9932 /* Roboto-Bold.ttf */; };
 		00FD4E7926398C54009C9932 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00FD4E6C26398C53009C9932 /* Roboto-Thin.ttf */; };
 		00FD4E7A26398C54009C9932 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00FD4E6D26398C53009C9932 /* Roboto-Black.ttf */; };
+		4D0F4E7127A7A553009A7DC1 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E6D27A7A553009A7DC1 /* Oswald-Bold.ttf */; };
+		4D0F4E7227A7A553009A7DC1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E6E27A7A553009A7DC1 /* Oswald-Regular.ttf */; };
+		4D0F4E7427A7A553009A7DC1 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E7027A7A553009A7DC1 /* Oswald-Light.ttf */; };
 		4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */; };
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
 		4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */; };
@@ -76,6 +79,7 @@
 		4D4C5126277D90CB00DCF3FE /* agreementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C5125277D90CB00DCF3FE /* agreementVC.swift */; };
 		4D4C5129277D931A00DCF3FE /* BankDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C5128277D931A00DCF3FE /* BankDetailsVC.swift */; };
 		4D4DD58C27854A610031187B /* NewOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4DD58B27854A610031187B /* NewOffersTVCell.swift */; };
+		4D4FF93327AA8098005AB37A /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4FF93227AA8098005AB37A /* MimeType.swift */; };
 		4D534EBE2779F48E0058C44C /* myChaletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EBD2779F48E0058C44C /* myChaletVC.swift */; };
 		4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EC1277A06400058C44C /* myChaletTVCell.swift */; };
 		4D5E3EC2277C1780006C57C7 /* FAQsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */; };
@@ -193,6 +197,9 @@
 		00FD4E6C26398C53009C9932 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		00FD4E6D26398C53009C9932 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		0B99CCC9C0909ED0B6A7FA8A /* Pods-AbyChaletApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AbyChaletApp.debug.xcconfig"; path = "Target Support Files/Pods-AbyChaletApp/Pods-AbyChaletApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4D0F4E6D27A7A553009A7DC1 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
+		4D0F4E6E27A7A553009A7DC1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		4D0F4E7027A7A553009A7DC1 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
 		4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersTVCell.swift; sourceTree = "<group>"; };
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
 		4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerDetailsTableVC.swift; sourceTree = "<group>"; };
@@ -205,6 +212,7 @@
 		4D4C5125277D90CB00DCF3FE /* agreementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = agreementVC.swift; sourceTree = "<group>"; };
 		4D4C5128277D931A00DCF3FE /* BankDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsVC.swift; sourceTree = "<group>"; };
 		4D4DD58B27854A610031187B /* NewOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOffersTVCell.swift; sourceTree = "<group>"; };
+		4D4FF93227AA8098005AB37A /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		4D534EBD2779F48E0058C44C /* myChaletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletVC.swift; sourceTree = "<group>"; };
 		4D534EC1277A06400058C44C /* myChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletTVCell.swift; sourceTree = "<group>"; };
 		4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +356,7 @@
 		00AAB6712632C8D4003F3761 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				4D4FF93127AA8078005AB37A /* MimeType */,
 				00AAB6772632C93B003F3761 /* Views */,
 				00AAB6762632C920003F3761 /* Controllers */,
 				00AAB6752632C919003F3761 /* Model */,
@@ -542,6 +551,7 @@
 		00FD4E5F26398C37009C9932 /* CustomFonts */ = {
 			isa = PBXGroup;
 			children = (
+				4D0F4E6C27A7A553009A7DC1 /* oswald */,
 				A1A882C926720E4F0085C281 /* Arabic-Font-Almarai */,
 				00FD4E6026398C53009C9932 /* Roboto */,
 			);
@@ -577,6 +587,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4D0F4E6C27A7A553009A7DC1 /* oswald */ = {
+			isa = PBXGroup;
+			children = (
+				4D0F4E6D27A7A553009A7DC1 /* Oswald-Bold.ttf */,
+				4D0F4E6E27A7A553009A7DC1 /* Oswald-Regular.ttf */,
+				4D0F4E7027A7A553009A7DC1 /* Oswald-Light.ttf */,
+			);
+			path = oswald;
+			sourceTree = "<group>";
+		};
 		4D46CCFC277D69DB00DD5398 /* Owner Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,6 +620,14 @@
 				4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */,
 			);
 			path = "Add Offers";
+			sourceTree = "<group>";
+		};
+		4D4FF93127AA8078005AB37A /* MimeType */ = {
+			isa = PBXGroup;
+			children = (
+				4D4FF93227AA8098005AB37A /* MimeType.swift */,
+			);
+			path = MimeType;
 			sourceTree = "<group>";
 		};
 		4D534EBC2779F4650058C44C /* MyChalet */ = {
@@ -873,6 +901,7 @@
 				00FD4E7826398C54009C9932 /* Roboto-Bold.ttf in Resources */,
 				A1A882D326720E4F0085C281 /* Almarai-Light.ttf in Resources */,
 				A1A882D126720E4F0085C281 /* Almarai-Regular.ttf in Resources */,
+				4D0F4E7427A7A553009A7DC1 /* Oswald-Light.ttf in Resources */,
 				00FD4E7626398C54009C9932 /* LICENSE.txt in Resources */,
 				00FD4E7326398C54009C9932 /* Roboto-BoldItalic.ttf in Resources */,
 				00FD4E7026398C54009C9932 /* Roboto-Regular.ttf in Resources */,
@@ -881,7 +910,9 @@
 				00AAB6672632C742003F3761 /* LaunchScreen.storyboard in Resources */,
 				00FD4E7726398C54009C9932 /* Roboto-BlackItalic.ttf in Resources */,
 				A1A882D026720E4F0085C281 /* Almarai-ExtraBold.ttf in Resources */,
+				4D0F4E7127A7A553009A7DC1 /* Oswald-Bold.ttf in Resources */,
 				00FD4E7926398C54009C9932 /* Roboto-Thin.ttf in Resources */,
+				4D0F4E7227A7A553009A7DC1 /* Oswald-Regular.ttf in Resources */,
 				A1A882CF26720E4F0085C281 /* Almarai-Bold.ttf in Resources */,
 				A1A882D226720E4F0085C281 /* OFL.txt in Resources */,
 				00FD4E6F26398C54009C9932 /* Roboto-Light.ttf in Resources */,
@@ -1046,6 +1077,7 @@
 				00FD4E49263979C0009C9932 /* PackageListTableVCell.swift in Sources */,
 				00D9E45E263C5F4C0080F8A2 /* HeaderPackageTitleTableViewCell.swift in Sources */,
 				A1FD69C6265016A600A03987 /* ReservationTVC.swift in Sources */,
+				4D4FF93327AA8098005AB37A /* MimeType.swift in Sources */,
 				00FD4E4F26397BEA009C9932 /* Constants.swift in Sources */,
 				00D348BE264ACF0A00216E68 /* ProgressAlertVC.swift in Sources */,
 				4D4C5126277D90CB00DCF3FE /* agreementVC.swift in Sources */,
@@ -1210,7 +1242,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.12;
+				CURRENT_PROJECT_VERSION = 1.1.16;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1236,7 +1268,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.12;
+				CURRENT_PROJECT_VERSION = 1.1.16;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

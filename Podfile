@@ -19,6 +19,7 @@ target 'AbyChaletApp' do
    pod 'GradientProgress'
    pod 'GoogleMaps'
    pod 'KeychainAccess'
+   pod 'HGCircularSlider'
 
 
 end

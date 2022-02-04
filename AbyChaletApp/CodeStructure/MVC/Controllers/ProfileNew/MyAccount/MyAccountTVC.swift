@@ -8,6 +8,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 import SDWebImage
+import MobileCoreServices
 
 class MyAccountTVC: UITableViewController {
 
@@ -297,16 +298,19 @@ extension MyAccountTVC {
         
         var imageData : Data?
         var imgKey = ""
+        var mimetype = ""
         if selectedProfileImage != nil{
             imageData = self.selectedProfileImage.jpegData(compressionQuality: 0.8)!
             imgKey = "image"
+            mimetype = mimeType(for: imageData!)
+            print("mime type = \(mimetype)")
         }else{
             imageData = Data()
             imgKey = ""
         }
        // let type = CAUser.currentUser.userstatus == "owner" ? "owner" : "user"
         let type = CAUser.currentUser.userstatus == "user"
-        ServiceManager.sharedInstance.uploadSingleData("api/updateprofile", parameters: ["id":CAUser.currentUser.id!,"first_name":firstName,"last_name":lastName,"email":email,"phone":phone,"gender":gender,"country_code":countryCode,"type":type,"country":country], imgdata: imageData, filename: imgKey, withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.uploadSingleData("api/updateprofile", parameters: ["id":CAUser.currentUser.id!,"first_name":firstName,"last_name":lastName,"email":email,"phone":phone,"gender":gender,"country_code":countryCode,"type":type,"country":country], imgdata: imageData, filename: imgKey, mimetype: mimetype, withHud: true) { (success, response, error) in
             if success {
                 print("Updated Response == \(response)")
                 if response!["status"] as! Bool == true {
@@ -326,6 +330,31 @@ extension MyAccountTVC {
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: error!.localizedDescription)
             }
+        }
+    }
+    
+    func mimeType(for data: Data) -> String {
+
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
         }
     }
     
