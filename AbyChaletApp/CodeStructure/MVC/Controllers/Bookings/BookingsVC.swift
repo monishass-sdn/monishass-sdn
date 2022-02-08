@@ -271,7 +271,7 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookingRewardsTVCell", for: indexPath) as! BookingRewardsTVCell
                 cell.btnQuestionmark.addTarget(self, action: #selector(BtnTapped(sender:)), for: .touchUpInside)
                     
-                    let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 97.5, height: 97.5))
+                    let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 92.5, height: 92.5))
                     progressNew.backgroundColor = UIColor.white
                     progressNew.lineWidth = 12
                     progressNew.thumbLineWidth = 0.7
@@ -414,7 +414,7 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
                 }else if dict.active_status == "not_available"{
                     return 176
                 }else if dict.active_status == "active"{
-                    return 326
+                    return 336
                         //286
                 }else if dict.active_status == "awaiting_payment"{
                     if dict.booking_status == "booked"{

@@ -60,6 +60,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var heightConstrain: NSLayoutConstraint!
     @IBOutlet weak var widthConstrainCheckBox: NSLayoutConstraint!
     @IBOutlet weak var heightConstrainForDiscount: NSLayoutConstraint!
+    @IBOutlet weak var heightCOnstraintForViewDepositBG : NSLayoutConstraint!
     @IBOutlet weak var viewRewards: UIView!
     @IBOutlet weak var viewCollectionIndex: UIView!
     @IBOutlet weak var lblCheckOutDate: UILabel!
@@ -143,7 +144,7 @@ class ReservationTVC: UITableViewController {
         lblDeposit1.text = "Deposit".localized()
         lbllTotalInvoice.text = "Total Invoice".localized()
         lblPleasePayRemainingAmt.text = "Please pay the remaining amount before".localized()
-        lblAfterthisDateString.text = "After this date  The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:".localized()
+        lblAfterthisDateString.text = "After this date                                                           The Reservation is considered canceled And with the deposit confiscated And can be reserved by another customer You can pay at any time by going to:".localized()
         lblBooking.text = "Booking".localized()
         lbllRemaining.text = "Remaining".localized()
         lblChaletDetails.text = "Chalet details".localized()
@@ -160,8 +161,8 @@ class ReservationTVC: UITableViewController {
             lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 18)
             lblDeposit1.font = UIFont(name: kFontAlmaraiRegular, size: 15)
             lbllTotalInvoice.font = UIFont(name: kFontAlmaraiRegular, size: 15)
-            lblPleasePayRemainingAmt.font = UIFont(name: kFontAlmaraiRegular, size: 15)
-            lblAfterthisDateString.font = UIFont(name: kFontAlmaraiRegular, size: 15)
+            lblPleasePayRemainingAmt.font = UIFont(name: "Roboto-Regular", size: 18)
+            lblAfterthisDateString.font = UIFont(name: "Roboto-Medium", size: 18)
             lblChaletDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
             lblAgreement1.font = UIFont(name: kFontAlmaraiRegular, size: 17)
             lblYouMustAgreeAllConditions.font = UIFont(name: kFontAlmaraiRegular, size: 14)
@@ -175,8 +176,8 @@ class ReservationTVC: UITableViewController {
             lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 17)
             lblDeposit1.font = UIFont(name: "Roboto-Regular", size: 15)
             lbllTotalInvoice.font = UIFont(name: "Roboto-Regular", size: 15)
-            lblPleasePayRemainingAmt.font = UIFont(name: "Roboto-Regular", size: 15)
-            lblAfterthisDateString.font = UIFont(name: "Roboto-Regular", size: 15)
+            lblPleasePayRemainingAmt.font = UIFont(name: "Roboto-Regular", size: 18)
+            lblAfterthisDateString.font = UIFont(name: "Roboto-Medium", size: 17)
             lblChaletDetails.font = UIFont(name: "Roboto-Medium", size: 17)
             lblAgreement1.font = UIFont(name: "Roboto-Medium", size: 17)
             lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -265,7 +266,7 @@ class ReservationTVC: UITableViewController {
         self.viewAgreement.addCornerForView(cornerRadius: 10.0)
         self.btnAgreement.addCornerForView(cornerRadius: 8.0)
         self.btnBookingDetailDeposit.addCornerForView(cornerRadius: 8.0)
-        self.btnPayment.addCornerForView(cornerRadius: 27.5)
+        self.btnPayment.addCornerForView(cornerRadius: 30)
         self.btnPayment.addBorderForView()
         for btn in btnCollection{
             btn.addCornerForView(cornerRadius: 17.5)
@@ -489,6 +490,7 @@ class ReservationTVC: UITableViewController {
         let rewardsshown = Double(dictOfferUserDetails.rewarded_amt!)
         if totarent == rewardsshown {
             self.viewDepositBg.isHidden = true
+           // self.heightCOnstraintForViewDepositBG.constant = 80
         }else{
             self.viewDepositBg.isHidden = false
         }
@@ -589,8 +591,8 @@ class ReservationTVC: UITableViewController {
         var rent = 0
         var deposit = 0
         if isFromOffer == false{
-            print("Rent is = \(arrayUserDetails[selectedIndex].rent)")
-            print("Deposit is = \(arrayUserDetails[selectedIndex].min_deposit)")
+           // print("Rent is = \(arrayUserDetails[selectedIndex].rent)")
+           // print("Deposit is = \(arrayUserDetails[selectedIndex].min_deposit)")
 
             rent = Int(arrayUserDetails[selectedIndex].rent!)!
             deposit = Int(arrayUserDetails[selectedIndex].min_deposit!)!
@@ -609,17 +611,24 @@ class ReservationTVC: UITableViewController {
                 self.isClickDeposit = true
                 self.heightConstrain.constant = 40
                 self.viewDeposit.isHidden = false
-                self.lblDeposit.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-                self.viewDepositBg.backgroundColor = #colorLiteral(red: 1, green: 0.06666666667, blue: 0.1647058824, alpha: 1)
-                self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .bottom)
+                self.lblDeposit.textColor = #colorLiteral(red: 1, green: 1, blue: 0, alpha: 1)
+                self.lblDeposit1.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                self.lblDeposit1.font = UIFont(name: "Roboto-Bold", size: 15)
+                self.viewDepositBg.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
+                self.tableView.reloadData()
+               // self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .bottom)
             }else{
                 sender.isSelected = false
                 self.isClickDeposit = false
                 self.heightConstrain.constant = 0
                 self.viewDeposit.isHidden = true
                 self.lblDeposit.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+                self.lblDeposit1.textColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
+                self.lblDeposit1.font = UIFont(name: "Roboto-Regular", size: 15)
                 self.viewDepositBg.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
-                self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .top)
+                self.tableView.reloadData()
+
+               // self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .top)
             }
         }else{
             showDefaultAlert(viewController: self, title: "Message".localized(), msg: "There is no deposit option for this chalet".localized())
@@ -831,15 +840,15 @@ class ReservationTVC: UITableViewController {
         if indexPath.row == 4 {
             if self.isClickDeposit == false {
                 if isFromOffer == true{
-                    return 216 - 40
+                    return 256 - 40
                 }else{
-                    return 216
+                    return 256
                 }
             }else{
                 if isFromOffer == true{
-                    return 530 - 40
+                    return 570 - 40
                 }else{
-                    return 530
+                    return 570
                 }
                 
             }
