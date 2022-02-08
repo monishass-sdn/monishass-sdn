@@ -126,7 +126,7 @@ class BookingRewardsTVCell: UITableViewCell {
     func setupProgressBar(dictReward:Reward_details) {
         print("Total Rewards = \(Double(dictReward.total!))")
         
-        let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 97, height: 97))
+        let progressNew = CircularSlider(frame: CGRect(x: -6.1, y: -5.4, width: 92.5, height: 92.5))
         progressNew.backgroundColor = UIColor.white
         progressNew.lineWidth = 12
         progressNew.thumbLineWidth = 0.7
@@ -367,7 +367,7 @@ class ActiveBookingTVCell: UITableViewCell, MKMapViewDelegate {
         lblCheckOut.text = "Check-Out".localized()
         lblLocation.text = "Location".localized()
         btnCopy.setTitle("Copy".localized(), for: .normal)
-        btnCopy.setTitle("Copied".localized(), for: .normal)
+      //  btnCopy.setTitle("Copied".localized(), for: .normal)
         btnCallUs.setTitle("Call us".localized(), for: .normal)
 
         

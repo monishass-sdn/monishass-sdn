@@ -428,7 +428,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 return CGSize(width: kScreenWidth , height: 60)
             }*/
         }else{
-            return CGSize(width: kScreenWidth , height: 150)
+            return CGSize(width: kScreenWidth , height: 190)
         }
         
     }
