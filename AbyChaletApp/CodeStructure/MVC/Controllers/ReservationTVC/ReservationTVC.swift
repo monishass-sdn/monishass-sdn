@@ -117,7 +117,7 @@ class ReservationTVC: UITableViewController {
     var arrayAgreements = [Agreement]()
     var arrayAdminDetails = [Admin_details]()
     var isUnpaidDone = true
-
+    var isDepositEligible : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -385,8 +385,12 @@ class ReservationTVC: UITableViewController {
         let rewardsshown = Double(arrayUserDetails[selectIndex].rewarded_amt!)
         if totarent == rewardsshown {
             self.viewDepositBg.isHidden = true
+            isDepositEligible = false
+            self.heightCOnstraintForViewDepositBG.constant = 0
         }else{
+            self.heightCOnstraintForViewDepositBG.constant = 40
             self.viewDepositBg.isHidden = false
+            isDepositEligible = true
             
         }
         
@@ -493,6 +497,7 @@ class ReservationTVC: UITableViewController {
            // self.heightCOnstraintForViewDepositBG.constant = 80
         }else{
             self.viewDepositBg.isHidden = false
+            isDepositEligible = true
         }
         
         let dateFormater1 = DateFormatter()
@@ -842,7 +847,11 @@ class ReservationTVC: UITableViewController {
                 if isFromOffer == true{
                     return 256 - 40
                 }else{
-                    return 256
+                    if isDepositEligible == false{
+                        return 256 - 40
+                    }else{
+                        return 256
+                    }
                 }
             }else{
                 if isFromOffer == true{

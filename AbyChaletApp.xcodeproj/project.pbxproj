@@ -1240,9 +1240,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.19;
+				CURRENT_PROJECT_VERSION = 1.1.20;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1252,7 +1252,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.srishti.AbyChaletApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = chalet_Distribution_New;
+				PROVISIONING_PROFILE_SPECIFIER = chalet_provision_2022/02/08;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/srishti/Downloads/Chalet-iOS/AbyChaletApp/CodeStructure/AbyChalet_Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1266,9 +1266,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.19;
+				CURRENT_PROJECT_VERSION = 1.1.20;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1278,7 +1278,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.srishti.AbyChaletApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = chalet_Distribution_New;
+				PROVISIONING_PROFILE_SPECIFIER = chalet_provision_2022/02/08;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/srishti/Downloads/Chalet-iOS/AbyChaletApp/CodeStructure/AbyChalet_Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

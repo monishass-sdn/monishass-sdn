@@ -136,6 +136,7 @@ extension FAQsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let predicate = NSPredicate(format: "SELF MATCHES %@", "(?s).*\\p{Arabic}.*")
         cell.textViewFaq.attributedText = faqData[indexPath.section].answer?.html2AttributedString
+        //cell.textViewFaq.text = faqData[indexPath.section].answer
      /*   if predicate.evaluate(with: stringValue) {
             print("arabic")
             cell.textViewFaq.text = faqData[indexPath.section].answer

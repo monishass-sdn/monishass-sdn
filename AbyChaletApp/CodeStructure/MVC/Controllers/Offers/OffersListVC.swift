@@ -27,6 +27,7 @@ class OffersListVC: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .medium
         self.view.addSubview(activityIndicator)
+        setUpAddOfferButton()
     }
     
     
@@ -52,6 +53,25 @@ class OffersListVC: UIViewController {
         navigationController?.pushViewController(addOfferVC, animated: true)
     }
     
+    func setUpAddOfferButton(){
+        if CAUser.currentUser.userstatus == "owner"{
+            let menuBtn = UIButton(type: .custom)
+            menuBtn.frame = CGRect(x: 0.0, y: 0.0, width: 75, height: 75)
+            menuBtn.setImage(UIImage(named:"addicon"), for: .normal)
+            menuBtn.addTarget(self, action: #selector(addOfferTapped), for: UIControl.Event.touchUpInside)
+
+            let menuBarItem = UIBarButtonItem(customView: menuBtn)
+            let currWidth = menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 24)
+            currWidth?.isActive = true
+            let currHeight = menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 24)
+            currHeight?.isActive = true
+            self.navigationItem.leftBarButtonItem = menuBarItem
+        }else{
+            // No need to show Add Offer
+        }
+
+    }
+    
 
     //MARK:- SetUp NavigationBar
     func setUpNavigationBar() {
@@ -68,8 +88,8 @@ class OffersListVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         if CAUser.currentUser.userstatus == "owner"{
-            let addOfferBtn = UIBarButtonItem(image: Images.kIconAdd, style: .plain, target: self, action: #selector(addOfferTapped))
-            self.navigationItem.leftBarButtonItems = [addOfferBtn]
+           // let addOfferBtn = UIBarButtonItem(image: Images.kIconAdd, style: .plain, target: self, action: #selector(addOfferTapped))
+           // self.navigationItem.leftBarButtonItems = [addOfferBtn]
         }else{
             
         }
