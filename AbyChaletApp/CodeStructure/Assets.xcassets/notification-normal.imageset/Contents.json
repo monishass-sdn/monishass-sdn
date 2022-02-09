@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "notification-normal.png",
+      "filename" : "Icon ionic-md-notifications-outline.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Icon ionic-md-notifications-outline@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Icon ionic-md-notifications-outline@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

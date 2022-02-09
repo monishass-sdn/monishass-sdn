@@ -34,6 +34,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblRemainingAmt: UILabel!
     @IBOutlet weak var lblDeposit: UILabel!
     @IBOutlet weak var viewBgCollectionView: UIView!
+    @IBOutlet weak var viewForTimerAndDiscount: UIView!
     @IBOutlet weak var collectionViewNew: UICollectionView!
     @IBOutlet weak var lblAgreement: UILabel!
     @IBOutlet var btnCollection: [UIButton]!
@@ -88,6 +89,8 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblBookingDetails: UILabel!
     
     @IBOutlet weak var lblRentalPriceTitel: UILabel!
+    @IBOutlet weak var viewForNoDepositinOffers: UIView!
+    @IBOutlet weak var lblDiscountAmount: UILabel!
     
     var isUSerIsBlocked = false
     var rewards = 0
@@ -127,9 +130,11 @@ class ReservationTVC: UITableViewController {
         if isFromOffer == true{
             self.setValuesFromOffer(selectIndex: 0)
             self.widthConstrainCheckBox.constant = 0.0
-            self.heightConstrainForDiscount.constant = 0.0
-            self.viewRewards.isHidden = true
+            self.heightConstrainForDiscount.constant = 40.0
+            self.viewRewards.isHidden = false
+            self.viewForNoDepositinOffers.isHidden = false
         }else{
+            self.viewForNoDepositinOffers.isHidden = true
             self.setValuesToFields(selectIndex: selectedIndex)
             self.widthConstrainCheckBox.constant = 30.0
             self.heightConstrainForDiscount.constant = 40.0
@@ -213,10 +218,9 @@ class ReservationTVC: UITableViewController {
         self.viewBookingDetails.roundCorners(corners: [.topLeft,.topRight], radius: 10.0)
         self.viewBookingDetails.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10.0)
         self.viewChalletName.roundCorners(corners: [.topLeft,.topRight], radius: 10.0)
-        self.viewBgCollectionView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10.0)
+        self.viewForTimerAndDiscount.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10.0)
         self.viewPrev.roundCorners(corners: [.topRight,.bottomRight], radius: 8.0)
         self.viewForward.roundCorners(corners: [.topLeft,.bottomLeft], radius: 8.0)
-        //layer.cornerRadius = 10.0
         self.viewCollectionIndex.roundCorners(corners: [.bottomRight], radius: 10.0)
     }
     
@@ -458,7 +462,7 @@ class ReservationTVC: UITableViewController {
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         self.lblTotalRent.attributedText = attributeString
         
-        
+        self.lblDiscountAmount.text = String("-\(dictOfferUserDetails.discount_amt ?? 0)")
         let attrsTotalRent1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 30)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2156862745, green: 0.6235294118, blue: 0, alpha: 1)] as [NSAttributedString.Key : Any]
         let attrsTotalRent2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Medium", size: 25)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)] as [NSAttributedString.Key : Any]
         
@@ -494,7 +498,6 @@ class ReservationTVC: UITableViewController {
         let rewardsshown = Double(dictOfferUserDetails.rewarded_amt!)
         if totarent == rewardsshown {
             self.viewDepositBg.isHidden = true
-           // self.heightCOnstraintForViewDepositBG.constant = 80
         }else{
             self.viewDepositBg.isHidden = false
             isDepositEligible = true
@@ -845,7 +848,7 @@ class ReservationTVC: UITableViewController {
         if indexPath.row == 4 {
             if self.isClickDeposit == false {
                 if isFromOffer == true{
-                    return 256 - 40
+                    return 256 //+ 40
                 }else{
                     if isDepositEligible == false{
                         return 256 - 40
@@ -863,14 +866,14 @@ class ReservationTVC: UITableViewController {
             }
         }else if indexPath.row == 0{
             if isFromOffer == true{
-                return 0
+                return 55
             }else{
                 return 55
             }
             
         }else if indexPath.row == 1 {
             if isFromOffer == true{
-                return 165
+                return 0
             }else{
                 return 0
             }
@@ -878,7 +881,7 @@ class ReservationTVC: UITableViewController {
         }else if indexPath.row == 2 {
             
             
-            return 371
+            return 430
             
         }else if indexPath.row == 5 {
             
@@ -1534,6 +1537,7 @@ extension ReservationTVC {
         let calender:Calendar = Calendar.current
         let components: DateComponents = calender.dateComponents([.day, .hour, .minute, .second], from: offerCreated, to: date)
         
+        /*
         if (components.day! >= 0 && components.day! < 3) {
             self.viewTopProgress.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.02352941176, blue: 0.1333333333, alpha: 1)
         }else if (components.day! > 3 && components.day! < 12){
@@ -1541,6 +1545,16 @@ extension ReservationTVC {
         }else{
             self.viewTopProgress.backgroundColor = #colorLiteral(red: 1, green: 0.7647058824, blue: 0, alpha: 1)
         }
+     */
+        if (components.hour! >= 0 && components.hour! < Int(0.25)) {
+            self.viewTopProgress.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+        }else if (components.hour! > Int(0.25) && components.day! < 1){
+            self.viewTopProgress.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.7333333333, blue: 0.1411764706, alpha: 1)
+        }else{
+            self.viewTopProgress.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+        }
+        
+        
         //viewTopProgress.setProgress(Float(progressValue), animated: true)
         dd.startTimer(pUpdateActionHandler: { [self] (time) in
             //progressValue = progressValue + 0.00001

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "notification-new.png",
+      "filename" : "Group 5813.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Group 5813@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Group 5813@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

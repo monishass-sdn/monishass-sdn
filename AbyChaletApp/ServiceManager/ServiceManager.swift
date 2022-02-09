@@ -9,7 +9,8 @@ import Foundation
 import Alamofire
 import SVProgressHUD
 
-let kBaseUrl            = "https://sicsapp.com/Aby_chalet/"
+//let kBaseUrl            = "https://sicsapp.com/Aby_chalet/"
+let kBaseUrl            = "http://54.201.160.69:3188/"
     //"https://sicsapp.com/Aby_chalet/"
     //"https://web.sicsglobal.com/aby_chalet/"
 

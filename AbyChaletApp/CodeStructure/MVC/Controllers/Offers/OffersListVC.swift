@@ -27,7 +27,7 @@ class OffersListVC: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .medium
         self.view.addSubview(activityIndicator)
-        setUpAddOfferButton()
+       // setUpAddOfferButton()
     }
     
     
@@ -88,8 +88,8 @@ class OffersListVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         if CAUser.currentUser.userstatus == "owner"{
-           // let addOfferBtn = UIBarButtonItem(image: Images.kIconAdd, style: .plain, target: self, action: #selector(addOfferTapped))
-           // self.navigationItem.leftBarButtonItems = [addOfferBtn]
+            let addOfferBtn = UIBarButtonItem(image: Images.kIconAdd, style: .plain, target: self, action: #selector(addOfferTapped))
+            self.navigationItem.leftBarButtonItems = [addOfferBtn]
         }else{
             
         }

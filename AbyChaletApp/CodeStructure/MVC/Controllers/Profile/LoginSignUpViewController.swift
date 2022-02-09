@@ -766,6 +766,7 @@ extension LoginSignUpViewController {
             imageData = self.selectedProfileImage.jpegData(compressionQuality: 0.8)!
             fileName = "image"
             mimetype = mimeType(for: imageData)
+           // fileName.append(mimetype)
         }else{
             imageData = Data()
             fileName = ""

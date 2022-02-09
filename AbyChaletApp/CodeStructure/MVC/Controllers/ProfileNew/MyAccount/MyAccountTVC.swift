@@ -304,6 +304,7 @@ extension MyAccountTVC {
             imgKey = "image"
             mimetype = mimeType(for: imageData!)
             print("mime type = \(mimetype)")
+           // imgKey.append(mimetype)
         }else{
             imageData = Data()
             imgKey = ""
