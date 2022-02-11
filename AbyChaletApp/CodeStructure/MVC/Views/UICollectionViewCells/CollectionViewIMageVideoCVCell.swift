@@ -239,7 +239,11 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
     @IBOutlet weak var imgChaletImage: UIImageView!
     @IBOutlet weak var lblCheckIn: UILabel!
     @IBOutlet weak var lblCheckOut: UILabel!
-    
+    @IBOutlet weak var lblTimer: UILabel!
+    @IBOutlet weak var lblOfferDiscount: UILabel!
+    @IBOutlet weak var viewForDiscountLabel: UIView!
+    @IBOutlet weak var progressViewForTimer: UIView!
+    @IBOutlet weak var heightForTImerView: NSLayoutConstraint!
     
     func setValuesToFields(dict : User_details) {
         lblCheckIn.text = "Check-in".localized()
@@ -266,10 +270,76 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
             imgChaletImage.image = kPlaceHolderImage
         }
         
+        if dict.offer_available == false{
+            print("No Offer Available for this chalet")
+            self.progressViewForTimer.isHidden = true
+            self.viewForDiscountLabel.isHidden = true
+            viewBg.cornerRadius = 10
+            self.heightForTImerView.constant = 0
+        }else{
+            print("Offer Available for this chalet")
+            self.heightForTImerView.constant = 40
+            self.progressViewForTimer.isHidden = false
+            self.viewForDiscountLabel.isHidden = false
+            viewBg.roundCorners(corners: [.topLeft,.topRight], radius: 10)
+            progressViewForTimer.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+            let dateFormater1 = DateFormatter()
+            dateFormater1.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let offerExpiry = dateFormater1.date(from: dict.offer_checkin!)
+            let offerCreatedDate = dateFormater1.date(from: dict.offercreated_at!)
+            let expiry = Calendar.current.date( byAdding: .hour,value: -Int(dict.offer_expiry!)!,to: offerExpiry!)
+            let expiryStr = dateFormater1.string(from: expiry!)
+            DispatchQueue.main.async {
+                self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
+            }
+        }
+
+        
+  
         
         
     }
     
+    
+    func strtTimer(time:String,offerCreated:Date)  {
+        let timeee = time
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm a"
+        let date = dateFormater.date(from: time)!
+        let dd = DateCountDownTimer()
+        dd.initializeTimer(timeee)
+        let seconds : Double = Double(Date().seconds(from: offerCreated))
+        let totalSeconds : Double = Double(date.seconds(from: offerCreated))
+        let remainingSeconds : Double = Double(date.seconds(from: Date()))
+        var progressValue = (seconds / totalSeconds)
+        
+        let calender:Calendar = Calendar.current
+        let components: DateComponents = calender.dateComponents([.day, .hour, .minute, .second], from: offerCreated, to: date)
+        
+
+        if (components.hour! >= 0 && components.hour! < Int(0.25)) {
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+        }else if (components.hour! > Int(0.25) && components.day! < 1){
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.7333333333, blue: 0.1411764706, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.7333333333, blue: 0.1411764706, alpha: 1)
+        }else{
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+        }
+        
+        dd.startTimer(pUpdateActionHandler: { [self] (time) in
+            
+            self.lblTimer.text = time
+            
+        }) {
+            DispatchQueue.main.async {
+                print("Completed")
+            }
+        }
+    }
     
     
     

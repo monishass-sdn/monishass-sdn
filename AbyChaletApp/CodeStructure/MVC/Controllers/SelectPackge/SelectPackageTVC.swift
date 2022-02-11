@@ -41,6 +41,8 @@ class SelectPackageTVC: UITableViewController {
     var calendarHeight : CGFloat = 425
     var selectedIndexHolidays = 0
     var showAvilablechaletStringHeight = 0
+    
+    var cellCount : Int = 0
     @IBOutlet var calenderContainerView     : UIView!
     @IBOutlet weak var lblAvailableChalets: UILabel!
     var tempValues : [User_details]?
@@ -191,7 +193,17 @@ class SelectPackageTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 6 {
             if arrayUserDetails.count > 0 {
-                return CGFloat(self.arrayUserDetails.count * 150) + 16
+                var countwithOffer = 0
+                for item in self.arrayUserDetails{
+                    if item.offer_available == true{
+                        countwithOffer += 1
+                    }
+                }
+                let countWithoutOffer = self.arrayUserDetails.count - countwithOffer
+                let heightForOffer = countwithOffer * 220
+                let heightWithoutOffer = countWithoutOffer * 190
+                
+                return CGFloat(heightForOffer + heightWithoutOffer) + 45
             }else{
                 return 0
             }
@@ -295,11 +307,13 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
         }else if collectionView.tag == 3{
             return self.arrayChalletList.count
         }else{
+            print("Count = \(arrayUserDetails.count)")
             return arrayUserDetails.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        self.cellCount += 1
+        print("CellCount = \(cellCount)")
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectChaletMenuCollectionViewCell", for: indexPath) as! SelectChaletMenuCollectionViewCell
             cell.lblTitle.text = topSliderMenuArray[indexPath.item]
@@ -332,6 +346,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             return cell
         }
         else{
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewChaletListCVCell", for: indexPath) as! CollectionViewChaletListCVCell
             if self.arrayUserDetails.count > 0 {
                 cell.setValuesToFields(dict: self.arrayUserDetails[indexPath.row])
@@ -396,6 +411,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                     reservationVC.selectedIndex = indexPath.item
                     reservationVC.selectedPackage = self.topSelection
                     reservationVC.isFromOffer = false
+                    reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
                     self.navigationController?.pushViewController(reservationVC, animated: true)
                     }else{
                         //Reservation Not Available
@@ -428,7 +444,11 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 return CGSize(width: kScreenWidth , height: 60)
             }*/
         }else{
-            return CGSize(width: kScreenWidth , height: 190)
+            if arrayUserDetails[indexPath.row].offer_available == false{
+                return CGSize(width: kScreenWidth, height: 190)
+            }else{
+                return CGSize(width: kScreenWidth , height: 215)
+            }
         }
         
     }
@@ -572,6 +592,7 @@ extension SelectPackageTVC {
         ServiceManager.sharedInstance.postMethodAlamofire("api/searchchalet", dictionary: ["from_date":fromDate,"to_date":toDate,"package":selectedPackage,"userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
             if success {
+                print(response)
                 if response!["status"] as! Bool == true {
                     let responseBase = ChaletSearchBase(dictionary: response as! NSDictionary)
                     self.arrayUserDetails = (responseBase?.user_details)!

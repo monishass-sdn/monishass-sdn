@@ -81,6 +81,14 @@ public class User_details {
     public var rewarded_amt : Int?
     public var reservation_available : Int?
     public var reservation_status : Bool?
+    
+    public var offer_available : Bool?
+    public var offercreated_at : String?
+    public var offer_checkin : String?
+    public var offer_checkout : String?
+    public var OfferId : String?
+    public var Offer_package : String?
+    public var Offer_discount_amt : String?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [User_details]
     {
@@ -128,6 +136,14 @@ public class User_details {
         rewarded_amt = dictionary["rewarded_amt"] as? Int
         reservation_available = dictionary["reservation_available"] as? Int
         reservation_status = dictionary["reservation_status"] as? Bool
+        
+        offer_available = dictionary["offer_available"] as? Bool
+        offercreated_at = dictionary["offercreated_at"] as? String
+        offer_checkin = dictionary["offer_checkin"] as? String
+        offer_checkout = dictionary["offer_checkout"] as? String
+        OfferId = dictionary["OfferId"] as? String
+        Offer_package = dictionary["Offer_package"] as? String
+        Offer_discount_amt = dictionary["Offer_discount_amt"] as? String
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -166,6 +182,16 @@ public class User_details {
         dictionary.setValue(self.rewarded_amt, forKey: "rewarded_amt")
         dictionary.setValue(self.reservation_available, forKey: "reservation_available")
         dictionary.setValue(self.reservation_status, forKey: "reservation_status")
+        
+        dictionary.setValue(self.offer_available, forKey: "offer_available")
+        dictionary.setValue(self.offercreated_at, forKey: "offercreated_at")
+        dictionary.setValue(self.offer_checkin, forKey: "offer_checkin")
+        dictionary.setValue(self.offer_checkout, forKey: "offer_checkout")
+        dictionary.setValue(self.Offer_discount_amt, forKey: "Offer_discount_amt")
+        dictionary.setValue(self.OfferId, forKey: "OfferId")
+        dictionary.setValue(self.Offer_package, forKey: "Offer_package")
+
+
         return dictionary
     }
 

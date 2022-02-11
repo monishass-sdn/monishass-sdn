@@ -91,6 +91,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblRentalPriceTitel: UILabel!
     @IBOutlet weak var viewForNoDepositinOffers: UIView!
     @IBOutlet weak var lblDiscountAmount: UILabel!
+    @IBOutlet weak var hrightConstraintsforTimerView: NSLayoutConstraint!
     
     var isUSerIsBlocked = false
     var rewards = 0
@@ -114,6 +115,7 @@ class ReservationTVC: UITableViewController {
     let productList = NSMutableArray()
     var selectedPackage = ""
     var isFromOffer = false
+    var isOfferAvailable = false
     var dictOfferUserDetails : Offer_Chalet_list!
     var dictOfferChaletList : Offer_Chalet_list!
     var dictAdmin : Admin!
@@ -121,9 +123,10 @@ class ReservationTVC: UITableViewController {
     var arrayAdminDetails = [Admin_details]()
     var isUnpaidDone = true
     var isDepositEligible : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(arrayUserDetails[selectedIndex].offer_available)
         self.setUpNavigationBar()
         self.setupUI()
         self.getAdminDetails()
@@ -881,7 +884,23 @@ class ReservationTVC: UITableViewController {
         }else if indexPath.row == 2 {
             
             
-            return 430
+           // return 430
+            
+            if isFromOffer == false{
+                if isOfferAvailable == false{
+                    self.viewBgCollectionView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+                    self.hrightConstraintsforTimerView.constant = 0.0
+                    return 370
+                }else{
+                    self.viewBgCollectionView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 0)
+                    self.hrightConstraintsforTimerView.constant = 60.0
+                    return 430
+                }
+              //  return 370
+            }else{
+                self.hrightConstraintsforTimerView.constant = 60.0
+                return 430
+            }
             
         }else if indexPath.row == 5 {
             
