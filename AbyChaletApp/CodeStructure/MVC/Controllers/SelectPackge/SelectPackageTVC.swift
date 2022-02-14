@@ -200,8 +200,8 @@ class SelectPackageTVC: UITableViewController {
                     }
                 }
                 let countWithoutOffer = self.arrayUserDetails.count - countwithOffer
-                let heightForOffer = countwithOffer * 220
-                let heightWithoutOffer = countWithoutOffer * 190
+                let heightForOffer = countwithOffer * 215
+                let heightWithoutOffer = countWithoutOffer * 176
                 
                 return CGFloat(heightForOffer + heightWithoutOffer) + 45
             }else{
@@ -445,7 +445,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             }*/
         }else{
             if arrayUserDetails[indexPath.row].offer_available == false{
-                return CGSize(width: kScreenWidth, height: 190)
+                return CGSize(width: kScreenWidth, height: 176)
             }else{
                 return CGSize(width: kScreenWidth , height: 215)
             }

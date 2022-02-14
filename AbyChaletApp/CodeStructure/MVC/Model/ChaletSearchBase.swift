@@ -89,6 +89,9 @@ public class User_details {
     public var OfferId : String?
     public var Offer_package : String?
     public var Offer_discount_amt : String?
+    public var subchalet_available : Bool?
+    public var isFromHolidaysandEvents : Bool?
+    public var subchalet_count : String?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [User_details]
     {
@@ -144,6 +147,10 @@ public class User_details {
         OfferId = dictionary["OfferId"] as? String
         Offer_package = dictionary["Offer_package"] as? String
         Offer_discount_amt = dictionary["Offer_discount_amt"] as? String
+        subchalet_available = dictionary["subchalet_available"] as? Bool
+        isFromHolidaysandEvents = dictionary["isFromHolidaysandEvents"] as? Bool
+        subchalet_count = dictionary["subchalet_count"] as? String
+        
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -190,6 +197,9 @@ public class User_details {
         dictionary.setValue(self.Offer_discount_amt, forKey: "Offer_discount_amt")
         dictionary.setValue(self.OfferId, forKey: "OfferId")
         dictionary.setValue(self.Offer_package, forKey: "Offer_package")
+        dictionary.setValue(self.subchalet_available, forKey: "subchalet_available")
+        dictionary.setValue(self.isFromHolidaysandEvents, forKey: "isFromHolidaysandEvents")
+        dictionary.setValue(self.subchalet_count, forKey: "subchalet_count")
 
 
         return dictionary

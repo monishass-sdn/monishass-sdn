@@ -92,6 +92,9 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var viewForNoDepositinOffers: UIView!
     @IBOutlet weak var lblDiscountAmount: UILabel!
     @IBOutlet weak var hrightConstraintsforTimerView: NSLayoutConstraint!
+    @IBOutlet weak var lblOfferAmount: UILabel!
+    @IBOutlet weak var heightConstraintForOfferView: NSLayoutConstraint!
+    @IBOutlet weak var viewForOffer: UIView!
     
     var isUSerIsBlocked = false
     var rewards = 0
@@ -126,7 +129,6 @@ class ReservationTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(arrayUserDetails[selectedIndex].offer_available)
         self.setUpNavigationBar()
         self.setupUI()
         self.getAdminDetails()
@@ -142,6 +144,13 @@ class ReservationTVC: UITableViewController {
             self.widthConstrainCheckBox.constant = 30.0
             self.heightConstrainForDiscount.constant = 40.0
             self.viewRewards.isHidden = false
+            if arrayUserDetails[selectedIndex].Offer_discount_amt == ""{
+                self.heightConstraintForOfferView.constant = 0.0
+                self.viewForOffer.isHidden = true
+            }else{
+                self.viewForOffer.isHidden = false
+                self.heightConstraintForOfferView.constant = 40.0
+            }
         }
         //check
         lblBookingDetails.text = "Booking Details".localized()
@@ -340,6 +349,20 @@ class ReservationTVC: UITableViewController {
     
     //MARK:- setValuesToFields
     func setValuesToFields(selectIndex:Int) {
+        if isOfferAvailable == false{
+            print("No Offer Available")
+        }else{
+            let dateFormater1 = DateFormatter()
+            dateFormater1.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let offerExpiry = dateFormater1.date(from: arrayUserDetails[selectIndex].offer_checkin!)
+            let offerCreatedDate = dateFormater1.date(from: arrayUserDetails[selectIndex].offercreated_at!)
+            let expiry = Calendar.current.date( byAdding: .hour,value: -Int(arrayUserDetails[selectIndex].offer_expiry!)!,to: offerExpiry!)
+            let expiryStr = dateFormater1.string(from: expiry!)
+            DispatchQueue.main.async {
+                self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
+            }
+        }
+
         
         let attrsKd = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
         let attrsAmt = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
@@ -348,6 +371,11 @@ class ReservationTVC: UITableViewController {
         let rent = NSMutableAttributedString(string:"\(arrayUserDetails[selectIndex].rent!)", attributes:attrsAmt)
         kd.append(rent)
         self.lblRent.attributedText = kd
+        
+        let offerkd = NSMutableAttributedString(string:"KD ", attributes:attrsKd)
+        let offerAmt = NSMutableAttributedString(string:"\(arrayUserDetails[selectIndex].Offer_discount_amt!)", attributes:attrsAmt)
+        offerkd.append(offerAmt)
+        self.lblOfferAmount.attributedText = offerkd
 
        // self.lblRent.text = "KD \(arrayUserDetails[selectIndex].rent!)"
         self.lblCheckOutDate.text = arrayUserDetails[selectIndex].check_out?.appFormattedDate
@@ -355,7 +383,6 @@ class ReservationTVC: UITableViewController {
         self.lblCheckInTime.text = arrayUserDetails[selectIndex].admincheck_in
         self.lblCheckOutTime.text = arrayUserDetails[selectIndex].admincheck_out
         self.lblSlNo.text = "\("No.".localized())\(arrayUserDetails[selectedIndex].chalet_id ?? 0)"
-        
 
         self.lblChaletName.text = arrayUserDetails[selectedIndex].chalet_name
         
@@ -398,6 +425,12 @@ class ReservationTVC: UITableViewController {
             self.heightCOnstraintForViewDepositBG.constant = 40
             self.viewDepositBg.isHidden = false
             isDepositEligible = true
+            
+        }
+        
+        if rewardsshown == 0{
+            
+        }else{
             
         }
         
@@ -445,6 +478,10 @@ class ReservationTVC: UITableViewController {
         kd.append(rent)
         self.lblRent.attributedText = kd
         
+        let offerkd = NSMutableAttributedString(string:"KD ", attributes:attrsKd)
+        let offerAmt = NSMutableAttributedString(string:"\(dictOfferUserDetails.discount_amt!)", attributes:attrsAmt)
+        offerkd.append(offerAmt)
+        self.lblOfferAmount.attributedText = offerkd
         
        // self.lblRent.text = "KD \(dictOfferUserDetails.rent!)"
         self.lblCheckOutDate.text = dictOfferUserDetails.check_out?.appFormattedDateOffereDetail
@@ -851,9 +888,11 @@ class ReservationTVC: UITableViewController {
         if indexPath.row == 4 {
             if self.isClickDeposit == false {
                 if isFromOffer == true{
-                    return 256 //+ 40
+                    return 256
                 }else{
-                    if isDepositEligible == false{
+                    if isDepositEligible == false && isOfferAvailable == false{
+                        return 256 - 80
+                    }else if isDepositEligible == true && isOfferAvailable == false{
                         return 256 - 40
                     }else{
                         return 256

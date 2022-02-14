@@ -244,6 +244,10 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
     @IBOutlet weak var viewForDiscountLabel: UIView!
     @IBOutlet weak var progressViewForTimer: UIView!
     @IBOutlet weak var heightForTImerView: NSLayoutConstraint!
+    @IBOutlet weak var mainView : UIView!
+    @IBOutlet weak var bottomConstrainForViewBG: NSLayoutConstraint!
+    @IBOutlet weak var viewForSUbChaletCount: UIView!
+    @IBOutlet weak var lblsubChaletCount: UILabel!
     
     func setValuesToFields(dict : User_details) {
         lblCheckIn.text = "Check-in".localized()
@@ -271,18 +275,32 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
         }
         
         if dict.offer_available == false{
+            if dict.subchalet_available!{
+                viewForSUbChaletCount.isHidden = false
+                lblsubChaletCount.text = dict.subchalet_count!
+                viewForSUbChaletCount.roundCorners(corners: .bottomRight, radius: 10)
+                viewForSUbChaletCount.clipsToBounds = true
+            }
             print("No Offer Available for this chalet")
             self.progressViewForTimer.isHidden = true
             self.viewForDiscountLabel.isHidden = true
-            viewBg.cornerRadius = 10
+            mainView.cornerRadius = 10
+            bottomConstrainForViewBG.constant = 0
             self.heightForTImerView.constant = 0
         }else{
+            if dict.subchalet_available!{
+                viewForSUbChaletCount.isHidden = false
+                lblsubChaletCount.text = dict.subchalet_count!
+                viewForSUbChaletCount.roundCorners(corners: .bottomRight, radius: 10)
+                viewForSUbChaletCount.clipsToBounds = true
+            }
             print("Offer Available for this chalet")
+            bottomConstrainForViewBG.constant = 40
             self.heightForTImerView.constant = 40
             self.progressViewForTimer.isHidden = false
             self.viewForDiscountLabel.isHidden = false
-            viewBg.roundCorners(corners: [.topLeft,.topRight], radius: 10)
-            progressViewForTimer.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+            mainView.cornerRadius = 10
+
             let dateFormater1 = DateFormatter()
             dateFormater1.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let offerExpiry = dateFormater1.date(from: dict.offer_checkin!)
