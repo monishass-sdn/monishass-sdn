@@ -8,6 +8,8 @@
 import UIKit
 
 class addNewOfferTVCell: UITableViewCell {
+    
+    @IBOutlet weak var btnAddNewOffer: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()

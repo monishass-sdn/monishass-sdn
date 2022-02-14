@@ -248,6 +248,7 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
     @IBOutlet weak var bottomConstrainForViewBG: NSLayoutConstraint!
     @IBOutlet weak var viewForSUbChaletCount: UIView!
     @IBOutlet weak var lblsubChaletCount: UILabel!
+    @IBOutlet weak var viewForHolidaysAndEvents: UIView!
     
     func setValuesToFields(dict : User_details) {
         lblCheckIn.text = "Check-in".localized()
@@ -272,6 +273,12 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
             imgChaletImage.sd_setImage(with: URL(string: dict.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
         }else{
             imgChaletImage.image = kPlaceHolderImage
+        }
+        
+        if dict.isFromHolidaysandEvents == false{
+            self.viewForHolidaysAndEvents.isHidden = true
+        }else{
+            self.viewForHolidaysAndEvents.isHidden = false
         }
         
         if dict.offer_available == false{

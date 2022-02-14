@@ -445,7 +445,12 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             }*/
         }else{
             if arrayUserDetails[indexPath.row].offer_available == false{
-                return CGSize(width: kScreenWidth, height: 176)
+                if arrayUserDetails[indexPath.row].isFromHolidaysandEvents == false{
+                    return CGSize(width: kScreenWidth, height: 176)
+                }else{
+                    return CGSize(width: kScreenWidth, height: 215)
+                }
+               // return CGSize(width: kScreenWidth, height: 176)
             }else{
                 return CGSize(width: kScreenWidth , height: 215)
             }

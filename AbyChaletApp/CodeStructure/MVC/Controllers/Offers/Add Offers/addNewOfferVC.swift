@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class addNewOfferVC: UIViewController {
     
@@ -13,13 +14,13 @@ class addNewOfferVC: UIViewController {
     @IBOutlet weak var addOfferTableView: UITableView!
     @IBOutlet weak var lblthereisnoOffer: UILabel!
     
-    var testDataCheckin = ["24/01/2022","25/01/2022","26/01/2022","27/01/2022"]
-    var testDataCheckout = ["28/01/2022","29/01/2022","30/01/2022","31/01/2022"]
+    var arryAvailableOfferList = [Available_Offer_list]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAvailableChalet()
         self.setUpNavigationBar()
-        self.addOfferTableView.isHidden = true
+        self.addOfferTableView.isHidden = false
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
         self.navigationItem.rightBarButtonItems = [notificationButton]
     }
@@ -56,12 +57,9 @@ class addNewOfferVC: UIViewController {
     
     //MARK:- Button Actions
     
-    @IBAction func addnewOffer_Tapped(_ sender: UIButton) {
-        self.addOfferTableView.isHidden = false
-        self.BtnaddNewOffer.isHidden = true
-        self.lblthereisnoOffer.isHidden = true
+    @objc func addnewOffer(sender: UIButton){
+        showDefaultAlert(viewController: self, title: "", msg: "Coming soooooon")
     }
-
 
 }
 
@@ -71,7 +69,7 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return testDataCheckin.count
+            return self.arryAvailableOfferList.count
         }else{
             return 1
         }
@@ -80,23 +78,81 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableOffersTVCell", for: indexPath) as! AvailableOffersTVCell
-            cell.lblCheck_in.text = testDataCheckin[indexPath.row]
-            cell.lblCheck_out.text = testDataCheckout[indexPath.row]
+            cell.setValuesToFields(dict: arryAvailableOfferList[indexPath.row])
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "addNewOfferTVCell", for: indexPath) as! addNewOfferTVCell
+            cell.btnAddNewOffer.addTarget(self, action: #selector(addnewOffer(sender:)), for: .touchUpInside)
             return cell
         }
        
     }
+        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            let selectedIndex = indexPath.row
+            print("Clicked on \(selectedIndex)")
+            print("Clicked On Offers")
+            showDefaultAlert(viewController: self, title: "", msg: "COMING SOON .Timer not Completed")
+        }else{
+            print("Clicked on IndexPath 1")
+           // showDefaultAlert(viewController: self, title: "", msg: "COMING SOON")
+        }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return 165
+        if indexPath.section == 0{
+            return 120
         }else{
             return 165
         }
     }
     
     
+}
+
+extension addNewOfferVC {
+    func getAvailableChalet() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/available_offers", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
+            self.checkNotificationCount()
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    let responseBase = AvailableOffersModel(dictionary: response as! NSDictionary)
+                    self.arryAvailableOfferList = (responseBase?.offer_list)!
+                    self.BtnaddNewOffer.isHidden = true
+                    self.lblthereisnoOffer.isHidden = true
+                    if self.arryAvailableOfferList.count <= 0{
+                        self.addOfferTableView.isHidden = true
+                        self.BtnaddNewOffer.isHidden = false
+                        self.lblthereisnoOffer.isHidden = false
+                        self.lblthereisnoOffer.text = "There are no offer's available."
+                    }
+                    DispatchQueue.main.async {
+                        self.addOfferTableView.reloadData()
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
+                    }
+                }else{
+                    showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+            }
+        }
+    }
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
 }

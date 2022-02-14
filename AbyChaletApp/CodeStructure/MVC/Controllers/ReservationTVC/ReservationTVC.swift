@@ -92,6 +92,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var viewForNoDepositinOffers: UIView!
     @IBOutlet weak var lblDiscountAmount: UILabel!
     @IBOutlet weak var hrightConstraintsforTimerView: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstrainForWhatsAppIcon : NSLayoutConstraint!
     @IBOutlet weak var lblOfferAmount: UILabel!
     @IBOutlet weak var heightConstraintForOfferView: NSLayoutConstraint!
     @IBOutlet weak var viewForOffer: UIView!
@@ -929,10 +930,12 @@ class ReservationTVC: UITableViewController {
                 if isOfferAvailable == false{
                     self.viewBgCollectionView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
                     self.hrightConstraintsforTimerView.constant = 0.0
+                    self.bottomConstrainForWhatsAppIcon.constant = 10
                     return 370
                 }else{
                     self.viewBgCollectionView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 0)
                     self.hrightConstraintsforTimerView.constant = 60.0
+                    self.bottomConstrainForWhatsAppIcon.constant = 80
                     return 430
                 }
               //  return 370
