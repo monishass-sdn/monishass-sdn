@@ -18,7 +18,7 @@ class addNewOfferVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAvailableChalet()
+        getAvailableOffers()
         self.setUpNavigationBar()
         self.addOfferTableView.isHidden = false
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
@@ -57,8 +57,12 @@ class addNewOfferVC: UIViewController {
     
     //MARK:- Button Actions
     
-    @objc func addnewOffer(sender: UIButton){
+ /*   @objc func addnewOffer(sender: UIButton){
         showDefaultAlert(viewController: self, title: "", msg: "Coming soooooon")
+    }*/
+    
+    @IBAction func TappedonAddNewOffer(_ sender:UIButton){
+        showDefaultAlert(viewController: self, title: "", msg: "COMING SOON")
     }
 
 }
@@ -69,42 +73,43 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return self.arryAvailableOfferList.count
-        }else{
             return 1
+            //return self.arryAvailableOfferList.count
+        }else{
+            return self.arryAvailableOfferList.count
+            //return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0{
+        if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableOffersTVCell", for: indexPath) as! AvailableOffersTVCell
             cell.setValuesToFields(dict: arryAvailableOfferList[indexPath.row])
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "addNewOfferTVCell", for: indexPath) as! addNewOfferTVCell
-            cell.btnAddNewOffer.addTarget(self, action: #selector(addnewOffer(sender:)), for: .touchUpInside)
+           // cell.btnAddNewOffer.addTarget(self, action: #selector(addnewOffer(sender:)), for: .touchUpInside)
             return cell
         }
        
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0{
-            let selectedIndex = indexPath.row
-            print("Clicked on \(selectedIndex)")
-            print("Clicked On Offers")
-            showDefaultAlert(viewController: self, title: "", msg: "COMING SOON .Timer not Completed")
+        if indexPath.section == 1{
+            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
+            nextVC.dictOfferData = self.arryAvailableOfferList[indexPath.row]
+            nextVC.offerid = String(self.arryAvailableOfferList[indexPath.row].id!)
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }else{
             print("Clicked on IndexPath 1")
-           // showDefaultAlert(viewController: self, title: "", msg: "COMING SOON")
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0{
+        if indexPath.section == 1{
             return 120
         }else{
-            return 165
+            return 65
         }
     }
     
@@ -112,7 +117,7 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
 }
 
 extension addNewOfferVC {
-    func getAvailableChalet() {
+    func getAvailableOffers() {
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/available_offers", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in

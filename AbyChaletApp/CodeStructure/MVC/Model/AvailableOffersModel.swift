@@ -43,13 +43,14 @@ public class AvailableOffersModel {
 }
 
 public class Available_Offer_list {
-    public var id : String?
+    public var id : Int?
     public var offer_checkin : String?
     public var offer_checkout : String?
     public var check_in : String?
     public var check_out : String?
     public var offer_expiry : String?
     public var offercreated_at : String?
+    public var offered_chalets : String?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Available_Offer_list]
     {
@@ -63,13 +64,14 @@ public class Available_Offer_list {
 
     required public init?(dictionary: NSDictionary) {
 
-        id = dictionary["id"] as? String
+        id = dictionary["id"] as? Int
         offer_checkin = dictionary["offer_checkin"] as? String
         offer_checkout = dictionary["offer_checkout"] as? String
         check_in = dictionary["check_in"] as? String
         check_out = dictionary["check_out"] as? String
         offer_expiry = dictionary["offer_expiry"] as? String
         offercreated_at = dictionary["offercreated_at"] as? String
+        offered_chalets = dictionary["offered_chalets"] as? String
         
     }
 
@@ -85,6 +87,7 @@ public class Available_Offer_list {
         dictionary.setValue(self.check_out, forKey: "check_out")
         dictionary.setValue(self.offer_expiry, forKey: "offer_expiry")
         dictionary.setValue(self.offercreated_at, forKey: "offercreated_at")
+        dictionary.setValue(self.offered_chalets, forKey: "offered_chalets")
 
         return dictionary
     }

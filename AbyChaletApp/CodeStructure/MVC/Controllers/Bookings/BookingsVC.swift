@@ -142,11 +142,18 @@ class BookingsVC: UIViewController {
         }
     }
     @IBAction func buttonPaymentNowAction(_ sender: UIButton) {
-        
+        let dict = self.arrayMyBooking[sender.tag]
         if isUSerIsBlocked == false {
             self.selectedIndex = sender.tag
             if CAUser.currentUser.id != nil {
-                self.intialisePaymentWithType()
+                if dict.active_status == "not_active"{
+                    showDefaultAlert(viewController: self, title: "Not Active", msg: "This chalet is not currently available in the App")
+                }else if dict.myBookingChalet_details?.first?.availablility_status == "not_available"{
+                    showDefaultAlert(viewController: self, title: "Not Available", msg: "Prices may be different now . You have to search again")
+                }else{
+                    self.intialisePaymentWithType()
+                }
+                
             }else{
                 let alert = UIAlertController(title: "Message", message: "Please Login for booking. Do you want to continue?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -393,7 +400,9 @@ extension BookingsVC : UITableViewDelegate, UITableViewDataSource {
             if self.arrayMyBooking.count > 0 {
                 let dict = self.arrayMyBooking[indexPath.row]
                 if dict.active_status == "not_available"{
-                    showDefaultAlert(viewController: self, title: "", msg: "This chalet is not currently available in the application")
+                    showDefaultAlert(viewController: self, title: "Not Available", msg: "This chalet is not currently available in the App")
+                }else if dict.active_status == "not_active"{
+                    showDefaultAlert(viewController: self, title: "Not Active", msg: "prices may be different now. You have to search again")
                 }else{
                     let bookingDetailTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailTVC") as! BookingDetailTVC
                     bookingDetailTVC.dictMyBooking = self.arrayMyBooking[indexPath.row]

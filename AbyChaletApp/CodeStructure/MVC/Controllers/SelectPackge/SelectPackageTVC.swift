@@ -223,7 +223,7 @@ class SelectPackageTVC: UITableViewController {
                     let arr = self.arrayChalletList.count * 166
                     return CGFloat(arr - 5)
                 }else{
-                    return 0
+                    return self.view.frame.height
                 }
                 //return CGFloat(arr + 160)
                 //return CGFloat(self.arrayChalletList.count * 400)
@@ -305,7 +305,13 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
         if collectionView.tag == 1 {
             return topSliderMenuArray.count
         }else if collectionView.tag == 3{
-            return self.arrayChalletList.count
+            if self.arrayChalletList.count == 0{
+                return 1
+            }else{
+                print("Count = \(arrayChalletList.count)")
+                return self.arrayChalletList.count
+            }
+         //   return self.arrayChalletList.count == 0 ? 1 : self.arrayChalletList.count
         }else{
             print("Count = \(arrayUserDetails.count)")
             return arrayUserDetails.count
@@ -314,6 +320,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         self.cellCount += 1
         print("CellCount = \(cellCount)")
+        
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectChaletMenuCollectionViewCell", for: indexPath) as! SelectChaletMenuCollectionViewCell
             cell.lblTitle.text = topSliderMenuArray[indexPath.item]
@@ -330,6 +337,10 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             
             return cell
         }else if collectionView.tag == 3{
+            if self.arrayChalletList.count == 0{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noeventcell", for: indexPath)
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewHolidaysListCVCell", for: indexPath) as! CollectionViewHolidaysListCVCell
             cell.setupCalenderView()
             let dict = self.arrayChalletList[indexPath.row]
@@ -436,6 +447,13 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 return CGSize(width: 110 , height: collectionView.bounds.size.height)
             }
         }else if collectionView.tag == 3{
+            if self.arrayChalletList.count == 0{
+               // let frame = collectionView.frame
+                let height = kScreenHeight - 100
+                return CGSize(width: kScreenWidth , height: 500)
+
+                //return CGSize(width: 100, height: 20)
+            }
             return CGSize(width: kScreenWidth , height: 166)
             /*if indexPath.row == selectedIndexHolidays {
                 return CGSize(width: kScreenWidth , height: 160)
@@ -788,7 +806,7 @@ extension SelectPackageTVC {
 
                 if response!["status"] as! Bool == true {
                     let responseBase = HolidaysAndEventsBas(dictionary: response as! NSDictionary)
-                    self.arrayChalletList = (responseBase?.chalet_list)!
+                  //  self.arrayChalletList = (responseBase?.chalet_list)!
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .bottom)
                         self.colletionViewHolidays.reloadData()

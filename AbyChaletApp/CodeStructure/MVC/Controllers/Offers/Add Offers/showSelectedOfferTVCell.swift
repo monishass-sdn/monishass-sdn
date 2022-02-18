@@ -1,22 +1,22 @@
 //
-//  AvailableOffersTVCell.swift
+//  showSelectedOfferTVCell.swift
 //  AbyChaletApp
 //
-//  Created by Srishti on 05/01/22.
+//  Created by Srishti on 15/02/22.
 //
 
 import UIKit
 
-class AvailableOffersTVCell: UITableViewCell {
-    @IBOutlet weak var lblCheck_in: UILabel!
-    @IBOutlet weak var lblCheck_out: UILabel!
-    @IBOutlet weak var lblTImer: UILabel!
-    @IBOutlet weak var mainView: UIView!
+class showSelectedOfferTVCell: UITableViewCell {
+    
+    @IBOutlet weak var lblcheckin: UILabel!
+    @IBOutlet weak var lblcheckout: UILabel!
+    @IBOutlet weak var lblTimer: UILabel!
     @IBOutlet weak var viewProgress: UIView!
-    @IBOutlet weak var lblAppliedOfferCount: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,15 +25,8 @@ class AvailableOffersTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setValuesToFields(dict : Available_Offer_list){
-        self.lblCheck_in.text = dict.check_in
-        self.lblCheck_out.text = dict.check_out
-        if dict.offered_chalets == "0"{
-            self.lblAppliedOfferCount.isHidden = true
-        }else{
-            self.lblAppliedOfferCount.isHidden = false
-            self.lblAppliedOfferCount.text = dict.offered_chalets
-        }
+    func setValuesToFields(dict:Available_Offer_list){
+        
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let offerExpiry = dateFormater.date(from: dict.offer_checkin!)
@@ -52,8 +45,6 @@ class AvailableOffersTVCell: UITableViewCell {
         let date = dateFormater.date(from: time)!
         let dd = DayInHoursCountDownTimer()
         dd.initializeTimer(timeee)
-       // let seconds : Double = Double(Date().seconds(from: offerCreated))
-       // let totalSeconds : Double = Double(date.seconds(from: offerCreated))
        
         
         let calender:Calendar = Calendar.current
@@ -70,7 +61,7 @@ class AvailableOffersTVCell: UITableViewCell {
         
         dd.startTimer1(pUpdateActionHandler: { [self] (time) in
             
-            self.lblTImer.text = time
+            self.lblTimer.text = time
             
         }) {
             DispatchQueue.main.async {
@@ -78,5 +69,6 @@ class AvailableOffersTVCell: UITableViewCell {
             }
         }
     }
+
 
 }
