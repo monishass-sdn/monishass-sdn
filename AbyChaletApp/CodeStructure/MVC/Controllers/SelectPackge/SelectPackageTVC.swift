@@ -806,7 +806,7 @@ extension SelectPackageTVC {
 
                 if response!["status"] as! Bool == true {
                     let responseBase = HolidaysAndEventsBas(dictionary: response as! NSDictionary)
-                  //  self.arrayChalletList = (responseBase?.chalet_list)!
+                    self.arrayChalletList = (responseBase?.chalet_list)!
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .bottom)
                         self.colletionViewHolidays.reloadData()

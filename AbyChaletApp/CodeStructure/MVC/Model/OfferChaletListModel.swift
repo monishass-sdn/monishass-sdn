@@ -56,6 +56,7 @@ public class Offer_Chalet_details {
     public var offerCount : Int?
     public var created_at : String?
     public var updated_at : String?
+    public var discount : Int?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Offer_Chalet_details]
     {
@@ -81,6 +82,7 @@ public class Offer_Chalet_details {
         offerCount = dictionary["offerCount"] as? Int
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
+        discount = dictionary["discount"] as? Int
     }
 
         
@@ -100,6 +102,7 @@ public class Offer_Chalet_details {
         dictionary.setValue(self.offerCount, forKey: "offerCount")
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
+        dictionary.setValue(self.discount, forKey: "discount")
 
         return dictionary
     }

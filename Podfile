@@ -20,6 +20,7 @@ target 'AbyChaletApp' do
    pod 'GoogleMaps'
    pod 'KeychainAccess'
    pod 'HGCircularSlider'
+   pod 'Kingfisher'
 
 
 end

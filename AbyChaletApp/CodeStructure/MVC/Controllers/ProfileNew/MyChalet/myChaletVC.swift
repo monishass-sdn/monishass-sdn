@@ -14,6 +14,7 @@ class myChaletVC: UIViewController {
     
     var touched : Bool = false
     var expanded = [Int]()
+    var toggledIndexes = [Int:Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,12 +99,48 @@ extension myChaletVC : UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "myChaletTVCell", for: indexPath) as! myChaletTVCell
         cell.BtnViewDetails.addTarget(self, action: #selector(viewDetails), for: .touchUpInside)
         cell.toggleBtn.addTarget(self, action: #selector(toggleAction), for: .touchUpInside)
+        cell.bttonView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
         cell.BtnViewDetails.tag = indexPath.row
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if toggledIndexes[indexPath.row] == true{
+            return 660.0
+        }else{
+            return 220.0
+        }
+    }
+    
     @objc func viewDetails(_ sender: UIButton!){
         let indexpath = IndexPath(row: sender.tag, section: 0)
+        sender.isSelected = !sender.isSelected
+        let cell = myChaletTV.cellForRow(at: indexpath) as! myChaletTVCell
+       // let item = arryAvailableOfferChaletList[sender.tag]
+        if sender.isSelected == true{
+            cell.downUpArrow.setImage(#imageLiteral(resourceName: "arrow-Up"), for: .normal)
+            cell.bttonView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+            toggledIndexes[sender.tag] = true
+          //  ArrayselectedItem.append(item)
+          //  self.selectedIndex = sender.tag
+          //  self.isToggled = true
+         //   cell.DetailViewHeight.constant = 375
+        }else{
+            toggledIndexes[sender.tag] = false
+            cell.downUpArrow.setImage(#imageLiteral(resourceName: "arrow-Down"), for: .normal)
+            cell.bttonView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 0)
+          /*  for (i,selectedItem) in ArrayselectedItem.enumerated(){
+                if selectedItem.chalet_id! == item.chalet_id!{
+                    ArrayselectedItem.remove(at: i)
+                }
+            }*/
+          //  self.selectedIndex = -1
+          //  self.isToggled = false
+          //  cell.DetailViewHeight.constant = 0
+
+        }
+        self.myChaletTV.reloadData()
+   /*     let indexpath = IndexPath(row: sender.tag, section: 0)
         let cell = myChaletTV.cellForRow(at: indexpath) as! myChaletTVCell
         if cell.isExpanded == true{
             cell.DetailViewHeight.constant = 0
@@ -113,9 +150,8 @@ extension myChaletVC : UITableViewDelegate, UITableViewDataSource{
             cell.isExpanded = true
         }
         myChaletTV.reloadData()
-        //myChaletTV.reloadRows(at: [indexpath], with: UITableView.RowAnimation.automatic)
         print("Sender tag = \(sender.tag)")
-
+*/
 
     }
     

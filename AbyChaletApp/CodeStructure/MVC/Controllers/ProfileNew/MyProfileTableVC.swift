@@ -124,6 +124,7 @@ class MyProfileTableVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setValuesToFields()
+        NotificationCenter.default.addObserver(self, selector: #selector(checkNotiCount), name: NSNotification.Name(rawValue: NotificationNames.KNotificationCountCheck), object: nil)
         getNotificationcount()
         appDelegate.checkBlockStatus()
     }

@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class chaletOwnershipVC: UIViewController {
 
+    @IBOutlet weak var imageOwnership:UIImageView!
+    
+    var arrayOwnerInfo : Owner_details?
+    var imageURLStored = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        getChaletOwnership()
         self.setUpNavigationBar()
         self.setupForCustomNavigationTitle()
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
@@ -75,3 +81,54 @@ class chaletOwnershipVC: UIViewController {
     */
 
 }
+
+extension chaletOwnershipVC {
+        
+        func getChaletOwnership() {
+           //["userid":CAUser.currentUser.id!]
+            SVProgressHUD.show()
+            self.view.isUserInteractionEnabled = false
+            ServiceManager.sharedInstance.postMethodAlamofire("api/owner_details", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
+                self.checkNotificationCount()
+                if success {
+                    if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                        let responseBase = OwnerInfoBase(dictionary: response as! NSDictionary)
+                        self.arrayOwnerInfo = (responseBase?.owner_details)!
+                        self.imageURLStored = (responseBase?.owner_details?.chalet_ownership)!
+                        print(self.imageURLStored)
+                        if self.arrayOwnerInfo?.chalet_ownership != ""{
+                            self.imageOwnership.sd_setImage(with: URL(string: (self.arrayOwnerInfo?.chalet_ownership!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+                        }else{
+                            self.imageOwnership.image = kPlaceHolderImage
+                        }
+                        DispatchQueue.main.async {
+                            SVProgressHUD.dismiss()
+                            self.view.isUserInteractionEnabled = true
+                        }
+                    }else{
+                        showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                    }
+                }else{
+                    showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                }
+            }
+        }
+        
+        func checkNotificationCount() {
+            if CAUser.currentUser.id != nil {
+                ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                    if success {
+                        let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                        kNotificationCount = messageCount
+                        let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                        self.navigationItem.rightBarButtonItems = [notificationButton]
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
+

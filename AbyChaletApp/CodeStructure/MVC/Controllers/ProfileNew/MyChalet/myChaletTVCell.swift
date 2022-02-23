@@ -11,8 +11,9 @@ class myChaletTVCell: UITableViewCell {
     
     @IBOutlet weak var BtnViewDetails: UIButton!
     @IBOutlet weak var toggleBtn: UIButton!
+    @IBOutlet weak var downUpArrow: UIButton!
     @IBOutlet weak var DetailsView : UIView!
-    @IBOutlet weak var DetailViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bttonView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var lblTotalIncomeKD: UILabel!
     @IBOutlet weak var lblUnpaidAmountKD: UILabel!

@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CivilIDVC: UIViewController {
-
+    @IBOutlet weak var imageCivilId: UIImageView!
+    var arrayOwnerInfo : Owner_details?
+    var imageURLStored = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCivilId()
         self.setUpNavigationBar()
         self.setupForCustomNavigationTitle()
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
@@ -63,15 +67,54 @@ class CivilIDVC: UIViewController {
         
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension CivilIDVC {
+    
+    //MARK:- GetMyBookingData
+    func getCivilId() {
+       //["userid":CAUser.currentUser.id!]
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/owner_details", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
+            self.checkNotificationCount()
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    let responseBase = OwnerInfoBase(dictionary: response as! NSDictionary)
+                    self.arrayOwnerInfo = (responseBase?.owner_details)!
+                    self.imageURLStored = (responseBase?.owner_details?.civil_id)!
+                    print(self.imageURLStored)
+                    if self.arrayOwnerInfo?.civil_id != ""{
+                        self.imageCivilId.sd_setImage(with: URL(string: (self.arrayOwnerInfo?.civil_id!)!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+                    }else{
+                        self.imageCivilId.image = kPlaceHolderImage
+                    }
+                    DispatchQueue.main.async {
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
+                    }
+                }else{
+                    showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+            }
+        }
     }
-    */
+    
+    func checkNotificationCount() {
+        if CAUser.currentUser.id != nil {
+            ServiceManager.sharedInstance.postMethodAlamofire("api/notification_count", dictionary: ["userid": CAUser.currentUser.id!], withHud: true) { (success, response, error) in
+                if success {
+                    let messageCount = ((response as! NSDictionary)["message_count"] as! Int)
+                    kNotificationCount = messageCount
+                    let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
+                    self.navigationItem.rightBarButtonItems = [notificationButton]
+                }
+            }
+        }
+    }
 
 }
+
+
