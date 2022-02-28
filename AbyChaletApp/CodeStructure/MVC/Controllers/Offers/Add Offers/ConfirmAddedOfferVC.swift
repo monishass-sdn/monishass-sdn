@@ -121,9 +121,10 @@ extension ConfirmAddedOfferVC{
     func confirmOffer() {
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/confirm-offer", dictionary: ["tokenid":token_id], withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/confirm-offer", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "","tokenid":token_id], withHud: true) { (success, response, error) in
             self.checkNotificationCount()
             if success {
+                print(response)
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     
                     let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "OwnerAddOfferSuccessVC") as! OwnerAddOfferSuccessVC
