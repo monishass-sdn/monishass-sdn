@@ -71,17 +71,20 @@
 		4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */; };
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
 		4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */; };
+		4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */; };
 		4D48F4E427831C0100EE7C38 /* addNewOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */; };
 		4D493BFC279551D8001A4886 /* AddOffertoChaletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D493BFB279551D8001A4886 /* AddOffertoChaletVC.swift */; };
 		4D493BFF27955219001A4886 /* ConfirmAddedOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */; };
 		4D498186279FFEF100483B1A /* FAQsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D498185279FFEF100483B1A /* FAQsTableViewCell.swift */; };
 		4D4B322127C4D76300F9B280 /* EventListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B322027C4D76300F9B280 /* EventListModel.swift */; };
+		4D4B766E27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B766D27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift */; };
 		4D4C5120277D909E00DCF3FE /* CivilIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C511F277D909E00DCF3FE /* CivilIDVC.swift */; };
 		4D4C5123277D90B600DCF3FE /* chaletOwnershipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C5122277D90B600DCF3FE /* chaletOwnershipVC.swift */; };
 		4D4C5126277D90CB00DCF3FE /* agreementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C5125277D90CB00DCF3FE /* agreementVC.swift */; };
 		4D4C5129277D931A00DCF3FE /* BankDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C5128277D931A00DCF3FE /* BankDetailsVC.swift */; };
 		4D4DD58C27854A610031187B /* NewOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4DD58B27854A610031187B /* NewOffersTVCell.swift */; };
 		4D4FF93327AA8098005AB37A /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4FF93227AA8098005AB37A /* MimeType.swift */; };
+		4D5319C527C775030028925F /* AddedOfferChaletListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5319C427C775030028925F /* AddedOfferChaletListModel.swift */; };
 		4D534EBE2779F48E0058C44C /* myChaletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EBD2779F48E0058C44C /* myChaletVC.swift */; };
 		4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EC1277A06400058C44C /* myChaletTVCell.swift */; };
 		4D59A8D427BBD59800F31C61 /* OfferChaletListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59A8D327BBD59800F31C61 /* OfferChaletListModel.swift */; };
@@ -211,17 +214,20 @@
 		4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersTVCell.swift; sourceTree = "<group>"; };
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
 		4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerDetailsTableVC.swift; sourceTree = "<group>"; };
+		4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmaddedOfferChaletTVCell.swift; sourceTree = "<group>"; };
 		4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferVC.swift; sourceTree = "<group>"; };
 		4D493BFB279551D8001A4886 /* AddOffertoChaletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOffertoChaletVC.swift; sourceTree = "<group>"; };
 		4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddedOfferVC.swift; sourceTree = "<group>"; };
 		4D498185279FFEF100483B1A /* FAQsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsTableViewCell.swift; sourceTree = "<group>"; };
 		4D4B322027C4D76300F9B280 /* EventListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListModel.swift; sourceTree = "<group>"; };
+		4D4B766D27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerAddOfferSuccessVC.swift; sourceTree = "<group>"; };
 		4D4C511F277D909E00DCF3FE /* CivilIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CivilIDVC.swift; sourceTree = "<group>"; };
 		4D4C5122277D90B600DCF3FE /* chaletOwnershipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chaletOwnershipVC.swift; sourceTree = "<group>"; };
 		4D4C5125277D90CB00DCF3FE /* agreementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = agreementVC.swift; sourceTree = "<group>"; };
 		4D4C5128277D931A00DCF3FE /* BankDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsVC.swift; sourceTree = "<group>"; };
 		4D4DD58B27854A610031187B /* NewOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOffersTVCell.swift; sourceTree = "<group>"; };
 		4D4FF93227AA8098005AB37A /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		4D5319C427C775030028925F /* AddedOfferChaletListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedOfferChaletListModel.swift; sourceTree = "<group>"; };
 		4D534EBD2779F48E0058C44C /* myChaletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletVC.swift; sourceTree = "<group>"; };
 		4D534EC1277A06400058C44C /* myChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletTVCell.swift; sourceTree = "<group>"; };
 		4D59A8D327BBD59800F31C61 /* OfferChaletListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferChaletListModel.swift; sourceTree = "<group>"; };
@@ -406,6 +412,7 @@
 				4D59A8D327BBD59800F31C61 /* OfferChaletListModel.swift */,
 				4D23766427C4A39F00607456 /* OwnerInfoBase.swift */,
 				4D4B322027C4D76300F9B280 /* EventListModel.swift */,
+				4D5319C427C775030028925F /* AddedOfferChaletListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -639,6 +646,8 @@
 				4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */,
 				4D62FD6C27BB8B86003E5221 /* showSelectedOfferTVCell.swift */,
 				4D62FD6F27BB8C2E003E5221 /* ChaletListToAddOfferTVCell.swift */,
+				4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */,
+				4D4B766D27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift */,
 			);
 			path = "Add Offers";
 			sourceTree = "<group>";
@@ -1027,8 +1036,10 @@
 				A1FD69C826501A5F00A03987 /* CollectionViewIMageVideoCVCell.swift in Sources */,
 				4D4C5129277D931A00DCF3FE /* BankDetailsVC.swift in Sources */,
 				00AD385B263FD76500FDA907 /* EmptyChaletTableViewCell.swift in Sources */,
+				4D5319C527C775030028925F /* AddedOfferChaletListModel.swift in Sources */,
 				0036111C263830BE009E581F /* Utils.swift in Sources */,
 				0091C49F2639AD4800EC0CF7 /* SelectPackageVC.swift in Sources */,
+				4D4B766E27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift in Sources */,
 				A1630C622656378100C58A38 /* HolidaysAndEventsBase.swift in Sources */,
 				00793273264E60E6001A08A2 /* ReservationContainerVC.swift in Sources */,
 				A12F5E1B266360CC00142A06 /* NotificationVC.swift in Sources */,
@@ -1089,6 +1100,7 @@
 				A1FFE28F2680903A0087756C /* ContactUsBase.swift in Sources */,
 				0091C4A52639B13D00EC0CF7 /* EnumObjects.swift in Sources */,
 				4D4C5123277D90B600DCF3FE /* chaletOwnershipVC.swift in Sources */,
+				4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */,
 				4D493BFC279551D8001A4886 /* AddOffertoChaletVC.swift in Sources */,
 				A10D337C26957EAC00B2AC07 /* MessageListBase.swift in Sources */,
 				00326FEB264577A200B2C630 /* ColumnFlowLayout.swift in Sources */,
@@ -1270,7 +1282,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.25;
+				CURRENT_PROJECT_VERSION = 1.1.26;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1296,7 +1308,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.25;
+				CURRENT_PROJECT_VERSION = 1.1.26;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

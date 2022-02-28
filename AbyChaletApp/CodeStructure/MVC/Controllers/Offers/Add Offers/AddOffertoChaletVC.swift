@@ -15,13 +15,15 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var AddOfferToChaletTV: UITableView!
     var dictOfferData : Available_Offer_list?
     var arryAvailableOfferChaletList = [Offer_Chalet_details]()
-   // var arrayDiscountAdded = [String:Int]()
     var arrayDiscountAdded : [Offer_Chalet_details] = []
     var ArrayselectedItem : [Offer_Chalet_details] = []
+    var selectedOffersList = [Inserted_offered_chalets]()
+    var arrayAddedOfferList = [Offered_Chalet_details]()
     var toggledIndexes = [Int:Bool]()
     var offerid : Int = 0
     var isToggled = false
     var selectedIndex = -1
+    var userid = (CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
@@ -107,20 +109,33 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
         var discountValue : Int? = 0
         discountValue = Int(cell.tfDiscountAdded.text!)!
         item.discount = discountValue
+        item.userid = Int(userid)
+        item.offerid = offerid
+        
        // arrayDiscountAdded.append(item)
     }
     
 
-    func DictionaryToJSON(){
-        let dictionary = ["aKey": "aValue", "anotherKey": "anotherValue"]
-          if let theJSONData = try?  JSONSerialization.data(
+    func DictionaryToJSON() -> Data{
+       // let dictionary = ["aKey": "aValue", "anotherKey": "anotherValue"]
+        let dictionary = ["data":ArrayselectedItem]
+        let jsonEncoder = JSONEncoder()
+        if let jsonData = try? jsonEncoder.encode(dictionary){
+            let json = String(data: jsonData, encoding: .ascii)
+           // print("JSON string = \n\(json ?? "")")
+            return jsonData as Data
+        }
+        return Data()
+        
+        
+       /*   if let theJSONData = try?  JSONSerialization.data(
             withJSONObject: dictionary,
             options: .prettyPrinted
             ),
             let theJSONText = String(data: theJSONData,
                                      encoding: String.Encoding.ascii) {
                 print("JSON string = \n\(theJSONText)")
-          }
+          }*/
         
     }
     
@@ -146,6 +161,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     @IBAction func Tapped_NextButton(_ sender: UIButton!){
        // test()
        // DictionaryToJSON()
+        
         postOfferChaletData()
     }
     
@@ -240,7 +256,7 @@ extension AddOffertoChaletVC{
         //"userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/Offer_chalet_list", dictionary: ["userid":"187","offerId":offerid], withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/Offer_chalet_list", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "","offerId":offerid], withHud: true) { (success, response, error) in
             self.checkNotificationCount()
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
@@ -279,23 +295,31 @@ extension AddOffertoChaletVC{
     //MARK:- Add Offer to Chalet API
     
     func postOfferChaletData() {
-        let dataa = ["discount":20,"chalet_id":16]
+        let rawdata = DictionaryToJSON()
         offerid = (dictOfferData?.id)!
+      //  let userid = CAUser.currentUser.id!
+        print("User ID = \(CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")")
+        print("OfferID = \(offerid)")
         //"userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/add-offer-to-chalet", dictionary: ["userid":CAUser.currentUser.id!,"offerid":offerid,"_qu_data_qua_":ArrayselectedItem], withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/add-offer-to-chalet", dictionary: ["userid":userid,"offerid":offerid], withHud: true,rowData: rawdata) { (success, response, error) in
             self.checkNotificationCount()
             print(response)
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
-                 //   let responseBase = OfferChaletListModel(dictionary: response as! NSDictionary)
-                 //   self.arryAvailableOfferChaletList = (responseBase?.user_details)!
-                 //   if self.arryAvailableOfferChaletList.count <= 0{
-                 //       showDefaultAlert(viewController: self, title: "Alert", msg: "No Chalets to List for this Offer")
-                 //   }
+                    let responseBase = AddedOfferChaletListModel(dictionary: response as! NSDictionary)
+                    self.selectedOffersList = (responseBase?.inserted_offered_chalets)!
+                    self.arrayAddedOfferList = (responseBase?.chalet_details)!
+                    
+                    let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ConfirmAddedOfferVC") as! ConfirmAddedOfferVC
+                    nextVC.dictOfferData = self.dictOfferData
+                    nextVC.selectedOfferedChaletData = self.selectedOffersList
+                    nextVC.offerAppliedChaletLists = self.arrayAddedOfferList
+                    nextVC.token_id = (responseBase?.confirm_token)!
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+   
                     DispatchQueue.main.async {
-                      //  self.AddOfferToChaletTV.reloadData()
                         SVProgressHUD.dismiss()
                         self.view.isUserInteractionEnabled = true
                     }
@@ -309,26 +333,3 @@ extension AddOffertoChaletVC{
     }
 }
 
-extension AddOffertoChaletVC{
-    func postRequest(_ sender:Any){
-        var sURL : String!
-        sURL = "https://sicsapp.com/Aby_chalet/api/add-offer-to-chalet"
-        var serializer = DataResponseSerializer(emptyResponseCodes: Set([200,204,205]))
-        var sampleRequest = URLRequest(url: URL(string: sURL)!)
-        sampleRequest.httpMethod = HTTPMethod.post.rawValue
-        AF.request(sampleRequest).uploadProgress{Progress
-            in }.response(responseSerializer: serializer){response in
-                if (response.error == nil){
-                    var responseString: String!
-                    responseString = ""
-                    if response.data != nil{
-                        responseString = String(bytes: response.data!, encoding: .utf8)
-                    }else{
-                        responseString = response.response?.description
-                    }
-                    print(responseString ?? "***")
-                }
-        }
-        
-    }
-}

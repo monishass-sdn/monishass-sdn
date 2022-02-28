@@ -169,4 +169,38 @@ class ServiceManager: NSObject {
             }
         }
     }
+    func postMethodAlamofire(_ serviceName : String, dictionary : Parameters?,withHud isHud: Bool,rowData:Data, completion : @escaping (Bool, AnyObject?, NSError?)->Void) {
+        if isHud {
+            SVProgressHUD.show()
+        }
+        completionHandler = completion
+        if let url = URL(string: kBaseUrl + serviceName) {
+            let header:HTTPHeaders = ["Content-Type":"application/x-www-form-urlencoded"]
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = rowData as Data
+            request.headers = header
+            AF.request(request).responseJSON { (response:AFDataResponse<Any>) in
+                if isHud {
+                    SVProgressHUD.dismiss()
+                }
+                switch response.result {
+                case .success(let jsonData):
+                    
+                    let dictionary = jsonData as! NSDictionary
+                    let status:Bool = dictionary.object(forKey: "status") as! Bool
+                    if status {
+                        completion(true, response.value as AnyObject , nil)
+                        //self.getModalObject(serviceUrl: serviceName, response: response)
+                    }else{
+                        self.completionHandler(true,response.value as AnyObject,nil)
+                    }
+                case .failure(let error): completion(false,nil,error as NSError)
+                    break
+                }
+            }
+        }
+    }
 }
+
+
