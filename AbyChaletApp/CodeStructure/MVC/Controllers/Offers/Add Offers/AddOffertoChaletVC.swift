@@ -13,6 +13,11 @@ import UIKit
 class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var AddOfferToChaletTV: UITableView!
+    @IBOutlet weak var warningView : UIView!
+    @IBOutlet weak var nextButtonMainView: UIView!
+    @IBOutlet weak var goBackView : UIView!
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var goBackBtn: UIButton!
     var dictOfferData : Available_Offer_list?
     var arryAvailableOfferChaletList = [Offer_Chalet_details]()
     var arrayDiscountAdded : [Offer_Chalet_details] = []
@@ -127,46 +132,19 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
         }
         return Data()
         
-        
-       /*   if let theJSONData = try?  JSONSerialization.data(
-            withJSONObject: dictionary,
-            options: .prettyPrinted
-            ),
-            let theJSONText = String(data: theJSONData,
-                                     encoding: String.Encoding.ascii) {
-                print("JSON string = \n\(theJSONText)")
-          }*/
-        
     }
     
-    func test(){
-        let dic = ArrayselectedItem
-
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
-
-            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-            // here "decoded" is of type `Any`, decoded from JSON data
-
-            // you can now cast it with the right type
-            if decoded is [String:String] {
-                // use dictFromJSON
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
     @IBAction func Tapped_NextButton(_ sender: UIButton!){
-       // test()
-       // DictionaryToJSON()
-        
         postOfferChaletData()
     }
     
-
-
+  
+    @IBAction func tapOn_GoBack(_ sender: UIButton!){
+        print("GO BACK BUTTON CLICKED")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
@@ -219,8 +197,18 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
             }
 
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        return cell!
+        if arryAvailableOfferChaletList.count <= 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "noChaletMessageCell")
+            self.warningView.isHidden = true
+            self.nextButtonMainView.isHidden = true
+            return cell!
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+            self.warningView.isHidden = false
+            self.nextButtonMainView.isHidden = false
+            return cell!
+        }
+
         
 
     }
@@ -252,8 +240,6 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
 
 extension AddOffertoChaletVC{
     func getOfferChaletData() {
-       // offerid = (dictOfferData?.id)!
-        //"userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/Offer_chalet_list", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "","offerId":offerid], withHud: true) { (success, response, error) in
@@ -263,7 +249,7 @@ extension AddOffertoChaletVC{
                     let responseBase = OfferChaletListModel(dictionary: response as! NSDictionary)
                     self.arryAvailableOfferChaletList = (responseBase?.user_details)!
                     if self.arryAvailableOfferChaletList.count <= 0{
-                        showDefaultAlert(viewController: self, title: "Alert", msg: "No Chalets to List for this Offer")
+                       // showDefaultAlert(viewController: self, title: "Alert", msg: "No Chalets to List for this Offer")
                     }
                     DispatchQueue.main.async {
                         self.AddOfferToChaletTV.reloadData()
@@ -271,7 +257,8 @@ extension AddOffertoChaletVC{
                         self.view.isUserInteractionEnabled = true
                     }
                 }else{
-                    showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
+                   // showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
@@ -297,10 +284,6 @@ extension AddOffertoChaletVC{
     func postOfferChaletData() {
         let rawdata = DictionaryToJSON()
         offerid = (dictOfferData?.id)!
-      //  let userid = CAUser.currentUser.id!
-        print("User ID = \(CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")")
-        print("OfferID = \(offerid)")
-        //"userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/add-offer-to-chalet", dictionary: ["userid":userid,"offerid":offerid], withHud: true,rowData: rawdata) { (success, response, error) in
