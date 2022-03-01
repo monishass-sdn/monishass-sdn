@@ -81,7 +81,7 @@ public class User_details {
     public var rewarded_amt : Int?
     public var reservation_available : Int?
     public var reservation_status : Bool?
-    
+    public var auto_accept : Bool?
     public var offer_available : Bool?
     public var offercreated_at : String?
     public var offer_checkin : String?
@@ -139,7 +139,7 @@ public class User_details {
         rewarded_amt = dictionary["rewarded_amt"] as? Int
         reservation_available = dictionary["reservation_available"] as? Int
         reservation_status = dictionary["reservation_status"] as? Bool
-        
+        auto_accept = dictionary["auto_accept"] as? Bool
         offer_available = dictionary["offer_available"] as? Bool
         offercreated_at = dictionary["offercreated_at"] as? String
         offer_checkin = dictionary["offer_checkin"] as? String
@@ -189,7 +189,7 @@ public class User_details {
         dictionary.setValue(self.rewarded_amt, forKey: "rewarded_amt")
         dictionary.setValue(self.reservation_available, forKey: "reservation_available")
         dictionary.setValue(self.reservation_status, forKey: "reservation_status")
-        
+        dictionary.setValue(self.auto_accept, forKey: "auto_accept")
         dictionary.setValue(self.offer_available, forKey: "offer_available")
         dictionary.setValue(self.offercreated_at, forKey: "offercreated_at")
         dictionary.setValue(self.offer_checkin, forKey: "offer_checkin")

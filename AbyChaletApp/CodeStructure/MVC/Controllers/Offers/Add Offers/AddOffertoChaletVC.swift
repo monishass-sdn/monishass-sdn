@@ -17,7 +17,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButtonMainView: UIView!
     @IBOutlet weak var goBackView : UIView!
     @IBOutlet weak var nextBtn: UIButton!
-    @IBOutlet weak var goBackBtn: UIButton!
+    @IBOutlet weak var submitBtnBGView: UIView!
     var dictOfferData : Available_Offer_list?
     var arryAvailableOfferChaletList = [Offer_Chalet_details]()
     var arrayDiscountAdded : [Offer_Chalet_details] = []

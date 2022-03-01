@@ -72,6 +72,7 @@
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
 		4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */; };
 		4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */; };
+		4D48E39E27CE27E100FA0578 /* confirmReservationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48E39D27CE27E100FA0578 /* confirmReservationVC.swift */; };
 		4D48F4E427831C0100EE7C38 /* addNewOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */; };
 		4D493BFC279551D8001A4886 /* AddOffertoChaletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D493BFB279551D8001A4886 /* AddOffertoChaletVC.swift */; };
 		4D493BFF27955219001A4886 /* ConfirmAddedOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */; };
@@ -215,6 +216,7 @@
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
 		4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerDetailsTableVC.swift; sourceTree = "<group>"; };
 		4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmaddedOfferChaletTVCell.swift; sourceTree = "<group>"; };
+		4D48E39D27CE27E100FA0578 /* confirmReservationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmReservationVC.swift; sourceTree = "<group>"; };
 		4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferVC.swift; sourceTree = "<group>"; };
 		4D493BFB279551D8001A4886 /* AddOffertoChaletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOffertoChaletVC.swift; sourceTree = "<group>"; };
 		4D493BFE27955219001A4886 /* ConfirmAddedOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddedOfferVC.swift; sourceTree = "<group>"; };
@@ -635,6 +637,14 @@
 			path = "Owner Details";
 			sourceTree = "<group>";
 		};
+		4D48E39C27CE279100FA0578 /* ReservationPagesWithTimer */ = {
+			isa = PBXGroup;
+			children = (
+				4D48E39D27CE27E100FA0578 /* confirmReservationVC.swift */,
+			);
+			path = ReservationPagesWithTimer;
+			sourceTree = "<group>";
+		};
 		4D48F4E227831BDC00EE7C38 /* Add Offers */ = {
 			isa = PBXGroup;
 			children = (
@@ -855,6 +865,7 @@
 		A1FD69C42650168E00A03987 /* ReservationTVC */ = {
 			isa = PBXGroup;
 			children = (
+				4D48E39C27CE279100FA0578 /* ReservationPagesWithTimer */,
 				A1FD69C5265016A600A03987 /* ReservationTVC.swift */,
 			);
 			path = ReservationTVC;
@@ -1099,6 +1110,7 @@
 				00AAB68D2632DFB8003F3761 /* IntroScreenVC.swift in Sources */,
 				A1FFE28F2680903A0087756C /* ContactUsBase.swift in Sources */,
 				0091C4A52639B13D00EC0CF7 /* EnumObjects.swift in Sources */,
+				4D48E39E27CE27E100FA0578 /* confirmReservationVC.swift in Sources */,
 				4D4C5123277D90B600DCF3FE /* chaletOwnershipVC.swift in Sources */,
 				4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */,
 				4D493BFC279551D8001A4886 /* AddOffertoChaletVC.swift in Sources */,

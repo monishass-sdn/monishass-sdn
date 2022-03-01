@@ -423,6 +423,7 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                     reservationVC.selectedPackage = self.topSelection
                     reservationVC.isFromOffer = false
                     reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
+                    reservationVC.arrayUserData = self.arrayUserDetails[indexPath.row]
                     self.navigationController?.pushViewController(reservationVC, animated: true)
                     }else{
                         //Reservation Not Available

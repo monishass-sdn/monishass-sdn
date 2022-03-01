@@ -97,6 +97,7 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var heightConstraintForOfferView: NSLayoutConstraint!
     @IBOutlet weak var viewForOffer: UIView!
     
+    var remainingAmount = "0"
     var isUSerIsBlocked = false
     var rewards = 0
     let text = "I have read and Agree to the terms of service "
@@ -120,6 +121,7 @@ class ReservationTVC: UITableViewController {
     var selectedPackage = ""
     var isFromOffer = false
     var isOfferAvailable = false
+    var arrayUserData : User_details!
     var dictOfferUserDetails : Offer_Chalet_list!
     var dictOfferChaletList : Offer_Chalet_list!
     var dictAdmin : Admin!
@@ -168,8 +170,12 @@ class ReservationTVC: UITableViewController {
         lblChaletDetails.text = "Chalet details".localized()
         lblAgreement1.text = "Agreement".localized()
         lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
-        
-        btnPayment.setTitle("Payment now".localized(), for: .normal)
+        if arrayUserData.auto_accept == true{
+            btnPayment.setTitle("Payment now".localized(), for: .normal)
+        }else{
+            btnPayment.setTitle("Apply".localized(), for: .normal)
+        }
+       // btnPayment.setTitle("Apply".localized(), for: .normal)
         
         if kCurrentLanguageCode == "ar"{
             lblBookingDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
@@ -645,6 +651,9 @@ class ReservationTVC: UITableViewController {
 
             rent = Int(arrayUserDetails[selectedIndex].rent!)!
             deposit = Int(arrayUserDetails[selectedIndex].min_deposit!)!
+            
+            let remainingAmt = "KD \(rent - deposit)"
+            self.remainingAmount = "\(rent - deposit)"
         }else{
            // rent  = dictOfferUserDetails.discount_amt!
             rent = dictOfferUserDetails.rent!
@@ -656,6 +665,7 @@ class ReservationTVC: UITableViewController {
         
         if rent >= deposit {
             if sender.isSelected == false{
+                self.remainingAmount = "\(rent - deposit)"
                 sender.isSelected = true
                 self.isClickDeposit = true
                 self.heightConstrain.constant = 40
@@ -667,6 +677,7 @@ class ReservationTVC: UITableViewController {
                 self.tableView.reloadData()
                // self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .bottom)
             }else{
+                self.remainingAmount = "0"
                 sender.isSelected = false
                 self.isClickDeposit = false
                 self.heightConstrain.constant = 0
@@ -705,12 +716,14 @@ class ReservationTVC: UITableViewController {
                 self.isClickRewards = true
                 self.lblTotalInvoice.text = "KD \(rent - rewards)"
                 self.lblRemainingAmt.text = "KD \(rent - rewards - deposit)"
+                self.remainingAmount = "\(rent - rewards - deposit)"
                 //self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .bottom)
             }else{
                 sender.isSelected = false
                 self.isClickRewards = false
                 self.lblTotalInvoice.text = "KD \(rent)"
                 self.lblRemainingAmt.text = "KD \(rent - deposit)"
+                self.remainingAmount = "\(rent - deposit)"
                // self.rewards = 0
                 //self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .top)
             }
@@ -821,8 +834,55 @@ class ReservationTVC: UITableViewController {
     }
     
     @IBAction func btnPaymentAction(_ sender: UIButton) {
-        
-        if isUSerIsBlocked == false {
+        if arrayUserData.auto_accept == false{
+            print("Go to Timer Page")
+            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "confirmReservationVC") as! confirmReservationVC
+            nextVC.arrayUserDetails = arrayUserData
+            
+            
+            let dict = self.arrayUserDetails[(self.selectedIndex)!]
+
+            nextVC.deposit = self.isClickDeposit == false ? "0" : (dict.min_deposit!)
+            nextVC.remainingAmount = self.isClickDeposit == true ? "\(Int((dict.rent!))! - self.rewards)" : "\(Int((dict.rent!))! - self.rewards)"
+            
+            nextVC.totalPaid = self.isClickDeposit == false ? self.isClickRewards == true ? "\(Int((dict.rent!))! - self.rewards)" : (dict.rent!) : (dict.min_deposit!)
+            
+            if self.isFromOffer == false{
+                nextVC.offerDiscount = "0"
+            }else{
+                nextVC.offerDiscount = "100"
+            }
+            
+            nextVC.remainingAmount = remainingAmount
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
+        }else{
+            print("Go to Direct Payement")
+            if isUSerIsBlocked == false {
+                 if self.isPaymentEnable == true {
+                     if CAUser.currentUser.id != nil {
+                         intialisePaymentWithType()
+                     }else{
+                         
+                         let alert = UIAlertController(title: "Message".localized(), message: "Please Login for booking. Do you want to continue?".localized(), preferredStyle: .alert)
+                         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                             let loginSignUpViewController = UIStoryboard(name: "Profile", bundle: Bundle.main).instantiateViewController(identifier: "LoginSignUpViewController") as! LoginSignUpViewController
+                             loginSignUpViewController.isFromNoLogin = true
+                             self.navigationController?.pushViewController(loginSignUpViewController, animated: true)
+                         }))
+                         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                             
+                         }))
+                         self.present(alert, animated: true, completion: nil)
+                         
+                     }
+                 }
+             }else{
+                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Your Account has been Blocked. Please contact Administrator.".localized())
+                 appDelegate.checkBlockStatus()
+             }
+        }
+    /*    if isUSerIsBlocked == false {
             if self.isPaymentEnable == true {
                 if CAUser.currentUser.id != nil {
                     intialisePaymentWithType()
@@ -844,14 +904,8 @@ class ReservationTVC: UITableViewController {
         }else{
             showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Your Account has been Blocked. Please contact Administrator.".localized())
             appDelegate.checkBlockStatus()
-        }
-        /*let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
-        bookingDetailsTVC.arrayUserDetails = self.arrayUserDetails
-        bookingDetailsTVC.selectedIndex = self.selectedIndex
-        navigationController?.pushViewController(bookingDetailsTVC, animated: true)*/
-        
-       /* let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
-        self.navigationController?.pushViewController(bookingDetailsTVC, animated: true)*/
+        }*/
+
     }
     
     @IBAction func buttonCancelForgotPasswordAction(_ sender: UIButton) {
