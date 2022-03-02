@@ -170,11 +170,21 @@ class ReservationTVC: UITableViewController {
         lblChaletDetails.text = "Chalet details".localized()
         lblAgreement1.text = "Agreement".localized()
         lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
-        if arrayUserData.auto_accept == true{
-            btnPayment.setTitle("Payment now".localized(), for: .normal)
+        if isFromOffer == false{
+            if arrayUserData.auto_accept == true{
+                btnPayment.setTitle("Payment now".localized(), for: .normal)
+            }else{
+                btnPayment.setTitle("Apply".localized(), for: .normal)
+            }
+
         }else{
-            btnPayment.setTitle("Apply".localized(), for: .normal)
+            if dictOfferUserDetails.auto_accept == true{
+                btnPayment.setTitle("Payment now".localized(), for: .normal)
+            }else{
+                btnPayment.setTitle("Apply".localized(), for: .normal)
+            }
         }
+
        // btnPayment.setTitle("Apply".localized(), for: .normal)
         
         if kCurrentLanguageCode == "ar"{
@@ -838,6 +848,7 @@ class ReservationTVC: UITableViewController {
             print("Go to Timer Page")
             let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "confirmReservationVC") as! confirmReservationVC
             nextVC.arrayUserDetails = arrayUserData
+            nextVC.dictOfferUserDetails = dictOfferUserDetails
             
             
             let dict = self.arrayUserDetails[(self.selectedIndex)!]
@@ -848,12 +859,15 @@ class ReservationTVC: UITableViewController {
             nextVC.totalPaid = self.isClickDeposit == false ? self.isClickRewards == true ? "\(Int((dict.rent!))! - self.rewards)" : (dict.rent!) : (dict.min_deposit!)
             
             if self.isFromOffer == false{
-                nextVC.offerDiscount = "0"
+                nextVC.isFromOffer = false
+                nextVC.offerDiscount = dict.Offer_discount_amt != nil ? "0" : "0"
             }else{
-                nextVC.offerDiscount = "100"
+                nextVC.isFromOffer = true
+                nextVC.offerDiscount = String(self.dictOfferUserDetails.discount_amt!)
             }
             
             nextVC.remainingAmount = remainingAmount
+            nextVC.selectedpackage = self.selectedPackage
             self.navigationController?.pushViewController(nextVC, animated: true)
 
         }else{
