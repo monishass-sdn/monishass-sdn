@@ -36,16 +36,26 @@ class confirmReservationVC: UIViewController {
     var totalPaid = "0"
     var selectedpackage = ""
     var isFromOffer = false
+    var isClickDeposit = false
+    var isClickRewards = false
+    var email = ""
+    var phone = ""
+    var civilid = ""
+    var firstName = ""
+    
+    var chalet_id = ""
+    var check_in = ""
+    var check_out = ""
+    var rent = ""
+    var reward_Discount = ""
+    var offer_Dis = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Selected Chalet id = \(arrayUserDetails.chalet_id ?? 0)")
         if isTimerRunning == false {
               runTimer()
          }
         self.setUpNavigationBar()
-        
         setValuestotheFields()
-       // var offerDis = arrayUserDetails.Offer_discount_amt == nil ? "0" : "0"
         // Do any additional setup after loading the view.
     }
     func setUpNavigationBar() {
@@ -64,21 +74,56 @@ class confirmReservationVC: UIViewController {
     }
     
     func setValuestotheFields(){
-        self.lbl_rent.text = arrayUserDetails.rent
-        self.lbl_checkin.text = arrayUserDetails.check_in
-        self.lbl_checkout.text = arrayUserDetails.check_out
-        self.lbl_Deposit.text = "KD \(deposit)"
-        self.lbl_rewardDiscount.text = "KD \(arrayUserDetails.rewarded_amt!)"
-        self.lbl_chaletName.text = arrayUserDetails.chalet_name
-        self.lbl_chaletid.text = String(arrayUserDetails.chalet_id!)
-        self.lbl_TotalInvoice.text = "KD \(arrayUserDetails.rent!)"
-        self.lbl_offerDiscount.text = "KD \(offerDiscount)"
-        self.lbl_RemainingAmt.text = "KD \(remainingAmount)"
-        if arrayUserDetails.cover_photo != ""{
-            chalet_image.sd_setImage(with: URL(string: arrayUserDetails.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+        if isFromOffer == false{
+            self.lbl_rent.text = arrayUserDetails.rent
+            self.lbl_checkin.text = arrayUserDetails.check_in
+            self.lbl_checkout.text = arrayUserDetails.check_out
+            self.lbl_Deposit.text = "KD \(deposit)"
+            self.lbl_rewardDiscount.text = "KD \(arrayUserDetails.rewarded_amt!)"
+            self.lbl_chaletName.text = arrayUserDetails.chalet_name
+            self.lbl_chaletid.text = String(arrayUserDetails.chalet_id!)
+            self.lbl_TotalInvoice.text = "KD \(arrayUserDetails.rent!)"
+            self.lbl_offerDiscount.text = "KD \(offerDiscount)"
+            self.lbl_RemainingAmt.text = "KD \(remainingAmount)"
+            if arrayUserDetails.cover_photo != ""{
+                chalet_image.sd_setImage(with: URL(string: arrayUserDetails.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+            }else{
+                chalet_image.image = kPlaceHolderImage
+            }
+            
+            chalet_id = String(arrayUserDetails.chalet_id!)
+            check_in = arrayUserDetails.check_in!
+            check_out = arrayUserDetails.check_out!
+            rent = arrayUserDetails.rent!
+            reward_Discount = String(arrayUserDetails.rewarded_amt!)
+            let offerDis = arrayUserDetails.Offer_discount_amt == nil ? "0" : "0"
+            offer_Dis = offerDis
         }else{
-            chalet_image.image = kPlaceHolderImage
+            self.lbl_rent.text = String(dictOfferUserDetails.rent!)
+            self.lbl_checkin.text = dictOfferUserDetails.check_in
+            self.lbl_checkout.text = dictOfferUserDetails.check_out
+            self.lbl_Deposit.text = "KD \(deposit)"
+            self.lbl_rewardDiscount.text = "KD \(dictOfferUserDetails.rewarded_amt!)"
+            self.lbl_chaletName.text = dictOfferUserDetails.chalet_name
+            self.lbl_chaletid.text = String(dictOfferUserDetails.chalet_id!)
+            self.lbl_TotalInvoice.text = "KD \(dictOfferUserDetails.rent!)"
+            self.lbl_offerDiscount.text = "KD \(offerDiscount)"
+            self.lbl_RemainingAmt.text = "KD \(remainingAmount)"
+            if dictOfferUserDetails.cover_photo != ""{
+                chalet_image.sd_setImage(with: URL(string: dictOfferUserDetails.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+            }else{
+                chalet_image.image = kPlaceHolderImage
+            }
+            
+            chalet_id = String(dictOfferUserDetails.chalet_id!)
+            check_in = dictOfferUserDetails.check_in!
+            check_out = dictOfferUserDetails.check_out!
+            rent = String(dictOfferUserDetails.rent!)
+            reward_Discount = String(dictOfferUserDetails.rewarded_amt!)
+            offer_Dis = String(dictOfferUserDetails.discount_amt!)
         }
+        
+
     }
     
     @objc func timerClass(){
@@ -118,34 +163,11 @@ class confirmReservationVC: UIViewController {
 
 extension confirmReservationVC{
     func sendReservationConfirmation() {
-        print("user_id = \(CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")")
-        print("chalet_id = \(arrayUserDetails.chalet_id!)")
-        print("selected_package = \(selectedpackage)")
-        print("check_in = \(arrayUserDetails.check_in! )")
-        print("check_out = \(arrayUserDetails.check_out! )")
-        print("deposit = \(deposit)")
-        print("rent = \(arrayUserDetails.rent! )")
-        print("total_paid = \(totalPaid)")
-        print("reward_discount = \(String(arrayUserDetails.rewarded_amt!))")
         let userid = CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""
-        let chaletid = arrayUserDetails.chalet_id
-        let checkin = arrayUserDetails.check_in!
-        let checkout = arrayUserDetails.check_out!
-        let rent = arrayUserDetails.rent!
-        let rewardDiscount = String(arrayUserDetails.rewarded_amt!)
-        var offerdis = ""
-        if isFromOffer == false{
-            offerdis = "0"
-        }else{
-            offerdis = String(dictOfferUserDetails.discount_amt!)
-        }
-        print("offer_discount = \(offerdis)")
         var reservID = ""
-
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/reservation-request", dictionary: ["userid":userid,"chaletid":chaletid!, "selected_package":selectedpackage,"check_in":checkin,"check_out":checkout,"deposit":"\(deposit)","rent":rent,"total_paid":totalPaid,"reward_discount":rewardDiscount,"offer_discount":offerdis], withHud: true) { (success, response, error) in
-            print("Response = \(response)")
+        ServiceManager.sharedInstance.postMethodAlamofire("api/reservation-request", dictionary: ["userid":userid,"chaletid":chalet_id, "selected_package":selectedpackage,"check_in":check_in,"check_out":check_out,"deposit":deposit,"rent":rent,"total_paid":totalPaid,"reward_discount":reward_Discount,"offer_discount":offer_Dis], withHud: true) { (success, response, error) in
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = ReservationRequestResponseModel(dictionary: response as! NSDictionary)
@@ -154,6 +176,15 @@ extension confirmReservationVC{
                     let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationApprovalVC") as! ReservationApprovalVC
                     nextVC.reservation_id = reservID
                     nextVC.reservedChaletData = self.arryReservedChaletDetails
+                    nextVC.isFromOffer = self.isFromOffer
+                    nextVC.dictOfferUserDetail = self.dictOfferUserDetails
+                    nextVC.selectedPackage = self.selectedpackage
+                    nextVC.isClickRewards = self.isClickRewards
+                    nextVC.isClickDeposit = self.isClickDeposit
+                    nextVC.email = self.email
+                    nextVC.phone = self.phone
+                    nextVC.civilid = self.civilid
+                    nextVC.firstName = self.firstName
                     self.navigationController?.pushViewController(nextVC, animated: true)
    
                     DispatchQueue.main.async {

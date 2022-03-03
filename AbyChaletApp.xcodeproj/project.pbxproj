@@ -67,6 +67,8 @@
 		4D0F4E7127A7A553009A7DC1 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E6D27A7A553009A7DC1 /* Oswald-Bold.ttf */; };
 		4D0F4E7227A7A553009A7DC1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E6E27A7A553009A7DC1 /* Oswald-Regular.ttf */; };
 		4D0F4E7427A7A553009A7DC1 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F4E7027A7A553009A7DC1 /* Oswald-Light.ttf */; };
+		4D1C6F4527D0D40100AFE89D /* ReservationCancelledbyUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1C6F4427D0D40100AFE89D /* ReservationCancelledbyUserVC.swift */; };
+		4D1C6F4827D0D41A00AFE89D /* ReservationRejectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1C6F4727D0D41A00AFE89D /* ReservationRejectedVC.swift */; };
 		4D23766527C4A39F00607456 /* OwnerInfoBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D23766427C4A39F00607456 /* OwnerInfoBase.swift */; };
 		4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */; };
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
@@ -214,6 +216,8 @@
 		4D0F4E6D27A7A553009A7DC1 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		4D0F4E6E27A7A553009A7DC1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		4D0F4E7027A7A553009A7DC1 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
+		4D1C6F4427D0D40100AFE89D /* ReservationCancelledbyUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCancelledbyUserVC.swift; sourceTree = "<group>"; };
+		4D1C6F4727D0D41A00AFE89D /* ReservationRejectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRejectedVC.swift; sourceTree = "<group>"; };
 		4D23766427C4A39F00607456 /* OwnerInfoBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerInfoBase.swift; sourceTree = "<group>"; };
 		4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersTVCell.swift; sourceTree = "<group>"; };
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
@@ -650,6 +654,8 @@
 				4D4C410927CF52B600E33E7E /* ReservationApprovalVC.swift */,
 				4D4B5E8327CFA9C400317329 /* ReservationRequestResponseModel.swift */,
 				4D4B5E8627CFBA4500317329 /* TimerEndVC.swift */,
+				4D1C6F4427D0D40100AFE89D /* ReservationCancelledbyUserVC.swift */,
+				4D1C6F4727D0D41A00AFE89D /* ReservationRejectedVC.swift */,
 			);
 			path = ReservationPagesWithTimer;
 			sourceTree = "<group>";
@@ -1051,6 +1057,7 @@
 				4D5E3EC2277C1780006C57C7 /* FAQsViewController.swift in Sources */,
 				006D54EA26427A7A00099F6A /* ServiceManager.swift in Sources */,
 				00AD3862263FE2E900FDA907 /* LoginSignUpViewController.swift in Sources */,
+				4D1C6F4827D0D41A00AFE89D /* ReservationRejectedVC.swift in Sources */,
 				A166F3BD265135D3009BCB7E /* ChaletSearchBase.swift in Sources */,
 				4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */,
 				A1FD69C826501A5F00A03987 /* CollectionViewIMageVideoCVCell.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				A12F5E1B266360CC00142A06 /* NotificationVC.swift in Sources */,
 				A12F5E1F266362D800142A06 /* MessagesVC.swift in Sources */,
 				4D4B5E8727CFBA4500317329 /* TimerEndVC.swift in Sources */,
+				4D1C6F4527D0D40100AFE89D /* ReservationCancelledbyUserVC.swift in Sources */,
 				0029CAED26419DF200D267EB /* NewPasswordViewController.swift in Sources */,
 				00C3044726367F7F007EBC7C /* Extentions.swift in Sources */,
 				4D4C410A27CF52B600E33E7E /* ReservationApprovalVC.swift in Sources */,

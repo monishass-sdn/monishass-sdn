@@ -1,13 +1,13 @@
 //
-//  TimerEndVC.swift
+//  ReservationRejectedVC.swift
 //  AbyChaletApp
 //
-//  Created by Srishti on 02/03/22.
+//  Created by Srishti on 03/03/22.
 //
 
 import UIKit
 
-class TimerEndVC: UIViewController {
+class ReservationRejectedVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +24,15 @@ class TimerEndVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
-    @IBAction func tapped_TryAgain(_ sender: UIButton){
-        self.popBack(4)
-        //showDefaultAlert(viewController: self, title: "", msg: "WORK IN PROGRESS")
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-    
-    func popBack(_ nb: Int) {
-        if let viewControllers: [UIViewController] = self.navigationController?.viewControllers {
-            guard viewControllers.count < nb else {
-                self.navigationController?.popToViewController(viewControllers[viewControllers.count - nb], animated: true)
-                return
-            }
-        }
-    }
+    */
 
 }

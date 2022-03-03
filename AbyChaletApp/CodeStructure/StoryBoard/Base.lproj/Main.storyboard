@@ -1090,7 +1090,7 @@
                                                             <rect key="frame" x="0.0" y="160" width="345" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VV6-pQ-PeM">
-                                                                    <rect key="frame" x="139.66666666666666" y="9" width="66" height="22"/>
+                                                                    <rect key="frame" x="139.33333333333334" y="9" width="66.333333333333343" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="OF9-Qw-T2l"/>
                                                                     </constraints>
@@ -2928,13 +2928,13 @@
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEI-4Z-QHH">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="0.0"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rental Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSH-Y6-y01">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rental Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSH-Y6-y01">
                                                                     <rect key="frame" x="248" y="-10" width="92" height="20"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.19607843137254902" green="0.38431372549019605" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD 1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qR0-Rf-AKg">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KD 1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qR0-Rf-AKg">
                                                                     <rect key="frame" x="5" y="-10.333333333333334" width="67.666666666666671" height="20.666666666666668"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.1960784314" green="0.38431372549999998" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2953,13 +2953,13 @@
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pT8-H0-Bhu">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="0.0"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commission" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHS-Hf-1d3">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Commission" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHS-Hf-1d3">
                                                                     <rect key="frame" x="245" y="-10" width="95" height="20"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.1960784314" green="0.38431372549999998" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD - 100 (10%)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-jd-y4G">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KD - 100 (10%)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-jd-y4G">
                                                                     <rect key="frame" x="4.9999999999999929" y="-10.333333333333334" width="120.33333333333331" height="20.666666666666668"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.1960784314" green="0.38431372549999998" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2978,13 +2978,13 @@
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-5N-iSH">
                                                             <rect key="frame" x="0.0" y="275" width="345" height="40"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Paid" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h81-SZ-uqO">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Paid" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h81-SZ-uqO">
                                                                     <rect key="frame" x="265.33333333333331" y="-10" width="74.666666666666686" height="20"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.1960784314" green="0.38431372549999998" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD 400" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sh-rf-WaK">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KD 400" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sh-rf-WaK">
                                                                     <rect key="frame" x="5" y="-10.333333333333334" width="58" height="20.666666666666668"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" red="0.43529411759999997" green="0.85490196080000003" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -8167,7 +8167,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Events have been added yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eN0-yj-qCr">
-                                                                        <rect key="frame" x="68" y="15" width="237" height="20"/>
+                                                                        <rect key="frame" x="65.333333333333329" y="15" width="242.66666666666669" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -9199,7 +9199,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check-Out" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCO-M9-Qph">
-                                                                            <rect key="frame" x="42.999999999999993" y="9.6666666666666679" width="86.333333333333314" height="21"/>
+                                                                            <rect key="frame" x="41.999999999999993" y="9.6666666666666679" width="88.333333333333314" height="21"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="18"/>
                                                                             <color key="textColor" red="0.9882352941176471" green="0.14117647058823529" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -9892,7 +9892,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agreement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIf-jm-GZ9">
-                                                                    <rect key="frame" x="130.33333333333334" y="9" width="84.333333333333343" height="22"/>
+                                                                    <rect key="frame" x="131" y="9" width="83" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="xwH-g1-erM"/>
                                                                     </constraints>
@@ -10337,7 +10337,7 @@
             <objects>
                 <viewController storyboardIdentifier="ReservationTableViewVC" id="mLd-3G-wo7" customClass="ReservationTableViewVC" customModule="AbyChaletApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rgg-i4-Jwo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSm-fm-XHP">
@@ -15049,7 +15049,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reservation Canceled" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rf-g2-PHe">
-                                                                    <rect key="frame" x="167.66666666666663" y="8" width="157.33333333333337" height="19"/>
+                                                                    <rect key="frame" x="167.66666666666663" y="8.3333333333333304" width="157.33333333333337" height="18.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="16"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -15320,10 +15320,10 @@
                                                             <rect key="frame" x="0.0" y="251" width="335" height="40"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdT-gR-iCH">
-                                                                    <rect key="frame" x="10.000000000000002" y="8.3333333333333162" width="30.666666666666671" height="23.666666666666671"/>
+                                                                    <rect key="frame" x="10" y="8.3333333333333126" width="33" height="23.333333333333329"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35o-8u-WHL">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="30.666666666666668" height="23.666666666666668"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="33" height="23.333333333333332"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                                             <color key="textColor" red="0.1960784314" green="0.38431372549999998" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -15491,16 +15491,16 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                                         </imageView>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eqs-d7-D3F">
-                                                                            <rect key="frame" x="0.0" y="63.333333333333329" width="120" height="56.666666666666671"/>
+                                                                            <rect key="frame" x="0.0" y="64" width="120" height="56"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyH-hE-zIO">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="28.333333333333332"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="28"/>
                                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kD-hp-gy2">
-                                                                                    <rect key="frame" x="0.0" y="28.333333333333329" width="120" height="28.333333333333329"/>
+                                                                                    <rect key="frame" x="0.0" y="28" width="120" height="28"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="24"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
@@ -15836,7 +15836,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCV-66-KWd">
-                                                                    <rect key="frame" x="167.66666666666663" y="8" width="157.33333333333337" height="19"/>
+                                                                    <rect key="frame" x="167.66666666666663" y="8.3333333333333304" width="157.33333333333337" height="18.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="16"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -16087,17 +16087,17 @@
                                                             <rect key="frame" x="0.0" y="190" width="335" height="40"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGc-rP-9aE">
-                                                                    <rect key="frame" x="10" y="8.3333333333333446" width="65.333333333333329" height="23.666666666666671"/>
+                                                                    <rect key="frame" x="10" y="8.333333333333341" width="66.666666666666671" height="23.333333333333329"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPS-ch-s8L">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="30.666666666666668" height="23.666666666666668"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="33" height="23.333333333333332"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                                             <color key="textColor" red="1" green="0.83529411760000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwH-HY-sFo">
-                                                                            <rect key="frame" x="30.666666666666668" y="0.0" width="34.666666666666657" height="23.666666666666668"/>
+                                                                            <rect key="frame" x="33" y="0.0" width="33.666666666666657" height="23.333333333333332"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
                                                                             <color key="textColor" red="1" green="0.83529411760000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -16974,6 +16974,64 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCc-3r-k4P">
+                                                <rect key="frame" x="-1" y="265" width="377" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee4-c3-4rB">
+                                                        <rect key="frame" x="128.66666666666669" y="10" width="120" height="45"/>
+                                                        <color key="backgroundColor" red="0.9882352941176471" green="0.14117647058823529" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="Fov-eF-9AT"/>
+                                                            <constraint firstAttribute="width" constant="120" id="Fuh-DP-NZK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="22.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="tapped_cancelReservation:" destination="dSj-r9-Ob4" eventType="touchUpInside" id="9iM-Cd-Ikw"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can cancel your reservation request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Y-Ac-Wn9">
+                                                        <rect key="frame" x="38.666666666666657" y="65" width="300" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="97E-Qy-L2g"/>
+                                                            <constraint firstAttribute="width" constant="300" id="uH0-47-6so"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.1680441201" green="0.35637885330000002" blue="0.42979097370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="Ee4-c3-4rB" firstAttribute="centerX" secondItem="nCc-3r-k4P" secondAttribute="centerX" id="ILC-FB-Eib"/>
+                                                    <constraint firstAttribute="height" constant="100" id="Jec-XF-5Ap"/>
+                                                    <constraint firstItem="Ee4-c3-4rB" firstAttribute="top" secondItem="nCc-3r-k4P" secondAttribute="top" constant="10" id="WWV-vn-hnh"/>
+                                                    <constraint firstItem="z5Y-Ac-Wn9" firstAttribute="top" secondItem="Ee4-c3-4rB" secondAttribute="bottom" constant="10" id="o2W-eP-3cm"/>
+                                                    <constraint firstItem="z5Y-Ac-Wn9" firstAttribute="centerX" secondItem="nCc-3r-k4P" secondAttribute="centerX" id="uHN-aN-pej"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.077762939040000006" green="0.20224839450000001" blue="0.24995672699999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoV-lX-L5G">
                                                 <rect key="frame" x="137.66666666666666" y="190" width="100" height="50"/>
                                                 <constraints>
@@ -17458,16 +17516,46 @@ The reservation is considered canceled And with the deposit confiscated And can 
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-Yc-jYz">
+                                                        <rect key="frame" x="40" y="25" width="295" height="60"/>
+                                                        <color key="backgroundColor" red="0.43529411764705883" green="0.85490196078431369" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="295" id="VSF-Nv-GzQ"/>
+                                                            <constraint firstAttribute="height" constant="60" id="Xl3-sk-t6d"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="22"/>
+                                                        <state key="normal" title="Payment now">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="30"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="payment_Now:" destination="dSj-r9-Ob4" eventType="touchUpInside" id="J2b-e9-oG2"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.15372130270000001" green="0.32118928429999999" blue="0.39450272920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="3wR-Xn-iY1" firstAttribute="centerY" secondItem="BBy-QI-201" secondAttribute="centerY" id="11d-At-HME"/>
+                                                    <constraint firstItem="VpW-Yc-jYz" firstAttribute="centerX" secondItem="BBy-QI-201" secondAttribute="centerX" id="3PC-Vr-ZHQ"/>
                                                     <constraint firstItem="3wR-Xn-iY1" firstAttribute="centerX" secondItem="BBy-QI-201" secondAttribute="centerX" id="5YD-aL-Y5A"/>
+                                                    <constraint firstItem="VpW-Yc-jYz" firstAttribute="centerY" secondItem="BBy-QI-201" secondAttribute="centerY" id="pAX-pf-oBQ"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="nCc-3r-k4P" firstAttribute="centerX" secondItem="cwJ-Y7-XGG" secondAttribute="centerX" id="3Jo-kt-MXM"/>
+                                            <constraint firstItem="nCc-3r-k4P" firstAttribute="top" secondItem="uoV-lX-L5G" secondAttribute="bottom" constant="25" id="BfR-cw-XGh"/>
                                             <constraint firstItem="xJV-c0-lTV" firstAttribute="leading" secondItem="cwJ-Y7-XGG" secondAttribute="leading" constant="-1" id="Biu-86-Mtl"/>
                                             <constraint firstItem="JIW-zh-HiI" firstAttribute="leading" secondItem="cwJ-Y7-XGG" secondAttribute="leading" constant="10" id="EFs-3t-IdX"/>
                                             <constraint firstItem="g05-Tn-us1" firstAttribute="top" secondItem="cwJ-Y7-XGG" secondAttribute="top" constant="20" id="JZy-0p-rex"/>
@@ -17483,10 +17571,12 @@ The reservation is considered canceled And with the deposit confiscated And can 
                                             <constraint firstItem="uoV-lX-L5G" firstAttribute="centerX" secondItem="cwJ-Y7-XGG" secondAttribute="centerX" id="VAb-v6-JwR"/>
                                             <constraint firstItem="5gn-CZ-8hl" firstAttribute="top" secondItem="6cw-Hq-a4g" secondAttribute="bottom" id="Xfs-1s-wye"/>
                                             <constraint firstAttribute="trailing" secondItem="JIW-zh-HiI" secondAttribute="trailing" constant="10" id="Z4Q-Bv-Qhm"/>
+                                            <constraint firstItem="nCc-3r-k4P" firstAttribute="leading" secondItem="cwJ-Y7-XGG" secondAttribute="leading" constant="-1" id="al2-cp-qq8"/>
                                             <constraint firstItem="BBy-QI-201" firstAttribute="leading" secondItem="cwJ-Y7-XGG" secondAttribute="leading" id="iJR-RL-UNd"/>
                                             <constraint firstAttribute="trailing" secondItem="xJV-c0-lTV" secondAttribute="trailing" constant="-1" id="mET-cy-Shj"/>
                                             <constraint firstAttribute="height" constant="1160" id="pZG-wu-HeG"/>
                                             <constraint firstAttribute="trailing" secondItem="BBy-QI-201" secondAttribute="trailing" id="ptT-5h-zd8"/>
+                                            <constraint firstAttribute="trailing" secondItem="nCc-3r-k4P" secondAttribute="trailing" constant="-1" id="rc6-8A-IJg"/>
                                             <constraint firstAttribute="bottom" secondItem="BBy-QI-201" secondAttribute="bottom" id="vbB-Hr-ulj"/>
                                             <constraint firstAttribute="trailing" secondItem="6cw-Hq-a4g" secondAttribute="trailing" constant="15" id="xwb-Uj-Hqe"/>
                                         </constraints>
@@ -17512,7 +17602,9 @@ The reservation is considered canceled And with the deposit confiscated And can 
                     </view>
                     <size key="freeformSize" width="375" height="1006"/>
                     <connections>
+                        <outlet property="btnPayment" destination="VpW-Yc-jYz" id="dud-th-Skr"/>
                         <outlet property="chalet_image" destination="IGR-OE-uiK" id="KQj-bg-YbT"/>
+                        <outlet property="height_RemainingAmntPayDateView" destination="KfO-tE-tOo" id="TPP-h7-9EX"/>
                         <outlet property="lblchalet_id" destination="Ecx-z2-Xkh" id="opx-O8-FQR"/>
                         <outlet property="lblchalet_name" destination="UYs-8H-1L5" id="ed3-5W-DEh"/>
                         <outlet property="lblchech_in" destination="ynn-dm-F2W" id="PcI-Rc-1hC"/>
@@ -17524,12 +17616,15 @@ The reservation is considered canceled And with the deposit confiscated And can 
                         <outlet property="lblrent" destination="syq-gs-jWV" id="dA1-8N-K0g"/>
                         <outlet property="lblreward_Dis" destination="wMP-oa-5Il" id="G9k-Z4-EIf"/>
                         <outlet property="lbltotal_invoice" destination="L5O-eT-lLq" id="jov-rQ-flI"/>
+                        <outlet property="status_Image" destination="g05-Tn-us1" id="RDf-IE-8wx"/>
+                        <outlet property="status_Label" destination="JIW-zh-HiI" id="h89-gD-0mp"/>
                         <outlet property="timeLabel" destination="uoV-lX-L5G" id="y7d-vs-gUa"/>
+                        <outlet property="view_cancelReservation" destination="nCc-3r-k4P" id="HOI-0j-S9A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maW-9q-Bhn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11473" y="821"/>
+            <point key="canvasLocation" x="11472.799999999999" y="820.93596059113304"/>
         </scene>
         <!--Timer EndVC-->
         <scene sceneID="gdZ-s2-66Q">
@@ -17633,6 +17728,102 @@ The reservation is considered canceled And with the deposit confiscated And can 
             </objects>
             <point key="canvasLocation" x="12191" y="750"/>
         </scene>
+        <!--Reservation RejectedVC-->
+        <scene sceneID="Gom-mE-elQ">
+            <objects>
+                <viewController storyboardIdentifier="ReservationRejectedVC" id="PhI-ny-i24" customClass="ReservationRejectedVC" customModule="AbyChaletApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="926-Tk-d00">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="failed_icon" translatesAutoresizingMaskIntoConstraints="NO" id="w63-6g-NGf">
+                                <rect key="frame" x="137.66666666666666" y="64" width="100" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="XoF-oN-W7D"/>
+                                    <constraint firstAttribute="width" constant="100" id="oZf-zE-QvS"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8W-9D-fU3">
+                                <rect key="frame" x="20" y="169" width="335" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hCj-dp-uj4"/>
+                                </constraints>
+                                <string key="text">The reservation request was rejected
+There may be other reasons</string>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We are so sorry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhc-Z5-LKi">
+                                <rect key="frame" x="112.66666666666669" y="294" width="150" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="4sM-Ci-QgK"/>
+                                    <constraint firstAttribute="height" constant="25" id="Qcd-H1-ifa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zwd-T3-4Yx"/>
+                        <color key="backgroundColor" red="0.1063062325" green="0.26595181229999998" blue="0.3319257498" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="w63-6g-NGf" firstAttribute="top" secondItem="zwd-T3-4Yx" secondAttribute="top" constant="20" id="2tk-9k-nb6"/>
+                            <constraint firstItem="w63-6g-NGf" firstAttribute="centerX" secondItem="926-Tk-d00" secondAttribute="centerX" id="BdW-vG-4lH"/>
+                            <constraint firstItem="f8W-9D-fU3" firstAttribute="leading" secondItem="zwd-T3-4Yx" secondAttribute="leading" constant="20" id="TK6-0p-Ybg"/>
+                            <constraint firstItem="f8W-9D-fU3" firstAttribute="top" secondItem="w63-6g-NGf" secondAttribute="bottom" constant="25" id="VjE-6L-2qW"/>
+                            <constraint firstItem="zwd-T3-4Yx" firstAttribute="trailing" secondItem="f8W-9D-fU3" secondAttribute="trailing" constant="20" id="bPN-yq-fXH"/>
+                            <constraint firstItem="Yhc-Z5-LKi" firstAttribute="top" secondItem="f8W-9D-fU3" secondAttribute="bottom" constant="25" id="byT-Zx-wdt"/>
+                            <constraint firstItem="Yhc-Z5-LKi" firstAttribute="centerX" secondItem="926-Tk-d00" secondAttribute="centerX" id="uWe-RH-L9x"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw5-WC-0fi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12862" y="750"/>
+        </scene>
+        <!--Reservation Cancelledby UserVC-->
+        <scene sceneID="OG3-sX-Y5h">
+            <objects>
+                <viewController storyboardIdentifier="ReservationCancelledbyUserVC" id="a0p-hX-yDN" customClass="ReservationCancelledbyUserVC" customModule="AbyChaletApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n1b-YG-vM3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="failed_icon" translatesAutoresizingMaskIntoConstraints="NO" id="CVG-jh-x9w">
+                                <rect key="frame" x="137.66666666666666" y="64" width="100" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="GIU-j0-WmS"/>
+                                    <constraint firstAttribute="width" constant="100" id="yFA-IE-beR"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snv-8K-KeT">
+                                <rect key="frame" x="20" y="169" width="335" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ykY-u9-OnR"/>
+                                </constraints>
+                                <string key="text">Your Reservation request 
+Has been Cancelled</string>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vAB-Tq-ev7"/>
+                        <color key="backgroundColor" red="0.1063062325" green="0.26595181229999998" blue="0.3319257498" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vAB-Tq-ev7" firstAttribute="trailing" secondItem="snv-8K-KeT" secondAttribute="trailing" constant="20" id="CVz-T3-cug"/>
+                            <constraint firstItem="snv-8K-KeT" firstAttribute="top" secondItem="CVG-jh-x9w" secondAttribute="bottom" constant="25" id="WYb-7n-hNb"/>
+                            <constraint firstItem="CVG-jh-x9w" firstAttribute="top" secondItem="vAB-Tq-ev7" secondAttribute="top" constant="20" id="bXq-mi-5yO"/>
+                            <constraint firstItem="CVG-jh-x9w" firstAttribute="centerX" secondItem="n1b-YG-vM3" secondAttribute="centerX" id="cb4-T6-tE7"/>
+                            <constraint firstItem="snv-8K-KeT" firstAttribute="leading" secondItem="vAB-Tq-ev7" secondAttribute="leading" constant="20" id="g1t-8S-5yW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Cv-05-Yfl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13524" y="750"/>
+        </scene>
     </scenes>
     <resources>
         <image name="DeselectIconNew" width="373" height="90"/>
@@ -17654,7 +17845,7 @@ The reservation is considered canceled And with the deposit confiscated And can 
         <image name="chaletDummyImage" width="290" height="290"/>
         <image name="close" width="512" height="512"/>
         <image name="discountField" width="70" height="40"/>
-        <image name="failed_icon" width="283" height="260"/>
+        <image name="failed_icon" width="94.333335876464844" height="86.666664123535156"/>
         <image name="flame" width="19" height="25"/>
         <image name="forwardWhite" width="20" height="20"/>
         <image name="groupRectangle" width="31" height="20"/>

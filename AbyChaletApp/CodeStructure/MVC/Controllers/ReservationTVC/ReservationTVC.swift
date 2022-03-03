@@ -844,58 +844,126 @@ class ReservationTVC: UITableViewController {
     }
     
     @IBAction func btnPaymentAction(_ sender: UIButton) {
-        if arrayUserData.auto_accept == false{
-            print("Go to Timer Page")
-            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "confirmReservationVC") as! confirmReservationVC
-            nextVC.arrayUserDetails = arrayUserData
-            nextVC.dictOfferUserDetails = dictOfferUserDetails
-            
-            
-            let dict = self.arrayUserDetails[(self.selectedIndex)!]
+        if isFromOffer == false{
+            if arrayUserData.auto_accept == false{
+                print("Go to Timer Page")
+                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "confirmReservationVC") as! confirmReservationVC
+                nextVC.arrayUserDetails = arrayUserData
+                nextVC.dictOfferUserDetails = dictOfferUserDetails
+                
+                
+                let dict = self.arrayUserDetails[(self.selectedIndex)!]
 
-            nextVC.deposit = self.isClickDeposit == false ? "0" : (dict.min_deposit!)
-            nextVC.remainingAmount = self.isClickDeposit == true ? "\(Int((dict.rent!))! - self.rewards)" : "\(Int((dict.rent!))! - self.rewards)"
-            
-            nextVC.totalPaid = self.isClickDeposit == false ? self.isClickRewards == true ? "\(Int((dict.rent!))! - self.rewards)" : (dict.rent!) : (dict.min_deposit!)
-            
-            if self.isFromOffer == false{
-                nextVC.isFromOffer = false
-                nextVC.offerDiscount = dict.Offer_discount_amt != nil ? "0" : "0"
+                nextVC.deposit = self.isClickDeposit == false ? "0" : (dict.min_deposit!)
+                nextVC.remainingAmount = self.isClickDeposit == true ? "\(Int((dict.rent!))! - self.rewards)" : "\(Int((dict.rent!))! - self.rewards)"
+                
+                nextVC.totalPaid = self.isClickDeposit == false ? self.isClickRewards == true ? "\(Int((dict.rent!))! - self.rewards)" : (dict.rent!) : (dict.min_deposit!)
+                
+               // if self.isFromOffer == false{
+                    nextVC.isFromOffer = false
+                    nextVC.offerDiscount = dict.Offer_discount_amt != nil ? "0" : "0"
+               // }else{
+               //     nextVC.isFromOffer = true
+               //     nextVC.offerDiscount = String(self.dictOfferUserDetails.discount_amt!)
+              //  }
+                
+                nextVC.remainingAmount = remainingAmount
+                nextVC.selectedpackage = self.selectedPackage
+                nextVC.isClickDeposit = self.isClickDeposit
+                nextVC.isClickRewards = self.isClickRewards
+                nextVC.email = dict.email!
+                nextVC.phone = dict.phone!
+                nextVC.civilid = dict.civil_id!
+                nextVC.firstName = dict.firstname!
+                self.navigationController?.pushViewController(nextVC, animated: true)
+
             }else{
-                nextVC.isFromOffer = true
-                nextVC.offerDiscount = String(self.dictOfferUserDetails.discount_amt!)
-            }
-            
-            nextVC.remainingAmount = remainingAmount
-            nextVC.selectedpackage = self.selectedPackage
-            self.navigationController?.pushViewController(nextVC, animated: true)
-
-        }else{
-            print("Go to Direct Payement")
-            if isUSerIsBlocked == false {
-                 if self.isPaymentEnable == true {
-                     if CAUser.currentUser.id != nil {
-                         intialisePaymentWithType()
-                     }else{
-                         
-                         let alert = UIAlertController(title: "Message".localized(), message: "Please Login for booking. Do you want to continue?".localized(), preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                             let loginSignUpViewController = UIStoryboard(name: "Profile", bundle: Bundle.main).instantiateViewController(identifier: "LoginSignUpViewController") as! LoginSignUpViewController
-                             loginSignUpViewController.isFromNoLogin = true
-                             self.navigationController?.pushViewController(loginSignUpViewController, animated: true)
-                         }))
-                         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                print("Go to Direct Payement")
+                if isUSerIsBlocked == false {
+                     if self.isPaymentEnable == true {
+                         if CAUser.currentUser.id != nil {
+                             intialisePaymentWithType()
+                         }else{
                              
-                         }))
-                         self.present(alert, animated: true, completion: nil)
-                         
+                             let alert = UIAlertController(title: "Message".localized(), message: "Please Login for booking. Do you want to continue?".localized(), preferredStyle: .alert)
+                             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                                 let loginSignUpViewController = UIStoryboard(name: "Profile", bundle: Bundle.main).instantiateViewController(identifier: "LoginSignUpViewController") as! LoginSignUpViewController
+                                 loginSignUpViewController.isFromNoLogin = true
+                                 self.navigationController?.pushViewController(loginSignUpViewController, animated: true)
+                             }))
+                             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                                 
+                             }))
+                             self.present(alert, animated: true, completion: nil)
+                             
+                         }
                      }
+                 }else{
+                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Your Account has been Blocked. Please contact Administrator.".localized())
+                     appDelegate.checkBlockStatus()
                  }
-             }else{
-                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Your Account has been Blocked. Please contact Administrator.".localized())
-                 appDelegate.checkBlockStatus()
-             }
+            }
+        }else{
+            if dictOfferUserDetails.auto_accept == false{
+                print("Go to Timer Page")
+                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "confirmReservationVC") as! confirmReservationVC
+                nextVC.arrayUserDetails = arrayUserData
+                nextVC.dictOfferUserDetails = dictOfferUserDetails
+                
+                let dict = self.dictOfferUserDetails
+              //  let dict = self.arrayUserDetails[(self.selectedIndex)!]
+
+                nextVC.deposit = self.isClickDeposit == false ? "0" : (dict!.min_deposit!)
+                nextVC.remainingAmount = self.isClickDeposit == true ? "\((dict?.rent)! - self.rewards)" : "\((dict?.rent)! - self.rewards)"
+                let totalPaid1 : String = "\((dict?.rent)! - self.rewards)"
+                nextVC.totalPaid = self.isClickDeposit == false ? self.isClickRewards == true ? totalPaid1 : "\(dict?.rent ?? 0)" : "\(dict?.min_deposit ?? "0")"
+                
+             //   if self.isFromOffer == false{
+              //      nextVC.isFromOffer = false
+               //     nextVC.offerDiscount = dict.Offer_discount_amt != nil ? "0" : "0"
+               // }else{
+                    nextVC.isFromOffer = true
+                    nextVC.offerDiscount = String(self.dictOfferUserDetails.discount_amt!)
+             //   }
+                
+                nextVC.remainingAmount = remainingAmount
+                nextVC.selectedpackage = self.selectedPackage
+                nextVC.isClickDeposit = self.isClickDeposit
+                nextVC.isClickRewards = self.isClickRewards
+                nextVC.email = (dict?.email!)!
+                nextVC.phone = (dict?.phone!)!
+                nextVC.civilid = (dict?.civil_id!)!
+                nextVC.firstName = (dict?.firstname!)!
+                self.navigationController?.pushViewController(nextVC, animated: true)
+
+            }else{
+                print("Go to Direct Payement")
+                if isUSerIsBlocked == false {
+                     if self.isPaymentEnable == true {
+                         if CAUser.currentUser.id != nil {
+                             intialisePaymentWithType()
+                         }else{
+                             
+                             let alert = UIAlertController(title: "Message".localized(), message: "Please Login for booking. Do you want to continue?".localized(), preferredStyle: .alert)
+                             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                                 let loginSignUpViewController = UIStoryboard(name: "Profile", bundle: Bundle.main).instantiateViewController(identifier: "LoginSignUpViewController") as! LoginSignUpViewController
+                                 loginSignUpViewController.isFromNoLogin = true
+                                 self.navigationController?.pushViewController(loginSignUpViewController, animated: true)
+                             }))
+                             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                                 
+                             }))
+                             self.present(alert, animated: true, completion: nil)
+                             
+                         }
+                     }
+                 }else{
+                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Your Account has been Blocked. Please contact Administrator.".localized())
+                     appDelegate.checkBlockStatus()
+                 }
+            }
         }
+        
     /*    if isUSerIsBlocked == false {
             if self.isPaymentEnable == true {
                 if CAUser.currentUser.id != nil {
