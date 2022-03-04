@@ -96,6 +96,8 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var lblOfferAmount: UILabel!
     @IBOutlet weak var heightConstraintForOfferView: NSLayoutConstraint!
     @IBOutlet weak var viewForOffer: UIView!
+    @IBOutlet weak var viewAutoAcceptMsg: UIView!
+    @IBOutlet weak var topCOnstraintForBtnPayment: NSLayoutConstraint!
     
     var remainingAmount = "0"
     var isUSerIsBlocked = false
@@ -132,6 +134,8 @@ class ReservationTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      //  self.hidesBottomBarWhenPushed = true
+        self.btnPayment.isUserInteractionEnabled = false
         self.setUpNavigationBar()
         self.setupUI()
         self.getAdminDetails()
@@ -226,6 +230,7 @@ class ReservationTVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.isPaymentEnable = false
         appDelegate.checkBlockStatus()
         print(navigationController?.viewControllers)
     }
@@ -807,7 +812,7 @@ class ReservationTVC: UITableViewController {
     }
     @IBAction func btnClickAgreement(_ sender: UIButton) {
         
-        if self.arrayAgreeMentIdxs.contains(sender.tag){
+   /*     if self.arrayAgreeMentIdxs.contains(sender.tag){
             if let idx =  self.arrayAgreeMentIdxs.firstIndex(where: {$0 == sender.tag}) {
                 self.arrayAgreeMentIdxs.remove(at: idx)
             }
@@ -823,24 +828,30 @@ class ReservationTVC: UITableViewController {
         }
         self.collectionViewAgreement.reloadData()
         
-        
+        */
     }
     @IBAction func btnClickFinalAgreementAction(_ sender: UIButton) {
         if sender.isSelected == false{
             sender.isSelected = true
             self.isSelectTermsAgreement = true
+            self.isPaymentEnable = true
+            self.btnPayment.isUserInteractionEnabled = true
+            self.btnPayment.backgroundColor = UIColor("#6FDA44")
         }else{
             sender.isSelected = false
             self.isSelectTermsAgreement = false
+            self.isPaymentEnable = false
+            self.btnPayment.isUserInteractionEnabled = false
+            self.btnPayment.backgroundColor = UIColor("#C2C2C2")
         }
         
-        if self.isSelectTermsAgreement == true && self.arrayAgreeMentIdxs.count == self.arrayAgreements.count{
+    /*    if self.isSelectTermsAgreement == true && self.arrayAgreeMentIdxs.count == self.arrayAgreements.count{
             self.btnPayment.backgroundColor = UIColor("#6FDA44")
             self.isPaymentEnable = true
         }else{
             self.btnPayment.backgroundColor = UIColor("#C2C2C2")
             self.isPaymentEnable = false
-        }
+        }*/
     }
     
     @IBAction func btnPaymentAction(_ sender: UIButton) {
@@ -1094,6 +1105,16 @@ class ReservationTVC: UITableViewController {
             let arrayHeight = arrayAgreements.count * 35
             return CGFloat(138 + arrayHeight)
             
+        }else if indexPath.row == 7{
+            if arrayUserData.auto_accept == true{
+                self.viewAutoAcceptMsg.isHidden = true
+                self.topCOnstraintForBtnPayment.constant = 20
+                return 110
+            }else{
+                self.viewAutoAcceptMsg.isHidden = false
+                self.topCOnstraintForBtnPayment.constant = 60
+                return 160
+            }
         }else{
             
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -1209,13 +1230,13 @@ extension ReservationTVC : UICollectionViewDelegate, UICollectionViewDataSource 
             }
             cell.lblAgreement.textAlignment = .right
             //cell.lblAgreement.text = self.arrayAgreements[indexPath.item].agreement_content!
-            cell.btnAgreement.addCornerForView(cornerRadius: 8.0)
-            cell.btnAgreement.tag = indexPath.item
-            if arrayAgreeMentIdxs.contains(indexPath.item){
+           // cell.btnAgreement.addCornerForView(cornerRadius: 8.0)
+           // cell.btnAgreement.tag = indexPath.item
+        /*    if arrayAgreeMentIdxs.contains(indexPath.item){
                 cell.btnAgreement.isSelected = true
             }else{
                 cell.btnAgreement.isSelected = false
-            }
+            }*/
             return cell
             
         }

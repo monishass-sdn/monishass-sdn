@@ -73,6 +73,7 @@
 		4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */; };
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
 		4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */; };
+		4D47F00B27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F00A27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift */; };
 		4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */; };
 		4D48E39E27CE27E100FA0578 /* confirmReservationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48E39D27CE27E100FA0578 /* confirmReservationVC.swift */; };
 		4D48F4E427831C0100EE7C38 /* addNewOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */; };
@@ -222,6 +223,7 @@
 		4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersTVCell.swift; sourceTree = "<group>"; };
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
 		4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerDetailsTableVC.swift; sourceTree = "<group>"; };
+		4D47F00A27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectPricingandStatsMenuCVCell.swift; sourceTree = "<group>"; };
 		4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmaddedOfferChaletTVCell.swift; sourceTree = "<group>"; };
 		4D48E39D27CE27E100FA0578 /* confirmReservationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmReservationVC.swift; sourceTree = "<group>"; };
 		4D48F4E327831C0100EE7C38 /* addNewOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferVC.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				00E45EDE264EB81C0038BA20 /* ChaletListCollectionViewCell.swift */,
 				00E45EE1264EB82F0038BA20 /* ChaletListImageCollectionViewCell.swift */,
 				A1FD69C726501A5F00A03987 /* CollectionViewIMageVideoCVCell.swift */,
+				4D47F00A27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift */,
 			);
 			path = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				A1C6CEFB265FC89800BE396B /* OfferListBase.swift in Sources */,
 				4D4B5E8427CFA9C400317329 /* ReservationRequestResponseModel.swift in Sources */,
 				4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */,
+				4D47F00B27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift in Sources */,
 				A1C6CEF7265FB78800BE396B /* OffersListVC.swift in Sources */,
 				00310654263A8571004B49F5 /* CustomColorExtentions.swift in Sources */,
 				00FD4E49263979C0009C9932 /* PackageListTableVCell.swift in Sources */,

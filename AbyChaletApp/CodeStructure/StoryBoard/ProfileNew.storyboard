@@ -1988,7 +1988,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vva-hk-HS2" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                            <rect key="frame" x="43" y="6.5" width="143" height="34"/>
+                                                            <rect key="frame" x="43" y="3.5" width="143" height="40"/>
                                                             <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
@@ -2017,7 +2017,7 @@
                                                             </connections>
                                                         </textField>
                                                         <textField opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4k5-Wc-0Bd" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                            <rect key="frame" x="200" y="6.5" width="164" height="34"/>
+                                                            <rect key="frame" x="200" y="2.5" width="164" height="42"/>
                                                             <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -2268,7 +2268,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lzs-Z9-siC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -2988,17 +2988,93 @@
                                     <outlet property="delegate" destination="Kil-4O-BGm" id="gsn-sE-FvD"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-Kz-fRj">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9rq-R1-Vyv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4gD-hh-GwQ">
+                                            <size key="itemSize" width="138" height="40.5"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="selectPricingandStatsMenuCVCell" id="IYf-mN-YMT" customClass="selectPricingandStatsMenuCVCell" customModule="AbyChaletApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-0.5" width="138" height="40.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZkP-Da-JsK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="40.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VnT-bP-u65">
+                                                            <rect key="frame" x="0.0" y="0.0" width="138" height="40.5"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbH-LH-9QB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="138" height="40.5"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="VnT-bP-u65" firstAttribute="top" secondItem="ZkP-Da-JsK" secondAttribute="top" id="MVa-Pf-JAu"/>
+                                                        <constraint firstItem="dbH-LH-9QB" firstAttribute="leading" secondItem="ZkP-Da-JsK" secondAttribute="leading" id="R1s-wr-vyy"/>
+                                                        <constraint firstItem="dbH-LH-9QB" firstAttribute="top" secondItem="ZkP-Da-JsK" secondAttribute="top" id="Sj7-rP-SGf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="VnT-bP-u65" secondAttribute="bottom" id="cmc-5Z-oQW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="VnT-bP-u65" secondAttribute="trailing" id="fKo-wa-SeA"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dbH-LH-9QB" secondAttribute="trailing" id="nPY-gs-GXR"/>
+                                                        <constraint firstAttribute="bottom" secondItem="dbH-LH-9QB" secondAttribute="bottom" id="pjr-BD-b2G"/>
+                                                        <constraint firstItem="VnT-bP-u65" firstAttribute="leading" secondItem="ZkP-Da-JsK" secondAttribute="leading" id="xqG-vm-deB"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="138" height="40.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="imgViewBg" destination="VnT-bP-u65" id="omd-rT-Bqg"/>
+                                                    <outlet property="lblTitle" destination="dbH-LH-9QB" id="XTt-lj-HKF"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Kil-4O-BGm" id="JMx-op-9Nj"/>
+                                            <outlet property="delegate" destination="Kil-4O-BGm" id="7ia-1B-NRD"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="9rq-R1-Vyv" secondAttribute="bottom" id="MPP-Oi-16h"/>
+                                    <constraint firstAttribute="height" constant="40" id="VxC-cF-TeB"/>
+                                    <constraint firstAttribute="trailing" secondItem="9rq-R1-Vyv" secondAttribute="trailing" id="cmK-Vk-pHJ"/>
+                                    <constraint firstItem="9rq-R1-Vyv" firstAttribute="leading" secondItem="Q13-Kz-fRj" secondAttribute="leading" id="hVm-87-G6G"/>
+                                    <constraint firstItem="9rq-R1-Vyv" firstAttribute="top" secondItem="Q13-Kz-fRj" secondAttribute="top" id="lRO-Kq-nik"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="34h-q7-fP2"/>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.2627450980392157" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Lzs-Z9-siC" firstAttribute="top" secondItem="34h-q7-fP2" secondAttribute="top" id="ALa-EX-khM"/>
+                            <constraint firstItem="34h-q7-fP2" firstAttribute="trailing" secondItem="Q13-Kz-fRj" secondAttribute="trailing" id="9cl-NX-2MN"/>
                             <constraint firstItem="34h-q7-fP2" firstAttribute="bottom" secondItem="Lzs-Z9-siC" secondAttribute="bottom" id="J7C-cO-cHG"/>
                             <constraint firstItem="Lzs-Z9-siC" firstAttribute="leading" secondItem="34h-q7-fP2" secondAttribute="leading" id="Kmp-lk-ARJ"/>
+                            <constraint firstItem="Lzs-Z9-siC" firstAttribute="top" secondItem="Q13-Kz-fRj" secondAttribute="bottom" id="bMe-Bm-PeA"/>
+                            <constraint firstItem="Q13-Kz-fRj" firstAttribute="top" secondItem="34h-q7-fP2" secondAttribute="top" id="k52-uQ-izt"/>
                             <constraint firstItem="34h-q7-fP2" firstAttribute="trailing" secondItem="Lzs-Z9-siC" secondAttribute="trailing" id="utG-TF-Yp1"/>
+                            <constraint firstItem="Q13-Kz-fRj" firstAttribute="leading" secondItem="34h-q7-fP2" secondAttribute="leading" id="xQN-bz-biC"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuCollectionView" destination="9rq-R1-Vyv" id="yCL-1S-BdG"/>
                         <outlet property="myChaletTV" destination="Lzs-Z9-siC" id="WuB-Cd-0Zn"/>
                     </connections>
                 </viewController>
@@ -3125,7 +3201,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-NB-cs5" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="52" y="9.5" width="302" height="34"/>
+                                                        <rect key="frame" x="52" y="5.5" width="302" height="42"/>
                                                         <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3181,7 +3257,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dcv-RM-cgy" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="52" y="10.5" width="302" height="34"/>
+                                                        <rect key="frame" x="52" y="6" width="302" height="42.5"/>
                                                         <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3357,7 +3433,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XeB-Jf-kUa" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                            <rect key="frame" x="45.5" y="9" width="142" height="34"/>
+                                                                            <rect key="frame" x="45.5" y="5" width="142" height="42"/>
                                                                             <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3386,7 +3462,7 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6kG-0R-EYt" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                            <rect key="frame" x="202.5" y="9" width="151.5" height="34"/>
+                                                                            <rect key="frame" x="202.5" y="5" width="151.5" height="42"/>
                                                                             <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3442,7 +3518,7 @@
                                                                     <rect key="frame" x="0.0" y="58" width="374" height="57.5"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KZ4-NM-Bgh" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                            <rect key="frame" x="46" y="8.5" width="308" height="34"/>
+                                                                            <rect key="frame" x="46" y="4.5" width="308" height="42.5"/>
                                                                             <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3760,7 +3836,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-om-W22" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                    <rect key="frame" x="47" y="10" width="307" height="34"/>
+                                                                    <rect key="frame" x="47" y="6" width="307" height="42"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3819,7 +3895,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4l9-oB-Km3" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                    <rect key="frame" x="47" y="9.5" width="307" height="34"/>
+                                                                    <rect key="frame" x="47" y="5.5" width="307" height="42.5"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3878,7 +3954,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-5k-JyZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                    <rect key="frame" x="47" y="10" width="307" height="34"/>
+                                                                    <rect key="frame" x="47" y="6" width="307" height="42"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.31764705879999999" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3940,7 +4016,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jlY-yZ-Uid" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                    <rect key="frame" x="47.5" y="15" width="105" height="34"/>
+                                                                    <rect key="frame" x="47.5" y="11" width="105" height="42.5"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -3969,7 +4045,7 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <textField opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0BR-ga-fm8" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                    <rect key="frame" x="172.5" y="15" width="181.5" height="34"/>
+                                                                    <rect key="frame" x="172.5" y="11" width="181.5" height="42.5"/>
                                                                     <color key="tintColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -5157,58 +5233,58 @@
     </scenes>
     <designables>
         <designable name="0BR-ga-fm8">
-            <size key="intrinsicContentSize" width="131.5" height="34"/>
+            <size key="intrinsicContentSize" width="181.5" height="42.15625"/>
         </designable>
         <designable name="4k5-Wc-0Bd">
-            <size key="intrinsicContentSize" width="131.5" height="34"/>
+            <size key="intrinsicContentSize" width="164" height="42.15625"/>
         </designable>
         <designable name="4l9-oB-Km3">
-            <size key="intrinsicContentSize" width="94.5" height="34"/>
+            <size key="intrinsicContentSize" width="307" height="42.15625"/>
         </designable>
         <designable name="6kG-0R-EYt">
-            <size key="intrinsicContentSize" width="101" height="34"/>
+            <size key="intrinsicContentSize" width="151.5" height="42.15625"/>
         </designable>
         <designable name="7Ow-Cv-ddp">
-            <size key="intrinsicContentSize" width="124.5" height="34"/>
+            <size key="intrinsicContentSize" width="340" height="42.15625"/>
         </designable>
         <designable name="Akw-Wi-irV">
-            <size key="intrinsicContentSize" width="101.5" height="34"/>
+            <size key="intrinsicContentSize" width="166" height="42.15625"/>
         </designable>
         <designable name="FaC-NB-cs5">
-            <size key="intrinsicContentSize" width="124.5" height="34"/>
+            <size key="intrinsicContentSize" width="302" height="42.15625"/>
         </designable>
         <designable name="KZ4-NM-Bgh">
-            <size key="intrinsicContentSize" width="112.5" height="34"/>
+            <size key="intrinsicContentSize" width="308" height="42.15625"/>
         </designable>
         <designable name="LIf-mH-FGs">
-            <size key="intrinsicContentSize" width="192.5" height="34"/>
+            <size key="intrinsicContentSize" width="331" height="42.15625"/>
         </designable>
         <designable name="LfJ-om-W22">
-            <size key="intrinsicContentSize" width="124.5" height="34"/>
+            <size key="intrinsicContentSize" width="307" height="42.15625"/>
         </designable>
         <designable name="OEb-Aa-Upw">
-            <size key="intrinsicContentSize" width="101" height="34"/>
+            <size key="intrinsicContentSize" width="166" height="42.15625"/>
         </designable>
         <designable name="VNk-Sp-aBz">
-            <size key="intrinsicContentSize" width="183" height="34"/>
+            <size key="intrinsicContentSize" width="331" height="42.15625"/>
         </designable>
         <designable name="XeB-Jf-kUa">
-            <size key="intrinsicContentSize" width="101.5" height="34"/>
+            <size key="intrinsicContentSize" width="142" height="42.15625"/>
         </designable>
         <designable name="dcv-RM-cgy">
-            <size key="intrinsicContentSize" width="94.5" height="34"/>
+            <size key="intrinsicContentSize" width="302" height="42.15625"/>
         </designable>
         <designable name="jlY-yZ-Uid">
-            <size key="intrinsicContentSize" width="122" height="34"/>
+            <size key="intrinsicContentSize" width="105" height="42.15625"/>
         </designable>
         <designable name="vGI-Bf-wnF">
-            <size key="intrinsicContentSize" width="129" height="34"/>
+            <size key="intrinsicContentSize" width="331" height="42.15625"/>
         </designable>
         <designable name="vva-hk-HS2">
-            <size key="intrinsicContentSize" width="109.5" height="34"/>
+            <size key="intrinsicContentSize" width="143" height="39.8125"/>
         </designable>
         <designable name="xoJ-5k-JyZ">
-            <size key="intrinsicContentSize" width="152" height="34"/>
+            <size key="intrinsicContentSize" width="307" height="42.15625"/>
         </designable>
     </designables>
     <resources>

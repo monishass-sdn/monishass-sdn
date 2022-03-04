@@ -10,21 +10,27 @@ import UIKit
 class myChaletVC: UIViewController {
     
     @IBOutlet weak var myChaletTV: UITableView!
- 
+    @IBOutlet weak var menuCollectionView: UICollectionView!
     
     var touched : Bool = false
     var expanded = [Int]()
     var toggledIndexes = [Int:Bool]()
+    var topSliderMenuArray:[String] = []
+    var selectedIndex:Int?
+    var selectedIndexPath : IndexPath?
+    var topSelection = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedIndex = 2
         view.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
         myChaletTV.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.262745098, blue: 0.3333333333, alpha: 1)
         setupForCustomNavigationTitle1()
         self.setUpNavigationBar()
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
         self.navigationItem.rightBarButtonItems = [notificationButton]
-        
+        topSliderMenuArray = ["holidays prices","Season prices","Stats"]
        // myChaletTV.rowHeight = UITableView.automaticDimension
         // Do any additional setup after loading the view.
     }
@@ -169,4 +175,47 @@ extension myChaletVC : UITableViewDelegate, UITableViewDataSource{
     }
     
 
+}
+
+extension myChaletVC : UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.topSliderMenuArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "selectPricingandStatsMenuCVCell", for: indexPath) as! selectPricingandStatsMenuCVCell
+        cell.lblTitle.text = topSliderMenuArray[indexPath.item]
+        self.menuCollectionView.scrollToItem(at: IndexPath(row: selectedIndex ?? 0, section: 0), at: [.centeredVertically, .centeredHorizontally], animated: true)
+        if selectedIndex == indexPath.row {
+            cell.imgViewBg.image = UIImage(named: "icn_SelectedPackage")
+            cell.lblTitle.font = UIFont(name: "Roboto-Bold", size: 17)
+        }else{
+            cell.imgViewBg.image = UIImage(named: "icn_DeselectedPackage")
+            cell.lblTitle.font = UIFont(name: "Roboto-Regular", size: 17)
+        }
+        cell.isSelected = (selectedIndexPath == indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 138 , height: 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath.row
+        self.topSelection = topSliderMenuArray[indexPath.row]
+        DispatchQueue.main.async {
+            self.menuCollectionView.reloadData()
+        }
+        if topSelection == "holidays prices"{
+           print("Selected holidays prices")
+        }else if topSelection == "Season prices"{
+            print("Selected Season prices")
+        }else{
+            print("Selected Stats")
+        }
+    }
+    
+    
 }

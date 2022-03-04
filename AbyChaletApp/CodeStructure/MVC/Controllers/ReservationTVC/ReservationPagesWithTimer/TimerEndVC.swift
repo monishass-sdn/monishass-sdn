@@ -12,7 +12,11 @@ class TimerEndVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setUpNavigationBar() {
@@ -26,7 +30,6 @@ class TimerEndVC: UIViewController {
     
     @IBAction func tapped_TryAgain(_ sender: UIButton){
         self.popBack(4)
-        //showDefaultAlert(viewController: self, title: "", msg: "WORK IN PROGRESS")
     }
     
     func popBack(_ nb: Int) {
