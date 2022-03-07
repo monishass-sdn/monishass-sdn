@@ -31,8 +31,11 @@ class myChaletVC: UIViewController {
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
         self.navigationItem.rightBarButtonItems = [notificationButton]
         topSliderMenuArray = ["holidays prices","Season prices","Stats"]
-       // myChaletTV.rowHeight = UITableView.automaticDimension
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        selectedIndex = 2
+        menuCollectionView.reloadData()
     }
     
     //MARK:- SetUp NavigationBar
@@ -210,8 +213,12 @@ extension myChaletVC : UICollectionViewDelegate,UICollectionViewDataSource{
         }
         if topSelection == "holidays prices"{
            print("Selected holidays prices")
+            let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddHolidayPriceMainVC") as! AddHolidayPriceMainVC
+            navigationController?.pushViewController(nextVC, animated: true)
         }else if topSelection == "Season prices"{
             print("Selected Season prices")
+            let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddSeasonPriceMainVC") as! AddSeasonPriceMainVC
+            navigationController?.pushViewController(nextVC, animated: true)
         }else{
             print("Selected Stats")
         }
