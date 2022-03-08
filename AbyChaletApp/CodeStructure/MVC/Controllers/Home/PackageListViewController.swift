@@ -36,6 +36,8 @@ class PackageListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationItem.setHidesBackButton(true, animated: true)
         tabBarController?.tabBar.barTintColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
         appDelegate.updateDeviceToke(deviceToken: DeviceTokenSaver.standard.deviceToken)
         //appDelegate.updateDeviceToke(deviceToken: "\(UserDefaults.standard.string(forKey:"kDeviceToken") ?? "No Device Token Captured")")

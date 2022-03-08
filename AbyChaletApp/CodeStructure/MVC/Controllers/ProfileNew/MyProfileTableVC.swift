@@ -123,6 +123,8 @@ class MyProfileTableVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+       // self.tabBarController?.tabBar.isHidden = false
+      //  self.navigationItem.setHidesBackButton(true, animated: true)
         self.setValuesToFields()
         NotificationCenter.default.addObserver(self, selector: #selector(checkNotiCount), name: NSNotification.Name(rawValue: NotificationNames.KNotificationCountCheck), object: nil)
         getNotificationcount()

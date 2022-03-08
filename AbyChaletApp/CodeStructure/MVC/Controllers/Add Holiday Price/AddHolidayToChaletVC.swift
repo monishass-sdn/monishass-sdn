@@ -8,15 +8,17 @@
 import UIKit
 import SVProgressHUD
 
-class AddHolidayToChaletVC: UIViewController {
+class AddHolidayToChaletVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addholidaytoChaletTV : UITableView!
     var dictEventData : Holi_event_list?
     var arrayHolidayChalet_List = [HolidayEventChaletList]()
-    
+    var ArrayselectedItem : [HolidayEventChaletList] = []
+    var arrayInsertedChaletList = [Inserted_Holiday_chalets]()
     var toggledIndexes = [Int:Bool]()
     var isToggled = false
     var selectedIndex = -1
-
+    var userid = (CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
@@ -43,6 +45,10 @@ class AddHolidayToChaletVC: UIViewController {
     @objc func didMoveToNotification(){
         let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
         navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
+    
+    @IBAction func Tapped_SubmitBtn(_ sender: UIButton!){
+        postHolidayChaletData()
     }
     
 
@@ -75,6 +81,10 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
                 cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
                 cell.btnCheckBox.tag = indexPath.row
                 cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
+                cell.tf_holidayPrice.tag = indexPath.row
+                cell.tf_holidayPrice.delegate = self
+                cell.tf_holidayPrice.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+
                 return cell
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AddHolidayToChaletOfferAlreadyAppliedTVCell", for: indexPath) as! AddHolidayToChaletOfferAlreadyAppliedTVCell
@@ -111,25 +121,48 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
         let indexpath = IndexPath(row: sender.tag, section: 2)
         sender.isSelected = !sender.isSelected
         let cell = addholidaytoChaletTV.cellForRow(at: indexpath) as! AddHolidayToChaletTVCell
+        let item = arrayHolidayChalet_List[sender.tag]
         if sender.isSelected == true{
             toggledIndexes[sender.tag] = true
-           // ArrayselectedItem.append(item)
-          //  self.selectedIndex = sender.tag
-          //  self.isToggled = true
+            ArrayselectedItem.append(item)
+            self.selectedIndex = sender.tag
             cell.heightForHolidayPriceView.constant = 100
         }else{
             toggledIndexes[sender.tag] = false
-           /* for (i,selectedItem) in ArrayselectedItem.enumerated(){
-                if selectedItem.chalet_id! == item.chalet_id!{
+            for (i,selectedItem) in ArrayselectedItem.enumerated(){
+                if selectedItem.chalet_id == item.chalet_id!{
                     ArrayselectedItem.remove(at: i)
                 }
-            }*/
+            }
             self.selectedIndex = -1
-           // self.isToggled = false
             cell.heightForHolidayPriceView.constant = 0
 
         }
         self.addholidaytoChaletTV.reloadData()
+    }
+    
+    @objc func valueChanged(_ textField: UITextField){
+        let indexpath = IndexPath(row: textField.tag, section: 2)
+        let cell = addholidaytoChaletTV.cellForRow(at: indexpath) as! AddHolidayToChaletTVCell
+        let item = arrayHolidayChalet_List[textField.tag]
+        var holiPrice : Int? = 0
+        holiPrice = Int(cell.tf_holidayPrice.text!)!
+        item.price = holiPrice
+        item.userid = Int(userid)
+        item.holieventId = dictEventData?.id
+    }
+    
+    func DictionaryToJSON() -> Data{
+
+        let dictionary = ["data":ArrayselectedItem]
+        let jsonEncoder = JSONEncoder()
+        if let jsonData = try? jsonEncoder.encode(dictionary){
+            let json = String(data: jsonData, encoding: .ascii)
+            //print("JSON string = \n\(json ?? "")")
+            return jsonData as Data
+        }
+        return Data()
+        
     }
     
     
@@ -149,8 +182,7 @@ extension AddHolidayToChaletVC{
                     if responseBase?.user_details != nil && (responseBase?.user_details!.count)! > 0 {
                         self.arrayHolidayChalet_List = (responseBase?.user_details)!
                     } else {
-                        print("Arry is empty")
-                      //  self.arryAvailableEventList = []
+                        print("Array is empty")
                     }
                     DispatchQueue.main.async {
                         self.addholidaytoChaletTV.reloadData()
@@ -175,6 +207,39 @@ extension AddHolidayToChaletVC{
                     let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
                     self.navigationItem.rightBarButtonItems = [notificationButton]
                 }
+            }
+        }
+    }
+    
+    
+    func postHolidayChaletData() {
+        let rawdata = DictionaryToJSON()
+        SVProgressHUD.show()
+        let event_id = (dictEventData?.id)!
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/add-holi-events-to-chalets", dictionary: ["userid":userid,"holieventId":event_id], withHud: true,rowData: rawdata) { (success, response, error) in
+            self.checkNotificationCount()
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    print("success success success")
+                    let responseBase = AddedHolidayPriceChaletList_Base(dictionary: response as! NSDictionary)
+                    self.arrayInsertedChaletList = (responseBase?.chalet_details)!
+                    
+                    let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "ConfirmAddHolidayToChaletVC") as! ConfirmAddHolidayToChaletVC
+                    nextVC.dictEventData = self.dictEventData
+                        nextVC.eventAppliedChaletLists = self.arrayInsertedChaletList
+                    nextVC.eventAppliedToken = (responseBase?.confirm_token)!
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+   
+                    DispatchQueue.main.async {
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
+                    }
+                }else{
+                    showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
             }
         }
     }

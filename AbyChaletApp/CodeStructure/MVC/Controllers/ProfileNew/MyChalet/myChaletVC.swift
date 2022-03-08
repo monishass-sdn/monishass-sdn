@@ -55,7 +55,10 @@ class myChaletVC: UIViewController {
     }
     
     @objc func backButtonTouched()  {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+      //  self.navigationController?.popViewController(animated: true)
+       // let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "MyProfileTableVC") as! MyProfileTableVC
+      //  navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func notificationButtonTouched()  {
         
