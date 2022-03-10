@@ -115,6 +115,9 @@
 		4D8910122796E004009AE8BE /* FAQModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8910112796E004009AE8BE /* FAQModel.swift */; };
 		4D9A38CE27BA6AED009FB9AA /* AvailableOffersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A38CD27BA6AED009FB9AA /* AvailableOffersModel.swift */; };
 		4DCAE71027D61919006553B6 /* AddHolidayToChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAE70F27D61919006553B6 /* AddHolidayToChaletTVCell.swift */; };
+		4DF17F3227D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF17F3127D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift */; };
+		4DF17F3527D87C7C00140910 /* ConfirmSeasonPriceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF17F3427D87C7C00140910 /* ConfirmSeasonPriceVC.swift */; };
+		4DF17F3827D885FA00140910 /* ConfirmSeasonPriceSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF17F3727D885FA00140910 /* ConfirmSeasonPriceSuccessVC.swift */; };
 		9B4D61982721651B00DD7BC7 /* popUpViewTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D61972721651B00DD7BC7 /* popUpViewTVCell.swift */; };
 		A10816A02668945C00054DB2 /* OwnerListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108169F2668945C00054DB2 /* OwnerListBase.swift */; };
 		A10D337C26957EAC00B2AC07 /* MessageListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10D337B26957EAC00B2AC07 /* MessageListBase.swift */; };
@@ -279,6 +282,9 @@
 		4D8910112796E004009AE8BE /* FAQModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModel.swift; sourceTree = "<group>"; };
 		4D9A38CD27BA6AED009FB9AA /* AvailableOffersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersModel.swift; sourceTree = "<group>"; };
 		4DCAE70F27D61919006553B6 /* AddHolidayToChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHolidayToChaletTVCell.swift; sourceTree = "<group>"; };
+		4DF17F3127D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonPriceAddedChaletList_Model.swift; sourceTree = "<group>"; };
+		4DF17F3427D87C7C00140910 /* ConfirmSeasonPriceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSeasonPriceVC.swift; sourceTree = "<group>"; };
+		4DF17F3727D885FA00140910 /* ConfirmSeasonPriceSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSeasonPriceSuccessVC.swift; sourceTree = "<group>"; };
 		8C8CAD5721864641A82BE1B0 /* Pods_AbyChaletApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AbyChaletApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4D61972721651B00DD7BC7 /* popUpViewTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpViewTVCell.swift; sourceTree = "<group>"; };
 		A108169F2668945C00054DB2 /* OwnerListBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerListBase.swift; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 				4D55382027D63C43004A61D6 /* HolidayEventChaletList_Base.swift */,
 				4D523C9B27D747840014F71E /* AddedHolidayPriceChaletList_Base.swift */,
 				4D50AFDC27D780B80051B944 /* AddSeasonPrice_Base.swift */,
+				4DF17F3127D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -668,6 +675,8 @@
 				4D059CB527D5BF9700FAFC59 /* AddSeasonPriceMainVC.swift */,
 				4D50AFD627D7765D0051B944 /* SeasonDateTVCell.swift */,
 				4D50AFD927D776B50051B944 /* SeasonPriceChaletListTVCell.swift */,
+				4DF17F3427D87C7C00140910 /* ConfirmSeasonPriceVC.swift */,
+				4DF17F3727D885FA00140910 /* ConfirmSeasonPriceSuccessVC.swift */,
 			);
 			path = "Add Season Price";
 			sourceTree = "<group>";
@@ -1129,6 +1138,7 @@
 				4D5319C527C775030028925F /* AddedOfferChaletListModel.swift in Sources */,
 				4D50AFDA27D776B50051B944 /* SeasonPriceChaletListTVCell.swift in Sources */,
 				0036111C263830BE009E581F /* Utils.swift in Sources */,
+				4DF17F3827D885FA00140910 /* ConfirmSeasonPriceSuccessVC.swift in Sources */,
 				0091C49F2639AD4800EC0CF7 /* SelectPackageVC.swift in Sources */,
 				4D4B766E27C7B7B5003F90D3 /* OwnerAddOfferSuccessVC.swift in Sources */,
 				A1630C622656378100C58A38 /* HolidaysAndEventsBase.swift in Sources */,
@@ -1162,6 +1172,7 @@
 				A1730D74266789100097AD23 /* TermsAndConditionVC.swift in Sources */,
 				4D55382127D63C43004A61D6 /* HolidayEventChaletList_Base.swift in Sources */,
 				A161DAF22669FA9200203899 /* BookingDetailTVC.swift in Sources */,
+				4DF17F3527D87C7C00140910 /* ConfirmSeasonPriceVC.swift in Sources */,
 				A1670EA72650F15300285CFF /* SelectPackageTVC.swift in Sources */,
 				00AAB6912632E1B6003F3761 /* IntrolCollectionViewCell.swift in Sources */,
 				00D9E464263C5F7B0080F8A2 /* SearchButtonTableViewCell.swift in Sources */,
@@ -1219,6 +1230,7 @@
 				A1C6CEF7265FB78800BE396B /* OffersListVC.swift in Sources */,
 				00310654263A8571004B49F5 /* CustomColorExtentions.swift in Sources */,
 				00FD4E49263979C0009C9932 /* PackageListTableVCell.swift in Sources */,
+				4DF17F3227D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift in Sources */,
 				00D9E45E263C5F4C0080F8A2 /* HeaderPackageTitleTableViewCell.swift in Sources */,
 				A1FD69C6265016A600A03987 /* ReservationTVC.swift in Sources */,
 				4D59A8D427BBD59800F31C61 /* OfferChaletListModel.swift in Sources */,

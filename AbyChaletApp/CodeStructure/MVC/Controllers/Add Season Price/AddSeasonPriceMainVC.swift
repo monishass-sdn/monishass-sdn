@@ -21,6 +21,7 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
     var isToggled = false
     var selectedIndexx = -1
     var arraySeasonPrice_Chalet_List = [SeasonPrice_Chalet_details]()
+    var arrayAddedSeasonPrice_Chalet_List = [SeasonPriceAdded_Chalet_details]()
     var ArrayselectedItem : [SeasonPrice_Chalet_details] = []
     var arraySeason_Date = [SeasonDate]()
     var seasonEnd = ""
@@ -30,7 +31,7 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpNavigationBar()
-        topSliderMenuArray = ["holidays prices","Season prices","Stats"]
+        topSliderMenuArray = ["Holidays prices","Season prices","Stats"]
         selectedIndex = 1
         getSeasonDateAndChalets()
         // Do any additional setup after loading the view.
@@ -75,7 +76,8 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func tapped_SubmitBtn(_ sender:UIButton!){
-        DictionaryToJSON()
+        postSeasonPriceChaletData()
+       // DictionaryToJSON()
     }
     
 
@@ -225,7 +227,7 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
         let indexpath = IndexPath(row: textField.tag, section: 2)
         let cell = AddSeasonPricetoChaletTV.cellForRow(at: indexpath) as! SeasonPriceChaletListTVCell
         let item = arraySeasonPrice_Chalet_List[textField.tag]
-        item.weekend_seasonprice = cell.tf_WeekAB_Price.text
+        item.week_seasonprice = cell.tf_WeekAB_Price.text
 
     }
     
@@ -235,7 +237,6 @@ extension AddSeasonPriceMainVC{
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/viewSeasonPrice", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
-            print(response)
             self.checkNotificationCount()
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
@@ -275,26 +276,30 @@ extension AddSeasonPriceMainVC{
         let userid = (CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/", dictionary: ["userid":userid], withHud: true,rowData: rawdata) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/addSeasonPrice", dictionary: ["userid":userid], withHud: true,rowData: rawdata) { (success, response, error) in
             self.checkNotificationCount()
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     print("success success success")
-                 //   let responseBase = AddedHolidayPriceChaletList_Base(dictionary: response as! NSDictionary)
-                 //   self.arrayInsertedChaletList = (responseBase?.chalet_details)!
+                    let responseBase = SeasonPriceAddedChaletList_Model(dictionary: response as! NSDictionary)
+                    self.arrayAddedSeasonPrice_Chalet_List = (responseBase?.chalet_details)!
                     
-                 //   let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "ConfirmAddHolidayToChaletVC") as! ConfirmAddHolidayToChaletVC
+                    let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "ConfirmSeasonPriceVC") as! ConfirmSeasonPriceVC
+                    nextVC.seasonStartDate = self.seasonStart
+                    nextVC.seasonEndDate = self.seasonEnd
+                    nextVC.arrayconfirmedChalets = self.arrayAddedSeasonPrice_Chalet_List
+                    nextVC.confirmedToken = (responseBase?.confirm_token)!
                  //   nextVC.dictEventData = self.dictEventData
                  //       nextVC.eventAppliedChaletLists = self.arrayInsertedChaletList
                  //   nextVC.eventAppliedToken = (responseBase?.confirm_token)!
-                 //   self.navigationController?.pushViewController(nextVC, animated: true)
+                    self.navigationController?.pushViewController(nextVC, animated: true)
    
                     DispatchQueue.main.async {
                         SVProgressHUD.dismiss()
                         self.view.isUserInteractionEnabled = true
                     }
                 }else{
-                    showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                    showDefaultAlert(viewController: self, title: "Sorry!", msg: response!["message"]! as! String)
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
