@@ -98,6 +98,8 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var viewForOffer: UIView!
     @IBOutlet weak var viewAutoAcceptMsg: UIView!
     @IBOutlet weak var topCOnstraintForBtnPayment: NSLayoutConstraint!
+    @IBOutlet weak var viewForGroupChaletName : UIView!
+    @IBOutlet weak var lblGroupChaletName : UILabel!
     
     var remainingAmount = "0"
     var isUSerIsBlocked = false
@@ -131,6 +133,8 @@ class ReservationTVC: UITableViewController {
     var arrayAdminDetails = [Admin_details]()
     var isUnpaidDone = true
     var isDepositEligible : Bool = false
+    var isFromSubChalets = false
+    var groupChaletName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +149,12 @@ class ReservationTVC: UITableViewController {
             self.heightConstrainForDiscount.constant = 40.0
             self.viewRewards.isHidden = false
             self.viewForNoDepositinOffers.isHidden = false
+            if isFromSubChalets == true{
+                self.viewForGroupChaletName.isHidden = false
+                self.lblGroupChaletName.text = self.groupChaletName
+            }else{
+                self.viewForGroupChaletName.isHidden = true
+            }
         }else{
             self.viewForNoDepositinOffers.isHidden = true
             self.setValuesToFields(selectIndex: selectedIndex)
@@ -157,6 +167,12 @@ class ReservationTVC: UITableViewController {
             }else{
                 self.viewForOffer.isHidden = false
                 self.heightConstraintForOfferView.constant = 40.0
+            }
+            if isFromSubChalets == true{
+                self.viewForGroupChaletName.isHidden = false
+                self.lblGroupChaletName.text = self.groupChaletName
+            }else{
+                self.viewForGroupChaletName.isHidden = true
             }
         }
         //check

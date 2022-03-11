@@ -146,10 +146,20 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
         let cell = addholidaytoChaletTV.cellForRow(at: indexpath) as! AddHolidayToChaletTVCell
         let item = arrayHolidayChalet_List[textField.tag]
         var holiPrice : Int? = 0
-        holiPrice = Int(cell.tf_holidayPrice.text!)!
+        holiPrice = Int(cell.tf_holidayPrice.text!) ?? 0
         item.price = holiPrice
         item.userid = Int(userid)
         item.holieventId = dictEventData?.id
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -92) {
+                print("Backspace was pressed")
+            }
+        }
+        return true
     }
     
     func DictionaryToJSON() -> Data{
@@ -237,9 +247,11 @@ extension AddHolidayToChaletVC{
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }

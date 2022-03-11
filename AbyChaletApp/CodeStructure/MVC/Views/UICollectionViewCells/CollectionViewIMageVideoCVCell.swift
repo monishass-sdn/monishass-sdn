@@ -376,3 +376,138 @@ class CollectionViewHolidaysEventsCVCell: UICollectionViewCell {
     @IBOutlet weak var lbl : UILabel!
     
 }
+
+
+
+class CollectionViewChaletListFromGroupSubChaletCVCell: UICollectionViewCell {
+    
+    @IBOutlet weak var viewBg: UIView!
+    @IBOutlet weak var lblSlNo: UILabel!
+    @IBOutlet weak var lblChaletName: UILabel!
+    @IBOutlet weak var lblRent: UILabel!
+    @IBOutlet weak var lblCheckOutDate: UILabel!
+    @IBOutlet weak var lblCheckInDate: UILabel!
+    @IBOutlet weak var lblCheckOutTime: UILabel!
+    @IBOutlet weak var lblCheckInTime: UILabel!
+    @IBOutlet weak var imgChaletImage: UIImageView!
+    @IBOutlet weak var lblCheckIn: UILabel!
+    @IBOutlet weak var lblCheckOut: UILabel!
+    @IBOutlet weak var lblTimer: UILabel!
+    @IBOutlet weak var lblOfferDiscount: UILabel!
+    @IBOutlet weak var viewForDiscountLabel: UIView!
+    @IBOutlet weak var progressViewForTimer: UIView!
+    @IBOutlet weak var heightForTImerView: NSLayoutConstraint!
+    @IBOutlet weak var mainView : UIView!
+    @IBOutlet weak var bottomConstrainForViewBG: NSLayoutConstraint!
+    @IBOutlet weak var viewForSUbChaletCount: UIView!
+    @IBOutlet weak var lblsubChaletCount: UILabel!
+    @IBOutlet weak var viewForHolidaysAndEvents: UIView!
+    
+    func setValuesToFields(dict : User_details) {
+        lblCheckIn.text = "Check-in".localized()
+        lblCheckOut.text = "Check-Out".localized()
+        
+        if kCurrentLanguageCode == "ar"{
+            lblCheckIn.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+            lblCheckOut.font = UIFont(name: kFontAlmaraiRegular, size: 16)
+        }else{
+            lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
+            lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
+        }
+        
+        lblSlNo.text = "\("No.".localized())\(dict.chalet_id ?? 0)"
+        lblChaletName.text = dict.chalet_name
+        lblRent.text = dict.rent
+        lblCheckOutDate.text = dict.check_out?.appFormattedDate
+        lblCheckInDate.text = dict.check_in?.appFormattedDate
+        lblCheckInTime.text = dict.admincheck_in
+        lblCheckOutTime.text = dict.admincheck_out
+        if dict.cover_photo != ""{
+            imgChaletImage.sd_setImage(with: URL(string: dict.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+        }else{
+            imgChaletImage.image = kPlaceHolderImage
+        }
+        
+        if dict.isFromHolidaysandEvents == false{
+            self.viewForHolidaysAndEvents.isHidden = true
+        }else{
+            self.viewForHolidaysAndEvents.isHidden = false
+        }
+        
+        if dict.offer_available == false{
+            print("No Offer Available for this chalet")
+            self.progressViewForTimer.isHidden = true
+            self.viewForDiscountLabel.isHidden = true
+            mainView.cornerRadius = 10
+            bottomConstrainForViewBG.constant = 0
+            self.heightForTImerView.constant = 0
+        }else{
+            print("Offer Available for this chalet")
+            bottomConstrainForViewBG.constant = 40
+            self.heightForTImerView.constant = 40
+            self.progressViewForTimer.isHidden = false
+            self.viewForDiscountLabel.isHidden = false
+            mainView.cornerRadius = 10
+
+            let dateFormater1 = DateFormatter()
+            dateFormater1.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let offerExpiry = dateFormater1.date(from: dict.offer_checkin!)
+            let offerCreatedDate = dateFormater1.date(from: dict.offercreated_at!)
+            let expiry = Calendar.current.date( byAdding: .hour,value: -Int(dict.offer_expiry!)!,to: offerExpiry!)
+            let expiryStr = dateFormater1.string(from: expiry!)
+            DispatchQueue.main.async {
+                self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
+            }
+        }
+
+        
+  
+        
+        
+    }
+    
+    
+    func strtTimer(time:String,offerCreated:Date)  {
+        let timeee = time
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm a"
+        let date = dateFormater.date(from: time)!
+        let dd = DateCountDownTimer()
+        dd.initializeTimer(timeee)
+        let seconds : Double = Double(Date().seconds(from: offerCreated))
+        let totalSeconds : Double = Double(date.seconds(from: offerCreated))
+        let remainingSeconds : Double = Double(date.seconds(from: Date()))
+        var progressValue = (seconds / totalSeconds)
+        
+        let calender:Calendar = Calendar.current
+        let components: DateComponents = calender.dateComponents([.day, .hour, .minute, .second], from: offerCreated, to: date)
+        
+
+        if (components.hour! >= 0 && components.hour! < Int(0.25)) {
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+        }else if (components.hour! > Int(0.25) && components.day! < 1){
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.7333333333, blue: 0.1411764706, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.7333333333, blue: 0.1411764706, alpha: 1)
+        }else{
+            self.progressViewForTimer.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+            self.viewForDiscountLabel.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
+        }
+        
+        dd.startTimer(pUpdateActionHandler: { [self] (time) in
+            
+            self.lblTimer.text = time
+            
+        }) {
+            DispatchQueue.main.async {
+                print("Completed")
+            }
+        }
+    }
+    
+    
+    
+    
+}

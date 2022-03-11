@@ -85,7 +85,6 @@ class chaletOwnershipVC: UIViewController {
 extension chaletOwnershipVC {
         
         func getChaletOwnership() {
-           //["userid":CAUser.currentUser.id!]
             SVProgressHUD.show()
             self.view.isUserInteractionEnabled = false
             ServiceManager.sharedInstance.postMethodAlamofire("api/owner_details", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in

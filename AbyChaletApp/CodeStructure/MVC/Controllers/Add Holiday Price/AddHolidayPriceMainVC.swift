@@ -22,7 +22,7 @@ class AddHolidayPriceMainVC: UIViewController {
         super.viewDidLoad()
         self.setUpNavigationBar()
         getAvailableEvents()
-        topSliderMenuArray = ["holidays prices","Season prices","Stats"]
+        topSliderMenuArray = ["Holidays prices","Season prices","Stats"]
         selectedIndex = 0
 
     }
@@ -84,7 +84,7 @@ extension AddHolidayPriceMainVC : UICollectionViewDelegate,UICollectionViewDataS
         DispatchQueue.main.async {
             self.menuCollectionView.reloadData()
         }
-        if topSelection == "holidays prices"{
+        if topSelection == "Holidays prices"{
            print("Selected holidays prices")
         }else if topSelection == "Season prices"{
             print("Selected Season prices")

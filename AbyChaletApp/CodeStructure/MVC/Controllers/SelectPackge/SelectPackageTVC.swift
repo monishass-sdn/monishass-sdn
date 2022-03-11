@@ -41,6 +41,8 @@ class SelectPackageTVC: UITableViewController {
     var calendarHeight : CGFloat = 425
     var selectedIndexHolidays = 0
     var showAvilablechaletStringHeight = 0
+    var fromdate = ""
+    var todate = ""
     
     var cellCount : Int = 0
     @IBOutlet var calenderContainerView     : UIView!
@@ -414,25 +416,44 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
         }else {
             if self.arrayUserDetails.count > 0 {
                 if self.topSelection != "" {
-                   // if self.arrayChalletList[self.holidaySelectedIndex].user_details?.first?.reservation_status == true{
+                    if self.arrayUserDetails[indexPath.row].subchalet_available == true{
                         if self.arrayUserDetails[indexPath.row].reservation_status == true{
-                        //Reservation Available
-                    let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
-                    reservationVC.arrayUserDetails = self.arrayUserDetails
-                    reservationVC.selectedIndex = indexPath.item
-                    reservationVC.selectedPackage = self.topSelection
-                    reservationVC.isFromOffer = false
-                    reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
-                    reservationVC.arrayUserData = self.arrayUserDetails[indexPath.row]
-                    self.navigationController?.pushViewController(reservationVC, animated: true)
+                            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SubChaletsVC") as! SubChaletsVC
+                            nextVC.mainChaletName = self.arrayUserDetails[indexPath.row].chalet_name!
+                            nextVC.mainChaletID = "\(self.arrayUserDetails[indexPath.row].chalet_id!)"
+                            nextVC.fromDate = self.fromdate
+                            nextVC.toDate = self.todate
+                            nextVC.selectedPackagee = self.selectedPackageName
+                            self.navigationController?.pushViewController(nextVC, animated: true)
+                        }else{
+                            //Reservation Not Available
+                            let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
+                            let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }else{
-                        //Reservation Not Available
-                        let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
-                        let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                        }))
-                        self.present(alert, animated: true, completion: nil)
+                        if self.arrayUserDetails[indexPath.row].reservation_status == true{
+                             //Reservation Available
+                         let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
+                         reservationVC.arrayUserDetails = self.arrayUserDetails
+                         reservationVC.selectedIndex = indexPath.item
+                         reservationVC.selectedPackage = self.topSelection
+                         reservationVC.isFromOffer = false
+                         reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
+                         reservationVC.arrayUserData = self.arrayUserDetails[indexPath.row]
+                         self.navigationController?.pushViewController(reservationVC, animated: true)
+                         }else{
+                             //Reservation Not Available
+                             let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
+                             let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                             }))
+                             self.present(alert, animated: true, completion: nil)
+                         }
                     }
+
                 }
             }
         }
@@ -611,6 +632,10 @@ extension SelectPackageTVC {
     
     //MARK:- Search Chalet
     func searchChalet(fromDate:String,toDate:String,selectedPackage:String) {
+        
+        self.fromdate = fromDate
+        self.todate = toDate
+        self.selectedPackageName = selectedPackage
         
         print("USer Selected Date == \(calendarSelectedDate.sharedData.selectedCalendarDate!)")
         ServiceManager.sharedInstance.postMethodAlamofire("api/searchchalet", dictionary: ["from_date":fromDate,"to_date":toDate,"package":selectedPackage,"userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in

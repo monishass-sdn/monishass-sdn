@@ -224,7 +224,8 @@ extension OffersListVC {
                     self.dictAdmin = responseBase?.admin
                     self.arryOfferList = (responseBase?.chalet_list)!
                     if self.arryOfferList.count <= 0{
-                        self.tableViewOfferList.isHidden = true
+                        //self.tableViewOfferList.isHidden = true
+                        self.collectionViewOfferlist.isHidden = true
                         self.lblMessageOnScreen.isHidden = false
                         if CAUser.currentUser.userstatus == "owner"{
                             self.lblMessageOnScreen.text = "There are no offer's added yet."

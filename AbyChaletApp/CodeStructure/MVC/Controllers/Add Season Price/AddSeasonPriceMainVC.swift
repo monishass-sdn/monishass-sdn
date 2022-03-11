@@ -114,7 +114,7 @@ extension AddSeasonPriceMainVC : UICollectionViewDelegate,UICollectionViewDataSo
         DispatchQueue.main.async {
             self.menuCollectionView.reloadData()
         }
-        if topSelection == "holidays prices"{
+        if topSelection == "Holidays prices"{
            print("Selected holidays prices")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddHolidayPriceMainVC") as! AddHolidayPriceMainVC
             navigationController?.pushViewController(nextVC, animated: true)
@@ -231,6 +231,16 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
 
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -92) {
+                print("Backspace was pressed")
+            }
+        }
+        return true
+    }
+    
 }
 extension AddSeasonPriceMainVC{
     func getSeasonDateAndChalets() {
@@ -251,9 +261,11 @@ extension AddSeasonPriceMainVC{
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
@@ -300,9 +312,11 @@ extension AddSeasonPriceMainVC{
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "Sorry!", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
