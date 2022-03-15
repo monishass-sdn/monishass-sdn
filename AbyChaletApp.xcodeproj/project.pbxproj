@@ -108,6 +108,7 @@
 		4D5319C527C775030028925F /* AddedOfferChaletListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5319C427C775030028925F /* AddedOfferChaletListModel.swift */; };
 		4D534EBE2779F48E0058C44C /* myChaletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EBD2779F48E0058C44C /* myChaletVC.swift */; };
 		4D534EC2277A06400058C44C /* myChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534EC1277A06400058C44C /* myChaletTVCell.swift */; };
+		4D53DF3E27DF5C770049AAC6 /* myChaletList_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53DF3D27DF5C770049AAC6 /* myChaletList_Base.swift */; };
 		4D55382127D63C43004A61D6 /* HolidayEventChaletList_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55382027D63C43004A61D6 /* HolidayEventChaletList_Base.swift */; };
 		4D59A8D427BBD59800F31C61 /* OfferChaletListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59A8D327BBD59800F31C61 /* OfferChaletListModel.swift */; };
 		4D5E3EC2277C1780006C57C7 /* FAQsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */; };
@@ -277,6 +278,7 @@
 		4D5319C427C775030028925F /* AddedOfferChaletListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedOfferChaletListModel.swift; sourceTree = "<group>"; };
 		4D534EBD2779F48E0058C44C /* myChaletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletVC.swift; sourceTree = "<group>"; };
 		4D534EC1277A06400058C44C /* myChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletTVCell.swift; sourceTree = "<group>"; };
+		4D53DF3D27DF5C770049AAC6 /* myChaletList_Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChaletList_Base.swift; sourceTree = "<group>"; };
 		4D55382027D63C43004A61D6 /* HolidayEventChaletList_Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayEventChaletList_Base.swift; sourceTree = "<group>"; };
 		4D59A8D327BBD59800F31C61 /* OfferChaletListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferChaletListModel.swift; sourceTree = "<group>"; };
 		4D5E3EC1277C1780006C57C7 /* FAQsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsViewController.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				4D50AFDC27D780B80051B944 /* AddSeasonPrice_Base.swift */,
 				4DF17F3127D8741E00140910 /* SeasonPriceAddedChaletList_Model.swift */,
 				4D4A1B8D27D9E2AA004B082A /* SubChalet_Base.swift */,
+				4D53DF3D27DF5C770049AAC6 /* myChaletList_Base.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1164,6 +1167,7 @@
 				4D1C6F4527D0D40100AFE89D /* ReservationCancelledbyUserVC.swift in Sources */,
 				0029CAED26419DF200D267EB /* NewPasswordViewController.swift in Sources */,
 				00C3044726367F7F007EBC7C /* Extentions.swift in Sources */,
+				4D53DF3E27DF5C770049AAC6 /* myChaletList_Base.swift in Sources */,
 				4D4C410A27CF52B600E33E7E /* ReservationApprovalVC.swift in Sources */,
 				007A52B526411A4500DC1127 /* DateOfBirthTableViewCell.swift in Sources */,
 				003E59AE263AD95700FD38F2 /* DIYCalendarCell.swift in Sources */,
@@ -1418,7 +1422,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.29;
+				CURRENT_PROJECT_VERSION = 1.1.30;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1444,7 +1448,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.29;
+				CURRENT_PROJECT_VERSION = 1.1.30;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -1122,15 +1122,28 @@ class ReservationTVC: UITableViewController {
             return CGFloat(138 + arrayHeight)
             
         }else if indexPath.row == 7{
-            if arrayUserData.auto_accept == true{
-                self.viewAutoAcceptMsg.isHidden = true
-                self.topCOnstraintForBtnPayment.constant = 20
-                return 110
+            if isFromOffer == true{
+                if dictOfferChaletList.auto_accept == true{
+                    self.viewAutoAcceptMsg.isHidden = true
+                    self.topCOnstraintForBtnPayment.constant = 20
+                    return 110
+                }else{
+                    self.viewAutoAcceptMsg.isHidden = false
+                    self.topCOnstraintForBtnPayment.constant = 60
+                    return 160
+                }
             }else{
-                self.viewAutoAcceptMsg.isHidden = false
-                self.topCOnstraintForBtnPayment.constant = 60
-                return 160
+                if arrayUserData.auto_accept == true{
+                    self.viewAutoAcceptMsg.isHidden = true
+                    self.topCOnstraintForBtnPayment.constant = 20
+                    return 110
+                }else{
+                    self.viewAutoAcceptMsg.isHidden = false
+                    self.topCOnstraintForBtnPayment.constant = 60
+                    return 160
+                }
             }
+
         }else{
             
             return super.tableView(tableView, heightForRowAt: indexPath)

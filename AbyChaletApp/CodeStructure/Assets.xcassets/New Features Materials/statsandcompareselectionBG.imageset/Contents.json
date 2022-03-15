@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "adddddd@2x-1.png",
+      "filename" : "statsandcompareselectionBG.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "adddddd@2x.png",
+      "filename" : "statsandcompareselectionBG-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "adddddd@3x.png",
+      "filename" : "statsandcompareselectionBG-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
