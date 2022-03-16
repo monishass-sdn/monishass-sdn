@@ -62,7 +62,8 @@ class addNewOfferVC: UIViewController {
     }*/
     
     @IBAction func TappedonAddNewOffer(_ sender:UIButton){
-        showDefaultAlert(viewController: self, title: "", msg: "COMING SOON")
+        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddNewOfferCalendarVC") as! AddNewOfferCalendarVC
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 
 }

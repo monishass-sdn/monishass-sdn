@@ -120,6 +120,16 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
        // arrayDiscountAdded.append(item)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -92) {
+                print("Backspace was pressed")
+            }
+        }
+        return true
+    }
+    
 
     func DictionaryToJSON() -> Data{
        // let dictionary = ["aKey": "aValue", "anotherKey": "anotherValue"]

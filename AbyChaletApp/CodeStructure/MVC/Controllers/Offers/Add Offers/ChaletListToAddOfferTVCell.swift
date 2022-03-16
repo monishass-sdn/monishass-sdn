@@ -36,10 +36,10 @@ class ChaletListToAddOfferTVCell: UITableViewCell {
         
         self.lblChaletName.text = dict.chalet_name
         if dict.price_type == "default_price"{
-            self.lblPriceType.text = "Default Price"
+            self.lblPriceType.text = "Default Prices"
             self.viewPriceType.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
         }else{
-            self.lblPriceType.text = "Seasonal Price"
+            self.lblPriceType.text = "Season Prices"
             self.viewPriceType.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6078431373, blue: 0.9490196078, alpha: 1)
         }
         self.lblOfferCount.text = "You have (\(dict.offerCount ?? 0)) Offer"
@@ -86,9 +86,9 @@ class ChaletWithZeroOfferTVCell: UITableViewCell {
         
         self.lblChaletName.text = dict.chalet_name
         if dict.price_type == "default_price"{
-            self.lblPriceType.text = "Default Price"
+            self.lblPriceType.text = "Default Prices"
         }else{
-            self.lblPriceType.text = "Seasonal Price"
+            self.lblPriceType.text = "Season Prices"
         }
         self.lblOfferCount.text = "You have (\(dict.offerCount ?? 0)) Offer"
         if dict.cover_photo != ""{

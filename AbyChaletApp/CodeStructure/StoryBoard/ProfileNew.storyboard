@@ -2817,7 +2817,7 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdC-hn-Hfe">
                                                                                             <rect key="frame" x="31" y="17.5" width="130" height="25"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comparison" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-xF-WyO">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compare" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-xF-WyO">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="25"/>
                                                                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="19"/>
                                                                                                     <color key="textColor" red="0.19607843137254902" green="0.38431372549019605" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -9068,6 +9068,62 @@
             <point key="canvasLocation" x="2075" y="919"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0BR-ga-fm8">
+            <size key="intrinsicContentSize" width="131.5" height="34"/>
+        </designable>
+        <designable name="4k5-Wc-0Bd">
+            <size key="intrinsicContentSize" width="131.5" height="34"/>
+        </designable>
+        <designable name="4l9-oB-Km3">
+            <size key="intrinsicContentSize" width="94.5" height="34"/>
+        </designable>
+        <designable name="6kG-0R-EYt">
+            <size key="intrinsicContentSize" width="101" height="34"/>
+        </designable>
+        <designable name="7Ow-Cv-ddp">
+            <size key="intrinsicContentSize" width="124.5" height="34"/>
+        </designable>
+        <designable name="Akw-Wi-irV">
+            <size key="intrinsicContentSize" width="101.5" height="34"/>
+        </designable>
+        <designable name="FaC-NB-cs5">
+            <size key="intrinsicContentSize" width="124.5" height="34"/>
+        </designable>
+        <designable name="KZ4-NM-Bgh">
+            <size key="intrinsicContentSize" width="112.5" height="34"/>
+        </designable>
+        <designable name="LIf-mH-FGs">
+            <size key="intrinsicContentSize" width="192.5" height="34"/>
+        </designable>
+        <designable name="LfJ-om-W22">
+            <size key="intrinsicContentSize" width="124.5" height="34"/>
+        </designable>
+        <designable name="OEb-Aa-Upw">
+            <size key="intrinsicContentSize" width="101" height="34"/>
+        </designable>
+        <designable name="VNk-Sp-aBz">
+            <size key="intrinsicContentSize" width="183" height="34"/>
+        </designable>
+        <designable name="XeB-Jf-kUa">
+            <size key="intrinsicContentSize" width="101.5" height="34"/>
+        </designable>
+        <designable name="dcv-RM-cgy">
+            <size key="intrinsicContentSize" width="94.5" height="34"/>
+        </designable>
+        <designable name="jlY-yZ-Uid">
+            <size key="intrinsicContentSize" width="122" height="34"/>
+        </designable>
+        <designable name="vGI-Bf-wnF">
+            <size key="intrinsicContentSize" width="129" height="34"/>
+        </designable>
+        <designable name="vva-hk-HS2">
+            <size key="intrinsicContentSize" width="109.5" height="34"/>
+        </designable>
+        <designable name="xoJ-5k-JyZ">
+            <size key="intrinsicContentSize" width="152" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ChangePassword1" width="92" height="92"/>
         <image name="Deselect" width="30" height="30"/>
