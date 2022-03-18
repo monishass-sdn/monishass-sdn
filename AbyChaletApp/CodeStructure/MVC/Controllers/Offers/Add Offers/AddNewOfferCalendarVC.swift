@@ -8,7 +8,7 @@
 import UIKit
 import SVProgressHUD
 
-class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
+class AddNewOfferCalendarVC: UIViewController, CalenderDelegate2 {
     @IBOutlet weak var menuCollectionView: UICollectionView!
     @IBOutlet weak var lblForSelectedPackageInfo: UILabel!
     @IBOutlet weak var viewForCalendarContainerView: UIView!
@@ -25,7 +25,10 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
     var arrayCalendarLists = [CalendarData]()
     var arrayListsCalender  = [JobsPerDate]()
     var isSearchEnable = false
-
+    var arrayValuesToBackEnd = ["weekB","weekA","weekend","weekdays"]
+    var selectedDate: String = ""
+    var fromdate = ""
+    var todate = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,11 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
         topSliderMenuValArray =  ["Thursday - Wednesday", "Sunday to Saturday", "Thursday - Friday - Saturday","Sunday - Monday - Tuesday - Wednesday"]
         setupUI()
         self.setupCalenderView()
+        self.topSelection = arrayValuesToBackEnd[selectedIndex ?? 0]
+        print("TOP SELECTION = \(topSelection)")
+        print("Month = \(calenderView.currentMonthIndex)")
+        print("Year = \(calenderView.currentYear)")
+        self.getCalendarList(month: "\(calenderView.currentMonthIndex)", year: "\(calenderView.currentYear)", package: topSelection)
 
         // Do any additional setup after loading the view.
     }
@@ -44,8 +52,8 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
 
     }
     
-    lazy var  calenderView: CalenderViewNew = {
-        let calenderView = CalenderViewNew.init(theme: MyThemeNew.light, isSelectionEnabled: true)
+    lazy var  calenderView: CalendarViewCreateOffer = {
+        let calenderView = CalendarViewCreateOffer.init(theme: MyThemeNew.light, isSelectionEnabled: true)
         calenderView.translatesAutoresizingMaskIntoConstraints=false
         
         return calenderView
@@ -67,10 +75,11 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
         
         calenderView.topSelection = self.topSelection
         calenderView.myCollectionView.reloadData()
-        if topSelection != "holidays"{
+      /*  if topSelection != ""{
             self.getCalendarList(month: "\(calenderView.currentMonthIndex)", year: "\(calenderView.currentYear)", package: topSelection)
-        }
-        
+        }else{
+            print("top selection is null")
+        }*/
     }
     
     func setUpNavigationBar() {
@@ -95,6 +104,20 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegateNew {
         
         let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
         navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
+    
+    @IBAction func createOffer(_ sender: UIButton!){
+        if self.isSearchEnable == true {
+            print("Check in \(startDate)")
+            print("Check out = \(endDate)")
+            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
+            nextVC.isFromCreateOffer = true
+            nextVC.createdOfferCheck_in = startDate
+            nextVC.createdOfferCheck_out = endDate
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
+        }
+
     }
 
 }

@@ -77,6 +77,7 @@
 		4D23766527C4A39F00607456 /* OwnerInfoBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D23766427C4A39F00607456 /* OwnerInfoBase.swift */; };
 		4D43725227854D26009A2447 /* AvailableOffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */; };
 		4D43725527854D78009A2447 /* addNewOfferTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43725427854D78009A2447 /* addNewOfferTVCell.swift */; };
+		4D44797127E2F5E10024E580 /* CalendarViewCreateOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D44797027E2F5E10024E580 /* CalendarViewCreateOffer.swift */; };
 		4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */; };
 		4D47F00B27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F00A27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift */; };
 		4D48656D27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */; };
@@ -248,6 +249,7 @@
 		4D23766427C4A39F00607456 /* OwnerInfoBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerInfoBase.swift; sourceTree = "<group>"; };
 		4D43725127854D26009A2447 /* AvailableOffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOffersTVCell.swift; sourceTree = "<group>"; };
 		4D43725427854D78009A2447 /* addNewOfferTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewOfferTVCell.swift; sourceTree = "<group>"; };
+		4D44797027E2F5E10024E580 /* CalendarViewCreateOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewCreateOffer.swift; sourceTree = "<group>"; };
 		4D46CCFD277D6A2A00DD5398 /* OwnerDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerDetailsTableVC.swift; sourceTree = "<group>"; };
 		4D47F00A27D23D970021B29A /* selectPricingandStatsMenuCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectPricingandStatsMenuCVCell.swift; sourceTree = "<group>"; };
 		4D48656C27C77DA6003C42D3 /* confirmaddedOfferChaletTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmaddedOfferChaletTVCell.swift; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 				A166C4112650ED2400A9596A /* CalenderViewNew.swift */,
 				A166C4122650ED2500A9596A /* MonthViewNew.swift */,
 				A166C4102650ED2400A9596A /* WeekdaysViewNew.swift */,
+				4D44797027E2F5E10024E580 /* CalendarViewCreateOffer.swift */,
 			);
 			path = CalendarClass;
 			sourceTree = "<group>";
@@ -1211,6 +1214,7 @@
 				4D46CCFE277D6A2A00DD5398 /* OwnerDetailsTableVC.swift in Sources */,
 				4D059CBE27D5D4BC00FAFC59 /* HolidayEventListTVCell.swift in Sources */,
 				A15D051926522D7F00F9B6FC /* CalendarListBase.swift in Sources */,
+				4D44797127E2F5E10024E580 /* CalendarViewCreateOffer.swift in Sources */,
 				A1FE1BBF26CBDD5C0024E022 /* PaymentFailedTVC.swift in Sources */,
 				4D4C5120277D909E00DCF3FE /* CivilIDVC.swift in Sources */,
 				A16C376A266DE2D300CE3AC5 /* AddNewChaletVC.swift in Sources */,
@@ -1426,7 +1430,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.30;
+				CURRENT_PROJECT_VERSION = 1.1.31;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1452,7 +1456,7 @@
 				CODE_SIGN_ENTITLEMENTS = AbyChaletApp/AbyChaletApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.30;
+				CURRENT_PROJECT_VERSION = 1.1.31;
 				DEVELOPMENT_TEAM = 23D9P95352;
 				INFOPLIST_FILE = AbyChaletApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

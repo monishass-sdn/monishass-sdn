@@ -36,6 +36,16 @@ class showSelectedOfferTVCell: UITableViewCell {
         self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
     }
     
+    func setTimer(offercheckin : String, offercreatedat : String,offerexpiry: String){
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let offerExpiry = dateFormater.date(from: offercheckin)
+        let offerCreatedDate = dateFormater.date(from: offercreatedat)
+        let expiry = Calendar.current.date( byAdding: .hour,value: -Int(offerexpiry)!,to: offerExpiry!)
+        let expiryStr = dateFormater.string(from: expiry!)
+        self.strtTimer(time: expiryStr, offerCreated: offerCreatedDate!)
+    }
+    
     func strtTimer(time:String,offerCreated:Date)  {
         let timeee = time
         let dateFormater = DateFormatter()

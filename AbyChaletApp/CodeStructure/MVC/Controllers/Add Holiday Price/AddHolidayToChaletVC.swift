@@ -10,6 +10,8 @@ import SVProgressHUD
 
 class AddHolidayToChaletVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addholidaytoChaletTV : UITableView!
+    @IBOutlet weak var submitBtn : UIButton!
+    
     var dictEventData : Holi_event_list?
     var arrayHolidayChalet_List = [HolidayEventChaletList]()
     var ArrayselectedItem : [HolidayEventChaletList] = []
@@ -23,6 +25,8 @@ class AddHolidayToChaletVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setUpNavigationBar()
         getHolidayAndEvent_Chalets()
+        self.submitBtn.isUserInteractionEnabled = false
+        self.submitBtn.backgroundColor = UIColor("#A8A8A8")
     }
     
     func setUpNavigationBar() {
@@ -100,7 +104,7 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return 120
+            return 140
         }else if indexPath.section == 2{
             if arrayHolidayChalet_List[indexPath.row].isOffer == false{
                 if toggledIndexes[indexPath.row] == true{
@@ -127,6 +131,13 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
             ArrayselectedItem.append(item)
             self.selectedIndex = sender.tag
             cell.heightForHolidayPriceView.constant = 100
+            if ArrayselectedItem.isEmpty{
+                self.submitBtn.isUserInteractionEnabled = false
+                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                self.submitBtn.isUserInteractionEnabled = true
+                self.submitBtn.backgroundColor = UIColor("#6FDA44")
+            }
         }else{
             toggledIndexes[sender.tag] = false
             for (i,selectedItem) in ArrayselectedItem.enumerated(){
@@ -136,6 +147,13 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
             }
             self.selectedIndex = -1
             cell.heightForHolidayPriceView.constant = 0
+            if ArrayselectedItem.isEmpty{
+                self.submitBtn.isUserInteractionEnabled = false
+                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                self.submitBtn.isUserInteractionEnabled = true
+                self.submitBtn.backgroundColor = UIColor("#6FDA44")
+            }
 
         }
         self.addholidaytoChaletTV.reloadData()

@@ -3,4 +3,70 @@
    uuid = "ACE4C8BD-3589-40F3-840C-96DC91CD654B"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "040B0A6D-8BC9-4180-830D-0DB61DE0D57C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/SelectPackge/SelectPackageTVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
+            landmarkName = "getCalendarList(month:year:package:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51272D6D-73EC-4DA1-9070-DE311C60F8AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AbyChaletApp/CodeStructure/MVC/Controllers/Offers/Add Offers/AddNewOfferCalendarVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "getCalendarList(month:year:package:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "51272D6D-73EC-4DA1-9070-DE311C60F8AE - efbc0068ef6cb575"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AbyChaletApp.AddNewOfferCalendarVC.getCalendarList(month: Swift.String, year: Swift.String, package: Swift.String) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishti/Documents/Projects%20Abin/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Offers/Add%20Offers/AddNewOfferCalendarVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "1577">
+               </Location>
+               <Location
+                  uuid = "51272D6D-73EC-4DA1-9070-DE311C60F8AE - c25dfbb38993a26b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.AnyObject&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in AbyChaletApp.AddNewOfferCalendarVC.getCalendarList(month: Swift.String, year: Swift.String, package: Swift.String) -&gt; ()"
+                  moduleName = "AbyChaletApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srishti/Documents/Projects%20Abin/Chalet-iOS/AbyChaletApp/CodeStructure/MVC/Controllers/Offers/Add%20Offers/AddNewOfferCalendarVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "410">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

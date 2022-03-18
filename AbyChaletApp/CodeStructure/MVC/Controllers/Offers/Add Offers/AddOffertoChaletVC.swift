@@ -18,6 +18,9 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var goBackView : UIView!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var submitBtnBGView: UIView!
+    @IBOutlet weak var lblmaxOfferText : UILabel!
+    @IBOutlet weak var lblsubmit : UILabel!
+    
     var dictOfferData : Available_Offer_list?
     var arryAvailableOfferChaletList = [Offer_Chalet_details]()
     var arrayDiscountAdded : [Offer_Chalet_details] = []
@@ -25,14 +28,29 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
     var selectedOffersList = [Inserted_offered_chalets]()
     var arrayAddedOfferList = [Offered_Chalet_details]()
     var toggledIndexes = [Int:Bool]()
-    var offerid : Int = 0
+    var offerid : String = ""
     var isToggled = false
     var selectedIndex = -1
+    var isFromCreateOffer : Bool = false
+    var createdOfferCheck_in = ""
+    var createdOfferCheck_out = ""
+    var timeroffercheckin = ""
+    var timerOffercreatedAt = ""
+    var timerOffexpiry = ""
+    var createdOfferid = ""
+    var maxOferCount = ""
     var userid = (CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "")
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
-        getOfferChaletData()
+        if isFromCreateOffer == true{
+            getCreatedOfferChaletData()
+        }else{
+            getOfferChaletData()
+        }
+        self.nextBtn.isUserInteractionEnabled = false
+        self.submitBtnBGView.backgroundColor = UIColor("#A8A8A8")
+
         // Do any additional setup after loading the view.
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: #selector(self.didMoveToNotification))
         self.navigationItem.rightBarButtonItems = [notificationButton]
@@ -79,6 +97,15 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
             self.selectedIndex = sender.tag
             self.isToggled = true
             cell.heightForDiscountView.constant = 100
+            if ArrayselectedItem.isEmpty{
+                print("button not accessable")
+                self.nextBtn.isUserInteractionEnabled = false
+                self.submitBtnBGView.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                print("Button accessable")
+                self.nextBtn.isUserInteractionEnabled = true
+                self.submitBtnBGView.backgroundColor = UIColor("#6FDA44")
+            }
         }else{
             toggledIndexes[sender.tag] = false
             for (i,selectedItem) in ArrayselectedItem.enumerated(){
@@ -89,6 +116,15 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
             self.selectedIndex = -1
             self.isToggled = false
             cell.heightForDiscountView.constant = 0
+            if ArrayselectedItem.isEmpty{
+                print("button not accessable")
+                self.nextBtn.isUserInteractionEnabled = false
+                self.submitBtnBGView.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                print("Button accessable")
+                self.nextBtn.isUserInteractionEnabled = true
+                self.submitBtnBGView.backgroundColor = UIColor("#6FDA44")
+            }
 
         }
         self.AddOfferToChaletTV.reloadData()
@@ -115,7 +151,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
         discountValue = Int(cell.tfDiscountAdded.text!)!
         item.discount = discountValue
         item.userid = Int(userid)
-        item.offerid = offerid
+        item.offerid = Int(offerid)
         
        // arrayDiscountAdded.append(item)
     }
@@ -174,11 +210,26 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.section == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "showSelectedOfferTVCell", for: indexPath) as! showSelectedOfferTVCell
-            cell.lblcheckin.text = dictOfferData?.check_in
-            cell.lblcheckout.text = dictOfferData?.check_out
-            cell.setValuesToFields(dict: dictOfferData!)
-            return cell
+            if isFromCreateOffer == false{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "showSelectedOfferTVCell", for: indexPath) as! showSelectedOfferTVCell
+                cell.lblcheckin.text = dictOfferData?.check_in
+                cell.lblcheckout.text = dictOfferData?.check_out
+                cell.setValuesToFields(dict: dictOfferData!)
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "showSelectedOfferTVCell", for: indexPath) as! showSelectedOfferTVCell
+                cell.lblcheckin.text = createdOfferCheck_in
+                cell.lblcheckout.text = createdOfferCheck_out
+                DispatchQueue.main.async {
+                    if self.timeroffercheckin != "" && self.timerOffexpiry != "" && self.timerOffercreatedAt != ""{
+                        cell.setTimer(offercheckin : self.timeroffercheckin, offercreatedat : self.timerOffercreatedAt,offerexpiry: self.timerOffexpiry)
+                    }else{
+                        print("no timer data fetched")
+                    }
+                    
+                }
+                return cell
+            }
         }else if indexPath.section == 2{
             let data = arryAvailableOfferChaletList[indexPath.row]
             if data.offerCount != 0{
@@ -226,12 +277,12 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if indexPath.section == 0{
-            return 120.0
+            return 140.0
         }else if indexPath.section == 2{
             let data = arryAvailableOfferChaletList[indexPath.row]
             if data.offerCount != 0{
                 if toggledIndexes[indexPath.row] == true{
-                    return 275.0
+                    return 282.0
                 }else{
                     return 184.0
                 }
@@ -257,6 +308,8 @@ extension AddOffertoChaletVC{
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = OfferChaletListModel(dictionary: response as! NSDictionary)
+                    self.maxOferCount = (responseBase?.max_offer_count)!
+                    self.lblmaxOfferText.text = "Maximum (\(self.maxOferCount)) Offers per chalet each month"
                     self.arryAvailableOfferChaletList = (responseBase?.user_details)!
                     if self.arryAvailableOfferChaletList.count <= 0{
                        // showDefaultAlert(viewController: self, title: "Alert", msg: "No Chalets to List for this Offer")
@@ -269,6 +322,39 @@ extension AddOffertoChaletVC{
                 }else{
                     self.view.isUserInteractionEnabled = true
                    // showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+            }
+        }
+    }
+    
+    func getCreatedOfferChaletData() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/add-offer", dictionary: ["user_id":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "","check_in":createdOfferCheck_in,"check_out":createdOfferCheck_out
+        ], withHud: true) { (success, response, error) in
+            self.checkNotificationCount()
+            print(response)
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    let responseBase = OfferChaletListModel(dictionary: response as! NSDictionary)
+                    self.arryAvailableOfferChaletList = (responseBase?.user_details)!
+                    self.timeroffercheckin = (responseBase?.offer_checkin)!
+                    self.timerOffercreatedAt = (responseBase?.offercreated_at)!
+                    self.timerOffexpiry = (responseBase?.offer_expiry)!
+                    self.createdOfferid = (responseBase?.offer_id)!
+                    if self.arryAvailableOfferChaletList.count <= 0{
+                        showDefaultAlert(viewController: self, title: "Alert", msg: "No Chalets to List for this Offer")
+                    }
+                    DispatchQueue.main.async {
+                        self.AddOfferToChaletTV.reloadData()
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
+                    }
+                }else{
+                    self.view.isUserInteractionEnabled = true
+                    showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
@@ -293,7 +379,11 @@ extension AddOffertoChaletVC{
     
     func postOfferChaletData() {
         let rawdata = DictionaryToJSON()
-        offerid = (dictOfferData?.id)!
+        if isFromCreateOffer == false{
+            offerid = "\(dictOfferData?.id)"
+        }else{
+            offerid = "\(self.createdOfferid)"
+        }
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/add-offer-to-chalet", dictionary: ["userid":userid,"offerid":offerid], withHud: true,rowData: rawdata) { (success, response, error) in
@@ -318,9 +408,11 @@ extension AddOffertoChaletVC{
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }

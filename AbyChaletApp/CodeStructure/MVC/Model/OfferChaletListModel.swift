@@ -10,6 +10,16 @@ import Foundation
 public class OfferChaletListModel {
     public var status : Bool?
     public var message : String?
+    public var max_offer_count : String?
+    public var check_in : String?
+    public var check_out : String?
+    public var offer_expiry : String?
+    public var offercreated_at : String?
+    public var offer_checkin : String?
+    public var offer_checkout : String?
+    public var offer_id : String?
+
+    
     public var user_details : [Offer_Chalet_details]?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [OfferChaletListModel]
@@ -26,6 +36,15 @@ public class OfferChaletListModel {
 
         status = dictionary["status"] as? Bool
         message = dictionary["message"] as? String
+        max_offer_count = dictionary["max_offer_count"] as? String
+        check_in = dictionary["check_in"] as? String
+        check_out = dictionary["check_out"] as? String
+        offer_expiry = dictionary["offer_expiry"] as? String
+        offercreated_at = dictionary["offercreated_at"] as? String
+        offer_checkin = dictionary["offer_checkin"] as? String
+        offer_checkout = dictionary["offer_checkout"] as? String
+        offer_id = dictionary["offer_id"] as? String
+
         if (dictionary["user_details"] != nil) { user_details = Offer_Chalet_details.modelsFromDictionaryArray(array: dictionary["user_details"] as! NSArray) }
     }
 
@@ -36,6 +55,15 @@ public class OfferChaletListModel {
 
         dictionary.setValue(self.status, forKey: "status")
         dictionary.setValue(self.message, forKey: "message")
+        dictionary.setValue(self.max_offer_count, forKey: "max_offer_count")
+        dictionary.setValue(self.check_in, forKey: "check_in")
+        dictionary.setValue(self.check_out, forKey: "check_out")
+        dictionary.setValue(self.offer_expiry, forKey: "offer_expiry")
+        dictionary.setValue(self.offercreated_at, forKey: "offercreated_at")
+        dictionary.setValue(self.offer_checkin, forKey: "offer_checkin")
+        dictionary.setValue(self.offer_checkout, forKey: "offer_checkout")
+        dictionary.setValue(self.offer_id, forKey: "offer_id")
+
 
         return dictionary
     }

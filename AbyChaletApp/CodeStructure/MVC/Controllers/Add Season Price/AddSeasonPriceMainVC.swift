@@ -12,6 +12,7 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var menuCollectionView: UICollectionView!
     @IBOutlet weak var AddSeasonPricetoChaletTV: UITableView!
+    @IBOutlet weak var submitBtn : UIButton!
     
     var topSliderMenuArray:[String] = []
     var selectedIndex:Int?
@@ -34,6 +35,8 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
         topSliderMenuArray = ["Holidays prices","Season prices","Stats"]
         selectedIndex = 1
         getSeasonDateAndChalets()
+        self.submitBtn.isUserInteractionEnabled = false
+        self.submitBtn.backgroundColor = UIColor("#A8A8A8")
         // Do any additional setup after loading the view.
     }
     
@@ -174,7 +177,7 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return 120
+            return 140
         }else if indexPath.section == 1{
             return 65
         }else{
@@ -196,6 +199,13 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             ArrayselectedItem.append(item)
             self.selectedIndexx = sender.tag
             cell.bottomViewHeightConstrain.constant = 220
+            if ArrayselectedItem.isEmpty{
+                self.submitBtn.isUserInteractionEnabled = false
+                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                self.submitBtn.isUserInteractionEnabled = true
+                self.submitBtn.backgroundColor = UIColor("#6FDA44")
+            }
         }else{
             toggledIndexes[sender.tag] = false
             for (i,selectedItem) in ArrayselectedItem.enumerated(){
@@ -205,6 +215,13 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             }
             self.selectedIndex = -1
             cell.bottomViewHeightConstrain.constant = 0
+            if ArrayselectedItem.isEmpty{
+                self.submitBtn.isUserInteractionEnabled = false
+                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+            }else{
+                self.submitBtn.isUserInteractionEnabled = true
+                self.submitBtn.backgroundColor = UIColor("#6FDA44")
+            }
 
         }
         self.AddSeasonPricetoChaletTV.reloadData()

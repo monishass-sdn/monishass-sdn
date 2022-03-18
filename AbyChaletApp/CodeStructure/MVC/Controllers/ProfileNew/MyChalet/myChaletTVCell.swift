@@ -29,7 +29,7 @@ class myChaletTVCell: UITableViewCell {
     @IBOutlet weak var lblOffers : UILabel!
     @IBOutlet weak var lblTotal_income : UILabel!
     @IBOutlet weak var lblSubChalet_count: UILabel!
-
+    @IBOutlet weak var imageCloseddate: UIImageView!
     
     var isExpanded : Bool = false
     var istoggleON : Bool = false
@@ -87,6 +87,12 @@ class myChaletTVCell: UITableViewCell {
             self.toggleBtn.setImage(UIImage(named: "toggleONReservation"), for: .normal)
         }else{
             self.toggleBtn.setImage(UIImage(named: "toggleOFFReservation"), for: .normal)
+        }
+        
+        if dict.closed_date == true{
+            self.imageCloseddate.image = UIImage(named: "selectedDateYes")
+        }else{
+            self.imageCloseddate.image = UIImage(named: "selectedDateNo")
         }
         
     }

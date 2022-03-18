@@ -99,7 +99,7 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 1{
             let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
             nextVC.dictOfferData = self.arryAvailableOfferList[indexPath.row]
-            nextVC.offerid = (self.arryAvailableOfferList[indexPath.row].id!)
+            nextVC.offerid = "\(self.arryAvailableOfferList[indexPath.row].id!)"
             self.navigationController?.pushViewController(nextVC, animated: true)
         }else{
             print("Clicked on IndexPath 1")
@@ -108,7 +108,7 @@ extension addNewOfferVC: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1{
-            return 120
+            return 140
         }else{
             return 65
         }
