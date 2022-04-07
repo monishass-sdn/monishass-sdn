@@ -30,6 +30,9 @@ class myChaletTVCell: UITableViewCell {
     @IBOutlet weak var lblTotal_income : UILabel!
     @IBOutlet weak var lblSubChalet_count: UILabel!
     @IBOutlet weak var imageCloseddate: UIImageView!
+    @IBOutlet weak var chalet_image : UIImageView!
+    @IBOutlet weak var view_subchaletCount : UIView!
+    @IBOutlet weak var btnClosedDate : UIButton!
     
     var isExpanded : Bool = false
     var istoggleON : Bool = false
@@ -49,9 +52,7 @@ class myChaletTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    override func prepareForReuse() {
- //       isExpanded = false
- //   }
+
     
     func setValuesToFields(dict : ChaletLists){
         
@@ -83,6 +84,14 @@ class myChaletTVCell: UITableViewCell {
         self.lblOffers.text = dict.offer_count
         self.lblSubChalet_count.text = dict.countOfSubChalets
         
+        if dict.ishaveSubCHalets == true{
+            self.view_subchaletCount.isHidden = false
+            self.btnClosedDate.isHidden = false
+        }else{
+            self.view_subchaletCount.isHidden = true
+            self.btnClosedDate.isHidden = true
+        }
+        
         if dict.reservation_available == true{
             self.toggleBtn.setImage(UIImage(named: "toggleONReservation"), for: .normal)
         }else{
@@ -93,6 +102,12 @@ class myChaletTVCell: UITableViewCell {
             self.imageCloseddate.image = UIImage(named: "selectedDateYes")
         }else{
             self.imageCloseddate.image = UIImage(named: "selectedDateNo")
+        }
+        
+        if dict.cover_photo != ""{
+            chalet_image.sd_setImage(with: URL(string: dict.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
+        }else{
+            chalet_image.image = kPlaceHolderImage
         }
         
     }

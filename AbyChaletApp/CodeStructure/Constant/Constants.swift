@@ -40,6 +40,7 @@ struct Images {
     static let KNewNotification = UIImage.init(named: "notification-new")?.withRenderingMode(.alwaysOriginal)
    // static let KIconNotification1 = UIImage.init(named: "icon_Notification")?.withRenderingMode(.alwaysOriginal)
     static let KcloseButton = UIImage.init(named: "closeButton")?.withRenderingMode(.alwaysOriginal)
+    static let KStatsicon = UIImage.init(named: "statsWhite")?.withRenderingMode(.alwaysOriginal)
     
     
 }
@@ -52,6 +53,7 @@ struct NotificationNames {
     static let kAlertOfferCLick               = "AlertOfferClick"
     static let KgoToSuccessPage             = "goToSuccessPage "
     static let KNotificationCountCheck       = "checkNotifiactionCount"
+    static let KGoToFailurePage = "goToPaymentFailurePage"
     
     
 }

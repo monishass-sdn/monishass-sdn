@@ -67,7 +67,11 @@ extension ConfirmAddHolidayToChaletVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HolidayEventListTVCell", for: indexPath) as! HolidayEventListTVCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HolidayEventListTVCell", for: indexPath) as!
+                HolidayEventListTVCell
+            cell.lblEvent_name.text = dictEventData?.event_name
+            cell.lblcheck_in.text = dictEventData?.check_in
+            cell.lblcheck_out.text = dictEventData?.check_out
             return cell
         }else if indexPath.section == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConfirmedHolidayPriceChaletListTVCell", for: indexPath) as! ConfirmedHolidayPriceChaletListTVCell

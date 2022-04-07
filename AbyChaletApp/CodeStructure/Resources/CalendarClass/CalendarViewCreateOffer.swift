@@ -1052,7 +1052,7 @@ class CalendarViewCreateOffer: UIView, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width/7
-        let height: CGFloat = collectionView.frame.width/6
+        let height: CGFloat = collectionView.frame.width/7
 
         return CGSize(width: width, height: height)
     }

@@ -92,6 +92,7 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
                 return cell
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AddHolidayToChaletOfferAlreadyAppliedTVCell", for: indexPath) as! AddHolidayToChaletOfferAlreadyAppliedTVCell
+                cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
                 return cell
             }
 

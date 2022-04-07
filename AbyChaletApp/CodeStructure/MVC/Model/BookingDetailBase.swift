@@ -64,6 +64,13 @@ public class Booking_details {
     public var offer_discount : String?
     public var chalet_details : [Chalet_details]?
     public var chalet_upload : [Chalet_upload]?
+    public var remaining_amt_pay : String?
+    public var address : String?
+    public var street_address : String?
+    public var city : String?
+    public var country : String?
+    public var default_callus : String?
+    public var admincheck_in : String?
 
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Booking_details]
@@ -101,6 +108,13 @@ public class Booking_details {
         offer_discount = dictionary["offer_discount"] as? String
         if (dictionary["chalet_details"] != nil) { chalet_details = Chalet_details.modelsFromDictionaryArray(array: dictionary["chalet_details"] as! NSArray) }
         if (dictionary["chalet_upload"] != nil) { chalet_upload = Chalet_upload.modelsFromDictionaryArray(array: dictionary["chalet_upload"] as! NSArray) }
+        remaining_amt_pay = dictionary["remaining_amt_pay"] as? String
+        address = dictionary["address"] as? String
+        street_address = dictionary["street_address"] as? String
+        city = dictionary["city"] as? String
+        country = dictionary["country"] as? String
+        default_callus = dictionary["default_callus"] as? String
+        admincheck_in = dictionary["admincheck_in"] as? String
     }
 
     public func dictionaryRepresentation() -> NSDictionary {
@@ -126,6 +140,13 @@ public class Booking_details {
         dictionary.setValue(self.remaining, forKey: "remaining")
         dictionary.setValue(self.ownerid, forKey: "ownerid")
         dictionary.setValue(self.offer_discount, forKey: "offer_discount")
+        dictionary.setValue(self.remaining_amt_pay, forKey: "remaining_amt_pay")
+        dictionary.setValue(self.address, forKey: "address")
+        dictionary.setValue(self.street_address, forKey: "street_address")
+        dictionary.setValue(self.city, forKey: "city")
+        dictionary.setValue(self.country, forKey: "country")
+        dictionary.setValue(self.default_callus, forKey: "default_callus")
+        dictionary.setValue(self.admincheck_in, forKey: "admincheck_in")
 
         return dictionary
     }

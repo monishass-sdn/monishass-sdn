@@ -41,8 +41,10 @@ class AddHolidayPriceMainVC: UIViewController {
 
     }
     @objc func backButtonTouched()  {
-        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
-        navigationController?.pushViewController(nextVC, animated: true)
+        navigationController?.popToRootViewController(animated: true)
+
+      /*  let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
+        navigationController?.pushViewController(nextVC, animated: true) */
     }
     
     @objc func didMoveToNotification(){

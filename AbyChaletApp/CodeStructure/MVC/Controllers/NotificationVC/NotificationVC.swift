@@ -23,7 +23,7 @@ class NotificationVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
         let notificationButton = UIBarButtonItem(image: kNotificationCount == 0 ? Images.kIconNoMessage : Images.kIconNotification, style: .plain, target: self, action: nil)
-        let reservationButton = UIBarButtonItem(image: showResrvationButton == true ? Images.KReservationicon?.withTintColor(UIColor.white) : Images.KHideReservationicon, style: .plain, target: self, action: nil)
+        let reservationButton = UIBarButtonItem(image: showResrvationButton == true ? Images.KReservationicon?.withTintColor(UIColor.white) : Images.KHideReservationicon, style: .plain, target: self, action: #selector(goToBookings))
         self.navigationItem.rightBarButtonItems = [notificationButton,reservationButton]
         
         btnInbox.setTitle("Inbox".localized(), for: .normal)
@@ -32,6 +32,12 @@ class NotificationVC: UIViewController {
     
     @objc func logoutUser() {
         appDelegate.logOut()
+    }
+    
+    @objc func goToBookings(){
+        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingsVC") as! BookingsVC
+        navigationController?.pushViewController(nextVC, animated: true)
+
     }
     override func viewWillAppear(_ animated: Bool) {
         if CAUser.currentUser.id != nil {
@@ -60,10 +66,10 @@ class NotificationVC: UIViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+  /*  override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.popViewController(animated: true)
     }
-    
+    */
     //MARK:- Check User/Owner Status
     
     func checkuserstatus(){

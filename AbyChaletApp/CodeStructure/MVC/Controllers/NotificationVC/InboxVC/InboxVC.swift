@@ -126,7 +126,7 @@ extension InboxVC : UITableViewDelegate, UITableViewDataSource {
 extension InboxVC {
     
     func getOwnerInboxDetails(ownerId:String) {
-        ServiceManager.sharedInstance.postMethodAlamofire("api/owner_chalet", dictionary: ["ownerid":ownerId], withHud: true) { [self] (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/owner_chalet", dictionary: ["ownerid":CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
             self.checkBlockStatus()
             if success {
                 if response!["status"] as! Bool == true {

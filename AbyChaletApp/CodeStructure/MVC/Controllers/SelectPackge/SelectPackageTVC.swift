@@ -18,6 +18,10 @@ class SelectPackageTVC: UITableViewController {
     @IBOutlet weak var collectionChalletList: UICollectionView!
     @IBOutlet weak var colletionViewHolidays: UICollectionView!
     @IBOutlet weak var lblThereisNoChaletString: UILabel!
+    @IBOutlet weak var lbl_fromdate: UILabel!
+    @IBOutlet weak var lbl_todate: UILabel!
+    @IBOutlet weak var noresultCollectionView : UICollectionView!
+    
     var  arrayListCalender  = [JobsPerDate]()
 
     var topSliderMenuArray:[String] = []
@@ -29,11 +33,13 @@ class SelectPackageTVC: UITableViewController {
     var selectedIndex:Int?
     var topSelection = ""
     var arrayUserDetails = [User_details]()
+    var arraynoresultsChalets = [User_details]()
     var arrayCalendarList = [CalendarData]()
     var arrayChalletList = [Chalet_list]()
     var dictBookingDetails = Booking_details(dictionary: NSDictionary())
     var isNoChaletFound = false
     var isSearchEnable = false
+    var isGotResult : Bool = false
     var startDate = ""
     var endDate = ""
     var isLoadHolidaysAndEvents = false
@@ -95,6 +101,10 @@ class SelectPackageTVC: UITableViewController {
         self.checkNotificationCount()
     }
     
+ /*   override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+ */
   /*  override func viewDidLayoutSubviews() {
         self.viewTop.roundCorners(corners: [.topLeft,.topRight], radius: 10.0)
         let width = kScreenWidth - 30
@@ -192,6 +202,11 @@ class SelectPackageTVC: UITableViewController {
         }
     }
     
+    @IBAction func bntSwipeUpAction(_ sender : UIButton){
+        self.tableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .top, animated: true)
+    }
+    
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 6 {
             if arrayUserDetails.count > 0 {
@@ -202,6 +217,22 @@ class SelectPackageTVC: UITableViewController {
                     }
                 }
                 let countWithoutOffer = self.arrayUserDetails.count - countwithOffer
+                let heightForOffer = countwithOffer * 215
+                let heightWithoutOffer = countWithoutOffer * 176
+                
+                return CGFloat(heightForOffer + heightWithoutOffer) + 45
+            }else{
+                return 0
+            }
+        }else if indexPath.row == 8 {
+            if arraynoresultsChalets.count > 0 {
+                var countwithOffer = 0
+                for item in self.arraynoresultsChalets{
+                    if item.offer_available == true{
+                        countwithOffer += 1
+                    }
+                }
+                let countWithoutOffer = self.arraynoresultsChalets.count - countwithOffer
                 let heightForOffer = countwithOffer * 215
                 let heightWithoutOffer = countWithoutOffer * 176
                 
@@ -267,7 +298,7 @@ class SelectPackageTVC: UITableViewController {
                     }else if modelName == "iPhone 12" || modelName == "Simulator iPhone 12" {
                         return 400
                     }else{
-                        return 420
+                        return 430
                     }
                 }else{
                     if modelName == "Simulator iPhone 8" || modelName == "iPhone 7" || modelName == "iPhone 6s" || modelName == "iPhone 8" || modelName == "iPhone 11 Pro" || modelName == "Simulator iPhone 11 Pro" || modelName == "Simulator iPhone SE (2nd generation)" || modelName == "iPhone SE (2nd generation)" {
@@ -279,7 +310,7 @@ class SelectPackageTVC: UITableViewController {
                     }else if modelName == "iPhone 12" || modelName == "Simulator iPhone 12" {
                         return 400
                     }else{
-                        return 420
+                        return 430
                     }
                     //return 420
                 }
@@ -291,7 +322,13 @@ class SelectPackageTVC: UITableViewController {
             if isNoChaletFound == false {
                 return 0
             }else{
-                return 65
+                return 134
+            }
+        }else if indexPath.row == 9{
+            if self.isGotResult == false{
+                return 0
+            }else{
+                return 60
             }
         }else{
             
@@ -313,10 +350,10 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 print("Count = \(arrayChalletList.count)")
                 return self.arrayChalletList.count
             }
-         //   return self.arrayChalletList.count == 0 ? 1 : self.arrayChalletList.count
+        }else if collectionView.tag == 4{
+            return self.arraynoresultsChalets.count
         }else{
-            print("Count = \(arrayUserDetails.count)")
-            return arrayUserDetails.count
+            return self.arrayUserDetails.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -357,6 +394,12 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             cell.lblCheckInTimeNew.text = dict.admincheck_in!
             cell.loadView(dictChalet: dict)
             return cell
+        }else if collectionView.tag == 4{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewChaletListCVCell", for: indexPath) as! CollectionViewChaletListCVCell
+            if self.arraynoresultsChalets.count > 0 {
+                cell.setValuesToFields(dict: self.arraynoresultsChalets[indexPath.row])
+            }
+            return cell
         }
         else{
 
@@ -367,6 +410,22 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             return cell
         }
     }
+    
+  /*  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView.tag == 2{
+            if indexPath.row == self.arrayUserDetails.count - 1{
+                print("last item displayed")
+            }else{
+                print("last arrayUserDetails item not displayed ytet")
+            }
+        }else if collectionView.tag == 4{
+            if indexPath.row == self.arraynoresultsChalets.count - 1{
+                print("last item displayed")
+            }else{
+                print("last arraynoresultsChalets item not displayed ytet")
+            }
+        }
+    }*/
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -414,46 +473,98 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             }
             
         }else {
-            if self.arrayUserDetails.count > 0 {
-                if self.topSelection != "" {
-                    if self.arrayUserDetails[indexPath.row].subchalet_available == true{
-                        if self.arrayUserDetails[indexPath.row].reservation_status == true{
-                            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SubChaletsVC") as! SubChaletsVC
-                            nextVC.mainChaletName = self.arrayUserDetails[indexPath.row].chalet_name!
-                            nextVC.mainChaletID = "\(self.arrayUserDetails[indexPath.row].chalet_id!)"
-                            nextVC.fromDate = self.fromdate
-                            nextVC.toDate = self.todate
-                            nextVC.selectedPackagee = self.selectedPackageName
-                            self.navigationController?.pushViewController(nextVC, animated: true)
+            if collectionView == collectionChalletList{
+                
+                if self.arrayUserDetails.count > 0 {
+                    if self.topSelection != "" {
+                        if self.arrayUserDetails[indexPath.row].subchalet_available == true{
+                            if self.arrayUserDetails[indexPath.row].reservation_status == true{
+                                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SubChaletsVC") as! SubChaletsVC
+                                nextVC.mainChaletName = self.arrayUserDetails[indexPath.row].chalet_name!
+                                nextVC.mainChaletID = "\(self.arrayUserDetails[indexPath.row].chalet_id!)"
+                                nextVC.fromDate = self.fromdate
+                                nextVC.toDate = self.todate
+                                nextVC.selectedPackagee = self.selectedPackageName
+                                self.navigationController?.pushViewController(nextVC, animated: true)
+                            }else{
+                                //Reservation Not Available
+                                let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
+                                let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }else{
-                            //Reservation Not Available
-                            let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
-                            let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            }))
-                            self.present(alert, animated: true, completion: nil)
+                            if self.arrayUserDetails[indexPath.row].reservation_status == true{
+                                 //Reservation Available
+                             let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
+                             reservationVC.arrayUserDetails = self.arrayUserDetails
+                             reservationVC.selectedIndex = indexPath.item
+                             reservationVC.selectedPackage = self.topSelection
+                             reservationVC.isFromOffer = false
+                             reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
+                             reservationVC.arrayUserData = self.arrayUserDetails[indexPath.row]
+                           //  let nvController = UINavigationController(rootViewController: reservationVC)
+                           //  nvController.modalPresentationStyle = .fullScreen
+                           //  self.present(nvController, animated: true, completion: nil)
+                             self.navigationController?.pushViewController(reservationVC, animated: true)
+                             }else{
+                                 //Reservation Not Available
+                                 let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
+                                 let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                 }))
+                                 self.present(alert, animated: true, completion: nil)
+                             }
                         }
-                    }else{
-                        if self.arrayUserDetails[indexPath.row].reservation_status == true{
-                             //Reservation Available
-                         let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
-                         reservationVC.arrayUserDetails = self.arrayUserDetails
-                         reservationVC.selectedIndex = indexPath.item
-                         reservationVC.selectedPackage = self.topSelection
-                         reservationVC.isFromOffer = false
-                         reservationVC.isOfferAvailable = self.arrayUserDetails[indexPath.row].offer_available ?? false
-                         reservationVC.arrayUserData = self.arrayUserDetails[indexPath.row]
-                         self.navigationController?.pushViewController(reservationVC, animated: true)
-                         }else{
-                             //Reservation Not Available
-                             let reservationAvailable = self.arrayUserDetails[indexPath.row].reservation_available
-                             let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
-                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                             }))
-                             self.present(alert, animated: true, completion: nil)
-                         }
-                    }
 
+                    }
+                }
+            }else{
+                
+                if self.arraynoresultsChalets.count > 0 {
+                    if self.topSelection != "" {
+                        if self.arraynoresultsChalets[indexPath.row].subchalet_available == true{
+                            if self.arraynoresultsChalets[indexPath.row].reservation_status == true{
+                                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SubChaletsVC") as! SubChaletsVC
+                                nextVC.mainChaletName = self.arraynoresultsChalets[indexPath.row].chalet_name!
+                                nextVC.mainChaletID = "\(self.arraynoresultsChalets[indexPath.row].chalet_id!)"
+                                nextVC.fromDate = self.fromdate
+                                nextVC.toDate = self.todate
+                                nextVC.selectedPackagee = self.selectedPackageName
+                                self.navigationController?.pushViewController(nextVC, animated: true)
+                            }else{
+                                //Reservation Not Available
+                                let reservationAvailable = self.arraynoresultsChalets[indexPath.row].reservation_available
+                                let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        }else{
+                            if self.arraynoresultsChalets[indexPath.row].reservation_status == true{
+                                 //Reservation Available
+                             let reservationVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "ReservationTVC") as! ReservationTVC
+                             reservationVC.arrayUserDetails = self.arraynoresultsChalets
+                             reservationVC.selectedIndex = indexPath.item
+                             reservationVC.selectedPackage = self.topSelection
+                             reservationVC.isFromOffer = false
+                             reservationVC.isOfferAvailable = self.arraynoresultsChalets[indexPath.row].offer_available ?? false
+                             reservationVC.arrayUserData = self.arraynoresultsChalets[indexPath.row]
+                             let nvController = UINavigationController(rootViewController: reservationVC)
+                                self.present(nvController, animated: true, completion: nil)
+                            // self.navigationController?.pushViewController(reservationVC, animated: true)
+                             }else{
+                                 //Reservation Not Available
+                                 let reservationAvailable = self.arraynoresultsChalets[indexPath.row].reservation_available
+                                 let alert = UIAlertController(title: "Message", message: "You Can't book after \(reservationAvailable ?? 0) days from Today", preferredStyle: .alert)
+                                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                 }))
+                                 self.present(alert, animated: true, completion: nil)
+                             }
+                        }
+
+                    }
                 }
             }
         }
@@ -476,7 +587,20 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
 
                 //return CGSize(width: 100, height: 20)
             }
-            return CGSize(width: kScreenWidth , height: 166)
+            return CGSize(width: kScreenWidth , height: 125)
+            /*if indexPath.row == selectedIndexHolidays {
+                return CGSize(width: kScreenWidth , height: 160)
+                
+            }else{
+                return CGSize(width: kScreenWidth , height: 60)
+            }*/
+        }else if collectionView.tag == 4{
+            if self.arraynoresultsChalets.count == 0{
+                return CGSize(width: kScreenWidth , height: 500)
+
+                //return CGSize(width: 100, height: 20)
+            }
+            return CGSize(width: kScreenWidth , height: 175)
             /*if indexPath.row == selectedIndexHolidays {
                 return CGSize(width: kScreenWidth , height: 160)
                 
@@ -484,16 +608,22 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
                 return CGSize(width: kScreenWidth , height: 60)
             }*/
         }else{
-            if arrayUserDetails[indexPath.row].offer_available == false{
-                if arrayUserDetails[indexPath.row].isFromHolidaysandEvents == false{
-                    return CGSize(width: kScreenWidth, height: 176)
-                }else{
-                    return CGSize(width: kScreenWidth, height: 215)
+            if arrayUserDetails.count > 0{
+                if arrayUserDetails[indexPath.row].offer_available == false{
+                    if arrayUserDetails[indexPath.row].isFromHolidaysandEvents == false{
+                        return CGSize(width: kScreenWidth, height: 176)
+                    }
                 }
-               // return CGSize(width: kScreenWidth, height: 176)
-            }else{
-                return CGSize(width: kScreenWidth , height: 215)
+            }else if arraynoresultsChalets.count > 0{
+                if arraynoresultsChalets[indexPath.row].offer_available == false{
+                    if arraynoresultsChalets[indexPath.row].isFromHolidaysandEvents == false{
+                        return CGSize(width: kScreenWidth, height: 176)
+                    }
+                }
             }
+            return CGSize(width: kScreenWidth , height: 215)
+
+            
         }
         
     }
@@ -501,6 +631,8 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
         if collectionView.tag == 1 {
             return 0.4
         }else if collectionView.tag == 3{
+            return 0
+        }else if collectionView.tag == 4{
             return 0
         }else{
             return 0
@@ -640,8 +772,8 @@ extension SelectPackageTVC {
         print("USer Selected Date == \(calendarSelectedDate.sharedData.selectedCalendarDate!)")
         ServiceManager.sharedInstance.postMethodAlamofire("api/searchchalet", dictionary: ["from_date":fromDate,"to_date":toDate,"package":selectedPackage,"userid":CAUser.currentUser.id != nil ? CAUser.currentUser.id! : 0], withHud: true) { (success, response, error) in
             self.arrayUserDetails.removeAll()
+            print(response)
             if success {
-                print(response)
                 if response!["status"] as! Bool == true {
                     let responseBase = ChaletSearchBase(dictionary: response as! NSDictionary)
                     self.arrayUserDetails = (responseBase?.user_details)!
@@ -667,17 +799,25 @@ extension SelectPackageTVC {
                             self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
                             self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
                             self.collectionChalletList.reloadData()
-
+              
+                        print("Chalet Count = \(self.arrayUserDetails.count)")
                         if self.arrayUserDetails.count > 0{
+                            if self.arrayUserDetails.count > 2{
+                                self.isGotResult = true
+                            }
+                          //  self.isGotResult = true
                             self.tableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .top, animated: true)
+                          //  self.navigationController?.setNavigationBarHidden(true, animated: true)
                             //self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
                             self.isNoChaletFound = false
                         }else{
+                            self.isGotResult = false
                             DispatchQueue.main.async {
+                                self.getChaletsWhenNoResults()
                                 self.isNoChaletFound = true
-                                self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
-                                self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
-                                self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
+                              //  self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                              //  self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
+                              //  self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
                             }
                         }
                         
@@ -871,5 +1011,64 @@ extension SelectPackageTVC {
     }
     
 }
+
+extension SelectPackageTVC{
+    //MARK:- Get Chalets When there is no search Results
+    func getChaletsWhenNoResults() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        self.arrayChalletList.removeAll()
+        ServiceManager.sharedInstance.postMethodAlamofire("api/available_chalet", dictionary: ["from_date":fromdate,"to_date":todate,"package":selectedPackageName], withHud: true) { (success, response, error) in
+            if success {
+                print("response is \(response as! NSDictionary)")
+                self.lbl_todate.text = self.todate
+                self.lbl_fromdate.text = self.fromdate
+                
+                let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#FFFFFF")] as [NSAttributedString.Key : Any]
+                let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#49FF00")] as [NSAttributedString.Key : Any]
+                
+                let attributedStringEarn1 = NSMutableAttributedString(string:"There is no chalet Available for this date \n Don't worry we have other ( ".localized(), attributes:attrsWhatKindOfJob1)
+                let attributedStringEarn2 = NSMutableAttributedString(string:"\(self.selectedPackageName)", attributes:attrsWhatKindOfJob2)
+                let attributedStringEarn3 = NSMutableAttributedString(string:" ) for you", attributes:attrsWhatKindOfJob1)
+                
+                attributedStringEarn1.append(attributedStringEarn2)
+                attributedStringEarn1.append(attributedStringEarn3)
+                self.lblThereisNoChaletString.attributedText = attributedStringEarn1
+                
+                
+
+                if response!["status"] as! Bool == true {
+                    let responseBase = ChaletSearchBase(dictionary: response as! NSDictionary)
+                    self.arraynoresultsChalets = (responseBase?.user_details)!
+                    self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                    self.tableView.reloadRows(at: [IndexPath(row: 8, section: 0)], with: .none)
+                    self.tableView.reloadRows(at: [IndexPath(row: 9, section: 0)], with: .none)
+
+                    self.noresultCollectionView.reloadData()
+                    if self.arraynoresultsChalets.count > 0 {
+                        self.isGotResult = true
+                        DispatchQueue.main.async {
+                            self.tableView.scrollToRow(at: IndexPath(row: 7, section: 0), at: .top, animated: true)
+                            self.view.isUserInteractionEnabled = true
+                       //     self.isSearchEnable = false
+                        //    self.btnSearch.backgroundColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+                        }
+                    }else{
+                        self.isGotResult = false
+                        // do nothing
+                    }
+
+                }else{
+                    showDefaultAlert(viewController: self, title: "", msg: "No Chalets Found")
+                    self.view.isUserInteractionEnabled = true
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+        }
+    }
+}
+
 
 

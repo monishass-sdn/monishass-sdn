@@ -52,13 +52,15 @@ class PackageListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(goToFailurePage), name: NSNotification.Name(rawValue: NotificationNames.KGoToFailurePage), object: nil)
         appDelegate.checkBlockStatus()
         if CAUser.currentUser.id != nil{
             if CAUser.currentUser.userstatus == "user"{
                 print("do Nothing")
             }else{
                 if CAUser.currentUser.userstatus == "owner" {
-                    self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id ?? 0)")
+                    self.getOwnerInboxDetails()
+                  //  self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id ?? 0)")
                 }
             }
         }else{
@@ -92,6 +94,29 @@ class PackageListViewController: UIViewController {
                   bookingDetailsTVC.isDeposit = false
                 
                 bookingDetailsTVC.isFrom = "Booked Successfully"
+                self.navigationController!.pushViewController(bookingDetailsTVC, animated: true)
+ 
+            }
+
+
+        }
+
+    }
+    
+    @objc func goToFailurePage(notification: Notification) {
+        DispatchQueue.main.async {
+            if let userinfo = notification.userInfo as? [String:Any]{
+                guard let dataa = userinfo["bookingData"] as? Booking_details , let labelString = userinfo["datentime"] as? String, let isdeposit = userinfo["isDeposit"] as? Bool, let remaindateTime = userinfo["remainingAmtDate"] as? String else {return}
+                
+                
+                let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
+                bookingDetailsTVC.dictBookingDetails = dataa
+                bookingDetailsTVC.remainingAmtDate = labelString
+                bookingDetailsTVC.isDeposit = isdeposit
+                  bookingDetailsTVC.remainingAmtDate = remaindateTime
+                
+                
+                bookingDetailsTVC.isFrom = "Booking failed"
                 self.navigationController!.pushViewController(bookingDetailsTVC, animated: true)
  
             }
@@ -233,8 +258,8 @@ extension PackageListViewController: UITableViewDelegate, UITableViewDataSource 
 //MARK:- API Code for Pop Up
 
 extension PackageListViewController{
-    func getOwnerInboxDetails(ownerId:String) {
-        ServiceManager.sharedInstance.postMethodAlamofire("api/owner_chalet", dictionary: ["ownerid":ownerId], withHud: true) { [self] (success, response, error) in
+    func getOwnerInboxDetails() {
+        ServiceManager.sharedInstance.postMethodAlamofire("api/owner_chalet", dictionary: ["ownerid":CAUser.currentUser.id!], withHud: true) { [self] (success, response, error) in
            // self.checkBlockStatus()
             if success {
                 if response!["status"] as! Bool == true {
@@ -281,7 +306,8 @@ extension PackageListViewController{
                     self.selectedIndx = 0
                     DispatchQueue.main.async {
                         if CAUser.currentUser.userstatus == "owner" {
-                            self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id!)")
+                            self.getOwnerInboxDetails()
+                            //self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id ?? 0)")
                         }
                         self.popUpTableView.reloadData()
                     }

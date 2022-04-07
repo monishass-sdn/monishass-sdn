@@ -287,6 +287,8 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
                 lblsubChaletCount.text = dict.subchalet_count!
                 viewForSUbChaletCount.roundCorners(corners: .bottomRight, radius: 10)
                 viewForSUbChaletCount.clipsToBounds = true
+            }else{
+                viewForSUbChaletCount.isHidden = true
             }
             print("No Offer Available for this chalet")
             self.progressViewForTimer.isHidden = true
@@ -300,6 +302,8 @@ class CollectionViewChaletListCVCell: UICollectionViewCell {
                 lblsubChaletCount.text = dict.subchalet_count!
                 viewForSUbChaletCount.roundCorners(corners: .bottomRight, radius: 10)
                 viewForSUbChaletCount.clipsToBounds = true
+            }else{
+                viewForSUbChaletCount.isHidden = true
             }
             print("Offer Available for this chalet")
             bottomConstrainForViewBG.constant = 40
@@ -414,7 +418,11 @@ class CollectionViewChaletListFromGroupSubChaletCVCell: UICollectionViewCell {
             lblCheckIn.font = UIFont(name: "Roboto-Medium", size: 16)
             lblCheckOut.font = UIFont(name: "Roboto-Medium", size: 16)
         }
-        
+        if dict.offer_available == true{
+                lblOfferDiscount.text = "-\(dict.Offer_discount_amt!)"
+        }else{
+            //
+        }
         lblSlNo.text = "\("No.".localized())\(dict.chalet_id ?? 0)"
         lblChaletName.text = dict.chalet_name
         lblRent.text = dict.rent

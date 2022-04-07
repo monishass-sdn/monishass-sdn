@@ -29,6 +29,11 @@ class ReservationApprovalVC: UIViewController {
     @IBOutlet weak var status_Label : UILabel!
     @IBOutlet weak var btnPayment : UIButton!
     @IBOutlet weak var height_RemainingAmntPayDateView : NSLayoutConstraint!
+    @IBOutlet weak var height_Scrollview : NSLayoutConstraint!
+
+    @IBOutlet weak var lblYouHave30minMsg : UILabel!
+    @IBOutlet weak var viewRemainingAmt : UIView!
+    @IBOutlet weak var viewBookingDetail : UIView!
     
     var arrayUserDetails : User_details!
     var reservedChaletData : [Reserved_Chalet_details]?
@@ -53,6 +58,7 @@ class ReservationApprovalVC: UIViewController {
     var phone = ""
     var civilid = ""
     var firstName = ""
+    var remainingamt = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         if isTimerRunning == false {
@@ -61,6 +67,7 @@ class ReservationApprovalVC: UIViewController {
         setUpNavigationBar()
         setValuestotheFields()
         print("Reservation Id = \(reservation_id)")
+        print("Remaining AMount = \(remainingamt)")
         
         // Do any additional setup after loading the view.
     }
@@ -96,11 +103,34 @@ class ReservationApprovalVC: UIViewController {
             chalet_image.image = kPlaceHolderImage
         }
         
-        if String((reservedChaletData?.first?.remaining)!) == ""{
+     //   if String((reservedChaletData?.first?.remaining)!) == ""{
+        if self.remainingamt == "0"{
+            self.viewRemainingAmt.isHidden = true
             self.height_RemainingAmntPayDateView.constant = 0.0
+            self.height_Scrollview.constant = 920
+        //    self.viewBookingDetail.cornerRadius = 10
+
         }else{
+            self.viewRemainingAmt.isHidden = false
             self.height_RemainingAmntPayDateView.constant = 240.0
+          //  self.viewRemainingAmt.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
+          //  self.viewBookingDetail.roundCorners(corners: [.topLeft,.topRight], radius: 10)
+            self.height_Scrollview.constant = 1160
+
         }
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 0.8352941176, blue: 0, alpha: 1)] as [NSAttributedString.Key : Any]
+        
+        let attributedString1 = NSMutableAttributedString(string:"If your Reservation is Approved You have ", attributes:attrs1)
+        let attributedString2 = NSMutableAttributedString(string: "30", attributes:attrs2)
+        let attributedString3 = NSMutableAttributedString(string: " Minutes to Pay", attributes:attrs1)
+
+        attributedString1.append(attributedString2)
+        attributedString1.append(attributedString3)
+        self.lblYouHave30minMsg.attributedText = attributedString1
+
+
     }
     
     @objc func timerClass(){

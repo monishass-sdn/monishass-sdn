@@ -131,7 +131,7 @@ extension addNewOfferVC {
                     self.lblthereisnoOffer.isHidden = true
                     if self.arryAvailableOfferList.count <= 0{
                         self.addOfferTableView.isHidden = true
-                        self.BtnaddNewOffer.isHidden = false
+                        self.BtnaddNewOffer.isHidden = true
                         self.lblthereisnoOffer.isHidden = false
                         self.lblthereisnoOffer.text = "There are no offer's available."
                     }

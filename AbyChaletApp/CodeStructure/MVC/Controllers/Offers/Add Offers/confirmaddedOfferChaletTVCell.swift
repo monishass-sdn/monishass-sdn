@@ -34,7 +34,7 @@ class confirmaddedOfferChaletTVCell: UITableViewCell {
             self.lbl_pricetype.text = "Default Price"
             self.viewPriceType.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
         }else{
-            self.lbl_pricetype.text = "Seasonal Price"
+            self.lbl_pricetype.text = "Season Price"
             self.viewPriceType.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6078431373, blue: 0.9490196078, alpha: 1)
         }
         self.lbl_chaletname.text = dict.chalet_name

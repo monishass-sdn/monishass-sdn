@@ -24,7 +24,8 @@ class MonthViewNew: UIView {
         super.init(frame: frame)
         self.backgroundColor=UIColor.clear
         
-        self.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
+
         
         currentMonthIndex = Calendar.current.component(.month, from: Date()) - 1
         currentYear = Calendar.current.component(.year, from: Date())
@@ -78,7 +79,7 @@ class MonthViewNew: UIView {
         lbl.text="Default Month Year text"
         lbl.textColor = StyleNew.activeCellLblColor
         lbl.textAlignment = .center
-        lbl.font = UIFont(name: "Roboto-Bold", size: 15.0)
+        lbl.font = UIFont(name: "Arial Bold", size: 25.0)
         lbl.translatesAutoresizingMaskIntoConstraints=false
         return lbl
     }()

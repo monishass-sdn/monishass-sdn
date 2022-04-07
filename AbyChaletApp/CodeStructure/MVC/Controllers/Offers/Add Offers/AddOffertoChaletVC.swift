@@ -100,7 +100,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
             if ArrayselectedItem.isEmpty{
                 print("button not accessable")
                 self.nextBtn.isUserInteractionEnabled = false
-                self.submitBtnBGView.backgroundColor = UIColor("#C2C2C2")
+                self.submitBtnBGView.backgroundColor = UIColor("#A8A8A8")
             }else{
                 print("Button accessable")
                 self.nextBtn.isUserInteractionEnabled = true
@@ -119,7 +119,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
             if ArrayselectedItem.isEmpty{
                 print("button not accessable")
                 self.nextBtn.isUserInteractionEnabled = false
-                self.submitBtnBGView.backgroundColor = UIColor("#C2C2C2")
+                self.submitBtnBGView.backgroundColor = UIColor("#A8A8A8")
             }else{
                 print("Button accessable")
                 self.nextBtn.isUserInteractionEnabled = true
@@ -148,7 +148,7 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
         let cell = AddOfferToChaletTV.cellForRow(at: indexpath) as! ChaletListToAddOfferTVCell
         let item = arryAvailableOfferChaletList[textField.tag]
         var discountValue : Int? = 0
-        discountValue = Int(cell.tfDiscountAdded.text!)!
+        discountValue = Int(cell.tfDiscountAdded.text ?? "\(Int(0))")
         item.discount = discountValue
         item.userid = Int(userid)
         item.offerid = Int(offerid)

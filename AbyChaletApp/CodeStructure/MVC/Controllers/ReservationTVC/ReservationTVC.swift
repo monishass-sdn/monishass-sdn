@@ -178,7 +178,7 @@ class ReservationTVC: UITableViewController {
         //check
         lblBookingDetails.text = "Booking Details".localized()
         lblRentalPriceTitel.text = "Rental price".localized()
-        lblTotalRewardTitle.text = "Total Rewards (Discount)".localized()
+        lblTotalRewardTitle.text = "Rewards (Discount)".localized()
         lblCheckIn.text = "Check-in".localized()
         lblCheckOut.text = "Check-Out".localized()
         lblDeposit1.text = "Deposit".localized()
@@ -189,7 +189,7 @@ class ReservationTVC: UITableViewController {
         lbllRemaining.text = "Remaining".localized()
         lblChaletDetails.text = "Chalet details".localized()
         lblAgreement1.text = "Agreement".localized()
-        lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
+      //  lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
         if isFromOffer == false{
             if arrayUserData.auto_accept == true{
                 btnPayment.setTitle("Payment now".localized(), for: .normal)
@@ -234,7 +234,7 @@ class ReservationTVC: UITableViewController {
             lblAfterthisDateString.font = UIFont(name: "Roboto-Medium", size: 17)
             lblChaletDetails.font = UIFont(name: "Roboto-Medium", size: 17)
             lblAgreement1.font = UIFont(name: "Roboto-Medium", size: 17)
-            lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
+          //  lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
             btnPayment.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 20)
             lbllRemaining.font = UIFont(name: "Roboto-Regular", size: 15)
         }
@@ -290,10 +290,17 @@ class ReservationTVC: UITableViewController {
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(backButtonTouched))
         //self.navigationItem.rightBarButtonItems = [notificationButton]
-        self.navigationItem.title = "Reservation".localized()
+      //  self.navigationItem.title = "Reservation".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.heightConstrain.constant = 0
         self.viewDeposit.isHidden = true
+        
+        let navLabel = UILabel()
+        let navTitle = NSMutableAttributedString(string: "Reservation", attributes:[
+                                                    NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                    NSAttributedString.Key.font: UIFont(name: "Arial Bold", size: 20)! ])
+        navLabel.attributedText = navTitle
+        self.navigationItem.titleView = navLabel
     }
     
     //MARK:- SetupUI
@@ -325,10 +332,14 @@ class ReservationTVC: UITableViewController {
         for btn in btnCollection{
             btn.addCornerForView(cornerRadius: 17.5)
         }
+
         if kCurrentLanguageCode == "ar"{
             let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: kFontAlmaraiRegular, size: 14)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
             let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: kFontAlmaraiRegular, size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
             let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: kFontAlmaraiRegular, size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Italic", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 21)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            
             
             let attributedStringWhatKindOfJob1 = NSMutableAttributedString(string:"I have read and ".localized(), attributes:attrsWhatKindOfJob1)
             let attributedStringWhatKindOfJob2 = NSMutableAttributedString(string:"Agree ".localized(), attributes:attrsWhatKindOfJob2)
@@ -341,13 +352,22 @@ class ReservationTVC: UITableViewController {
             attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob5)
             self.lblAgreement.attributedText = attributedStringWhatKindOfJob1
             
-            self.lblDeposit72No.font = UIFont(name: kFontAlmaraiBold, size: 15)
-            self.lblDeposit72No.text = "No Deposit 72 hours before Check-in".localized()
+           // self.lblDeposit72No.font = UIFont(name: kFontAlmaraiBold, size: 15)
+            let attributedStringMsg1 = NSMutableAttributedString(string:"No Deposit ", attributes:attrsWhatKindOfJob4)
+            let attributedStringMsg2 = NSMutableAttributedString(string:"72", attributes:attrsWhatKindOfJob5)
+            let attributedStringMsg3 = NSMutableAttributedString(string:" hours before Check-in", attributes:attrsWhatKindOfJob4)
+            
+            attributedStringMsg1.append(attributedStringMsg2)
+            attributedStringMsg1.append(attributedStringMsg3)
+            self.lblDeposit72No.attributedText = attributedStringMsg1
+           // self.lblDeposit72No.text = "No Deposit 72 hours before Check-in".localized()
         }else{
         let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 14)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Medium", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Medium", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
-        
+            let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Italic", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 21)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            
         let attributedStringWhatKindOfJob1 = NSMutableAttributedString(string:"I have read and ".localized(), attributes:attrsWhatKindOfJob1)
         let attributedStringWhatKindOfJob2 = NSMutableAttributedString(string:"Agree ".localized(), attributes:attrsWhatKindOfJob2)
         let attributedStringWhatKindOfJob3 = NSMutableAttributedString(string:"to the ".localized(), attributes:attrsWhatKindOfJob1)
@@ -359,8 +379,15 @@ class ReservationTVC: UITableViewController {
         attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob5)
         self.lblAgreement.attributedText = attributedStringWhatKindOfJob1
             
-            self.lblDeposit72No.font = UIFont(name: "Roboto-BoldItalic", size: 15)
-            self.lblDeposit72No.text = "No Deposit 72 hours before Check-in".localized()
+         //   self.lblDeposit72No.font = UIFont(name: "Roboto-BoldItalic", size: 15)
+           // self.lblDeposit72No.text = "No Deposit 72 hours before Check-in".localized()
+            let attributedStringMsg1 = NSMutableAttributedString(string:"No Deposit ", attributes:attrsWhatKindOfJob4)
+            let attributedStringMsg2 = NSMutableAttributedString(string:"72", attributes:attrsWhatKindOfJob5)
+            let attributedStringMsg3 = NSMutableAttributedString(string:" hours before Check-in", attributes:attrsWhatKindOfJob4)
+            
+            attributedStringMsg1.append(attributedStringMsg2)
+            attributedStringMsg1.append(attributedStringMsg3)
+            self.lblDeposit72No.attributedText = attributedStringMsg1
         }
         self.lblAgreement.isUserInteractionEnabled = true
         self.lblAgreement.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
@@ -512,7 +539,7 @@ class ReservationTVC: UITableViewController {
         
         let totalaMt : Int = dictOfferUserDetails.original_price! - dictOfferUserDetails.discount_amt!
         let kd = NSMutableAttributedString(string:"KD ", attributes:attrsKd)
-        let rent = NSMutableAttributedString(string:"\(dictOfferUserDetails.rent!)", attributes:attrsAmt)
+        let rent = NSMutableAttributedString(string:"\(dictOfferUserDetails.original_price!)", attributes:attrsAmt)
         kd.append(rent)
         self.lblRent.attributedText = kd
         
@@ -572,7 +599,7 @@ class ReservationTVC: UITableViewController {
             self.lblTotalInvoice.text = "KD \(dictOfferUserDetails.rent!)"
         }
         
-        let totarent = Double(dictOfferUserDetails.rent!)
+        let totarent = Double(dictOfferUserDetails.original_price!)
         let rewardsshown = Double(dictOfferUserDetails.rewarded_amt!)
         if totarent == rewardsshown {
             self.viewDepositBg.isHidden = true
@@ -858,7 +885,7 @@ class ReservationTVC: UITableViewController {
             self.isSelectTermsAgreement = false
             self.isPaymentEnable = false
             self.btnPayment.isUserInteractionEnabled = false
-            self.btnPayment.backgroundColor = UIColor("#C2C2C2")
+            self.btnPayment.backgroundColor = UIColor("#A8A8A8")
         }
         
     /*    if self.isSelectTermsAgreement == true && self.arrayAgreeMentIdxs.count == self.arrayAgreements.count{
@@ -1119,7 +1146,7 @@ class ReservationTVC: UITableViewController {
             
         }else if indexPath.row == 6 {
             let arrayHeight = arrayAgreements.count * 35
-            return CGFloat(138 + arrayHeight)
+            return CGFloat(100 + arrayHeight)
             
         }else if indexPath.row == 7{
             if isFromOffer == true{
@@ -1330,10 +1357,11 @@ extension ReservationTVC {
                 print(self.rewards)
                 if success {
                     if ((response as! NSDictionary)["status"] as! Bool) == true {
+                        print(response)
                         let responseBase = BookingDetailBase(dictionary: response as! NSDictionary)
                         self.dictBookingDetails = responseBase?.booking_details
-                        print(responseBase?.booking_details)
                         DispatchQueue.main.async {
+                            print("deposit clicked = \(self.isClickDeposit)")
                             if serverUrl == "api/booking"{
                                 if self.isFromOffer{
                                     let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
@@ -1357,8 +1385,24 @@ extension ReservationTVC {
                                 self.navigationController?.pushViewController(bookingDetailsTVC, animated: true)
  */
                             }else{
-                                let paymentFailedTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PaymentFailedTVC") as! PaymentFailedTVC
-                                self.navigationController?.pushViewController(paymentFailedTVC, animated: true)
+                                print("Deposit clicked = \(self.isClickDeposit)")
+                              //  print("Admin check in= \(self)")
+                                let userInfo : [String:Any] = ["bookingData":self.dictBookingDetails!,"datentime" : self.lblRemainingDateAndTime.text!, "isDeposit" : self.isClickDeposit,"isFrom":"Booking failed", "remainingAmtDate":self.lblRemainingDateAndTime.text!]
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.KGoToFailurePage), object: nil, userInfo: userInfo)
+                                
+                                let bookingDetailsTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "BookingDetailsTVC") as! BookingDetailsTVC
+                                       bookingDetailsTVC.dictBookingDetails = self.dictBookingDetails
+                                       bookingDetailsTVC.remainingAmtDate = self.lblRemainingDateAndTime.text!
+                                       bookingDetailsTVC.isDeposit = self.isClickDeposit
+                                     //  bookingDetailsTVC.isFrom = "Booked Successfully"
+                                       bookingDetailsTVC.is_paymentFailed = true
+                                  //  let bookingNavigation = UINavigationController(rootViewController: bookingDetailsTVC)
+                                  //  bookingNavigation.setNavigationBarHidden(true, animated: false)
+                              //  self.present(bookingDetailsTVC, animated: true, completion: nil)
+                              //  self.navigationController?.present(bookingNavigation, animated: true, completion: nil)
+                                       self.navigationController?.pushViewController(bookingDetailsTVC, animated: true)
+                              /*  let paymentFailedTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "PaymentFailedTVC") as! PaymentFailedTVC
+                                self.navigationController?.pushViewController(paymentFailedTVC, animated: true)*/
                             }
                         }
                     }else{
@@ -1648,9 +1692,9 @@ extension ReservationTVC {
                     if  failError.errorDescription == "A server with the specified hostname could not be found." || failError.errorDescription == "Transaction not Captured!" {
                         if self!.isFromOffer == false {
                             let dict = self?.arrayUserDetails[(self?.selectedIndex)!]
-                            DispatchQueue.main.async {
+                           // DispatchQueue.main.async {
                                 self!.chaletBooking(chaletId: "\((dict?.chalet_id!)!)", selectedPackage: self!.selectedPackage, checkIn: (dict?.check_in!)!, checkOut: (dict?.check_out!)!, deposit: self!.isClickDeposit == false ? "0" : (dict?.min_deposit!)!, rent: (dict?.rent!)!, totalPaid: self!.isClickDeposit == false ? (dict?.rent!)! : (dict?.min_deposit!)!, offerDiscount: "0",paymentGateway: "",paymentId: "",authId: "",trackId: "",transcationId: "",invoiceReference: "",referenceId: "", serverUrl: "api/paid_booking", rewarDiscount: self!.isClickRewards == false ? "0" : String((dict?.rewarded_amt)!))
-                            }
+                           // }
                         }else{
                             let dict = self!.dictOfferUserDetails
                             let dis = "\(dict!.min_deposit!)"

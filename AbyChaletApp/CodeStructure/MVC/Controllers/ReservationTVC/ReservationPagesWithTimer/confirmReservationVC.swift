@@ -75,15 +75,37 @@ class confirmReservationVC: UIViewController {
     
     func setValuestotheFields(){
         if isFromOffer == false{
+            
+            self.lbl_TotalInvoice.font = UIFont(name: "Roboto-Bold", size: 22)
+            self.lbl_RemainingAmt.font = UIFont(name: "Roboto-Bold", size: 22)
+            
+            let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
+            let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
+            
+            let attributedStringDiscount = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedDiscountKD = NSMutableAttributedString(string: deposit, attributes:attrs2)
+            attributedStringDiscount.append(attributedDiscountKD)
+            self.lbl_Deposit.attributedText = attributedStringDiscount
+            
+            let attributedStringKD2 = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedRewardDiscount = NSMutableAttributedString(string: "-\(arrayUserDetails.rewarded_amt!)", attributes:attrs2)
+            attributedStringKD2.append(attributedRewardDiscount)
+            self.lbl_rewardDiscount.attributedText = attributedStringKD2
+            
+            let attributedStringKD3 = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedOfferDiscount = NSMutableAttributedString(string: "-\(offerDiscount)", attributes:attrs2)
+            attributedStringKD3.append(attributedOfferDiscount)
+            self.lbl_offerDiscount.attributedText = attributedStringKD3
+            
+            
+            
+            
             self.lbl_rent.text = arrayUserDetails.rent
             self.lbl_checkin.text = arrayUserDetails.check_in
             self.lbl_checkout.text = arrayUserDetails.check_out
-            self.lbl_Deposit.text = "KD \(deposit)"
-            self.lbl_rewardDiscount.text = "KD \(arrayUserDetails.rewarded_amt!)"
             self.lbl_chaletName.text = arrayUserDetails.chalet_name
-            self.lbl_chaletid.text = String(arrayUserDetails.chalet_id!)
+            self.lbl_chaletid.text = "No.\(arrayUserDetails.chalet_id!)"
             self.lbl_TotalInvoice.text = "KD \(arrayUserDetails.rent!)"
-            self.lbl_offerDiscount.text = "KD \(offerDiscount)"
             self.lbl_RemainingAmt.text = "KD \(remainingAmount)"
             if arrayUserDetails.cover_photo != ""{
                 chalet_image.sd_setImage(with: URL(string: arrayUserDetails.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
@@ -99,15 +121,37 @@ class confirmReservationVC: UIViewController {
             let offerDis = arrayUserDetails.Offer_discount_amt == nil ? "0" : "0"
             offer_Dis = offerDis
         }else{
+            
+            self.lbl_TotalInvoice.font = UIFont(name: "Roboto-Bold", size: 22)
+            self.lbl_RemainingAmt.font = UIFont(name: "Roboto-Bold", size: 22)
+            
+            let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
+            let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)] as [NSAttributedString.Key : Any]
+            
+            let attributedStringDiscount = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedDiscountKD = NSMutableAttributedString(string: deposit, attributes:attrs2)
+            attributedStringDiscount.append(attributedDiscountKD)
+            self.lbl_Deposit.attributedText = attributedStringDiscount
+            
+            let attributedStringKD2 = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedRewardDiscount = NSMutableAttributedString(string: "-\(dictOfferUserDetails.rewarded_amt!)", attributes:attrs2)
+            attributedStringKD2.append(attributedRewardDiscount)
+            self.lbl_rewardDiscount.attributedText = attributedStringKD2
+            
+            let attributedStringKD3 = NSMutableAttributedString(string:"KD ", attributes:attrs1)
+            let attributedOfferDiscount = NSMutableAttributedString(string: "-\(offerDiscount)", attributes:attrs2)
+            attributedStringKD3.append(attributedOfferDiscount)
+            self.lbl_offerDiscount.attributedText = attributedStringKD3
+            
             self.lbl_rent.text = String(dictOfferUserDetails.rent!)
             self.lbl_checkin.text = dictOfferUserDetails.check_in
             self.lbl_checkout.text = dictOfferUserDetails.check_out
-            self.lbl_Deposit.text = "KD \(deposit)"
-            self.lbl_rewardDiscount.text = "KD \(dictOfferUserDetails.rewarded_amt!)"
+           // self.lbl_Deposit.text = "KD \(deposit)"
+           // self.lbl_rewardDiscount.text = "KD \(dictOfferUserDetails.rewarded_amt!)"
             self.lbl_chaletName.text = dictOfferUserDetails.chalet_name
-            self.lbl_chaletid.text = String(dictOfferUserDetails.chalet_id!)
+            self.lbl_chaletid.text = "No.\(dictOfferUserDetails.chalet_id!)"
             self.lbl_TotalInvoice.text = "KD \(dictOfferUserDetails.rent!)"
-            self.lbl_offerDiscount.text = "KD \(offerDiscount)"
+           // self.lbl_offerDiscount.text = "KD \(offerDiscount)"
             self.lbl_RemainingAmt.text = "KD \(remainingAmount)"
             if dictOfferUserDetails.cover_photo != ""{
                 chalet_image.sd_setImage(with: URL(string: dictOfferUserDetails.cover_photo!), placeholderImage: kPlaceHolderImage, options: .highPriority, context: nil)
@@ -185,6 +229,7 @@ extension confirmReservationVC{
                     nextVC.phone = self.phone
                     nextVC.civilid = self.civilid
                     nextVC.firstName = self.firstName
+                    nextVC.remainingamt = self.remainingAmount
                     self.navigationController?.pushViewController(nextVC, animated: true)
    
                     DispatchQueue.main.async {

@@ -14,6 +14,8 @@ class WeekdaysViewNew: UIView {
         super.init(frame: frame)
         //self.backgroundColor=UIColor.clear
         self.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
+       // self.borderWidth = 0.5
+       // self.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setupViews()
     }
     
@@ -30,7 +32,7 @@ class WeekdaysViewNew: UIView {
             lbl.text=daysArr[i]
             lbl.textAlignment = .center
             lbl.textColor = .white
-            lbl.font = UIFont(name: "Roboto-Bold", size: 16.0)
+            lbl.font = UIFont(name: "Arial", size: 19.0)
             myStackView.addArrangedSubview(lbl)
         }
     }

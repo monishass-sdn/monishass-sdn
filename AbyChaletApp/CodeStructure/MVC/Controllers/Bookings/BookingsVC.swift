@@ -48,6 +48,7 @@ class BookingsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         if CAUser.currentUser.id != nil{
             self.getMyBookigData()
         }else{
@@ -453,6 +454,7 @@ extension BookingsVC {
             DispatchQueue.main.async {
                 self.checkBlockStatus()
             }
+            print(response)
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = MyBookingBase(dictionary: response as! NSDictionary)

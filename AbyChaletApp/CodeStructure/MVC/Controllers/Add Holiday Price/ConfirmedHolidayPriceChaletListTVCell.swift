@@ -16,6 +16,7 @@ class ConfirmedHolidayPriceChaletListTVCell: UITableViewCell {
     @IBOutlet weak var lblWeekAB_Price: UILabel!
     @IBOutlet weak var holiday_Price: UILabel!
     @IBOutlet weak var lblChalet_image: UIImageView!
+    @IBOutlet weak var view_PriceType : UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +33,11 @@ class ConfirmedHolidayPriceChaletListTVCell: UITableViewCell {
         self.lblChalet_name.text = dict.chalet_name!
         if dict.price_type == "default_price"{
             self.lblPrice_type.text = "Default Price"
+            self.view_PriceType.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3843137255, blue: 0.4666666667, alpha: 1)
         }else{
-            self.lblPrice_type.text = "Seasonal Price"
+            self.lblPrice_type.text = "Season Price"
+            self.view_PriceType.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6078431373, blue: 0.9490196078, alpha: 1)
+
         }
         self.lblWeekday_Price.text = dict.weekdays_rent!
         self.lblWeekend_Price.text = dict.weekend_rent!

@@ -32,7 +32,7 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpNavigationBar()
-        topSliderMenuArray = ["Holidays prices","Season prices","Stats"]
+        topSliderMenuArray = ["Holidays prices","Season Prices","Stats"]
         selectedIndex = 1
         getSeasonDateAndChalets()
         self.submitBtn.isUserInteractionEnabled = false
@@ -54,9 +54,9 @@ class AddSeasonPriceMainVC: UIViewController, UITextFieldDelegate {
 
     }
     @objc func backButtonTouched()  {
-       // self.navigationController?.popViewController(animated: true)
-        let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
-        navigationController?.pushViewController(nextVC, animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+     /*   let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
+        navigationController?.pushViewController(nextVC, animated: true)*/
     }
     
     @objc func didMoveToNotification(){
@@ -121,8 +121,8 @@ extension AddSeasonPriceMainVC : UICollectionViewDelegate,UICollectionViewDataSo
            print("Selected holidays prices")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddHolidayPriceMainVC") as! AddHolidayPriceMainVC
             navigationController?.pushViewController(nextVC, animated: true)
-        }else if topSelection == "Season prices"{
-            print("Selected Season prices")
+        }else if topSelection == "Season Prices"{
+            print("Selected Season Prices")
         }else{
             print("Selected Stats")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
@@ -184,7 +184,7 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             if toggledIndexes[indexPath.row] == true{
                 return 400.0
             }else{
-                return 184.0
+                return 182.0
             }
         }
     }
@@ -201,7 +201,7 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             cell.bottomViewHeightConstrain.constant = 220
             if ArrayselectedItem.isEmpty{
                 self.submitBtn.isUserInteractionEnabled = false
-                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+                self.submitBtn.backgroundColor = UIColor("#A8A8A8")
             }else{
                 self.submitBtn.isUserInteractionEnabled = true
                 self.submitBtn.backgroundColor = UIColor("#6FDA44")
@@ -217,7 +217,7 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             cell.bottomViewHeightConstrain.constant = 0
             if ArrayselectedItem.isEmpty{
                 self.submitBtn.isUserInteractionEnabled = false
-                self.submitBtn.backgroundColor = UIColor("#C2C2C2")
+                self.submitBtn.backgroundColor = UIColor("#A8A8A8")
             }else{
                 self.submitBtn.isUserInteractionEnabled = true
                 self.submitBtn.backgroundColor = UIColor("#6FDA44")

@@ -23,6 +23,7 @@ class HolidayEventListTVCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     func setValuesToFields(dict : Holi_event_list){
         self.lblcheck_in.text = dict.check_in
         self.lblcheck_out.text = dict.check_out
