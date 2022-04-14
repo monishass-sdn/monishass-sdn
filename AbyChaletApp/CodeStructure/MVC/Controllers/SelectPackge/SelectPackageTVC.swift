@@ -464,12 +464,19 @@ extension SelectPackageTVC : UICollectionViewDelegate, UICollectionViewDataSourc
             self.arrayUserDetails = self.arrayChalletList[self.holidaySelectedIndex].user_details!
             self.selectedIndexHolidays = indexPath.row
             DispatchQueue.main.async {
-                //self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SearchResultsVC") as! SearchResultsVC
+                nextVC.arrayChaletDetails = self.arrayChalletList[self.holidaySelectedIndex].user_details!
+                nextVC.fromdate = self.fromdate
+                nextVC.todate = self.todate
+                nextVC.selectedPackageName = self.topSelection
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+                /*
                 self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
                 self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
                 self.collectionChalletList.reloadData()
-                //self.colletionViewHolidays.reloadData()
                 self.tableView.scrollToRow(at: IndexPath(row: 6, section: 0), at: .top, animated: true)
+                */
             }
             
         }else {
@@ -802,18 +809,35 @@ extension SelectPackageTVC {
               
                         print("Chalet Count = \(self.arrayUserDetails.count)")
                         if self.arrayUserDetails.count > 0{
-                            if self.arrayUserDetails.count > 2{
+                            
+                            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SearchResultsVC") as! SearchResultsVC
+                            nextVC.arrayChaletDetails = self.arrayUserDetails
+                            nextVC.fromdate = self.fromdate
+                            nextVC.todate = self.todate
+                            nextVC.selectedPackageName = selectedPackage
+                            self.navigationController?.pushViewController(nextVC, animated: true)
+                            
+                         /*   if self.arrayUserDetails.count > 2{
                                 self.isGotResult = true
-                            }
+                            }*/
                           //  self.isGotResult = true
-                            self.tableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .top, animated: true)
+                            
+                            //self.tableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .top, animated: true)
+                            
+                            
+                            
                           //  self.navigationController?.setNavigationBarHidden(true, animated: true)
                             //self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
                             self.isNoChaletFound = false
                         }else{
                             self.isGotResult = false
                             DispatchQueue.main.async {
-                                self.getChaletsWhenNoResults()
+                                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "SearchChaletsWithNoResultsVC") as! SearchChaletsWithNoResultsVC
+                                nextVC.fromdate = self.fromdate
+                                nextVC.todate = self.todate
+                                nextVC.selectedPackageName = selectedPackage
+                                self.navigationController?.pushViewController(nextVC, animated: true)
+                               // self.getChaletsWhenNoResults()
                                 self.isNoChaletFound = true
                               //  self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
                               //  self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)

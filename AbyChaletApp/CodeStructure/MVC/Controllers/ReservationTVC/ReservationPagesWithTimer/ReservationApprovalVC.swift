@@ -68,7 +68,13 @@ class ReservationApprovalVC: UIViewController {
         setValuestotheFields()
         print("Reservation Id = \(reservation_id)")
         print("Remaining AMount = \(remainingamt)")
-        
+    /*
+        let dict:NSDictionary = NSKeyedUnarchiver.unarchiveObject(with: (UserDefaults.standard.object(forKey: "kCurrentReservationDetails") as! NSData) as Data) as! NSDictionary
+        CAReservationRequestModel.reservedDetails.initWithDictionary(userDictionary: dict)
+        CAReservationRequestModel.saveReservationDetails(dictDetails: dict)
+        UserDefaults.standard.setValue(0, forKey: "ReservationApprovalView")
+        print("saved value test = \(CAReservationRequestModel.reservedDetails.chaletName)")
+*/
         // Do any additional setup after loading the view.
     }
     

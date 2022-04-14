@@ -119,6 +119,8 @@ public class Offer_Chalet_list {
     public var created_at : String?
     public var updated_at : String?
     public var auto_accept : Bool?
+    public var chalet_reservation_status : Bool?
+    public var request_time : Int?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Offer_Chalet_list]
     {
@@ -172,6 +174,8 @@ public class Offer_Chalet_list {
         created_at = dictionary["created_at"] as? String
         updated_at = dictionary["updated_at"] as? String
         auto_accept = dictionary["auto_accept"] as? Bool
+        chalet_reservation_status = dictionary["chalet_reservation_status"] as? Bool
+        request_time = dictionary["request_time"] as? Int
         if (dictionary["chalet_details"] != nil) { chalet_details = Chalet_details.modelsFromDictionaryArray(array: dictionary["chalet_details"] as! NSArray) }
         if (dictionary["chalet_upload"] != nil) { chalet_upload = Chalet_upload.modelsFromDictionaryArray(array: dictionary["chalet_upload"] as! NSArray) }
     }
@@ -222,6 +226,8 @@ public class Offer_Chalet_list {
         dictionary.setValue(self.created_at, forKey: "created_at")
         dictionary.setValue(self.updated_at, forKey: "updated_at")
         dictionary.setValue(self.auto_accept, forKey: "auto_accept")
+        dictionary.setValue(self.request_time, forKey: "request_time")
+        dictionary.setValue(self.chalet_reservation_status, forKey: "chalet_reservation_status")
 
         return dictionary
     }

@@ -211,7 +211,7 @@ extension confirmReservationVC{
         var reservID = ""
         SVProgressHUD.show()
         self.view.isUserInteractionEnabled = false
-        ServiceManager.sharedInstance.postMethodAlamofire("api/reservation-request", dictionary: ["userid":userid,"chaletid":chalet_id, "selected_package":selectedpackage,"check_in":check_in,"check_out":check_out,"deposit":deposit,"rent":rent,"total_paid":totalPaid,"reward_discount":reward_Discount,"offer_discount":offer_Dis], withHud: true) { (success, response, error) in
+        ServiceManager.sharedInstance.postMethodAlamofire("api/reservation-request", dictionary: ["userid":userid,"chaletid":chalet_id,  "selected_package":selectedpackage,"check_in":check_in,"check_out":check_out,"deposit":deposit,"rent":rent,"total_paid":totalPaid,"reward_discount":reward_Discount,"offer_discount":offer_Dis], withHud: true) { (success, response, error) in
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = ReservationRequestResponseModel(dictionary: response as! NSDictionary)

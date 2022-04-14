@@ -11,7 +11,8 @@ import SVProgressHUD
 class SubChaletsVC: UIViewController {
     
     @IBOutlet weak var subChaletCV : UICollectionView!
-    
+    @IBOutlet weak var Btn_SwipeUp : UIButton!
+
     var mainChaletName = ""
     var mainChaletID = ""
     var fromDate = ""
@@ -27,6 +28,8 @@ class SubChaletsVC: UIViewController {
 
         setUpNavigationBar()
         getSubchalets()
+        Btn_SwipeUp.isHidden = true
+
         // Do any additional setup after loading the view.
     }
     
@@ -51,6 +54,12 @@ class SubChaletsVC: UIViewController {
         
         let changePasswordTVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NotificationVC") as! NotificationVC
         navigationController?.pushViewController(changePasswordTVC, animated: true)
+    }
+    
+    @IBAction func Action_SwipeUp(_ sender: UIButton){
+        // go to top
+        self.subChaletCV?.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath,at: .top,animated: true)
+        self.Btn_SwipeUp.isHidden = true
     }
     
 
@@ -101,6 +110,7 @@ extension SubChaletsVC : UICollectionViewDelegate,UICollectionViewDataSource,UIC
          reservationVC.arrayUserData = self.arraySubChalets[indexPath.row]
             reservationVC.isFromSubChalets = true
             reservationVC.groupChaletName = self.mainChaletName
+            reservationVC.requestTimeleft = self.arraySubChalets[indexPath.row].request_time ?? 0
          self.navigationController?.pushViewController(reservationVC, animated: true)
          }else{
              let reservationAvailable = self.arraySubChalets[indexPath.row].reservation_available
@@ -110,7 +120,25 @@ extension SubChaletsVC : UICollectionViewDelegate,UICollectionViewDataSource,UIC
              self.present(alert, animated: true, completion: nil)
          }
     }
-   
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        for cell in subChaletCV.visibleCells {
+            let indexPath = subChaletCV.indexPath(for: cell)
+            //print("visible cell indexpath = \(indexPath)")
+            if indexPath == [0,0]{
+            }else if indexPath == [0,1]{
+                self.Btn_SwipeUp.isHidden = true
+            }else if indexPath == [0,2]{
+                self.Btn_SwipeUp.isHidden = true
+            }else if indexPath == [0,3]{
+                self.Btn_SwipeUp.isHidden = true
+            }else if indexPath == [0,4]{
+                self.Btn_SwipeUp.isHidden = true
+            }else{
+                self.Btn_SwipeUp.isHidden = false // Show Swipe-Up Button
+            }
+        }
+    }
     
 }
 

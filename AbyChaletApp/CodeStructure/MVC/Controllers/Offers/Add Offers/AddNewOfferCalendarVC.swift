@@ -29,20 +29,23 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegate2 {
     var selectedDate: String = ""
     var fromdate = ""
     var todate = ""
+    var isCreateOfferDateisValid : Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
-        selectedIndex = 0
+       // selectedIndex = 0
         topSliderMenuArray = ["Week (B)","Week (A)","Weekend","Weekdays"]
         topSliderMenuValArray =  ["Thursday - Wednesday", "Sunday to Saturday", "Thursday - Friday - Saturday","Sunday - Monday - Tuesday - Wednesday"]
         setupUI()
         self.setupCalenderView()
         self.topSelection = arrayValuesToBackEnd[selectedIndex ?? 0]
+       // self.topSelection = "weekB"
         print("TOP SELECTION = \(topSelection)")
         print("Month = \(calenderView.currentMonthIndex)")
         print("Year = \(calenderView.currentYear)")
-        self.getCalendarList(month: "\(calenderView.currentMonthIndex)", year: "\(calenderView.currentYear)", package: topSelection)
+        self.getCalendarList(month: "\(calenderView.currentMonthIndex)", year: "\(calenderView.currentYear)", package: self.topSelection)
+        self.starter()
 
         // Do any additional setup after loading the view.
     }
@@ -108,18 +111,42 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegate2 {
     
     @IBAction func createOffer(_ sender: UIButton!){
         if self.isSearchEnable == true {
-            print("Check in \(startDate)")
-            print("Check out = \(endDate)")
-            let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
-            nextVC.isFromCreateOffer = true
-            nextVC.createdOfferCheck_in = startDate
-            nextVC.createdOfferCheck_out = endDate
-            self.navigationController?.pushViewController(nextVC, animated: true)
-
+            CheckOfferAvailable()
+            if isCreateOfferDateisValid == false{
+                print("Check in \(startDate)")
+                print("Check out = \(endDate)")
+                let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
+                nextVC.isFromCreateOffer = true
+                nextVC.createdOfferCheck_in = startDate
+                nextVC.createdOfferCheck_out = endDate
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }else{
+                print("show alert")
+            }
         }
-
     }
-
+    
+    func starter(){
+      //  self.selectedIndex = selectedIndex
+        self.lblForSelectedPackageInfo.text = topSliderMenuValArray[selectedIndex ?? 0]
+       // self.lblForSelectedPackageInfo.text = topSliderMenuValArray[0]
+        self.topSelection = topSliderMenuArray[selectedIndex ?? 0]
+        calenderView.topSelection = self.topSelection
+        calenderView.selectedArray.removeAll()
+        calenderView.myCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.menuCollectionView.reloadData()
+        }
+        if topSelection == "Week (B)"{
+            self.topSelection = "weekB"
+        }else if topSelection == "Week (A)"{
+            self.topSelection = "weekA"
+        }else if topSelection == "Weekend"{
+            self.topSelection = "weekend"
+        }else{
+            self.topSelection = "weekdays"
+        }
+    }
 }
 
 extension AddNewOfferCalendarVC : UICollectionViewDelegate,UICollectionViewDataSource{
@@ -159,12 +186,16 @@ extension AddNewOfferCalendarVC : UICollectionViewDelegate,UICollectionViewDataS
             }
             if topSelection == "Week (B)"{
                print("Selected Week B")
+                self.topSelection = "weekB"
             }else if topSelection == "Week (A)"{
                 print("Selected Week A")
+                self.topSelection = "weekA"
             }else if topSelection == "Weekend"{
                 print("Selected Weekend")
+                self.topSelection = "weekend"
             }else{
                 print("Selected Weekdays")
+                self.topSelection = "weekdays"
             }
         }
     
@@ -172,6 +203,30 @@ extension AddNewOfferCalendarVC : UICollectionViewDelegate,UICollectionViewDataS
 }
 
 extension AddNewOfferCalendarVC{
+    func CheckOfferAvailable() {
+        SVProgressHUD.show()
+        print("start date = \(startDate)")
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/offer_not_available", dictionary: ["checkin":startDate], withHud: true) { (success, response, error) in
+            print(response)
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                        self.isCreateOfferDateisValid = false
+                        SVProgressHUD.dismiss()
+                        self.view.isUserInteractionEnabled = true
+                }else{
+                    self.isCreateOfferDateisValid = true
+                    self.view.isUserInteractionEnabled = true
+                    showDefaultAlert(viewController: self, title: "Alert", msg: response!["message"]! as! String)
+                }
+            }else{
+                self.view.isUserInteractionEnabled = true
+                showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+            }
+        }
+    }
+    
+    
     func getCalendarList(month:String,year:String,package:String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M"

@@ -62,7 +62,7 @@ class addNewOfferVC: UIViewController {
     }*/
     
     @IBAction func TappedonAddNewOffer(_ sender:UIButton){
-        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddNewOfferCalendarVC") as! AddNewOfferCalendarVC
+        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "CreateOfferWeekTypeSelection_VC") as! CreateOfferWeekTypeSelection_VC
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 

@@ -100,6 +100,8 @@ class ReservationTVC: UITableViewController {
     @IBOutlet weak var topCOnstraintForBtnPayment: NSLayoutConstraint!
     @IBOutlet weak var viewForGroupChaletName : UIView!
     @IBOutlet weak var lblGroupChaletName : UILabel!
+    @IBOutlet weak var lbl_autoAcceptoranotherreservation : UILabel!
+    @IBOutlet weak var height_ForViewAutoAcceptMsg : NSLayoutConstraint!
     
     var remainingAmount = "0"
     var isUSerIsBlocked = false
@@ -135,9 +137,15 @@ class ReservationTVC: UITableViewController {
     var isDepositEligible : Bool = false
     var isFromSubChalets = false
     var groupChaletName = ""
+    var requestTimeleft = 0
+    var timer = Timer()
+    var isTimerRunning : Bool = false
+    var isReservationRequestUpdated : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Request time left = \(requestTimeleft)")
+        print("Selected Chalet = \(arrayUserData.chalet_name)")
       //  self.hidesBottomBarWhenPushed = true
         self.btnPayment.isUserInteractionEnabled = false
         self.setUpNavigationBar()
@@ -194,7 +202,18 @@ class ReservationTVC: UITableViewController {
             if arrayUserData.auto_accept == true{
                 btnPayment.setTitle("Payment now".localized(), for: .normal)
             }else{
-                btnPayment.setTitle("Apply".localized(), for: .normal)
+                if arrayUserData.request_time != 0{
+                    if isTimerRunning == false {
+                          runTimer()
+                     }
+                    self.btnAgreement.isUserInteractionEnabled = true
+                    self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6078431373, blue: 0.9490196078, alpha: 1)
+                    self.lbl_autoAcceptoranotherreservation.text = "There is a reservation request \n from another customer This request may expire on"
+                }else{
+                    btnPayment.setTitle("Apply".localized(), for: .normal)
+                    self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+                    self.lbl_autoAcceptoranotherreservation.text = "Approval of booking within an ( 1 ) Hour"
+                }
             }
 
         }else{
@@ -248,7 +267,7 @@ class ReservationTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.isPaymentEnable = false
         appDelegate.checkBlockStatus()
-        print(navigationController?.viewControllers)
+       // print(navigationController?.viewControllers)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -278,6 +297,41 @@ class ReservationTVC: UITableViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.kStopVideoPlayer), object: nil, userInfo: nil)
 
     }
+    
+    @objc func timerClass(){
+        requestTimeleft -= 1
+        self.btnPayment.setTitle(String(requestTimeleft), for: .normal)
+      //  self.timeLabel.text = String(requestTimeleft)
+    }
+    
+    func runTimer() {
+         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: #selector(ReservationTVC.updateTimer), userInfo: nil, repeats: true)
+    }
+    @objc func updateTimer() {
+        if requestTimeleft < 1 {
+             timer.invalidate()
+             //Send alert to indicate "time's up!"
+            btnPayment.setTitle("Apply".localized(), for: .normal)
+            self.btnAgreement.isUserInteractionEnabled = true
+        } else {
+            requestTimeleft -= 1
+            self.btnPayment.setTitle(String(timeString(time: TimeInterval(requestTimeleft))), for: .normal)
+            checkReservationStatus()
+        }
+    }
+    func timeString(time:TimeInterval) -> String {
+    let hour = Int(time) / 3600
+    let minutes = Int(time) / 60 % 60
+    let seconds = Int(time) % 60
+        return String(format: "%02d:%02d:%02d",hour,minutes,seconds)
+    }
+    
+    
+    
+    
+    
+    
+    
 
     //MARK:- SetUp NavigationBar
     func setUpNavigationBar() {
@@ -1155,9 +1209,18 @@ class ReservationTVC: UITableViewController {
                     self.topCOnstraintForBtnPayment.constant = 20
                     return 110
                 }else{
-                    self.viewAutoAcceptMsg.isHidden = false
-                    self.topCOnstraintForBtnPayment.constant = 60
-                    return 160
+                    if dictOfferChaletList.request_time != 0{
+                        self.viewAutoAcceptMsg.isHidden = false
+                        self.topCOnstraintForBtnPayment.constant = 60
+                        self.height_ForViewAutoAcceptMsg.constant = 80
+                        return 180
+                    }else{
+                        self.viewAutoAcceptMsg.isHidden = false
+                        self.topCOnstraintForBtnPayment.constant = 60
+                        self.height_ForViewAutoAcceptMsg.constant = 50
+                        return 160
+                    }
+
                 }
             }else{
                 if arrayUserData.auto_accept == true{
@@ -1165,9 +1228,17 @@ class ReservationTVC: UITableViewController {
                     self.topCOnstraintForBtnPayment.constant = 20
                     return 110
                 }else{
-                    self.viewAutoAcceptMsg.isHidden = false
-                    self.topCOnstraintForBtnPayment.constant = 60
-                    return 160
+                    if arrayUserData.request_time != 0{
+                        self.viewAutoAcceptMsg.isHidden = false
+                        self.topCOnstraintForBtnPayment.constant = 100
+                        self.height_ForViewAutoAcceptMsg.constant = 80
+                        return 180
+                    }else{
+                        self.viewAutoAcceptMsg.isHidden = false
+                        self.topCOnstraintForBtnPayment.constant = 60
+                        self.height_ForViewAutoAcceptMsg.constant = 50
+                        return 160
+                    }
                 }
             }
 
@@ -1882,6 +1953,37 @@ extension ReservationTVC {
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: error!.localizedDescription)
+            }
+        }
+    }
+    
+    
+    //MARK:- Check Reservation Request Time
+    func checkReservationStatus() {
+        ServiceManager.sharedInstance.postMethodAlamofire("api/requesttimer", dictionary: ["from_date":self.arrayUserData.check_in!,"to_date":self.arrayUserData.check_out!,"chaletid":self.arrayUserData.chalet_id!], withHud: false) { (success, response, error) in
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                   // if (response as! NSDictionary) ["request_time"] as! Int == 0{
+                   if response!["message"]! == "timer_complete"{
+                        // make button name Apply.
+                        self.btnPayment.setTitle("Apply".localized(), for: .normal)
+                        self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
+                        self.lbl_autoAcceptoranotherreservation.text = "Approval of booking within an ( 1 ) Hour"
+                        self.topCOnstraintForBtnPayment.constant = 60
+                        self.height_ForViewAutoAcceptMsg.constant = 50
+                        self.isReservationRequestUpdated = true
+                        self.tableView.reloadData()
+                       // self.tableView.reloadRows(at: [IndexPath(row: 7, section: 0)], with: .none)
+                    }else{
+                        print("request time not yet 0")
+                        self.isReservationRequestUpdated = false
+                        // do nothing
+                    }
+                }else{
+                    showDefaultAlert(viewController: self, title: "", msg: response!["message"]!!)
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
             }
         }
     }

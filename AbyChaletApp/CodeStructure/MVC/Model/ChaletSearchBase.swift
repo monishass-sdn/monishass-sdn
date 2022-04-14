@@ -92,6 +92,8 @@ public class User_details {
     public var subchalet_available : Bool?
     public var isFromHolidaysandEvents : Bool?
     public var subchalet_count : String?
+    public var chalet_reservation_status : Bool?
+    public var request_time : Int?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [User_details]
     {
@@ -150,6 +152,8 @@ public class User_details {
         subchalet_available = dictionary["subchalet_available"] as? Bool
         isFromHolidaysandEvents = dictionary["isFromHolidaysandEvents"] as? Bool
         subchalet_count = dictionary["subchalet_count"] as? String
+        chalet_reservation_status = dictionary["chalet_reservation_status"] as? Bool
+        request_time = dictionary["request_time"] as? Int
         
     }
 
@@ -200,6 +204,8 @@ public class User_details {
         dictionary.setValue(self.subchalet_available, forKey: "subchalet_available")
         dictionary.setValue(self.isFromHolidaysandEvents, forKey: "isFromHolidaysandEvents")
         dictionary.setValue(self.subchalet_count, forKey: "subchalet_count")
+        dictionary.setValue(self.request_time, forKey: "request_time")
+        dictionary.setValue(self.chalet_reservation_status, forKey: "chalet_reservation_status")
 
 
         return dictionary
