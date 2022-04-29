@@ -14,7 +14,7 @@ class AvailableOffersTVCell: UITableViewCell {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var viewProgress: UIView!
     @IBOutlet weak var lblAppliedOfferCount: UILabel!
-
+    let dd = DayInHoursCountDownTimer()
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -26,6 +26,12 @@ class AvailableOffersTVCell: UITableViewCell {
     }
     
     func setValuesToFields(dict : Available_Offer_list){
+        self.lblTImer.text = "loading..."
+        if dd.countdownTimer != nil{
+            if dd.countdownTimer.isValid {
+                self.dd.endTimer()
+            }
+        }
         self.lblCheck_in.text = dict.check_in
         self.lblCheck_out.text = dict.check_out
         if dict.offered_chalets == "0"{
@@ -50,7 +56,7 @@ class AvailableOffersTVCell: UITableViewCell {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "hh:mm a"
         let date = dateFormater.date(from: time)!
-        let dd = DayInHoursCountDownTimer()
+      //  let dd = DayInHoursCountDownTimer()
         dd.initializeTimer(timeee)
        // let seconds : Double = Double(Date().seconds(from: offerCreated))
        // let totalSeconds : Double = Double(date.seconds(from: offerCreated))

@@ -191,6 +191,17 @@ class AddOffertoChaletVC: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func TapCheckbox2(_ sender: UIButton!){
+        
+        let item = arryAvailableOfferChaletList[sender.tag]
+        sender.isSelected = !sender.isSelected
+        if item.disable_status == true{
+            self.disableOffer(chalet_id: "\(item.chalet_id!)", offer_id : offerid)
+        }else{
+            showDefaultAlert(viewController: self, title: "Message", msg: "within 12 hour limit from checkin , Can't disable")
+        }
+    }
+    
 }
 
 extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
@@ -201,7 +212,11 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
         if section == 0{
             return 1
         }else if section == 1{
-            return 1
+            if arryAvailableOfferChaletList.count <= 0{
+                return 0
+            }else{
+                return 1
+            }
         }else{
             return arryAvailableOfferChaletList.count
         }
@@ -233,18 +248,26 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
         }else if indexPath.section == 2{
             let data = arryAvailableOfferChaletList[indexPath.row]
             if data.offerCount != 0{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ChaletListToAddOfferTVCell", for: indexPath) as! ChaletListToAddOfferTVCell
-               // cell.setValuesToFields(dict: arryAvailableOfferChaletList[indexPath.row])
-                
-                
-                cell.setValuesToFields(index: indexPath.row, dict: self.arryAvailableOfferChaletList[indexPath.row],isClick: self.isToggled,selectedIndex: self.selectedIndex)
-                
-                cell.tfDiscountAdded.tag = indexPath.row
-                cell.tfDiscountAdded.delegate = self
-                cell.btnCheckBox.tag = indexPath.row
-                cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
-                cell.tfDiscountAdded.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
-                return cell
+                if self.arryAvailableOfferChaletList[indexPath.row].offeredStatus == false{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ChaletListToAddOfferTVCell", for: indexPath) as! ChaletListToAddOfferTVCell
+                    cell.setValuesToFields(index: indexPath.row, dict: self.arryAvailableOfferChaletList[indexPath.row],isClick: self.isToggled,selectedIndex: self.selectedIndex)
+                    cell.tfDiscountAdded.tag = indexPath.row
+                    cell.tfDiscountAdded.delegate = self
+                    cell.btnCheckBox.tag = indexPath.row
+                    cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
+                    cell.tfDiscountAdded.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+                    return cell
+                }else{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ChaletListToAddedOfferTVCell", for: indexPath) as! ChaletListToAddedOfferTVCell
+                    cell.setValuesToFields(index: indexPath.row, dict: self.arryAvailableOfferChaletList[indexPath.row],isClick: self.isToggled,selectedIndex: self.selectedIndex)
+                  //  cell.tfDiscountAdded.tag = indexPath.row
+                 //   cell.tfDiscountAdded.delegate = self
+                    cell.btnCheckBox.tag = indexPath.row
+                    cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox2), for: .touchUpInside)
+                 //   cell.tfDiscountAdded.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+                    return cell
+                }
+
             }else if data.offerCount == 0 && data.isFromHoliday == false{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ChaletWithZeroOfferTVCell", for: indexPath) as! ChaletWithZeroOfferTVCell
                 cell.setValuesToFields(dict: arryAvailableOfferChaletList[indexPath.row])
@@ -281,11 +304,16 @@ extension AddOffertoChaletVC: UITableViewDelegate,UITableViewDataSource {
         }else if indexPath.section == 2{
             let data = arryAvailableOfferChaletList[indexPath.row]
             if data.offerCount != 0{
-                if toggledIndexes[indexPath.row] == true{
-                    return 282.0
+                if self.arryAvailableOfferChaletList[indexPath.row].offeredStatus == false{
+                    if toggledIndexes[indexPath.row] == true{
+                        return 282.0
+                    }else{
+                        return 184.0
+                    }
                 }else{
-                    return 184.0
+                    return 282.0
                 }
+
             }else if data.isFromHoliday == true{
                 return 185.0
             }else{
@@ -305,6 +333,7 @@ extension AddOffertoChaletVC{
         self.view.isUserInteractionEnabled = false
         ServiceManager.sharedInstance.postMethodAlamofire("api/Offer_chalet_list", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : "","offerId":offerid], withHud: true) { (success, response, error) in
             self.checkNotificationCount()
+            print(response)
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = OfferChaletListModel(dictionary: response as! NSDictionary)
@@ -361,6 +390,25 @@ extension AddOffertoChaletVC{
             }
         }
     }
+    
+    func disableOffer(chalet_id: String, offer_id : String) {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/disable-offered-status", dictionary: ["chaletid":chalet_id,"offerid":offer_id], withHud: true) { (success, response, error) in
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    self.getOfferChaletData()
+                    self.view.isUserInteractionEnabled = true
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: " Response Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+            }else{
+                showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+    }
+}
     
     func checkNotificationCount() {
         if CAUser.currentUser.id != nil {

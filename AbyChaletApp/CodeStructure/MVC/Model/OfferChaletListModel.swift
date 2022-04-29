@@ -87,6 +87,8 @@ public class Offer_Chalet_details : Codable {
     public var discount : Int?
     public var userid : Int?
     public var offerid : Int?
+    public var offeredStatus : Bool?
+    public var disable_status : Bool?
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [Offer_Chalet_details]
     {
@@ -115,6 +117,8 @@ public class Offer_Chalet_details : Codable {
         discount = dictionary["discount"] as? Int
         userid = dictionary["userid"] as? Int
         offerid = dictionary["offerid"] as? Int
+        offeredStatus = dictionary["offeredStatus"] as? Bool
+        disable_status = dictionary["disable_status"] as? Bool
     }
 
         
@@ -137,6 +141,8 @@ public class Offer_Chalet_details : Codable {
         dictionary.setValue(self.discount, forKey: "discount")
         dictionary.setValue(self.userid, forKey: "userid")
         dictionary.setValue(self.offerid, forKey: "offerid")
+        dictionary.setValue(self.offeredStatus, forKey: "offeredStatus")
+        dictionary.setValue(self.disable_status, forKey: "disable_status")
 
         return dictionary
     }

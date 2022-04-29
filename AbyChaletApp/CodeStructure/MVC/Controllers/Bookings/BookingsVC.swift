@@ -35,19 +35,22 @@ class BookingsVC: UIViewController {
     var isUSerIsBlocked = false
     var dictRewardDetails = NSDictionary()
     let locationManager = CLLocationManager()
+    var foreveryAmt = "0"
+    var earnAmt = "0"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.168627451, green: 0.3294117647, blue: 0.4078431373, alpha: 1)
         self.setUpNavigationBar()
         appDelegate.checkBlockStatus()
-        setupPopUpText()
+        getRewardsData()
+        
       //  self.tableViewBooking.register(NoBookingTVCell.self, forCellReuseIdentifier: "NoBookingTVCell")
 
 
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         self.tabBarController?.tabBar.isHidden = false
         if CAUser.currentUser.id != nil{
             self.getMyBookigData()
@@ -72,9 +75,9 @@ class BookingsVC: UIViewController {
         
         
         let attributedStringEarn1 = NSMutableAttributedString(string:"For every ".localized(), attributes:attrsWhatKindOfJob1)
-        let attributedStringEarn2 = NSMutableAttributedString(string:"2000", attributes:attrsWhatKindOfJob2)
+        let attributedStringEarn2 = NSMutableAttributedString(string:foreveryAmt, attributes:attrsWhatKindOfJob2)
         let attributedStringEarn3 = NSMutableAttributedString(string:" KD you spend on your total bookings for chalets, you get a Rewards of ".localized(), attributes:attrsWhatKindOfJob1)
-        let attributedStringEarn4 = NSMutableAttributedString(string:"100", attributes:attrsWhatKindOfJob3)
+        let attributedStringEarn4 = NSMutableAttributedString(string:earnAmt, attributes:attrsWhatKindOfJob3)
         let attributedStringEarn5 = NSMutableAttributedString(string:" KD each time, and you can use this Rewards as a discount on the next booking  or collect and double this Rewards".localized(), attributes:attrsWhatKindOfJob1)
         
         attributedStringEarn1.append(attributedStringEarn2)
@@ -214,7 +217,7 @@ class BookingsVC: UIViewController {
     
     //MARK:- Show Popup
     func showPopup()  {
-        
+        getRewardsData()
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
                 .compactMap({$0 as? UIWindowScene})
@@ -485,6 +488,34 @@ extension BookingsVC {
             }
         }
     }
+    
+    
+    
+    func getRewardsData() {
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/reward_details", dictionary: ["userid":0], withHud: true) { (success, response, error) in
+            self.isLoad = true
+
+            print(response)
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    self.foreveryAmt = response!["every_spend"] as! String
+                    self.earnAmt = response!["reward_earn"] as! String
+                    self.setupPopUpText()
+                }else{
+                    self.foreveryAmt = "0"
+                    self.earnAmt = "0"
+                }
+                self.view.isUserInteractionEnabled = true
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!".localized())
+                self.view.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    
 }
 
 extension BookingsVC {

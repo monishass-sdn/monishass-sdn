@@ -218,6 +218,7 @@ extension OffersListVC {
         ServiceManager.sharedInstance.postMethodAlamofire("api/offers", dictionary: ["userid":CAUser.currentUser.id != nil ? "\(CAUser.currentUser.id!)" : ""], withHud: true) { (success, response, error) in
             self.checkNotificationCount()
             self.isLoad = true
+            print(response)
             if success {
                 if ((response as! NSDictionary) ["status"] as! Bool) == true {
                     let responseBase = OfferListBase(dictionary: response as! NSDictionary)

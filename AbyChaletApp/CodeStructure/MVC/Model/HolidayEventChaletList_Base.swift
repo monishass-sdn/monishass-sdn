@@ -51,6 +51,8 @@ public class HolidayEventChaletList : Codable {
     public var cover_photo : String?
     public var price_type : String?
     public var isOffer : Bool?
+    public var chaletEventStatus : Bool?
+    public var holidayPrice : String?
     public var weekAB_rent : String?
     public var weekdays_rent : String?
     public var weekend_rent : String?
@@ -78,6 +80,8 @@ public class HolidayEventChaletList : Codable {
         chalet_name = dictionary["chalet_name"] as? String
         owner_id = dictionary["owner_id"] as? Int
         auto_accept = dictionary["auto_accept"] as? Bool
+        chaletEventStatus = dictionary["chaletEventStatus"] as? Bool
+        holidayPrice = dictionary["holidayPrice"] as? String
         cover_photo = dictionary["cover_photo"] as? String
         price_type = dictionary["price_type"] as? String
         isOffer = dictionary["isOffer"] as? Bool
@@ -101,6 +105,8 @@ public class HolidayEventChaletList : Codable {
         dictionary.setValue(self.chalet_name, forKey: "chalet_name")
         dictionary.setValue(self.owner_id, forKey: "owner_id")
         dictionary.setValue(self.auto_accept, forKey: "auto_accept")
+        dictionary.setValue(self.chaletEventStatus, forKey: "chaletEventStatus")
+        dictionary.setValue(self.holidayPrice, forKey: "holidayPrice")
         dictionary.setValue(self.cover_photo, forKey: "cover_photo")
         dictionary.setValue(self.price_type, forKey: "price_type")
         dictionary.setValue(self.isOffer, forKey: "isOffer")

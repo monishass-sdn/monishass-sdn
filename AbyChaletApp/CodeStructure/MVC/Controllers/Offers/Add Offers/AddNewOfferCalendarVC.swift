@@ -112,7 +112,7 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegate2 {
     @IBAction func createOffer(_ sender: UIButton!){
         if self.isSearchEnable == true {
             CheckOfferAvailable()
-            if isCreateOfferDateisValid == false{
+        /*    if isCreateOfferDateisValid == false{
                 print("Check in \(startDate)")
                 print("Check out = \(endDate)")
                 let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
@@ -122,7 +122,7 @@ class AddNewOfferCalendarVC: UIViewController, CalenderDelegate2 {
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }else{
                 print("show alert")
-            }
+            } */
         }
     }
     
@@ -214,6 +214,13 @@ extension AddNewOfferCalendarVC{
                         self.isCreateOfferDateisValid = false
                         SVProgressHUD.dismiss()
                         self.view.isUserInteractionEnabled = true
+                    
+                    let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "AddOffertoChaletVC") as! AddOffertoChaletVC
+                    nextVC.isFromCreateOffer = true
+                    nextVC.createdOfferCheck_in = self.startDate
+                    nextVC.createdOfferCheck_out = self.endDate
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                    
                 }else{
                     self.isCreateOfferDateisValid = true
                     self.view.isUserInteractionEnabled = true
@@ -336,7 +343,7 @@ extension AddNewOfferCalendarVC{
         
         print(selectedDates)
         
-        if topSelection == "Week (B)"{
+        if topSelection == "weekB"{
             if selectedDates.count > 6 {
                 self.isSearchEnable = true
                 self.btnCreateOffer.backgroundColor = UIColor("#6FDA44")
@@ -347,7 +354,7 @@ extension AddNewOfferCalendarVC{
                 self.btnCreateOffer.backgroundColor = UIColor("#C2C2C2")
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "You can't select this date".localized())
             }
-        }else if topSelection == "Week (A)"{
+        }else if topSelection == "weekA"{
             if selectedDates.count > 6 {
                 self.isSearchEnable = true
                 self.btnCreateOffer.backgroundColor = UIColor("#6FDA44")
@@ -358,7 +365,7 @@ extension AddNewOfferCalendarVC{
                 self.btnCreateOffer.backgroundColor = UIColor("#C2C2C2")
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "You can't select this date".localized())
             }
-        }else if topSelection == "Weekend"{
+        }else if topSelection == "weekend"{
             if selectedDates.count > 2 {
                 self.isSearchEnable = true
                 self.btnCreateOffer.backgroundColor = UIColor("#6FDA44")
@@ -369,7 +376,7 @@ extension AddNewOfferCalendarVC{
                 self.btnCreateOffer.backgroundColor = UIColor("#C2C2C2")
                 showDefaultAlert(viewController: self, title: "Message".localized(), msg: "You can't select this date".localized())
             }
-        }else if topSelection == "Weekdays"{
+        }else if topSelection == "weekdays"{
             if selectedDates.count > 3 {
                 self.isSearchEnable = true
                 self.btnCreateOffer.backgroundColor = UIColor("#6FDA44")

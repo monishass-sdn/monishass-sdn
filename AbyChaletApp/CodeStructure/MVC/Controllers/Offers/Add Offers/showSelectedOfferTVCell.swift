@@ -13,6 +13,7 @@ class showSelectedOfferTVCell: UITableViewCell {
     @IBOutlet weak var lblcheckout: UILabel!
     @IBOutlet weak var lblTimer: UILabel!
     @IBOutlet weak var viewProgress: UIView!
+    let dd = DayInHoursCountDownTimer()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,8 +26,16 @@ class showSelectedOfferTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+    }
+    
     func setValuesToFields(dict:Available_Offer_list){
-        
+        self.lblTimer.text = "loading..."
+        if dd.countdownTimer != nil{
+            if dd.countdownTimer.isValid {
+                self.dd.endTimer()
+            }
+        }
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let offerExpiry = dateFormater.date(from: dict.offer_checkin!)
@@ -53,7 +62,7 @@ class showSelectedOfferTVCell: UITableViewCell {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "hh:mm a"
         let date = dateFormater.date(from: time)!
-        let dd = DayInHoursCountDownTimer()
+        //let dd = DayInHoursCountDownTimer()
         dd.initializeTimer(timeee)
        
         

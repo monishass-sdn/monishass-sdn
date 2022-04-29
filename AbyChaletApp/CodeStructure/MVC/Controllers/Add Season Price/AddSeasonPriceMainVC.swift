@@ -120,13 +120,13 @@ extension AddSeasonPriceMainVC : UICollectionViewDelegate,UICollectionViewDataSo
         if topSelection == "Holidays prices"{
            print("Selected holidays prices")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddHolidayPriceMainVC") as! AddHolidayPriceMainVC
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: false)
         }else if topSelection == "Season Prices"{
             print("Selected Season Prices")
         }else{
             print("Selected Stats")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: false)
         }
     }
     
@@ -154,22 +154,30 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
             cell.lblStart_season.text = seasonStart
             return cell
         }else if indexPath.section == 2{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SeasonPriceChaletListTVCell", for: indexPath) as! SeasonPriceChaletListTVCell
-            cell.setValuesToFields(dict: arraySeasonPrice_Chalet_List[indexPath.row])
-            cell.btnCheckBox.tag = indexPath.row
-            cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
-            cell.tf_Weekend_Price.tag = indexPath.row
-            cell.tf_Weekdays_Price.tag = indexPath.row
-            cell.tf_WeekAB_Price.tag = indexPath.row
-            cell.tf_Weekend_Price.delegate = self
-            cell.tf_Weekdays_Price.delegate = self
-            cell.tf_WeekAB_Price.delegate = self
-            cell.tf_Weekend_Price.addTarget(self, action: #selector(WeekendvalueChanged), for: .editingChanged)
-            cell.tf_Weekdays_Price.addTarget(self, action: #selector(WeekdaysvalueChanged), for: .editingChanged)
-            cell.tf_WeekAB_Price.addTarget(self, action: #selector(WeekABvalueChanged), for: .editingChanged)
-
-            
-            return cell
+            if self.arraySeasonPrice_Chalet_List[indexPath.row].seasonPriceStatus == false{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SeasonPriceChaletListTVCell", for: indexPath) as! SeasonPriceChaletListTVCell
+                cell.setValuesToFields(dict: arraySeasonPrice_Chalet_List[indexPath.row])
+                cell.btnCheckBox.tag = indexPath.row
+                cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
+                cell.tf_Weekend_Price.tag = indexPath.row
+                cell.tf_Weekdays_Price.tag = indexPath.row
+                cell.tf_WeekAB_Price.tag = indexPath.row
+                cell.tf_Weekend_Price.delegate = self
+                cell.tf_Weekdays_Price.delegate = self
+                cell.tf_WeekAB_Price.delegate = self
+                cell.tf_Weekend_Price.addTarget(self, action: #selector(WeekendvalueChanged), for: .editingChanged)
+                cell.tf_Weekdays_Price.addTarget(self, action: #selector(WeekdaysvalueChanged), for: .editingChanged)
+                cell.tf_WeekAB_Price.addTarget(self, action: #selector(WeekABvalueChanged), for: .editingChanged)
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SeasonPriceAppliedChaletListTVCell", for: indexPath) as! SeasonPriceAppliedChaletListTVCell
+                cell.setValuesToFields(dict: arraySeasonPrice_Chalet_List[indexPath.row])
+                cell.btnCheckBox.tag = indexPath.row
+                cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox2), for: .touchUpInside)
+                let yourImage: UIImage = UIImage(named: "toggleONReservation")!
+                cell.btnCheckBox.setImage(yourImage, for: .normal)
+                return cell
+            }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "seasonpricemiddlecell")
         return cell!
@@ -181,11 +189,16 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.section == 1{
             return 65
         }else{
-            if toggledIndexes[indexPath.row] == true{
-                return 400.0
+            if self.arraySeasonPrice_Chalet_List[indexPath.row].seasonPriceStatus == false{
+                if toggledIndexes[indexPath.row] == true{
+                    return 400.0
+                }else{
+                    return 182.0
+                }
             }else{
-                return 182.0
+                return 400.0
             }
+
         }
     }
     
@@ -225,6 +238,12 @@ extension AddSeasonPriceMainVC:UITableViewDelegate, UITableViewDataSource{
 
         }
         self.AddSeasonPricetoChaletTV.reloadData()
+    }
+    
+    @objc func TapCheckbox2(_ sender: UIButton!){
+        let item = arraySeasonPrice_Chalet_List[sender.tag]
+        sender.isSelected = !sender.isSelected
+        disableSeasonPrice(chalet_id: "\(item.id!)", owner_id: "\(CAUser.currentUser.id ?? 0)")
     }
     
     @objc func WeekendvalueChanged(_ textField: UITextField){
@@ -286,6 +305,29 @@ extension AddSeasonPriceMainVC{
             }
         }
     }
+    
+    //MARK:- Disable Season Price API
+    
+    func disableSeasonPrice(chalet_id: String, owner_id : String) {
+
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/disable-season-status", dictionary: ["chaletid":chalet_id,"ownerid":owner_id], withHud: true) { (success, response, error) in
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    self.getSeasonDateAndChalets()
+                    self.AddSeasonPricetoChaletTV.reloadData()
+                    self.view.isUserInteractionEnabled = true
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: " Response Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+            }else{
+                showDefaultAlert(viewController: self, title: "Alert", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+    }
+}
     
     func checkNotificationCount() {
         if CAUser.currentUser.id != nil {

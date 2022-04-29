@@ -14,7 +14,8 @@ class BookingDetailTVC: UITableViewController {
 
     @IBOutlet weak var lblCollectionIndex: UILabel!
     @IBOutlet weak var viewCollectionIndex: UIView!
-
+    @IBOutlet weak var lblOfferDiscount : UILabel!
+    @IBOutlet weak var lblDeposit : UILabel!
     @IBOutlet weak var lblTotalPaid: UILabel!
     @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblRent: UILabel!
@@ -61,7 +62,7 @@ class BookingDetailTVC: UITableViewController {
         lblTotalInvoice.text = "Total Invoice".localized()
         lblChaletDetails.text = "Chalet details".localized()
         lblAgreement.text = "Agreement".localized()
-        lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
+     //   lblYouMustAgreeAllConditions.text = "You must Agree to all condtions to be able book".localized()
         
         if kCurrentLanguageCode == "ar"{
             lblBookingDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
@@ -72,7 +73,7 @@ class BookingDetailTVC: UITableViewController {
             lblTotalInvoice.font = UIFont(name: kFontAlmaraiRegular, size: 15)
             lblChaletDetails.font = UIFont(name: kFontAlmaraiRegular, size: 17)
             lblAgreement.font = UIFont(name: kFontAlmaraiRegular, size: 17)
-            lblYouMustAgreeAllConditions.font = UIFont(name: kFontAlmaraiRegular, size: 14)
+          //  lblYouMustAgreeAllConditions.font = UIFont(name: kFontAlmaraiRegular, size: 14)
 
 
         }else {
@@ -84,7 +85,7 @@ class BookingDetailTVC: UITableViewController {
             lblTotalInvoice.font = UIFont(name: "Roboto-Regular", size: 15)
             lblChaletDetails.font = UIFont(name: "Roboto-Medium", size: 17)
             lblAgreement.font = UIFont(name: "Roboto-Medium", size: 17)
-            lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
+         //   lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
 
         }
     }
@@ -115,7 +116,7 @@ class BookingDetailTVC: UITableViewController {
         self.navigationItem.leftBarButtonItems = [backBarButton]
         let notificationButton = UIBarButtonItem(image: Images.kIconNotification, style: .plain, target: self, action: #selector(backButtonTouched))
         //self.navigationItem.rightBarButtonItems = [notificationButton]
-        self.navigationItem.title = ""
+        self.navigationItem.title = "My Reservation"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
@@ -152,8 +153,27 @@ class BookingDetailTVC: UITableViewController {
         self.lblRent.text = "KD \(dictMyBooking.rent!)"
         self.lblDiscount.text = "KD \(dictMyBooking.reward_discount!)"
         self.lblTotalPaid.text = "KD \(dictMyBooking.total_paid!)"
+        self.lblDeposit.text = "KD \(dictMyBooking.deposit!)"
+        self.lblOfferDiscount.text = "KD \(dictMyBooking.offer_discount!)"
         
         self.lblCollectionIndex.text = "\(lblIndexValue)/\(String(describing: (dictMyBooking.myBookingChalet_details?.first?.chalet_details!.count)!))"
+        
+        let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 14)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)] as [NSAttributedString.Key : Any]
+        let attrsWhatKindOfJob3 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 0.8352941176, blue: 0, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+         //   let attrsWhatKindOfJob4 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Italic", size: 20)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+        //    let attrsWhatKindOfJob5 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 21)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1),NSAttributedString.Key.underlineStyle : NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            
+        let attributedStringWhatKindOfJob1 = NSMutableAttributedString(string:"I have read and ".localized(), attributes:attrsWhatKindOfJob1)
+        let attributedStringWhatKindOfJob2 = NSMutableAttributedString(string:"Agree ".localized(), attributes:attrsWhatKindOfJob2)
+        let attributedStringWhatKindOfJob3 = NSMutableAttributedString(string:"to the ".localized(), attributes:attrsWhatKindOfJob1)
+        let attributedStringWhatKindOfJob4 = NSMutableAttributedString(string:"terms".localized(), attributes:attrsWhatKindOfJob3)
+        let attributedStringWhatKindOfJob5 = NSMutableAttributedString(string:" of service ".localized(), attributes:attrsWhatKindOfJob1)
+        attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob2)
+        attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob3)
+        attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob4)
+        attributedStringWhatKindOfJob1.append(attributedStringWhatKindOfJob5)
+        self.lblYouMustAgreeAllConditions.attributedText = attributedStringWhatKindOfJob1
     }
     
     //MARK:- ButtonActions

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 struct PackageBookingChartStruct {
     var type:String
@@ -24,8 +25,14 @@ class PackageListViewController: UIViewController {
     var isClicked = false
     var selectedIndx = 0
     var arrayReservationList = [Reservation_list]()
+    var arrayReservationReq_List = [Reservation_Request_list]()
+
     var dictBookingDetails = Booking_details(dictionary: NSDictionary())
-    
+    let systemSoundID: SystemSoundID = 1000
+    var playCount = 0
+    var timer = Timer()
+    var isRequestPending : Bool = false
+
     lazy var packageBookingChartArray: [PackageBookingChartStruct] = [
         PackageBookingChartStruct(type: "Weekdays".localized(), days: "Sunday - Monday - Tuesday - Wednesday".localized()),
         PackageBookingChartStruct(type: "Weekend".localized(), days: "Thursday - Friday - Saturday".localized()),
@@ -49,9 +56,11 @@ class PackageListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(goToSuccess), name: NSNotification.Name(rawValue: NotificationNames.KgoToSuccessPage), object: nil)
         lblYouCanAcceptRejectLater.text = "You can accepr or reject later".localized()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(goToFailurePage), name: NSNotification.Name(rawValue: NotificationNames.KGoToFailurePage), object: nil)
         appDelegate.checkBlockStatus()
         if CAUser.currentUser.id != nil{
@@ -59,8 +68,8 @@ class PackageListViewController: UIViewController {
                 print("do Nothing")
             }else{
                 if CAUser.currentUser.userstatus == "owner" {
-                    self.getOwnerInboxDetails()
-                  //  self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id ?? 0)")
+                  //  self.getOwnerInboxDetails()
+                    self.getOwnerReservationRequests()
                 }
             }
         }else{
@@ -124,6 +133,9 @@ class PackageListViewController: UIViewController {
 
         }
 
+    }
+    func updateCounting(){
+        self.getOwnerReservationRequests()
     }
  
 }
@@ -255,7 +267,7 @@ extension PackageListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-//MARK:- API Code for Pop Up
+//MARK:- API Code for Pop Up : Booking Request
 
 extension PackageListViewController{
     func getOwnerInboxDetails() {
@@ -274,6 +286,40 @@ extension PackageListViewController{
                         self.showPopUp()
                     }
                         self.popUpTableView.reloadData()
+                }else{
+                    showDefaultAlert(viewController: self, title: "Message".localized(), msg: ((response! as! NSDictionary)["message"] as! String))
+                }
+            }else{
+                showDefaultAlert(viewController: self, title: "Message".localized(), msg: "Failed...!".localized())
+            }
+        }
+    }
+//MARK:- API Code for Pop Up : Reservation Request
+
+    func getOwnerReservationRequests() {
+        ServiceManager.sharedInstance.postMethodAlamofire("api/requested_chalet", dictionary: ["ownerid":CAUser.currentUser.id!], withHud: false) { [self] (success, response, error) in
+            print(response)
+            if success {
+                if response!["status"] as! Bool == true {
+                    let jsonBase = Owner_Reservation_RequestBase(dictionary: response as! NSDictionary)
+                    self.arrayReservationReq_List = (jsonBase?.reservation_list)!
+                    if self.arrayReservationReq_List.count != 0{
+                        print("play sound")
+                        AudioServicesPlaySystemSound(systemSoundID)
+                        
+                        let nextVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "Reservation_Request_AcceptReject_VC") as! Reservation_Request_AcceptReject_VC
+                        navigationController?.pushViewController(nextVC, animated: true)
+                        
+                     /*   self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+                            self.updateCounting()
+                        }) */
+                        self.isRequestPending = false
+                    }else{
+                        
+                        print("stop sound")
+                        timer.invalidate()
+                        self.isRequestPending = false
+                    }
                 }else{
                     showDefaultAlert(viewController: self, title: "Message".localized(), msg: ((response! as! NSDictionary)["message"] as! String))
                 }
@@ -306,7 +352,7 @@ extension PackageListViewController{
                     self.selectedIndx = 0
                     DispatchQueue.main.async {
                         if CAUser.currentUser.userstatus == "owner" {
-                            self.getOwnerInboxDetails()
+                          //  self.getOwnerInboxDetails()
                             //self.getOwnerInboxDetails(ownerId: "\(CAUser.currentUser.id ?? 0)")
                         }
                         self.popUpTableView.reloadData()

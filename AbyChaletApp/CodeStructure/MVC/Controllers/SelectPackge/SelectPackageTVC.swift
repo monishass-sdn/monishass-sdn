@@ -78,12 +78,19 @@ class SelectPackageTVC: UITableViewController {
         navigationController?.navigationBar.barTintColor = kAppHeaderColor
 
         self.navigationItem.setHidesBackButton(true, animated: false)
+        let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
+        self.navigationItem.leftBarButtonItems = [backBarButton]
        // self.addBarButtons()
         self.setupUI()
         self.setupCalenderView()
                 
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: NSNotification.Name(rawValue: NotificationNames.kBlockedUser), object: nil)
     }
+    
+    @objc func backButtonTouched()  {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc func logoutUser() {
         
         appDelegate.logOut()
@@ -209,7 +216,7 @@ class SelectPackageTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 6 {
-            if arrayUserDetails.count > 0 {
+          /*  if arrayUserDetails.count > 0 {
                 var countwithOffer = 0
                 for item in self.arrayUserDetails{
                     if item.offer_available == true{
@@ -223,9 +230,10 @@ class SelectPackageTVC: UITableViewController {
                 return CGFloat(heightForOffer + heightWithoutOffer) + 45
             }else{
                 return 0
-            }
+            } */
+            return 0
         }else if indexPath.row == 8 {
-            if arraynoresultsChalets.count > 0 {
+         /*   if arraynoresultsChalets.count > 0 {
                 var countwithOffer = 0
                 for item in self.arraynoresultsChalets{
                     if item.offer_available == true{
@@ -239,13 +247,15 @@ class SelectPackageTVC: UITableViewController {
                 return CGFloat(heightForOffer + heightWithoutOffer) + 45
             }else{
                 return 0
-            }
+            } */
+            return 0
         }else if indexPath.row == 5 {
-            if arrayUserDetails.count > 0 {
+        /*    if arrayUserDetails.count > 0 {
                 return 35
             }else{
                 return CGFloat(showAvilablechaletStringHeight)
-            }
+            } */
+            return 0
         }else if indexPath.row == 2 {
             if self.isLoadHolidaysAndEvents == true {
                 //return CGFloat(self.arrayChalletList.count * 94)
@@ -319,17 +329,19 @@ class SelectPackageTVC: UITableViewController {
                 return 0
             }
         }else if indexPath.row == 7 {
-            if isNoChaletFound == false {
+          /*  if isNoChaletFound == false {
                 return 0
             }else{
                 return 134
-            }
+            } */
+            return 0
         }else if indexPath.row == 9{
-            if self.isGotResult == false{
+          /*  if self.isGotResult == false{
                 return 0
             }else{
                 return 60
-            }
+            } */
+            return 0
         }else{
             
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -803,8 +815,8 @@ extension SelectPackageTVC {
                     }else{
     
                     DispatchQueue.main.async {
-                            self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
-                            self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
+                           // self.tableView.reloadRows(at: [IndexPath(row: 5, section: 0)], with: .none)
+                          //  self.tableView.reloadRows(at: [IndexPath(row: 6, section: 0)], with: .none)
                             self.collectionChalletList.reloadData()
               
                         print("Chalet Count = \(self.arrayUserDetails.count)")
@@ -998,7 +1010,7 @@ extension SelectPackageTVC {
                     let responseBase = HolidaysAndEventsBas(dictionary: response as! NSDictionary)
                     self.arrayChalletList = (responseBase?.chalet_list)!
                     DispatchQueue.main.async {
-                        self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .bottom)
+                       // self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .bottom)
                         self.colletionViewHolidays.reloadData()
                         self.view.isUserInteractionEnabled = true
                         self.isSearchEnable = false

@@ -141,11 +141,12 @@ class ReservationTVC: UITableViewController {
     var timer = Timer()
     var isTimerRunning : Bool = false
     var isReservationRequestUpdated : Bool = false
+    var requestTime = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Request time left = \(requestTimeleft)")
-        print("Selected Chalet = \(arrayUserData.chalet_name)")
+      //  print("Request time left = \(requestTimeleft)")
+      //  print("Selected Chalet = \(arrayUserData.chalet_name)")
       //  self.hidesBottomBarWhenPushed = true
         self.btnPayment.isUserInteractionEnabled = false
         self.setUpNavigationBar()
@@ -202,14 +203,17 @@ class ReservationTVC: UITableViewController {
             if arrayUserData.auto_accept == true{
                 btnPayment.setTitle("Payment now".localized(), for: .normal)
             }else{
-                if arrayUserData.request_time != 0{
+                print("Request time = \(requestTime)")
+                if requestTime != 0{
+              //  if arrayUserData.request_time != 0{
                     if isTimerRunning == false {
                           runTimer()
                      }
-                    self.btnAgreement.isUserInteractionEnabled = true
+                    self.btnAgreement.isUserInteractionEnabled = false
                     self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6078431373, blue: 0.9490196078, alpha: 1)
                     self.lbl_autoAcceptoranotherreservation.text = "There is a reservation request \n from another customer This request may expire on"
                 }else{
+                    self.btnAgreement.isUserInteractionEnabled = true
                     btnPayment.setTitle("Apply".localized(), for: .normal)
                     self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
                     self.lbl_autoAcceptoranotherreservation.text = "Approval of booking within an ( 1 ) Hour"
@@ -254,7 +258,7 @@ class ReservationTVC: UITableViewController {
             lblChaletDetails.font = UIFont(name: "Roboto-Medium", size: 17)
             lblAgreement1.font = UIFont(name: "Roboto-Medium", size: 17)
           //  lblYouMustAgreeAllConditions.font = UIFont(name: "Roboto-Regular", size: 14)
-            btnPayment.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 20)
+            btnPayment.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 20)
             lbllRemaining.font = UIFont(name: "Roboto-Regular", size: 15)
         }
         
@@ -265,6 +269,7 @@ class ReservationTVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         self.isPaymentEnable = false
         appDelegate.checkBlockStatus()
        // print(navigationController?.viewControllers)
@@ -300,7 +305,8 @@ class ReservationTVC: UITableViewController {
     
     @objc func timerClass(){
         requestTimeleft -= 1
-        self.btnPayment.setTitle(String(requestTimeleft), for: .normal)
+       // self.btnPayment.setTitle(String(requestTimeleft), for: .normal)
+        
       //  self.timeLabel.text = String(requestTimeleft)
     }
     
@@ -690,6 +696,7 @@ class ReservationTVC: UITableViewController {
     }
     @objc func backButtonTouched()  {
         self.navigationController?.popViewController(animated: true)
+        timer.invalidate()
     }
     @IBAction func btnPrevAction(_ sender: Any) {
         if selectedIndex != 0 {
@@ -928,19 +935,110 @@ class ReservationTVC: UITableViewController {
         */
     }
     @IBAction func btnClickFinalAgreementAction(_ sender: UIButton) {
-        if sender.isSelected == false{
-            sender.isSelected = true
-            self.isSelectTermsAgreement = true
-            self.isPaymentEnable = true
-            self.btnPayment.isUserInteractionEnabled = true
-            self.btnPayment.backgroundColor = UIColor("#6FDA44")
+        if CAUser.currentUser.id == nil{
+            self.btnAgreement.isUserInteractionEnabled = false
+            
+            let alert = UIAlertController(title: "Alert", message: "You must login first".localized(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                UserDefaults.standard.removeObject(forKey: "kCurrentUserDetails")
+                appDelegate.logOut()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            
         }else{
-            sender.isSelected = false
-            self.isSelectTermsAgreement = false
-            self.isPaymentEnable = false
-            self.btnPayment.isUserInteractionEnabled = false
-            self.btnPayment.backgroundColor = UIColor("#A8A8A8")
+            if isFromOffer{
+                if dictOfferUserDetails.auto_accept == true{
+                    self.btnAgreement.isUserInteractionEnabled = true
+                    if sender.isSelected == false{
+                        sender.isSelected = true
+                        self.isSelectTermsAgreement = true
+                        self.isPaymentEnable = true
+                        self.btnPayment.isUserInteractionEnabled = true
+                        self.btnPayment.backgroundColor = UIColor("#6FDA44")
+                    }else{
+                        sender.isSelected = false
+                        self.isSelectTermsAgreement = false
+                        self.isPaymentEnable = false
+                        self.btnPayment.isUserInteractionEnabled = false
+                        self.btnPayment.backgroundColor = UIColor("#A8A8A8")
+                    }
+                }else{
+                    if dictOfferUserDetails.request_time != 0{
+                        self.btnAgreement.isUserInteractionEnabled = false
+                    }else{
+                        if isReservationRequestUpdated == true{
+                        self.btnAgreement.isUserInteractionEnabled = false
+                    }else{
+                        self.btnAgreement.isUserInteractionEnabled = true
+                        if sender.isSelected == false{
+                            sender.isSelected = true
+                            self.isSelectTermsAgreement = true
+                            self.isPaymentEnable = true
+                            self.btnPayment.isUserInteractionEnabled = true
+                            self.btnPayment.backgroundColor = UIColor("#6FDA44")
+                        }else{
+                            sender.isSelected = false
+                            self.isSelectTermsAgreement = false
+                            self.isPaymentEnable = false
+                            self.btnPayment.isUserInteractionEnabled = false
+                            self.btnPayment.backgroundColor = UIColor("#A8A8A8")
+                        }
+                    }
+                }
+            }
+            }else{
+                    if arrayUserData.auto_accept == true{
+                        self.btnAgreement.isUserInteractionEnabled = true
+                        if sender.isSelected == false{
+                            sender.isSelected = true
+                            self.isSelectTermsAgreement = true
+                            self.isPaymentEnable = true
+                            self.btnPayment.isUserInteractionEnabled = true
+                            self.btnPayment.backgroundColor = UIColor("#6FDA44")
+                        }else{
+                            sender.isSelected = false
+                            self.isSelectTermsAgreement = false
+                            self.isPaymentEnable = false
+                            self.btnPayment.isUserInteractionEnabled = true
+                            self.btnPayment.backgroundColor = UIColor("#A8A8A8")
+                        }
+                    }else{
+                        if arrayUserData.request_time != nil{
+                            self.btnAgreement.isUserInteractionEnabled = false
+                        }else{
+                            if isReservationRequestUpdated == true{
+                            self.btnAgreement.isUserInteractionEnabled = false
+                        }else{
+                            self.btnAgreement.isUserInteractionEnabled = true
+                            if sender.isSelected == false{
+                                sender.isSelected = true
+                                self.isSelectTermsAgreement = true
+                                self.isPaymentEnable = true
+                                self.btnPayment.isUserInteractionEnabled = true
+                                self.btnPayment.backgroundColor = UIColor("#6FDA44")
+                            }else{
+                                sender.isSelected = false
+                                self.isSelectTermsAgreement = false
+                                self.isPaymentEnable = false
+                                self.btnPayment.isUserInteractionEnabled = false
+                                self.btnPayment.backgroundColor = UIColor("#A8A8A8")
+                            }
+                        }
+                    }
+                }
+               // }
+                // user interaction disabled
+            }
+
         }
+
+
+
+
         
     /*    if self.isSelectTermsAgreement == true && self.arrayAgreeMentIdxs.count == self.arrayAgreements.count{
             self.btnPayment.backgroundColor = UIColor("#6FDA44")
@@ -1966,7 +2064,7 @@ extension ReservationTVC {
                    // if (response as! NSDictionary) ["request_time"] as! Int == 0{
                    if response!["message"]! == "timer_complete"{
                         // make button name Apply.
-                        self.btnPayment.setTitle("Apply".localized(), for: .normal)
+                      //  self.btnPayment.setTitle("Apply".localized(), for: .normal)
                         self.viewAutoAcceptMsg.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.1411764706, blue: 0.2784313725, alpha: 1)
                         self.lbl_autoAcceptoranotherreservation.text = "Approval of booking within an ( 1 ) Hour"
                         self.topCOnstraintForBtnPayment.constant = 60

@@ -91,11 +91,11 @@ extension AddHolidayPriceMainVC : UICollectionViewDelegate,UICollectionViewDataS
         }else if topSelection == "Season prices"{
             print("Selected Season prices")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddSeasonPriceMainVC") as! AddSeasonPriceMainVC
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: false)
         }else{
             print("Selected Stats")
             let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "myChaletVC") as! myChaletVC
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: false)
         }
     }
     

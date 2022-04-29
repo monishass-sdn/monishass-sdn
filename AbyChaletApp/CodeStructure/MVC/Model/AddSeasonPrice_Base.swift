@@ -105,6 +105,7 @@ public class SeasonPrice_Chalet_details : Codable {
     public var weekend_seasonprice : String?
     public var weekdays_seasonprice : String?
     public var price_type : String?
+    public var seasonPriceStatus : Bool?
 
 
     public class func modelsFromDictionaryArray(array:NSArray) -> [SeasonPrice_Chalet_details]
@@ -134,6 +135,7 @@ public class SeasonPrice_Chalet_details : Codable {
         weekend_seasonprice = dictionary["weekend_seasonprice"] as? String
         weekdays_seasonprice = dictionary["weekdays_seasonprice"] as? String
         price_type = dictionary["price_type"] as? String
+        seasonPriceStatus = dictionary["seasonPriceStatus"] as? Bool
     }
 
         
@@ -156,6 +158,7 @@ public class SeasonPrice_Chalet_details : Codable {
         dictionary.setValue(self.weekend_seasonprice, forKey: "weekend_seasonprice")
         dictionary.setValue(self.weekdays_seasonprice, forKey: "weekdays_seasonprice")
         dictionary.setValue(self.price_type, forKey: "price_type")
+        dictionary.setValue(self.seasonPriceStatus, forKey: "seasonPriceStatus")
 
         return dictionary
     }

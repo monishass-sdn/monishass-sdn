@@ -632,7 +632,7 @@ extension myChaletVC : UICollectionViewDelegate,UICollectionViewDataSource{
             cell.lblTitle.text = topSliderStatsMenuArray[indexPath.item]
             self.menuCollectionView.scrollToItem(at: IndexPath(row: selectedIndexB ?? 0, section: 0), at: [.centeredVertically, .centeredHorizontally], animated: true)
             if selectedIndexB == indexPath.row {
-                cell.imgViewBg.image = UIImage(named: "statsandcompareselectionBG")
+                cell.imgViewBg.image = UIImage(named: "icn_SelectedPackage")
                 cell.lblTitle.font = UIFont(name: "Roboto-Bold", size: 17)
             }else{
                 cell.imgViewBg.image = UIImage(named: "icn_DeselectedPackage")
@@ -647,9 +647,12 @@ extension myChaletVC : UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == menuCollectionView{
-            return CGSize(width: 138 , height: 40)
+            return CGSize(width: view.frame.size.width / 3 , height: 40.0)
+
+         //   return CGSize(width: 138 , height: 40)
         }else{
-            return CGSize(width: 138 , height: 40)
+            return CGSize(width: view.frame.size.width / 3 , height: 40.0)
+          //  return CGSize(width: 138 , height: 40)
         }
     }
     
@@ -663,11 +666,11 @@ extension myChaletVC : UICollectionViewDelegate,UICollectionViewDataSource{
             if topSelection == "Holidays prices"{
                print("Selected holidays prices")
                 let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddHolidayPriceMainVC") as! AddHolidayPriceMainVC
-                navigationController?.pushViewController(nextVC, animated: true)
+                navigationController?.pushViewController(nextVC, animated: false)
             }else if topSelection == "Season prices"{
                 print("Selected Season prices")
                 let nextVC = UIStoryboard(name: "ProfileNew", bundle: Bundle.main).instantiateViewController(identifier: "AddSeasonPriceMainVC") as! AddSeasonPriceMainVC
-                navigationController?.pushViewController(nextVC, animated: true)
+                navigationController?.pushViewController(nextVC, animated: false)
             }else{
                 print("Selected Stats")
             }

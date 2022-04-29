@@ -54,6 +54,7 @@ struct NotificationNames {
     static let KgoToSuccessPage             = "goToSuccessPage "
     static let KNotificationCountCheck       = "checkNotifiactionCount"
     static let KGoToFailurePage = "goToPaymentFailurePage"
+    static let KUpdateTImer_End = "refreshDataAndPopVC"
     
     
 }

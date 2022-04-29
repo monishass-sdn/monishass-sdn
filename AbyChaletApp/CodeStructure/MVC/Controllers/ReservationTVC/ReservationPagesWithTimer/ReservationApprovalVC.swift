@@ -92,7 +92,8 @@ class ReservationApprovalVC: UIViewController {
     }
     
     func setValuestotheFields(){
-        self.lblchalet_id.text = String((reservedChaletData?.first?.chalet_id!)!)
+        self.lblchalet_id.text = "No.\(reservedChaletData?.first?.chalet_id ?? "0")"
+       // self.lblchalet_id.text = String((reservedChaletData?.first?.chalet_id!)!)
         self.lblchalet_name.text = reservedChaletData?.first?.chaletName
         self.lblchech_in.text = reservedChaletData?.first?.check_in
         self.lblcheck_out.text = reservedChaletData?.first?.check_out
@@ -113,7 +114,7 @@ class ReservationApprovalVC: UIViewController {
         if self.remainingamt == "0"{
             self.viewRemainingAmt.isHidden = true
             self.height_RemainingAmntPayDateView.constant = 0.0
-            self.height_Scrollview.constant = 920
+            self.height_Scrollview.constant = 820
         //    self.viewBookingDetail.cornerRadius = 10
 
         }else{
@@ -121,7 +122,7 @@ class ReservationApprovalVC: UIViewController {
             self.height_RemainingAmntPayDateView.constant = 240.0
           //  self.viewRemainingAmt.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 10)
           //  self.viewBookingDetail.roundCorners(corners: [.topLeft,.topRight], radius: 10)
-            self.height_Scrollview.constant = 1160
+            self.height_Scrollview.constant = 1060
 
         }
         

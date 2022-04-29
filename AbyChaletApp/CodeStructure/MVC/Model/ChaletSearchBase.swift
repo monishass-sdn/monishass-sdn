@@ -9,6 +9,8 @@ public class ChaletSearchBase {
     public var offer_status : Bool?
 	public var message : String?
     public var reservation_available : Int?
+    public var from_date : String?
+    public var to_date : String?
 	public var user_details : [User_details]?
 
 
@@ -30,6 +32,8 @@ public class ChaletSearchBase {
         offer_status = dictionary["offer_status"] as? Bool
 		message = dictionary["message"] as? String
         reservation_available = dictionary["reservation_available"] as? Int
+        from_date = dictionary["from_date"] as? String
+        to_date = dictionary["to_date"] as? String
         if (dictionary["user_details"] != nil) { user_details = User_details.modelsFromDictionaryArray(array: dictionary["user_details"] as! NSArray) }
 	}
 
@@ -42,6 +46,8 @@ public class ChaletSearchBase {
         dictionary.setValue(self.offer_status, forKey: "offer_status")
 		dictionary.setValue(self.message, forKey: "message")
         dictionary.setValue(self.reservation_available, forKey: "reservation_available")
+        dictionary.setValue(self.from_date, forKey: "from_date")
+        dictionary.setValue(self.to_date, forKey: "to_date")
 		return dictionary
 	}
 

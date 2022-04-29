@@ -26,7 +26,7 @@ class confirmReservationVC: UIViewController {
     @IBOutlet weak var lbl_Deposit: UILabel!
 
     var timer = Timer()
-    var seconds = 3600   // change this value according to the time
+    var seconds = 60   // change this value according to the time
     var isTimerRunning : Bool = false
     
     var deposit = "0"

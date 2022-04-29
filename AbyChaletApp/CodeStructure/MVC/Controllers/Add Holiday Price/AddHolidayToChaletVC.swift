@@ -81,15 +81,28 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
             return cell
         }else if indexPath.section == 2{
             if arrayHolidayChalet_List[indexPath.row].isOffer == false{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "AddHolidayToChaletTVCell", for: indexPath) as! AddHolidayToChaletTVCell
-                cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
-                cell.btnCheckBox.tag = indexPath.row
-                cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
-                cell.tf_holidayPrice.tag = indexPath.row
-                cell.tf_holidayPrice.delegate = self
-                cell.tf_holidayPrice.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+                if arrayHolidayChalet_List[indexPath.row].chaletEventStatus == false{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "AddHolidayToChaletTVCell", for: indexPath) as! AddHolidayToChaletTVCell
+                    cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
+                    cell.btnCheckBox.tag = indexPath.row
+                    cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox), for: .touchUpInside)
+                    cell.tf_holidayPrice.tag = indexPath.row
+                    cell.tf_holidayPrice.delegate = self
+                    cell.tf_holidayPrice.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
 
-                return cell
+                    return cell
+                }else{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "AddedHolidayChaletTVCell", for: indexPath) as! AddedHolidayChaletTVCell
+                    cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
+                    cell.btnCheckBox.tag = indexPath.row
+                    cell.btnCheckBox.addTarget(self, action: #selector(TapCheckbox2), for: .touchUpInside)
+                    cell.tf_holidayPrice.tag = indexPath.row
+                    cell.tf_holidayPrice.delegate = self
+                    cell.tf_holidayPrice.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+
+                    return cell
+                }
+                
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AddHolidayToChaletOfferAlreadyAppliedTVCell", for: indexPath) as! AddHolidayToChaletOfferAlreadyAppliedTVCell
                 cell.setValuesToFields(dict: arrayHolidayChalet_List[indexPath.row])
@@ -108,10 +121,14 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
             return 140
         }else if indexPath.section == 2{
             if arrayHolidayChalet_List[indexPath.row].isOffer == false{
-                if toggledIndexes[indexPath.row] == true{
-                    return 275.0
+                if arrayHolidayChalet_List[indexPath.row].chaletEventStatus == false{
+                    if toggledIndexes[indexPath.row] == true{
+                        return 275.0
+                    }else{
+                        return 184.0
+                    }
                 }else{
-                    return 184.0
+                    return 275.0
                 }
             }else{
                 return 184
@@ -160,6 +177,15 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
         self.addholidaytoChaletTV.reloadData()
     }
     
+
+    @objc func TapCheckbox2(_ sender: UIButton!){
+        
+        let item = arrayHolidayChalet_List[sender.tag]
+        sender.isSelected = !sender.isSelected
+        let event_id = dictEventData?.id!
+        disableHolidayChalet(chalet_id: "\(item.chalet_id!)", event_id: "\(event_id ?? 0)")
+    }
+    
     @objc func valueChanged(_ textField: UITextField){
         let indexpath = IndexPath(row: textField.tag, section: 2)
         let cell = addholidaytoChaletTV.cellForRow(at: indexpath) as! AddHolidayToChaletTVCell
@@ -187,7 +213,7 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
         let jsonEncoder = JSONEncoder()
         if let jsonData = try? jsonEncoder.encode(dictionary){
             let json = String(data: jsonData, encoding: .ascii)
-            //print("JSON string = \n\(json ?? "")")
+            print("JSON string = \n\(json ?? "")")
             return jsonData as Data
         }
         return Data()
@@ -198,6 +224,8 @@ extension AddHolidayToChaletVC: UITableViewDelegate,UITableViewDataSource{
 }
 
 extension AddHolidayToChaletVC{
+    //MARK:- Get Holiday Event Data API
+
     func getHolidayAndEvent_Chalets() {
         let event_id = dictEventData?.id
         SVProgressHUD.show()
@@ -220,12 +248,35 @@ extension AddHolidayToChaletVC{
                     }
                 }else{
                     showDefaultAlert(viewController: self, title: "", msg: response!["message"]! as! String)
+                    self.view.isUserInteractionEnabled = true
                 }
             }else{
                 showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
             }
         }
     }
+    
+    //MARK:- Disable Chalet Price API
+
+    func disableHolidayChalet(chalet_id: String, event_id : String) {
+        let event_id = dictEventData?.id
+        SVProgressHUD.show()
+        self.view.isUserInteractionEnabled = false
+        ServiceManager.sharedInstance.postMethodAlamofire("api/disable-chalet-event", dictionary: ["chaletid":chalet_id,"eventid":event_id!], withHud: true) { (success, response, error) in
+            print(response)
+            if success {
+                if ((response as! NSDictionary) ["status"] as! Bool) == true {
+                    self.getHolidayAndEvent_Chalets()
+            }else{
+                showDefaultAlert(viewController: self, title: "", msg: "Failed..!")
+                self.view.isUserInteractionEnabled = true
+            }
+            }else{
+                
+            }
+    }
+}
     
     func checkNotificationCount() {
         if CAUser.currentUser.id != nil {
@@ -240,7 +291,8 @@ extension AddHolidayToChaletVC{
         }
     }
     
-    
+    //MARK:- Post Holiday Event Data API
+
     func postHolidayChaletData() {
         let rawdata = DictionaryToJSON()
         SVProgressHUD.show()

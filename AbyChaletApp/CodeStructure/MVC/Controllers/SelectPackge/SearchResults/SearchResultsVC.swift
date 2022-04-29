@@ -28,7 +28,12 @@ class SearchResultsVC: UIViewController {
     }
     
     func setupForCustomNavigationTitle(){
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.title = "Available Chalet".localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
+/*
         let navLabel = UILabel()
         let navTitle = NSMutableAttributedString(string: "Aby", attributes:[
                                                     NSAttributedString.Key.foregroundColor: UIColor.green,
@@ -40,7 +45,14 @@ class SearchResultsVC: UIViewController {
 
         navLabel.attributedText = navTitle
         self.navigationItem.titleView = navLabel
+        */
         self.navigationItem.setHidesBackButton(true, animated: true)
+        let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
+        self.navigationItem.leftBarButtonItems = [backBarButton]
+    }
+    
+    @objc func backButtonTouched()  {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func Action_SwipeUp(_ sender: UIButton){
@@ -106,6 +118,8 @@ extension SearchResultsVC: UICollectionViewDelegate,UICollectionViewDataSource,U
                      reservationVC.isOfferAvailable = self.arrayChaletDetails[indexPath.row].offer_available ?? false
                      reservationVC.arrayUserData = self.arrayChaletDetails[indexPath.row]
                      reservationVC.requestTimeleft = self.arrayChaletDetails[indexPath.row].request_time ?? 0
+                     reservationVC.requestTime = self.arrayChaletDetails[indexPath.row].request_time ?? 0
+
                      self.navigationController?.pushViewController(reservationVC, animated: true)
                      }else{
                          //Reservation Not Available

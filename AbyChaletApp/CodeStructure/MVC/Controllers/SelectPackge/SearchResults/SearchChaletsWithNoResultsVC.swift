@@ -38,14 +38,33 @@ class SearchChaletsWithNoResultsVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "Available Chalet".localized()
+        
+    /*    let navLabel = UILabel()
+        let navTitle = NSMutableAttributedString(string: "Aby", attributes:[
+                                                    NSAttributedString.Key.foregroundColor: UIColor.green,
+                                                    NSAttributedString.Key.font: UIFont(name: "Roboto-BoldItalic", size: 25)! ])
+
+        navTitle.append(NSMutableAttributedString(string: " Chalet", attributes:[
+                                                    NSAttributedString.Key.font: UIFont(name: "Roboto-BoldItalic", size: 25)! ,
+                                                    NSAttributedString.Key.foregroundColor: UIColor.white]))
+
+        navLabel.attributedText = navTitle
+        self.navigationItem.titleView = navLabel
+      */
         self.navigationController?.navigationBar.barTintColor = kAppThemeColor
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let backBarButton = UIBarButtonItem(image: Images.kIconBackGreen, style: .plain, target: self, action: #selector(backButtonTouched))
+        self.navigationItem.leftBarButtonItems = [backBarButton]
+    }
+    
+    @objc func backButtonTouched()  {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setupTopView(){
-        self.lblFromDate.text = fromdate
-        self.lblToDate.text = todate
+      //  self.lblFromDate.text = fromdate
+      //  self.lblToDate.text = todate
         let attrsWhatKindOfJob1 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#FFFFFF")] as [NSAttributedString.Key : Any]
         let attrsWhatKindOfJob2 = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 13)!, NSAttributedString.Key.foregroundColor : UIColor("#49FF00")] as [NSAttributedString.Key : Any]
         
@@ -118,6 +137,8 @@ extension SearchChaletsWithNoResultsVC : UICollectionViewDelegate,UICollectionVi
                      reservationVC.isOfferAvailable = self.arraynoresultsChalets[indexPath.row].offer_available ?? false
                      reservationVC.arrayUserData = self.arraynoresultsChalets[indexPath.row]
                      reservationVC.requestTimeleft = self.arraynoresultsChalets[indexPath.row].request_time ?? 0
+                     reservationVC.requestTime = self.arraynoresultsChalets[indexPath.row].request_time ?? 0
+
                      self.navigationController?.pushViewController(reservationVC, animated: true)
                      }else{
                          //Reservation Not Available
@@ -182,6 +203,23 @@ extension SearchChaletsWithNoResultsVC {
                 if response!["status"] as! Bool == true {
                     let responseBase = ChaletSearchBase(dictionary: response as! NSDictionary)
                     self.arraynoresultsChalets = (responseBase?.user_details)!
+                /*    let FromDate = responseBase?.from_date ?? "from date"
+                    let ToDate = responseBase?.to_date ?? "to date"
+                    self.lblFromDate.text = FromDate
+                    self.lblToDate.text = ToDate */
+                    
+                    let dateFormatterGet = DateFormatter()
+                    dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let dateFormatterPrint = DateFormatter()
+                    dateFormatterPrint.dateFormat = "dd/MM/yyyy"
+                    let Fromdate: NSDate? = dateFormatterGet.date(from: responseBase?.from_date ?? "0000-00-00 00:00:00") as NSDate?
+                    let Todate: NSDate? = dateFormatterGet.date(from: responseBase?.to_date ?? "0000-00-00 00:00:00") as NSDate?
+                    print(dateFormatterPrint.string(from: Fromdate! as Date))
+                    print(dateFormatterPrint.string(from: Todate! as Date))
+                    self.lblFromDate.text = dateFormatterPrint.string(from: Fromdate! as Date)
+                    self.lblToDate.text = dateFormatterPrint.string(from: Todate! as Date)
+                    
+                        
                     self.noresultCollectionView.reloadData()
                     if self.arraynoresultsChalets.count > 0 {
                         DispatchQueue.main.async {

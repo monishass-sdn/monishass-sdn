@@ -163,11 +163,11 @@ class CalendarViewCreateOffer: UIView, UICollectionViewDelegate, UICollectionVie
                         if self.selectedArray.count == 3 {
                             if self.selectedArray.first == dateFormatter.string(from: jDate) {
                                 cell.dateLbl.roundCorners(corners: [.topLeft,.bottomLeft], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else if self.selectedArray.last == dateFormatter.string(from: jDate){
                                 cell.dateLbl.roundCorners(corners: [.bottomRight,.topRight], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else {
                                 cell.dateLbl.backgroundColor = #colorLiteral(red: 0.7843137255, green: 1, blue: 0.7019607843, alpha: 0.5271136225)
@@ -183,11 +183,11 @@ class CalendarViewCreateOffer: UIView, UICollectionViewDelegate, UICollectionVie
                         if self.selectedArray.count == 4 {
                             if self.selectedArray.first == dateFormatter.string(from: jDate) {
                                 cell.dateLbl.roundCorners(corners: [.topLeft,.bottomLeft], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else if self.selectedArray.last == dateFormatter.string(from: jDate){
                                 cell.dateLbl.roundCorners(corners: [.bottomRight,.topRight], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else {
                                 cell.dateLbl.backgroundColor = #colorLiteral(red: 0.7843137255, green: 1, blue: 0.7019607843, alpha: 0.5271136225)
@@ -203,11 +203,11 @@ class CalendarViewCreateOffer: UIView, UICollectionViewDelegate, UICollectionVie
                         if self.selectedArray.count == 7 {
                             if self.selectedArray.first == dateFormatter.string(from: jDate) {
                                 cell.dateLbl.roundCorners(corners: [.topLeft,.bottomLeft], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else if self.selectedArray.last == dateFormatter.string(from: jDate){
                                 cell.dateLbl.roundCorners(corners: [.bottomRight,.topRight], radius: 10)
-                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                                cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                                 cell.dateLbl.textColor = UIColor.white
                             }else {
                                 cell.dateLbl.backgroundColor = #colorLiteral(red: 0.7843137255, green: 1, blue: 0.7019607843, alpha: 0.5271136225)
@@ -222,11 +222,11 @@ class CalendarViewCreateOffer: UIView, UICollectionViewDelegate, UICollectionVie
                     }else{
                         if self.selectedArray.first == dateFormatter.string(from: jDate) {
                             cell.dateLbl.roundCorners(corners: [.topLeft,.bottomLeft], radius: 10)
-                            cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                            cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                             cell.dateLbl.textColor = UIColor.white
                         }else if self.selectedArray.last == dateFormatter.string(from: jDate){
                             cell.dateLbl.roundCorners(corners: [.bottomRight,.topRight], radius: 10)
-                            cell.dateLbl.backgroundColor = #colorLiteral(red: 0, green: 0.7844216353, blue: 0, alpha: 1)
+                            cell.dateLbl.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.8549019608, blue: 0.2666666667, alpha: 1)
                             cell.dateLbl.textColor = UIColor.white
                         }else {
                             cell.dateLbl.backgroundColor = #colorLiteral(red: 0.7843137255, green: 1, blue: 0.7019607843, alpha: 0.5271136225)
